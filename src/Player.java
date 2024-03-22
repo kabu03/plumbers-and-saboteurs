@@ -17,6 +17,8 @@ public abstract class Player {
     protected void move(){
         System.out.println("move()");
         // What to implement here?
+        // i do not know since we have no postion yet
+        // maybe move to an element.
     }
 
 }

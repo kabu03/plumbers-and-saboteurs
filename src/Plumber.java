@@ -20,10 +20,12 @@ public class Plumber extends Player {
     public void insertPump(Pump pump, Pipe pipe){
         System.out.println("insertPump(Pump, Pipe)");
         // Why is pump a parameter? We know they can only insert the one they have in the inventory.
+        // you are right
     }
 
     public void insertPipeEnd(EndOfPipe e, Element e2){
         System.out.println("insertPipeEnd(EndOfPipe, Element)");
         // Why is EndOfPipe a parameter? We know they can only insert the one they have in the inventory.
+        //
     }
 }
