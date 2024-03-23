@@ -1,0 +1,45 @@
+
+0
+java:S1220""Move this file to a named package.
+@	java:S106"+Replace this use of System.out by a logger.(à“ÛŒ
+E	java:S106"+Replace this use of System.out by a logger.(»ä›¿şÿÿÿÿ
+@	java:S106"+Replace this use of System.out by a logger.(Á©¥
+@	java:S106"+Replace this use of System.out by a logger.(¬’Æ’
+E	java:S106"+Replace this use of System.out by a logger.(¤±ùÿÿÿÿ
+E	java:S106"+Replace this use of System.out by a logger.(âÿšØıÿÿÿÿ
+E	java:S106"+Replace this use of System.out by a logger.(è’¨Ôûÿÿÿÿ
+?	java:S106"+Replace this use of System.out by a logger.(„’¯x
+@
+java:S1172"+Remove this unused method parameter "pipe".(ÛĞÖJ
+@	java:S106 "+Replace this use of System.out by a logger.(¡À¸
+E	java:S106!"+Replace this use of System.out by a logger.(ñŠı¦üÿÿÿÿ
+F
+java:S1172#"+Remove this unused method parameter "pump".(û–ìòıÿÿÿÿ
+E	java:S106$"+Replace this use of System.out by a logger.(úª­ùûÿÿÿÿ
+@	java:S106%"+Replace this use of System.out by a logger.(‹Ö„Î
+>
+java:S1172'"(Remove this unused method parameter "c".(—¿ÿÆ
+E	java:S106("+Replace this use of System.out by a logger.(‹õ÷ğüÿÿÿÿ
+E	java:S106)"+Replace this use of System.out by a logger.(¯Óóıÿÿÿÿ
+>
+java:S1172+"(Remove this unused method parameter "s".(¬£øã
+@	java:S106,"+Replace this use of System.out by a logger.(ÒŠàÉ
+@	java:S106-"+Replace this use of System.out by a logger.(äØ±Ô
+E	java:S1060"+Replace this use of System.out by a logger.(şÚ’ìúÿÿÿÿ
+V	java:S1253"<This block of commented-out lines of code should be removed.(ö¯—Ëúÿÿÿÿ
+@	java:S106>"+Replace this use of System.out by a logger.(‹†±Ú
+@	java:S106B"+Replace this use of System.out by a logger.(‡»°É
+B
+java:S1068",Remove this unused "plumbers" private field.(ŒŞƒÖ
+H
+java:S1068"-Remove this unused "saboteurs" private field.(Ìíá’øÿÿÿÿ
+K
+java:S1068"6Remove this unused "currentPlayerIndex" private field.(Ûù_
+F
+java:S1068"0Remove this unused "gameElements" private field.(ÕÎğÑ
+C
+java:S1068"-Remove this unused "turnOrder" private field.(ªÕ¡ï
+C
+java:S1068	"-Remove this unused "gameScore" private field.(÷ïÑõ
+D
+java:S1068")Remove this unused "timer" private field.(å¡Ê˜ûÿÿÿÿ

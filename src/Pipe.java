@@ -9,4 +9,9 @@ public class Pipe extends Element {
         System.out.println("getLeakedWater()");
         return leakedAmount;
     }
+
+    @Override
+    public void Update() {
+        System.out.println("Update");
+    }
 }

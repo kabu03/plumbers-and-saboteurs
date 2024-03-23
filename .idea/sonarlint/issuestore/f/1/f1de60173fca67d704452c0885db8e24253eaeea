@@ -1,0 +1,21 @@
+
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë´ÒËùÿÿÿÿ
+0
+java:S1220""Move this file to a named package.
+y
+java:S1450"^Remove the "playerEndOfPipe" field and declare it as a local variable in the relevant methods.(Ó‡ó¯øÿÿÿÿ
+t
+java:S1450"YRemove the "playerPump" field and declare it as a local variable in the relevant methods.(çÒŒ³ÿÿÿÿÿ
+E	java:S106"+Replace this use of System.out by a logger.(Ù´×Äøÿÿÿÿ
+E	java:S106"+Replace this use of System.out by a logger.(ŠžÂ¦úÿÿÿÿ
+@	java:S106
+"+Replace this use of System.out by a logger.(ó¶Üê
+E	java:S106"+Replace this use of System.out by a logger.(²Á¶÷ýÿÿÿÿ
+E	java:S106"+Replace this use of System.out by a logger.(´þÀæøÿÿÿÿ
+E	java:S106"+Replace this use of System.out by a logger.(Àó¨Šÿÿÿÿÿ
+@	java:S106"+Replace this use of System.out by a logger.(ö„¯û
+E	java:S106"+Replace this use of System.out by a logger.(Ÿ€³øÿÿÿÿÿ
+I
+java:S1068".Remove this unused "playerPump" private field.(çÒŒ³ÿÿÿÿÿ
+N
+java:S1068"3Remove this unused "playerEndOfPipe" private field.(Ó‡ó¯øÿÿÿÿ

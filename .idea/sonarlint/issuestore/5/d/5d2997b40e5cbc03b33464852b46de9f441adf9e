@@ -1,0 +1,11 @@
+
+0
+java:S1220""Move this file to a named package.
+q
+java:S1450"[Remove the "workingTurns" field and declare it as a local variable in the relevant methods.(«ÃÖ
+E
+java:S1068"*Remove this unused "inPipe" private field.(±¨ûÿÿÿÿ
+A
+java:S1068"+Remove this unused "outPipe" private field.(³µÃ®
+F
+java:S1068"0Remove this unused "workingTurns" private field.(«ÃÖ

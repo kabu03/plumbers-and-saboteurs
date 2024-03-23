@@ -5,4 +5,9 @@ public class Pump extends Element {
     public void setWorkingTurns(int x){
         workingTurns = x;
     }
+
+    @Override
+    public void Update() {
+        System.out.println("Update");
+    }
 }

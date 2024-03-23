@@ -1,0 +1,12 @@
+
+0
+java:S1220""Move this file to a named package.
+l
+java:S1128"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ãø©Æþÿÿÿÿ
+L
+java:S1172"1Remove these unused method parameters "p1", "p2".(‘ê×¡ýÿÿÿÿ
+E	java:S106"+Replace this use of System.out by a logger.(éÊÌþÿÿÿÿÿ
+F
+java:S1172"1Remove these unused method parameters "p1", "p2".(õÊ¡N
+@	java:S106"+Replace this use of System.out by a logger.(‹Æ¸³
+E	java:S106"+Replace this use of System.out by a logger.(‚ì‚šüÿÿÿÿ
