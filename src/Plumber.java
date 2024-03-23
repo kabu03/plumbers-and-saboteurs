@@ -86,9 +86,18 @@ public class Plumber extends Player {
         System.out.println("The plumber has picked up a pump. They can now insert it.");
     }
     public void getEnd(EndOfPipe EoP){
-        System.out.println("getEnd(EndOfPipe)");
-        playerEndOfPipe = EoP;
-        System.out.println("The plumber has picked up an end of pipe. They can now insert it.");
+        String userChoice;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Are you it the end of the pipe?");
+        userChoice = sc.nextLine();
+        if(userChoice.equalsIgnoreCase("yes")) {
+            System.out.println("getEnd(EndOfPipe)");
+            playerEndOfPipe = EoP;
+            System.out.println("The plumber has picked up an end of pipe. They can now insert it.");
+        }
+        else {
+            System.out.println("You can not pick up the end of the pipe");
+        }
     }
 
     public void insertPump(Pump pump, Pipe pipe){
@@ -97,9 +106,16 @@ public class Plumber extends Player {
         // you are right
     }
 
-    public void insertPipeEnd(EndOfPipe e, Element e2){
-        System.out.println("insertPipeEnd(EndOfPipe, Element)");
-        // Why is EndOfPipe a parameter? We know they can only insert the one they have in the inventory.
-        //
+    public void insertPipeEnd(Element e){
+        String userChoice;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Are you at the end of the pipe?");
+        userChoice = sc.nextLine();
+        if(userChoice.equalsIgnoreCase("yes")) {
+            System.out.println("insertPipeEnd(Element)");
+        }
+        else{
+            System.out.println("Please Move to the end of the pipe to insert");
+        }
     }
 }

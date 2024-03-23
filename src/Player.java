@@ -66,10 +66,46 @@ public abstract class Player {
     }
 
     protected void move() {
-        System.out.println("move()");
-        // What to implement here?
-        // i do not know since we have no postion yet
-        // maybe move to an element.
+        int userChoice1;
+        String userChoice2;
+        String userChoice3;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Where do you want to move? ");
+        System.out.println("Enter 1 for pipe");
+        System.out.println("Enter 2 for pump");
+        System.out.println("Enter 3 for cistern");
+        userChoice1 = sc.nextInt();
+        if(userChoice1 == 1)
+        {
+            System.out.println("There are currently 5 pipes");
+            System.out.println("Which pipe do you want to move to?");
+            userChoice2 = sc.nextLine();
+            System.out.println(userChoice2+".Standable() == True");
+            System.out.println("is " + userChoice2 + " occupied");
+            userChoice3 = sc.nextLine();
+            if(userChoice3.equalsIgnoreCase("yes"))
+            {
+                System.out.println("Player.move()");
+                System.out.println("You have moved to " + userChoice2);
+            }
+            else {
+                System.out.println("You can not move since the pipe is occupied");
+            }
+        }
+        if(userChoice1 == 2)
+        {
+            System.out.println("There are currently 5 pumps");
+            System.out.println("Which pipe do you want to move to?");
+            userChoice2 = sc.nextLine();
+            System.out.println("Player.move()");
+            System.out.println("You have moved to " + userChoice2);
+        }
+        if(userChoice1 == 3)
+        {
+            System.out.println("Player.move()");
+            // assuming there is only one cistern
+            System.out.println("You have moved to the cistern");
+        }
     }
 
 }
