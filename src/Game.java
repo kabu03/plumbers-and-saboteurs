@@ -1,13 +1,20 @@
 import java.util.Scanner;
 
 public class Game {
-private Plumber[] plumbers;
-private Saboteur[] saboteurs;
+private Player[] players;
+private Saboteur[] saboteurs; // index even -> ta3al hon
+private Plumber[] plumbers; // index odd -> ta3al hon
+
 private int currentPlayerIndex;
-private Element[] gameElements;
+private Element[] elementArray;
+private Pipe[] pipeArray;
+private Pump[] pumpArray;
+private Cistern[] cisternArray;
+private EndOfPipe[] endOfPipesArray;
 private int[] turnOrder;
 private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index 1 represents Saboteur score.
     // Don't we need a method to set that the gameScore depends on game calculateLeakedWater and calculateCollectedWater?
+    public Game(Player[] players, Element[] gameElements, )
 private Timer timer;
 public void initGame(){
     System.out.println("initGame()");
@@ -60,16 +67,14 @@ public void determineWinner(){
     System.out.println("determineWinner()");
 calculateLeakedWater();
 calculateCollectedWater();
-//Scanner sc = new Scanner(System.in);
-//    System.out.println("Enter 1 if the leaked water was greater than collected water.");
-//    if (sc.nextInt() == 1){
-//        System.out.println("The Saboteurs won the game.");
-//    }
-//    else {
-//        System.out.println("The Plumbers won the game.");
-//    }
-    // What do you think about this?
-    // i think it is good.
+Scanner sc = new Scanner(System.in);
+    System.out.println("Enter 1 if the leaked water was greater than collected water.");
+    if (sc.nextInt() == 1){
+        System.out.println("The Saboteurs won the game.");
+    }
+    else {
+        System.out.println("The Plumbers won the game.");
+    }
 }
 public void calculateLeakedWater(){
     System.out.println("calculateLeakedWater()");

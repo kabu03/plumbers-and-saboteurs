@@ -35,7 +35,7 @@ public abstract class Element {
         System.out.println("getWaterLevel()");
         return waterLevel;
     }
-    public abstract void Update(); // it is an abstract method.
+    public abstract void update(); // it is an abstract method.
     public void setStandable(boolean bool){
         System.out.println("setStandable()");
         standable = bool;

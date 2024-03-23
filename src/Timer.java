@@ -6,9 +6,7 @@ public class Timer {
         return gameLength;
     }
     public void setTime(double x){
-        // This method has no input parameters in the class diagram, but I put a double here. Which is correct?
         System.out.println("setTime(double)");
         gameLength = x;
-        // you are correct.
     }
 }

@@ -1,7 +1,7 @@
 import java.lang.*;
 public abstract class Player {
-    protected String playerName;
-    protected int index;
+    public String playerName;
+    public int index;
     protected abstract void takeTurn();
 
     protected void changeInputPipe(Pump p1, Pipe p2){
