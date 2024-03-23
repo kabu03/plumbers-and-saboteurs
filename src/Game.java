@@ -14,7 +14,7 @@ private EndOfPipe[] endOfPipesArray;
 private int[] turnOrder;
 private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index 1 represents Saboteur score.
     // Don't we need a method to set that the gameScore depends on game calculateLeakedWater and calculateCollectedWater?
-    public Game(Player[] players, Element[] gameElements, )
+  //  public Game(Player[] players, Element[] gameElements, )
 private Timer timer;
 public void initGame(){
     System.out.println("initGame()");

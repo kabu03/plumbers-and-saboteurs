@@ -7,7 +7,7 @@ public class Pump extends Element {
     }
 
     @Override
-    public void Update() {
+    public void update() {
         System.out.println("Update");
     }
 }
