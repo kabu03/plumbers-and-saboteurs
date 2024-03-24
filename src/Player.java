@@ -58,7 +58,7 @@ public abstract class Player {
             System.out.println("Pump.connectedPipes.Contains(Pipe) returns true.");
             System.out.println("Checks done.");
             System.out.printf("changeInputPipe(%d, %d)\n", pumpNumber, pipeNumber);
-            System.out.printf("Pump.InPipe = Pipe %d", pipeNumber);
+            System.out.printf("Pump.InPipe = Pipe %d\n", pipeNumber);
         } else {
             System.out.println("You cannot perform this action if you're not on the pump.");
         }
@@ -102,7 +102,7 @@ public abstract class Player {
             System.out.println("Pump.connectedPipes.Contains(Pipe) returns true.");
             System.out.println("Checks done.");
             System.out.printf("changeOutputPipe(%d, %d)\n", pumpNumber, pipeNumber);
-            System.out.printf("Pump.OutPipe = Pipe %d", pipeNumber);
+            System.out.printf("Pump.OutPipe = Pipe %d\n", pipeNumber);
         } else {
             System.out.println("You cannot perform this action if you're not on the pump.");
         }
@@ -131,37 +131,50 @@ public abstract class Player {
         System.out.println("Enter 3 for cistern");
         userChoice1 = sc.nextInt();
         sc.nextLine();
-        if(userChoice1 == 1)
-        {
-            System.out.println("There are currently 5 pipes");
-            System.out.println("Which pipe do you want to move to?");
-            userChoice2 = sc.nextLine();
-            System.out.println(userChoice2+".Standable() == True");
-            System.out.println("is " + userChoice2 + " occupied?");
-            userChoice3 = sc.nextLine();
-            if(userChoice3.equalsIgnoreCase("no"))
-            {
+        if (userChoice1 == 1) {
+            while (true) {
+                System.out.println("There are currently 5 pipes");
+                System.out.println("Which pipe do you want to move to? (Enter a number from 1 to 5)");
+                userChoice2 = sc.nextLine();
+                int pipeNumber = Integer.parseInt(userChoice2);
+                if (pipeNumber < 1 || pipeNumber > 5) {
+                    System.out.println("Invalid choice. Please enter a number from 1 to 5.");
+                    continue;
+                }
+
+                System.out.println("is pipe " + pipeNumber + " occupied?");
+                userChoice3 = sc.nextLine();
+                if (userChoice3.equalsIgnoreCase("no")) {
+                    System.out.println("Player.move()");
+                    System.out.println("You have moved to pipe " + pipeNumber);
+                } else {
+                    System.out.println("You cannot move since the pipe is occupied.");
+                }
+                break; // Exit the loop after processing valid input
+            }
+        }
+        if (userChoice1 == 2) {
+            while (true) {
+                System.out.println("There are currently 5 pumps");
+                System.out.println("Which pipe do you want to move to?");
+                userChoice2 = sc.nextLine();
+                int pipeNumber = Integer.parseInt(userChoice2);
+                if (pipeNumber < 1 || pipeNumber > 5) {
+                    System.out.println("Invalid choice. Please enter a number from 1 to 5.");
+                    continue;
+                }
+
                 System.out.println("Player.move()");
-                System.out.println("You have moved to " + userChoice2);
-            }
-            else {
-                System.out.println("You can not move since the pipe is occupied");
+                System.out.println("You have moved to pump " + pipeNumber);
+                break;
+
             }
         }
-        if(userChoice1 == 2)
-        {
-            System.out.println("There are currently 5 pumps");
-            System.out.println("Which pipe do you want to move to?");
-            userChoice2 = sc.nextLine();
-            System.out.println("Player.move()");
-            System.out.println("You have moved to " + userChoice2);
-        }
-        if(userChoice1 == 3)
-        {
+        if (userChoice1 == 3) {
             System.out.println("Player.move()");
             // assuming there is only one cistern
             System.out.println("You have moved to the cistern");
         }
-    }
 
+    }
 }
