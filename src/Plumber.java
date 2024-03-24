@@ -96,7 +96,7 @@ public class Plumber extends Player {
      * The user is asked about the condition of the pipe before the game proceeds with any action,
      * if the pipe is punctured the plumber is allowed to fix if he is standing on it, otherwise the action will be aborted.
      * @param p will be the broken pipe to be fixed
-     * @author: Ibrahim
+     * @author Ibrahim
      */
     public  void fixPipe(Pipe p){
         String userChoice,userChoice2;
@@ -122,7 +122,7 @@ public class Plumber extends Player {
     /**
      * Method for picking up a pump that was manufactured at a cistern
      * @param p is the pump that will be picked up
-     * @auhtor: Ibrahim
+     * @author Ibrahim
      */
     public  void getPump(Pump p) {
         Scanner scanner = new Scanner(System.in);
@@ -143,7 +143,7 @@ public class Plumber extends Player {
      * Pipe in which the pump is to be connected to, has to be specified.
      * @param pump will be the inserted pump
      * @param pipe will be where the pump is inserted on
-     * @author: Ibrahim
+     * @author Ibrahim
      *
      */
     public void insertPump(Pump pump, Pipe pipe){
@@ -164,7 +164,7 @@ public class Plumber extends Player {
     /**
      * this method fixes a broken pump
      * @param pump this will be the element that we will fix.\
-     * @author :Nafez
+     * @author Nafez
      */
     public void fixPump(Pump pump){
         String userChoice,userChoice2;

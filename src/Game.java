@@ -11,8 +11,8 @@ import static java.lang.System.exit;
  */
 public class Game {
 private Player[] players;
-private Saboteur[] saboteurs; // index even -> ta3al hon
-private Plumber[] plumbers; // index odd -> ta3al hon
+private Saboteur[] saboteurs;
+private Plumber[] plumbers;
 
 private int currentPlayerIndex;
 private Element[] elementArray;
@@ -28,7 +28,6 @@ private int[] turnOrder;
 
 
     private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index 1 represents Saboteur score.
-    // Don't we need a method to set that the gameScore depends on game calculateLeakedWater and calculateCollectedWater?
     public Game(Player[] players, Element[] gameElements ){}
 private Timer timer;
 
@@ -179,13 +178,6 @@ private Timer timer;
         // Initialize plumber and saboteur indices outside the loop
         int plumberIndex = 0;
         int saboteurIndex = 0;
-
-
-        /* ****************************************************************************************
-        * I think we should modify the part below to keep taking turns while the timer is still going
-        * this is a simple approach bcz the timer is not implemented yet
-        * *****************************************************************************************/
-
         int i = 0;
         while(true) {
             // Determine whose turn it is based on the current turn number.
@@ -287,7 +279,7 @@ private Timer timer;
                     default:
                         System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
                 }
-                // this is if the number of players it two. so that the loop will work correctly.
+                // this is if the number of players is two, so that the loop will work correctly.
                 if(numPlumbers == 2) {
                     saboteurIndex++;
                     if (saboteurIndex == 2) {
