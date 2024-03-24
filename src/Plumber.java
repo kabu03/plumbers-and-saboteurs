@@ -72,13 +72,16 @@ public class Plumber extends Player {
                 break;
             case 10:
                 System.out.println("You chose: End the Game");
-
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
         }
     }
 
+    /**
+     * this method will allow a plumber to pick up an end of pipe object from the end of a pipe.
+     * @param EoP this will be the end of pipe object that we will pick up
+     */
     public void getEnd(EndOfPipe EoP){
         String userChoice;
         Scanner sc = new Scanner(System.in);
@@ -88,7 +91,7 @@ public class Plumber extends Player {
             System.out.println("getEnd(EndOfPipe)");
             playerEndOfPipe = EoP;
             System.out.println("The plumber has picked up an end of pipe. They can now insert it.");
-        }
+        }git
         else {
             System.out.println("You can not pick up the end of the pipe");
         }
