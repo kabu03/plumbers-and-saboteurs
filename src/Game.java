@@ -17,6 +17,9 @@ private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index
     public Game(Player[] players, Element[] gameElements ){}
 private Timer timer;
 
+    public Game() {
+    }
+
     public void initGame() {
         System.out.println("initGame()");
         Scanner scanner = new Scanner(System.in);
