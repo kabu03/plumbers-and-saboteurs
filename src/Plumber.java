@@ -38,7 +38,6 @@ public class Plumber extends Player {
         switch (choice) {
             case 1:
                 System.out.println("You chose: Move to an element");
-
                 break;
             case 2:
                 System.out.println("You chose: GetPump");
@@ -58,7 +57,6 @@ public class Plumber extends Player {
                 break;
             case 6:
                 System.out.println("You chose: GetEnd");
-
                 break;
             case 7:
                 System.out.println("You chose: InsertPipeEnd");
@@ -97,6 +95,10 @@ public class Plumber extends Player {
     }
 
 
+    /**
+     * this method connects an end of pipe object to an element in the game.
+     * @param e this will be the element that we will insert the pipe end to.
+     */
     public void insertPipeEnd(Element e){
         String userChoice;
         Scanner sc = new Scanner(System.in);

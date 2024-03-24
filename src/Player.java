@@ -11,7 +11,7 @@ public abstract class Player {
         int pumpNumber;
         int pipeNumber;
         System.out.println("changeInputPipe(Pump, Pipe)");
-        System.out.println("Enter the number of the pump");
+        System.out.println("Enter the number of the pump.");
         Scanner sc = new Scanner(System.in);
         pumpNumber = sc.nextInt();
         System.out.println("Pump " + pumpNumber + " currently has 3 connected pipes.");
@@ -65,6 +65,9 @@ public abstract class Player {
         }
     }
 
+    /**
+     * Allows the player to move between different game locations (pipes, pumps, or the cistern).
+     */
     protected void move() {
         int userChoice1;
         String userChoice2;
@@ -75,15 +78,16 @@ public abstract class Player {
         System.out.println("Enter 2 for pump");
         System.out.println("Enter 3 for cistern");
         userChoice1 = sc.nextInt();
+        sc.nextLine();
         if(userChoice1 == 1)
         {
             System.out.println("There are currently 5 pipes");
             System.out.println("Which pipe do you want to move to?");
             userChoice2 = sc.nextLine();
             System.out.println(userChoice2+".Standable() == True");
-            System.out.println("is " + userChoice2 + " occupied");
+            System.out.println("is " + userChoice2 + " occupied?");
             userChoice3 = sc.nextLine();
-            if(userChoice3.equalsIgnoreCase("yes"))
+            if(userChoice3.equalsIgnoreCase("no"))
             {
                 System.out.println("Player.move()");
                 System.out.println("You have moved to " + userChoice2);
