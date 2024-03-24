@@ -176,8 +176,6 @@ private Timer timer;
         int numPlumbers = plumbers.length;
         int numSaboteurs = saboteurs.length;
 
-        int maxTurns = Math.max(numPlumbers, numSaboteurs);
-
         // Initialize plumber and saboteur indices outside the loop
         int plumberIndex = 0;
         int saboteurIndex = 0;
@@ -188,17 +186,17 @@ private Timer timer;
         * this is a simple approach bcz the timer is not implemented yet
         * *****************************************************************************************/
 
-
-        // Iterate through the maximum number of turns
-        for (int i = 0; i < maxTurns; i++) {
+        int i = 0;
+        while(true) {
             // Determine whose turn it is based on the current turn number.
             // If the turn number is even, it's the plumber's turn; otherwise, it's the saboteur's turn.
-            boolean isPlumberTurn = i % 2 == 0;
 
+            boolean isPlumberTurn = i % 2 == 0;
             // Check if it's the plumber's turn and there are plumbers left to play
-            if (isPlumberTurn && plumberIndex < numPlumbers) {
+            if (isPlumberTurn) {
+                i++;
                 System.out.println("Plumber's turn:");
-                int choice = plumbers[plumberIndex++].takeTurn();
+                int choice = plumbers[plumberIndex].takeTurn();
                 switch (choice) {
                     case 1:
                         System.out.println("You chose: Move to an element");
@@ -245,11 +243,26 @@ private Timer timer;
                     default:
                         System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
                 }
+                if(numPlumbers == 2) {
+                    plumberIndex++;
+                    if (plumberIndex == 2) {
+                        plumberIndex = 0;
+                    }
+                }
+                else if(numPlumbers == 3)
+                {
+                    plumberIndex++;
+                    if (plumberIndex == 3) {
+                        plumberIndex = 0;
+                    }
+                }
+
             }
-            // If it's not the plumber's turn, and there are saboteurs left to play
-            else if (!isPlumberTurn && saboteurIndex < numSaboteurs) {
+            // If it's not the plumber's turn.
+            else if (!isPlumberTurn) {
+                i++;
                 System.out.println("Saboteur's turn:");
-                int choice = saboteurs[saboteurIndex++].takeTurn();
+                int choice = saboteurs[saboteurIndex].takeTurn();
                 switch (choice) {
                     case 1:
                         System.out.println("You chose: Move");
@@ -273,6 +286,21 @@ private Timer timer;
                         exit(0);
                     default:
                         System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
+                }
+                // this is if the number of players it two. so that the loop will work correctly.
+                if(numPlumbers == 2) {
+                    saboteurIndex++;
+                    if (saboteurIndex == 2) {
+                        saboteurIndex = 0;
+                    }
+                }
+                else if(numPlumbers == 3)
+                {
+                    saboteurIndex++;
+                    if(saboteurIndex == 3)
+                    {
+                        saboteurIndex = 0;
+                    }
                 }
             }
         }
