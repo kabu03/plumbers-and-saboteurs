@@ -90,6 +90,12 @@ public class Plumber extends Player {
             System.out.println("Please Move to the end of the pipe to insert");
         }
     }
+
+    /**
+     * This method serves the purpose of fixing a punctured pipe.
+     * @param p will be the broken pipe to be fixed
+     * @author: Ibrahim
+     */
     public  void fixPipe(Pipe p){
         String userChoice,userChoice2;
         Scanner sc = new Scanner(System.in);
@@ -110,6 +116,12 @@ public class Plumber extends Player {
         }
 
     }
+
+    /**
+     * Method for picking up a pump that was manufactured at a cistern
+     * @param p is the pump that will be picked up
+     * @auhtor: Ibrahim
+     */
     public  void getPump(Pump p) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Are you on the pump you want to pick up?");
@@ -123,6 +135,14 @@ public class Plumber extends Player {
 
 
     }
+
+    /**
+     * Methods that inserts a pump that was obtained from a cistern, into the pipe grid.
+     * @param pump will be the inserted pump
+     * @param pipe will be where the pump is inserted on
+     * @author: Ibrahim
+     *
+     */
     public void insertPump(Pump pump, Pipe pipe){
 
         String userChoice;
@@ -131,14 +151,11 @@ public class Plumber extends Player {
         userChoice = scanner.nextLine();
 
         if (userChoice.equalsIgnoreCase("yes")) {
-            System.out.println("InsertPump(p1:Pump, p2:Pipe)\n Pump is successfully inserted into the pipe system.");
+            System.out.println("InsertPump(p1:Pump, p2:Pipe)\nPipe.ConnectToElement(Pump)\n Pump is successfully inserted into the pipe system.");
         } else {
             System.out.println("Please move to the pipe you want to insert the pump on.");
         }
 
-
-        // Why is pump a parameter? We know they can only insert the one they have in the inventory.
-        // you are right
     }
 
     /**
