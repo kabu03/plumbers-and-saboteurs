@@ -1,6 +1,4 @@
 
-0
-java:S1220""Move this file to a named package.
 ?	java:S106"+Replace this use of System.out by a logger.(àñ‡
 E	java:S106"+Replace this use of System.out by a logger.(ŠŒ¹ºüÿÿÿÿ
 E	java:S106"+Replace this use of System.out by a logger.(úÉÙéüÿÿÿÿ
@@ -8,5 +6,4 @@ E	java:S106"+Replace this use of System.out by a logger.(úÉÙéüÿÿÿÿ
 @	java:S106"+Replace this use of System.out by a logger.(æ½½ş
 ?	java:S106"+Replace this use of System.out by a logger.(æ¤â2
 E	java:S106#"+Replace this use of System.out by a logger.(Âø¦¥şÿÿÿÿ
-h	java:S100&"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºü¯˜ùÿÿÿÿ
-@	java:S106*"+Replace this use of System.out by a logger.(›ìâĞ
+@	java:S106("+Replace this use of System.out by a logger.(›ìâĞ

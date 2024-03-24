@@ -1,21 +1,58 @@
 
-k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë´ÒËùÿÿÿÿ
-0
-java:S1220""Move this file to a named package.
-y
-java:S1450"^Remove the "playerEndOfPipe" field and declare it as a local variable in the relevant methods.(Ó‡ó¯øÿÿÿÿ
-t
-java:S1450"YRemove the "playerPump" field and declare it as a local variable in the relevant methods.(çÒŒ³ÿÿÿÿÿ
-E	java:S106"+Replace this use of System.out by a logger.(Ù´×Äøÿÿÿÿ
-E	java:S106"+Replace this use of System.out by a logger.(ŠÂ¦úÿÿÿÿ
-@	java:S106
-"+Replace this use of System.out by a logger.(ó¶Üê
-E	java:S106"+Replace this use of System.out by a logger.(²Á¶÷ıÿÿÿÿ
-E	java:S106"+Replace this use of System.out by a logger.(´şÀæøÿÿÿÿ
-E	java:S106"+Replace this use of System.out by a logger.(Àó¨Šÿÿÿÿÿ
-@	java:S106"+Replace this use of System.out by a logger.(ö„¯û
-E	java:S106"+Replace this use of System.out by a logger.(Ÿ€³øÿÿÿÿÿ
-I
-java:S1068".Remove this unused "playerPump" private field.(çÒŒ³ÿÿÿÿÿ
-N
-java:S1068"3Remove this unused "playerEndOfPipe" private field.(Ó‡ó¯øÿÿÿÿ
+r	java:S117T"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë´ÒËùÿÿÿÿ8×ËÒíæ1
+t	java:S116"SRename this field "TempPipe" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï¹ËÜüÿÿÿÿ8ÛËÒíæ1
+€
+java:S1450"^Remove the "playerEndOfPipe" field and declare it as a local variable in the relevant methods.(Ó‡ó¯øÿÿÿÿ8ÜËÒíæ1
+L	java:S106"+Replace this use of System.out by a logger.(Ù´×Äøÿÿÿÿ8àËÒíæ1
+G	java:S106"+Replace this use of System.out by a logger.(€ãª8áËÒíæ1
+L	java:S106"+Replace this use of System.out by a logger.(¸û‘ìıÿÿÿÿ8áËÒíæ1
+G	java:S106"+Replace this use of System.out by a logger.(‰âûë8áËÒíæ1
+G	java:S106"+Replace this use of System.out by a logger.(•ëŞØ8áËÒíæ1
+L	java:S106"+Replace this use of System.out by a logger.(œÏƒåşÿÿÿÿ8áËÒíæ1
+L	java:S106"+Replace this use of System.out by a logger.(ÏõŸßşÿÿÿÿ8áËÒíæ1
+L	java:S106"+Replace this use of System.out by a logger.(ÒÒæÏùÿÿÿÿ8âËÒíæ1
+L	java:S106"+Replace this use of System.out by a logger.(îª¥‰úÿÿÿÿ8âËÒíæ1
+F	java:S106"+Replace this use of System.out by a logger.(À™Ş8âËÒíæ1
+G	java:S106"+Replace this use of System.out by a logger.(²°§Ë8ãËÒíæ1
+G	java:S106"+Replace this use of System.out by a logger.(’²¤ÿ8ãËÒíæ1
+G	java:S106"+Replace this use of System.out by a logger.(º®ß¼8ãËÒíæ1
+G	java:S106"+Replace this use of System.out by a logger.(°Ò…—8ãËÒíæ1
+F	java:S106!"+Replace this use of System.out by a logger.(“Ó‡^8ãËÒíæ1
+G	java:S106("+Replace this use of System.out by a logger.(§ë£8çËÒíæ1
+L	java:S106,"+Replace this use of System.out by a logger.(¹áùõıÿÿÿÿ8çËÒíæ1
+G	java:S1060"+Replace this use of System.out by a logger.(À‚ƒ8çËÒíæ1
+G	java:S1064"+Replace this use of System.out by a logger.(½‚Âì8çËÒíæ1
+L	java:S1068"+Replace this use of System.out by a logger.(ÿë§Ïşÿÿÿÿ8èËÒíæ1
+L	java:S106<"+Replace this use of System.out by a logger.(ÔÆœÓùÿÿÿÿ8èËÒíæ1
+L	java:S106@"+Replace this use of System.out by a logger.(¼‰åøûÿÿÿÿ8èËÒíæ1
+G	java:S106D"+Replace this use of System.out by a logger.(ÿº¥À8èËÒíæ1
+G	java:S106H"+Replace this use of System.out by a logger.(“ú‹ü8éËÒíæ1
+L	java:S106L"+Replace this use of System.out by a logger.(ëÍ˜øÿÿÿÿ8éËÒíæ1
+L	java:S106P"+Replace this use of System.out by a logger.(ˆŞØíùÿÿÿÿ8éËÒíæ1
+L	java:S106W"+Replace this use of System.out by a logger.(¯Ù¶ëùÿÿÿÿ8êËÒíæ1
+L	java:S106Z"+Replace this use of System.out by a logger.(´şÀæøÿÿÿÿ8êËÒíæ1
+L	java:S106\"+Replace this use of System.out by a logger.(Àó¨Šÿÿÿÿÿ8êËÒíæ1
+L	java:S106_"+Replace this use of System.out by a logger.(Ÿàğÿúÿÿÿÿ8êËÒíæ1
+G	java:S106g"+Replace this use of System.out by a logger.(¡ñØÄ8ëËÒíæ1
+L	java:S106j"+Replace this use of System.out by a logger.(ÚÈòşÿÿÿÿ8ëËÒíæ1
+L	java:S106m"+Replace this use of System.out by a logger.(ŠÁßúùÿÿÿÿ8ëËÒíæ1
+o	java:S100p"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Èİü¶şÿÿÿÿ8ëËÒíæ1
+J
+java:S1172p"(Remove this unused method parameter "p".(Èİü¶şÿÿÿÿ8ìËÒíæ1
+F
+java:S1659q")Declare "userChoice2" on a separate line.(­å—å8ìËÒíæ1
+L	java:S106t"+Replace this use of System.out by a logger.(Ì•İüÿÿÿÿ8íËÒíæ1
+G	java:S106w"+Replace this use of System.out by a logger.(ÕÏé°8íËÒíæ1
+F	java:S106z"+Replace this use of System.out by a logger.(’ªÆ8íËÒíæ1
+L	java:S106|"+Replace this use of System.out by a logger.(Ç®ü³úÿÿÿÿ8îËÒíæ1
+M	java:S106€"+Replace this use of System.out by a logger.(ü­ğ°øÿÿÿÿ8îËÒíæ1
+F
+java:S1172…"(Remove this unused method parameter "p".(±Óì¨8ïËÒíæ1
+M	java:S106‡"+Replace this use of System.out by a logger.(Ñ†í şÿÿÿÿ8ïËÒíæ1
+H	java:S106‹"+Replace this use of System.out by a logger.(’ ÄŒ8ğËÒíæ1
+H	java:S106"+Replace this use of System.out by a logger.(¾”Ü§8ğËÒíæ1
+M	java:S106–"+Replace this use of System.out by a logger.(æÿÆÃıÿÿÿÿ8ğËÒíæ1
+M	java:S106š"+Replace this use of System.out by a logger.(´‚ÚÄøÿÿÿÿ8ñËÒíæ1
+H	java:S106œ"+Replace this use of System.out by a logger.(¶©Í®8ñËÒíæ1
+U
+java:S1068"3Remove this unused "playerEndOfPipe" private field.(Ó‡ó¯øÿÿÿÿ8ñËÒíæ1

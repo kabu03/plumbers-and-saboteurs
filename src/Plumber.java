@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Plumber extends Player {
     private Pump playerPump;
+    private Pipe TempPipe;
     private EndOfPipe playerEndOfPipe;
 
     public Plumber(String playerName) {
@@ -40,11 +41,11 @@ public class Plumber extends Player {
                 break;
             case 2:
                 System.out.println("You chose: GetPump");
-
+                getPump(playerPump);
                 break;
             case 3:
                 System.out.println("You chose: InsertPump");
-
+                insertPump(playerPump,TempPipe);
                 break;
             case 4:
                 System.out.println("You chose: FixPump");
@@ -52,7 +53,7 @@ public class Plumber extends Player {
                 break;
             case 5:
                 System.out.println("You chose: FixPipe");
-
+                FixPipe(TempPipe);
                 break;
             case 6:
                 System.out.println("You chose: GetEnd");
@@ -78,18 +79,6 @@ public class Plumber extends Player {
         }
     }
 
-    public void getPump(Pump pump){
-        System.out.println("getPump(Pump)");
-        playerPump = pump;
-        System.out.println("The plumber has picked up a pump. They can now insert it.");
-    }
-
-    /**
-     * This method checks if the player is at the end of a pipe and, if so, allows the player to pick up
-     * an EndOfPipe object for later use in the game.
-     * @param EoP this will be the end of pipe object that the user will pick up
-     *            and use later in the game.
-     */
     public void getEnd(EndOfPipe EoP){
         String userChoice;
         Scanner sc = new Scanner(System.in);
@@ -105,11 +94,6 @@ public class Plumber extends Player {
         }
     }
 
-    public void insertPump(Pump pump, Pipe pipe){
-        System.out.println("insertPump(Pump, Pipe)");
-        // Why is pump a parameter? We know they can only insert the one they have in the inventory.
-        // you are right
-    }
 
     /**
      * this method connects an end of pipe object to an element in the game.
@@ -126,5 +110,56 @@ public class Plumber extends Player {
         else{
             System.out.println("Please Move to the end of the pipe to insert");
         }
+    }
+    public static void FixPipe(Pipe p){
+        String userChoice,userChoice2;
+        Scanner sc = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
+        System.out.println("Are you on the pipe?");
+        userChoice = sc.nextLine();
+        if(userChoice.equalsIgnoreCase("yes")){
+            System.out.println("is the pipe punctured?");
+            userChoice2 = sc2.nextLine();
+            if(userChoice2.equalsIgnoreCase("yes")){
+                System.out.println("FixPipe(Pipe)\n Pipe.Works=True;\n Pipe is now repaired and working");
+            }else{
+                System.out.print("You can't fix a pipe that is not punctured.");
+            }
+
+        }else {
+            System.out.println("Please first move to the Pipe you want to fix.");
+        }
+        sc.close();
+        sc2.close();
+    }
+    public static void getPump(Pump p) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Are you on the pump you want to pick up?");
+        String userChoice = scanner.nextLine();
+
+        if (userChoice.equalsIgnoreCase("yes")) {
+            System.out.println("GetPump(p: Pump)\n You have picked up the pump.");
+        } else {
+            System.out.println("First go to a cistern that has a pump available for pick up.");
+        }
+
+        scanner.close();
+    }
+    public void insertPump(Pump pump, Pipe pipe){
+
+        String userChoice;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Are you on the pipe you want to insert a pump on?");
+        userChoice = scanner.nextLine();
+
+        if (userChoice.equalsIgnoreCase("yes")) {
+            System.out.println("InsertPump(p1:Pump, p2:Pipe)\n Pump is successfully inserted into the pipe system.");
+        } else {
+            System.out.println("Please move to the pipe you want to insert the pump on.");
+        }
+        scanner.close();
+
+        // Why is pump a parameter? We know they can only insert the one they have in the inventory.
+        // you are right
     }
 }
