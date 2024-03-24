@@ -38,6 +38,7 @@ public class Plumber extends Player {
         switch (choice) {
             case 1:
                 System.out.println("You chose: Move to an element");
+                move();
                 break;
             case 2:
                 System.out.println("You chose: GetPump");
@@ -57,18 +58,20 @@ public class Plumber extends Player {
                 break;
             case 6:
                 System.out.println("You chose: GetEnd");
+                getEnd(playerEndOfPipe);
                 break;
             case 7:
                 System.out.println("You chose: InsertPipeEnd");
+                insertPipeEnd(playerPump);
 
                 break;
             case 8:
                 System.out.println("You chose: ChangeInputPipe");
-
+                    changeInputPipe(playerPump,TempPipe);
                 break;
             case 9:
                 System.out.println("You chose: ChangeOutputPipe");
-
+                changeOutputPipe(playerPump,TempPipe);
                 break;
             case 10:
                 System.out.println("You chose: End the Game");
