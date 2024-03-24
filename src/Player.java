@@ -11,6 +11,13 @@ public abstract class Player {
     public String playerName;
     public int index;
 
+    /**
+     * Abstract method representing a player's turn in the game.
+     * Subclasses (Plumber & Saboteur ) implement this method to define specific player actions.
+     *
+     * @return The integer representing the chosen action.
+     * @author Basel Al-Raoush
+     */
     protected abstract int takeTurn();
 
     /**

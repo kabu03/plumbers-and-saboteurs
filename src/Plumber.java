@@ -14,6 +14,16 @@ public class Plumber extends Player {
     public Plumber(String playerName) {
         this.playerName = playerName;
     }
+
+    /**
+     * Allows the Plumber player to take their turn.
+     * Displays available actions and prompts the player to choose one.
+     * Returns the chosen action as an integer.
+     * Overrides the abstract takeTurn method of the Player class.
+     *
+     * @return The integer representing the chosen action.
+     * @author Basel Al-Raoush
+     */
     @Override
     protected int takeTurn() {
         System.out.println("takeTurn()");

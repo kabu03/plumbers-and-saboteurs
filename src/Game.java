@@ -27,6 +27,15 @@ private Timer timer;
     public Game() {
     }
 
+
+    /**
+     * Initializes the game by setting up players and game elements.
+     * Asks for the number of players and assigns them to teams (Plumbers or Saboteurs).
+     * Ensures balanced team assignments for 2v2 or 3v3 setups.
+     * Initializes game elements such as pipes, pumps, cisterns, and springs.
+     * Starts the game.
+     * @author Basel Al-Raoush
+     */
     public void initGame() {
         System.out.println("initGame()");
         Scanner scanner = new Scanner(System.in);
@@ -110,7 +119,19 @@ private Timer timer;
         System.out.println("The game's state has been initialized.");
     }
 
+    /**
+     * Starts the game and manages turns for players.
+     * starts the game timer, places players on the map, and starts water flow.
+     * Players take turns performing actions until the game ends.
+     * Actions include moving, interacting with pipes and pumps, allowing the players
+        to perform actions based on their team (Plumber or Saboteur).
 
+     * Each player's turn is executed sequentially, with actions being chosen based on user input,
+
+     *The method handles player turns,provides feedback to players throughout the game,
+      keeping them informed of the current state and their available actions.
+     * @author Basel Al-Raoush
+     */
     public void startGame() {
         System.out.println("startGame()");
 
@@ -240,6 +261,8 @@ public void nextTurn(){
     // + i think we should change it to be one arr of players not an arr of saboteurs and an array of plumbers
     // then we do something like this: player[currentindex++].taketurn()
 }
+
+
 public void addPipe(Pipe pipe){
     System.out.println("addPipe(Pipe)");
     System.out.println("A new pipe has been added.");
