@@ -135,8 +135,7 @@ public class Plumber extends Player {
         }else {
             System.out.println("Please first move to the Pipe you want to fix.");
         }
-        sc.close();
-        sc2.close();
+
     }
     public static void getPump(Pump p) {
         Scanner scanner = new Scanner(System.in);
@@ -149,7 +148,7 @@ public class Plumber extends Player {
             System.out.println("First go to a cistern that has a pump available for pick up.");
         }
 
-        scanner.close();
+
     }
     public void insertPump(Pump pump, Pipe pipe){
 
@@ -163,7 +162,7 @@ public class Plumber extends Player {
         } else {
             System.out.println("Please move to the pipe you want to insert the pump on.");
         }
-        scanner.close();
+
 
         // Why is pump a parameter? We know they can only insert the one they have in the inventory.
         // you are right
