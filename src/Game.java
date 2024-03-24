@@ -312,14 +312,9 @@ private Timer timer;
     determineWinner();
 }
 public void nextTurn(){
-    // it will make every element call the update method
-    //for(element ele: gameElements){ele.update()};
     System.out.println("nextTurn()");
     System.out.println("It's now the turn of the next player.");
-    // logic of incrementing index of turnOrder array, I guess?
-    // we have to either create a get index method or make the index attr public for players,
-    // + i think we should change it to be one arr of players not an arr of saboteurs and an array of plumbers
-    // then we do something like this: player[currentindex++].taketurn()
+
 }
 
 
@@ -357,7 +352,6 @@ public void addSpring(Spring s){
 
 public void calculateLeakedWater(){
     System.out.println("calculateLeakedWater()");
-    // The return value of this method and the one below it should be double, but what should we do now?
 }
 public void calculateCollectedWater(){
     System.out.println("calculateCollectedWater()");
