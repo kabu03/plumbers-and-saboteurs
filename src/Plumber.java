@@ -140,4 +140,31 @@ public class Plumber extends Player {
         // Why is pump a parameter? We know they can only insert the one they have in the inventory.
         // you are right
     }
+
+    /**
+     * this method fixes a broken pump
+     * @param pump this will be the element that we will fix.\
+     * @author :Nafez
+     */
+    public void fixPump(Pump pump){
+        String userChoice,userChoice2;
+        Scanner sc = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
+        System.out.println("Are you on the pump?");
+        userChoice = sc.nextLine();
+        if(userChoice.equalsIgnoreCase("yes")){
+            System.out.println("is the pump working?");
+            userChoice2 = sc2.nextLine();
+            if(userChoice2.equalsIgnoreCase("no")){
+                System.out.println("FixPump(Pump)\n Pump.Works=True;\n Pump is now repaired and working");
+            }else{
+                System.out.print("You can't fix a pump that is not broken.");
+            }
+
+        }else {
+            System.out.println("Please first move to the pump you want to fix.");
+        }
+
+
+    }
 }

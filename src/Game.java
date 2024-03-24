@@ -188,7 +188,7 @@ private Timer timer;
                         break;
                     case 4:
                         System.out.println("You chose: FixPump");
-                        // no method yet
+                        plumbers[plumberIndex].fixPump(pumpArray[0]);
                         break;
                     case 5:
                         System.out.println("You chose: FixPipe");
