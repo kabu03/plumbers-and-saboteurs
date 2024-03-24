@@ -93,6 +93,8 @@ public class Plumber extends Player {
 
     /**
      * This method serves the purpose of fixing a punctured pipe.
+     * The user is asked about the condition of the pipe before the game proceeds with any action,
+     * if the pipe is punctured the plumber is allowed to fix if he is standing on it, otherwise the action will be aborted.
      * @param p will be the broken pipe to be fixed
      * @author: Ibrahim
      */
@@ -138,6 +140,7 @@ public class Plumber extends Player {
 
     /**
      * Methods that inserts a pump that was obtained from a cistern, into the pipe grid.
+     * Pipe in which the pump is to be connected to, has to be specified.
      * @param pump will be the inserted pump
      * @param pipe will be where the pump is inserted on
      * @author: Ibrahim
