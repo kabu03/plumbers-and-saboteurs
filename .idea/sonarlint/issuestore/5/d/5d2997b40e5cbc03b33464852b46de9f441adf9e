@@ -1,8 +1,7 @@
 
-0
-java:S1220""Move this file to a named package.
 q
 java:S1450"[Remove the "workingTurns" field and declare it as a local variable in the relevant methods.(«ÃÖ
+L	java:S106"+Replace this use of System.out by a logger.(Çæ×Çûÿÿÿÿ8Ë®äÚæ1
 E
 java:S1068"*Remove this unused "inPipe" private field.(±¨ûÿÿÿÿ
 A

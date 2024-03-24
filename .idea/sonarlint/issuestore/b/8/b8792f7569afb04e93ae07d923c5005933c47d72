@@ -1,45 +1,89 @@
 
-0
-java:S1220""Move this file to a named package.
-@	java:S106"+Replace this use of System.out by a logger.(à“ÛŒ
-E	java:S106"+Replace this use of System.out by a logger.(»ä›¿şÿÿÿÿ
-@	java:S106"+Replace this use of System.out by a logger.(Á©¥
-@	java:S106"+Replace this use of System.out by a logger.(¬’Æ’
-E	java:S106"+Replace this use of System.out by a logger.(¤±ùÿÿÿÿ
-E	java:S106"+Replace this use of System.out by a logger.(âÿšØıÿÿÿÿ
-E	java:S106"+Replace this use of System.out by a logger.(è’¨Ôûÿÿÿÿ
-?	java:S106"+Replace this use of System.out by a logger.(„’¯x
-@
-java:S1172"+Remove this unused method parameter "pipe".(ÛĞÖJ
-@	java:S106 "+Replace this use of System.out by a logger.(¡À¸
-E	java:S106!"+Replace this use of System.out by a logger.(ñŠı¦üÿÿÿÿ
-F
-java:S1172#"+Remove this unused method parameter "pump".(û–ìòıÿÿÿÿ
-E	java:S106$"+Replace this use of System.out by a logger.(úª­ùûÿÿÿÿ
-@	java:S106%"+Replace this use of System.out by a logger.(‹Ö„Î
->
-java:S1172'"(Remove this unused method parameter "c".(—¿ÿÆ
-E	java:S106("+Replace this use of System.out by a logger.(‹õ÷ğüÿÿÿÿ
-E	java:S106)"+Replace this use of System.out by a logger.(¯Óóıÿÿÿÿ
->
-java:S1172+"(Remove this unused method parameter "s".(¬£øã
-@	java:S106,"+Replace this use of System.out by a logger.(ÒŠàÉ
-@	java:S106-"+Replace this use of System.out by a logger.(äØ±Ô
-E	java:S1060"+Replace this use of System.out by a logger.(şÚ’ìúÿÿÿÿ
-V	java:S1253"<This block of commented-out lines of code should be removed.(ö¯—Ëúÿÿÿÿ
-@	java:S106>"+Replace this use of System.out by a logger.(‹†±Ú
-@	java:S106B"+Replace this use of System.out by a logger.(‡»°É
-B
-java:S1068",Remove this unused "plumbers" private field.(ŒŞƒÖ
+G	java:S106"+Replace this use of System.out by a logger.(à“ÛŒ8ÍŞÎëæ1
+L	java:S106"+Replace this use of System.out by a logger.(ÙéÕÁùÿÿÿÿ8×ŞÎëæ1
+L	java:S106"+Replace this use of System.out by a logger.(ˆ÷ƒüÿÿÿÿ8ØŞÎëæ1
+L	java:S106#"+Replace this use of System.out by a logger.(¹Âô¸üÿÿÿÿ8ãŞÎëæ1
+F	java:S106'"+Replace this use of System.out by a logger.(µâI8æŞÎëæ1
+L	java:S106("+Replace this use of System.out by a logger.(‚ÛÎ†øÿÿÿÿ8éŞÎëæ1
+L	java:S1061"+Replace this use of System.out by a logger.(¢Ğ€ïÿÿÿÿÿ8íŞÎëæ1
+G	java:S1068"+Replace this use of System.out by a logger.(êş‚â8ïŞÎëæ1
+_
+java:S11179"=Rename "pipeArray" which hides the field declared at line 10.(É„’äıÿÿÿÿ8ñŞÎëæ1
+G	java:S106I"+Replace this use of System.out by a logger.(šÆ”Œ8øŞÎëæ1
+G	java:S106L"+Replace this use of System.out by a logger.(£²®”8ùŞÎëæ1
+L	java:S106O"+Replace this use of System.out by a logger.(»ä›¿şÿÿÿÿ8úŞÎëæ1
+\
+java:S1854g"@Remove this useless assignment to local variable "totalPlayers".(Áœ«8üŞÎëæ1
+]
+java:S1854x"@Remove this useless assignment to local variable "plumberIndex".(™Ò÷ü8ıŞÎëæ1
+]
+java:S1854|"ARemove this useless assignment to local variable "saboteurIndex".(ëÈå8ÿŞÎëæ1
+^
+java:S1854€"@Remove this useless assignment to local variable "plumberIndex".(™Ò÷ü8€ßÎëæ1
+^
+java:S1854„"ARemove this useless assignment to local variable "saboteurIndex".(ëÈå8ßÎëæ1
+G	java:S106U"+Replace this use of System.out by a logger.(Á©¥8ƒßÎëæ1
+G	java:S106V"+Replace this use of System.out by a logger.(£²®”8„ßÎëæ1
+L	java:S106Y"+Replace this use of System.out by a logger.(³¨±œıÿÿÿÿ8…ßÎëæ1
+G	java:S106_"+Replace this use of System.out by a logger.(Àå³æ8†ßÎëæ1
+G	java:S106b"+Replace this use of System.out by a logger.(ú¸Ğ€8ˆßÎëæ1
+M
+java:S1481g"1Remove this unused "totalPlayers" local variable.(Áœ«8ŠßÎëæ1
+]	java:S125l"<This block of commented-out lines of code should be removed.(ŒøåÒüÿÿÿÿ8ßÎëæ1
+k
+java:S1871"MThis branch's code block is the same as the block for the branch on line 121.(å¥‡8’ßÎëæ1
+j
+java:S1871}"MThis branch's code block is the same as the block for the branch on line 117.(’º‚ù8ßÎëæ1
+G	java:S106w"+Replace this use of System.out by a logger.(ˆ¼˜ÿ8”ßÎëæ1
+F	java:S106{"+Replace this use of System.out by a logger.(ŞÛ¸b8–ßÎëæ1
+G	java:S106"+Replace this use of System.out by a logger.(ˆ¼˜ÿ8—ßÎëæ1
+G	java:S106ƒ"+Replace this use of System.out by a logger.(ŞÛ¸b8˜ßÎëæ1
+H	java:S106Š"+Replace this use of System.out by a logger.(¬’Æ’8šßÎëæ1
+M	java:S106"+Replace this use of System.out by a logger.(¤±ùÿÿÿÿ8œßÎëæ1
+M	java:S106"+Replace this use of System.out by a logger.(âÿšØıÿÿÿÿ8ßÎëæ1
+M	java:S106•"+Replace this use of System.out by a logger.(è’¨Ôûÿÿÿÿ8ßÎëæ1
+Y	java:S125”"<This block of commented-out lines of code should be removed.(Üš’ï8ßÎëæ1
+G	java:S106–"+Replace this use of System.out by a logger.(„’¯x8ŸßÎëæ1
 H
-java:S1068"-Remove this unused "saboteurs" private field.(Ìíá’øÿÿÿÿ
-K
-java:S1068"6Remove this unused "currentPlayerIndex" private field.(Ûù_
+java:S1172œ"+Remove this unused method parameter "pipe".(ÛĞÖJ8¡ßÎëæ1
+H	java:S106"+Replace this use of System.out by a logger.(¡À¸8¡ßÎëæ1
+M	java:S106"+Replace this use of System.out by a logger.(ñŠı¦üÿÿÿÿ8¢ßÎëæ1
+N
+java:S1172 "+Remove this unused method parameter "pump".(û–ìòıÿÿÿÿ8£ßÎëæ1
+M	java:S106¡"+Replace this use of System.out by a logger.(úª­ùûÿÿÿÿ8¤ßÎëæ1
+H	java:S106¢"+Replace this use of System.out by a logger.(‹Ö„Î8¤ßÎëæ1
 F
-java:S1068"0Remove this unused "gameElements" private field.(ÕÎğÑ
-C
-java:S1068"-Remove this unused "turnOrder" private field.(ªÕ¡ï
-C
-java:S1068	"-Remove this unused "gameScore" private field.(÷ïÑõ
-D
-java:S1068")Remove this unused "timer" private field.(å¡Ê˜ûÿÿÿÿ
+java:S1172¤"(Remove this unused method parameter "c".(—¿ÿÆ8¥ßÎëæ1
+M	java:S106¥"+Replace this use of System.out by a logger.(‹õ÷ğüÿÿÿÿ8¦ßÎëæ1
+M	java:S106¦"+Replace this use of System.out by a logger.(¯Óóıÿÿÿÿ8¦ßÎëæ1
+F
+java:S1172¨"(Remove this unused method parameter "s".(¬£øã8¨ßÎëæ1
+H	java:S106©"+Replace this use of System.out by a logger.(ÒŠàÉ8©ßÎëæ1
+H	java:S106ª"+Replace this use of System.out by a logger.(äØ±Ô8«ßÎëæ1
+M	java:S106­"+Replace this use of System.out by a logger.(şÚ’ìúÿÿÿÿ8¯ßÎëæ1
+M	java:S106±"+Replace this use of System.out by a logger.(“æ¨¿úÿÿÿÿ8¸ßÎëæ1
+H	java:S106³"+Replace this use of System.out by a logger.(ÕŒØç8»ßÎëæ1
+H	java:S106¶"+Replace this use of System.out by a logger.(Â‚ŸÖ8½ßÎëæ1
+H	java:S106º"+Replace this use of System.out by a logger.(‹†±Ú8ÀßÎëæ1
+H	java:S106¾"+Replace this use of System.out by a logger.(‡»°É8ÃßÎëæ1
+M
+java:S1068"+Remove this unused "players" private field.(–êÇºúÿÿÿÿ8ÅßÎëæ1
+R
+java:S1068"6Remove this unused "currentPlayerIndex" private field.(Ûù_8ÅßÎëæ1
+M
+java:S1068	"0Remove this unused "elementArray" private field.(ğÜ”8ÅßÎëæ1
+O
+java:S1068
+"-Remove this unused "pipeArray" private field.(±Ã„®øÿÿÿÿ8ÆßÎëæ1
+O
+java:S1068"-Remove this unused "pumpArray" private field.(¿¢»éùÿÿÿÿ8ÆßÎëæ1
+M
+java:S1068"0Remove this unused "cisternArray" private field.(‡’£8ÆßÎëæ1
+O
+java:S1068"3Remove this unused "endOfPipesArray" private field.(òîş8ÆßÎëæ1
+J
+java:S1068"-Remove this unused "turnOrder" private field.(ªÕ¡ï8ÆßÎëæ1
+J
+java:S1068"-Remove this unused "gameScore" private field.(÷ïÑõ8ÆßÎëæ1
+K
+java:S1068")Remove this unused "timer" private field.(å¡Ê˜ûÿÿÿÿ8ÇßÎëæ1
