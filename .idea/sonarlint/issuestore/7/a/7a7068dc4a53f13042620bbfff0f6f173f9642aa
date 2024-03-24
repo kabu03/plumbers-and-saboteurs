@@ -1,9 +1,0 @@
-
-s
-java:S1104"VMake gameLength a static final constant or non-public and provide accessors if needed.(—–ŠÀ8…°‹íæ1
-r
-java:S1104"VMake turnLength a static final constant or non-public and provide accessors if needed.(ÑÀ8…°‹íæ1
-M
-java:S1444"0Make this "public static gameLength" field final(—–ŠÀ8‡°‹íæ1
-G	java:S106"+Replace this use of System.out by a logger.(è”ª8Ÿ°‹íæ1
-L	java:S106	"+Replace this use of System.out by a logger.(ëŸ½’ùÿÿÿÿ8¡°‹íæ1

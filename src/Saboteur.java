@@ -76,11 +76,9 @@ public class Saboteur extends Player {
                 System.out.println("Pipe.works = False");
                 System.out.println("The pipe has been punctured.");
                 System.out.println("IF WaterLevel > 0 (meaning there is water currently flowing through the pipe)");
-
-                if (p1.getWaterLevel() > 0) {
                     p1.decrementWater();
                     p1.incrementLeakage();
-                }
+
             } else {
                 System.out.println("You cannot puncture a pipe that you're not currently standing on.");
             }

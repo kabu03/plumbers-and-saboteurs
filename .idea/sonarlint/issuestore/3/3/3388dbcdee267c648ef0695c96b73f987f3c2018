@@ -1,8 +1,9 @@
 
 n
-java:S1104"XMake leakedAmount a static final constant or non-public and provide accessors if needed.(ˆœî
+java:S1104"XMake leakedAmount a static final constant or non-public and provide accessors if needed.(ˆœî
 q
-java:S1104"VMake endsOfPipe a static final constant or non-public and provide accessors if needed.(©…‚Óøÿÿÿÿ
-E	java:S106"+Replace this use of System.out by a logger.(‘¯¶‚ÿÿÿÿÿ
-E	java:S106	"+Replace this use of System.out by a logger.(‡«Åìşÿÿÿÿ
-L	java:S106"+Replace this use of System.out by a logger.(Çæ×Çûÿÿÿÿ8Î¼äÚæ1
+java:S1104"VMake endsOfPipe a static final constant or non-public and provide accessors if needed.(©…‚Óøÿÿÿÿ
+E	java:S106
+"+Replace this use of System.out by a logger.(‘¯¶‚ÿÿÿÿÿ
+E	java:S106"+Replace this use of System.out by a logger.(‡«Åìşÿÿÿÿ
+L	java:S106"+Replace this use of System.out by a logger.(Çæ×Çûÿÿÿÿ8Î¼äÚæ1
