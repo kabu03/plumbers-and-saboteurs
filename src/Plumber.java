@@ -91,7 +91,7 @@ public class Plumber extends Player {
             System.out.println("getEnd(EndOfPipe)");
             playerEndOfPipe = EoP;
             System.out.println("The plumber has picked up an end of pipe. They can now insert it.");
-        }git
+        }
         else {
             System.out.println("You can not pick up the end of the pipe");
         }
