@@ -11,7 +11,7 @@ public abstract class Player {
         int pumpNumber;
         int pipeNumber;
         System.out.println("changeInputPipe(Pump, Pipe)");
-        System.out.println("Enter the number of the pump");
+        System.out.println("Enter the number of the pump.");
         Scanner sc = new Scanner(System.in);
         pumpNumber = sc.nextInt();
         System.out.println("Pump " + pumpNumber + " currently has 3 connected pipes.");
