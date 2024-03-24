@@ -89,7 +89,8 @@ public class Plumber extends Player {
 
     /**
      * this method will allow a plumber to pick up an end of pipe object from the end of a pipe.
-     * @param EoP this will be the end of pipe object that we will pick up
+     * @param EoP this will be the end of pipe object that we will pick up.
+     * @author : Majed
      */
     public void getEnd(EndOfPipe EoP){
         String userChoice;
@@ -109,7 +110,8 @@ public class Plumber extends Player {
 
     /**
      * this method connects an end of pipe object to an element in the game.
-     * @param e this will be the element that we will insert the pipe end to.
+     * @param e this will be the element that we will insert the pipe end to.\
+     * @author :Majed
      */
     public void insertPipeEnd(Element e){
         String userChoice;

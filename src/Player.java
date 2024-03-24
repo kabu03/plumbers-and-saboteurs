@@ -102,7 +102,16 @@ public abstract class Player {
     }
 
     /**
-     * Allows the player to move between different game locations (pipes, pumps, or the cistern).
+     * Facilitates player movement between different game locations, including pipes, pumps, and a cistern.
+     * This method engages the player with a choice-driven interface to select their next destination within the game's environment.
+     * Upon selection, the method evaluates the feasibility of the move based on game logic, such as the occupancy state of the target location.
+     *
+     * The method operates in several steps:
+     * 1. Prompts the user to choose their desired destination type (pipe, pump, or cistern) with an input choice.
+     * 2. Based on the selection, further prompts guide the user to specify their destination more precisely (e.g., which pipe or pump).
+     * 3. Checks for conditions that might prevent the move, such as an occupied destination.
+     * 4. Updates the player's location in the game world if the move is valid.
+     * @author : Majed
      */
     protected void move() {
         int userChoice1;
