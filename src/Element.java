@@ -1,3 +1,9 @@
+/**
+ * Acts as a superclass for elements in the game, including pipes, pumps, cisterns, and springs.
+ * These elements are responsible for managing water flow and system functionality, tracking
+ * occupancy, operational status, water levels, defining maximum capacities, and maintaining
+ * connections among each other.
+ */
 public abstract class Element {
     protected boolean occupied = false;
     protected boolean works = true;

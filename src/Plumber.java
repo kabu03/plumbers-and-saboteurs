@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+/**
+ * Represents players tasked with maintaining and repairing the pipe system. Plumbers can fix
+ * broken pumps, repair leaking pipes, manage pipe ends, and extend the system. They play a
+ * crucial role in setting pump directions and defending against sabotage, with their actions
+ * being vital for water transfer efficiency and system operation.
+ */
 public class Plumber extends Player {
     private Pump playerPump;
     private Pipe TempPipe;

@@ -1,19 +1,40 @@
 import java.lang.*;
 import java.util.Scanner;
 
+/**
+ * Represents individual players in the game, each being part of a team as plumbers or saboteurs.
+ * Players take turns to perform actions such as moving, repairing pipes, sabotaging the system,
+ * transferring water, and managing pump operations including fixing, inserting, changing input/output
+ * pipes, and setting water flow direction. Each player is identified by their name, team, and index number.
+ */
 public abstract class Player {
     public String playerName;
     public int index;
 
     protected abstract void takeTurn();
 
+    /**
+     * Changes the input pipe of a specified pump to a new pipe based on user input.
+     * The method prompts the user to select a pump and then choose which of the
+     * connected pipes to set as the new input pipe. It performs checks to ensure the action
+     * is permissible and outputs the result of the change. The method assumes that there are 5 pumps in the game, and 3 connected
+     * pipes connected to every pump. In the GUI implementation, this will be different.
+     *
+     * @param p1 The pump object whose input pipe is to be changed.
+     * @param p2 The new pipe object to be set as the input pipe. Note: This parameter is not directly used in the current implementation.
+     * @author Karam Abu Judom
+     */
     protected void changeInputPipe(Pump p1, Pipe p2) {
         int pumpNumber;
         int pipeNumber;
         System.out.println("changeInputPipe(Pump, Pipe)");
-        System.out.println("Enter the number of the pump.");
+        System.out.println("Enter the number of the pump. (1-5)");
         Scanner sc = new Scanner(System.in);
         pumpNumber = sc.nextInt();
+        while (pumpNumber < 1 || pumpNumber > 5) {
+            System.out.println("Invalid input. Enter a number from 1 to 5.");
+            pumpNumber = sc.nextInt();
+        }
         System.out.println("Pump " + pumpNumber + " currently has 3 connected pipes.");
         System.out.println("Which pipe do you want to set as the input pipe? (1-3)");
 
@@ -36,13 +57,28 @@ public abstract class Player {
         }
     }
 
+    /**
+     * Changes the output pipe of a specified pump to a new pipe based on user input.
+     * Similar to {@link #changeInputPipe(Pump, Pipe)}, this method prompts the user
+     * to select a pump and then choose one of the connected pipes to set as the
+     * new output pipe. It checks if the action can be performed and displays the result.
+     * The method assumes that there are 5 pumps in the game, and 3 connected
+     * pipes connected to every pump. In the GUI implementation, this will be different.
+     * @param p1 The pump object whose output pipe is to be changed.
+     * @param p2 The new pipe object to be set as the output pipe. Note: This parameter is not directly used in the current implementation.
+     * @author Karam Abu Judom
+     */
     protected void changeOutputPipe(Pump p1, Pipe p2) {
         System.out.println("changeOutputPipe(Pump, Pipe)");
         int pumpNumber;
         int pipeNumber;
-        System.out.println("Enter the number of the pump");
+        System.out.println("Enter the number of the pump (1-5).");
         Scanner sc = new Scanner(System.in);
         pumpNumber = sc.nextInt();
+        while (pumpNumber < 1 || pumpNumber > 5) {
+            System.out.println("Invalid input. Enter a number from 1 to 5.");
+            pumpNumber = sc.nextInt();
+        }
         System.out.println("Pump " + pumpNumber + " currently has 3 connected pipes.");
         System.out.println("Which pipe do you want to set as the output pipe? (1-3)");
 

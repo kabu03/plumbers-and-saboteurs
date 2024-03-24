@@ -1,5 +1,12 @@
 import java.util.Scanner;
 
+/**
+ * Serves as the central class for managing the game. It orchestrates gameplay, managing plumbers
+ * and saboteurs, tracking the current player index, and overseeing elements crucial for water
+ * management. The class provides essential methods for game initialization
+ * and addition of elements to the system, alongside methods for determining the winner and calculating
+ * game metrics.
+ */
 public class Game {
 private Player[] players;
 private Saboteur[] saboteurs; // index even -> ta3al hon

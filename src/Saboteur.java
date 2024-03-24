@@ -1,5 +1,10 @@
 import java.util.Scanner;
 
+/**
+ * Represents players dedicated to disrupting the pipe system and causing water wastage.
+ * Saboteurs employ tactics to change pump directions and puncture pipes, aiming to hinder
+ * the plumbers' efforts by strategically targeting system weaknesses to maximize water loss.
+ */
 public class Saboteur extends Player {
 
     public Saboteur(String playerName) {
@@ -47,6 +52,23 @@ public class Saboteur extends Player {
                 System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
         }
     }
+    /**
+     * Attempts to puncture the specified pipe based on user input and certain conditions.
+     * The method first checks if the pipe is in a working state. If it is, it then verifies
+     * if the user is standing on the pipe. If both conditions are satisfied, the method
+     * sets the pipe's working status to false (punctured), potentially affects water flow,
+     * and increments leakage.
+     * <p>
+     * The method prompts the user for input to confirm the pipe's working status and the
+     * user's position relative to the pipe. If the pipe is not working or the user is not
+     * standing on it, the action is aborted with an explanatory message.
+     * </p>
+     *
+     * @param p1 The {@link Pipe} object to be punctured. This method directly modifies its
+     *           {@code works} property, and may call {@code decrementWater()} and
+     *           {@code incrementLeakage()} on it depending on the water level.
+     * @author Karam Abu Judom
+     */
     public void puncture(Pipe p1){
         Scanner sc = new Scanner(System.in);
         System.out.println("puncture(Pipe)");
