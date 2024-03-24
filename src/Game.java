@@ -194,6 +194,7 @@ Scanner sc = new Scanner(System.in);
     if (sc.nextInt() == 1){
         System.out.println("The Saboteurs won the game.");
     }
+
     else {
         System.out.println("The Plumbers won the game.");
     }

@@ -83,6 +83,13 @@ public class Plumber extends Player {
         playerPump = pump;
         System.out.println("The plumber has picked up a pump. They can now insert it.");
     }
+
+    /**
+     * This method checks if the player is at the end of a pipe and, if so, allows the player to pick up
+     * an EndOfPipe object for later use in the game.
+     * @param EoP this will be the end of pipe object that the user will pick up
+     *            and use later in the game.
+     */
     public void getEnd(EndOfPipe EoP){
         String userChoice;
         Scanner sc = new Scanner(System.in);
@@ -104,6 +111,10 @@ public class Plumber extends Player {
         // you are right
     }
 
+    /**
+     * this method connects an end of pipe object to an element in the game.
+     * @param e this will be the element that we will insert the pipe end to.
+     */
     public void insertPipeEnd(Element e){
         String userChoice;
         Scanner sc = new Scanner(System.in);

@@ -65,6 +65,9 @@ public abstract class Player {
         }
     }
 
+    /**
+     * Allows the player to move between different game locations (pipes, pumps, or the cistern).
+     */
     protected void move() {
         int userChoice1;
         String userChoice2;
