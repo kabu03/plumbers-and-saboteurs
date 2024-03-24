@@ -339,20 +339,22 @@ public void addSpring(Spring s){
     System.out.println("addSpring(Spring)");
     System.out.println("A new Spring has been added.");
 }
-public void determineWinner(){
-    System.out.println("determineWinner()");
-calculateLeakedWater();
-calculateCollectedWater();
-Scanner sc = new Scanner(System.in);
-    System.out.println("Enter 1 if the leaked water was greater than collected water.");
-    if (sc.nextInt() == 1){
-        System.out.println("The Saboteurs won the game.");
+    public void determineWinner() {
+        System.out.println("determineWinner()");
+        calculateLeakedWater();
+        calculateCollectedWater();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter 1 if the leaked water was greater than collected water.");
+        String input = sc.nextLine();
+
+        if (input.trim().equals("1")) {
+            System.out.println("The Saboteurs won the game.");
+        } else {
+            System.out.println("The Plumbers won the game.");
+        }
     }
 
-    else {
-        System.out.println("The Plumbers won the game.");
-    }
-}
 public void calculateLeakedWater(){
     System.out.println("calculateLeakedWater()");
     // The return value of this method and the one below it should be double, but what should we do now?
