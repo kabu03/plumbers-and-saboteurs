@@ -15,7 +15,7 @@ public class Plumber extends Player {
         this.playerName = playerName;
     }
     @Override
-    protected void takeTurn() {
+    protected int takeTurn() {
         System.out.println("takeTurn()");
 
 
@@ -39,52 +39,7 @@ public class Plumber extends Player {
         System.out.print("Enter the number corresponding to your choice: ");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-
-        // Switch case
-        switch (choice) {
-            case 1:
-                System.out.println("You chose: Move to an element");
-                move();
-                break;
-            case 2:
-                System.out.println("You chose: GetPump");
-                getPump(playerPump);
-                break;
-            case 3:
-                System.out.println("You chose: InsertPump");
-                insertPump(playerPump,TempPipe);
-                break;
-            case 4:
-                System.out.println("You chose: FixPump");
-
-                break;
-            case 5:
-                System.out.println("You chose: FixPipe");
-                FixPipe(TempPipe);
-                break;
-            case 6:
-                System.out.println("You chose: GetEnd");
-                getEnd(playerEndOfPipe);
-                break;
-            case 7:
-                System.out.println("You chose: InsertPipeEnd");
-                insertPipeEnd(playerPump);
-
-                break;
-            case 8:
-                System.out.println("You chose: ChangeInputPipe");
-                    changeInputPipe(playerPump,TempPipe);
-                break;
-            case 9:
-                System.out.println("You chose: ChangeOutputPipe");
-                changeOutputPipe(playerPump,TempPipe);
-                break;
-            case 10:
-                System.out.println("You chose: End the Game");
-                break;
-            default:
-                System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
-        }
+        return choice;
     }
 
     /**
@@ -125,7 +80,7 @@ public class Plumber extends Player {
             System.out.println("Please Move to the end of the pipe to insert");
         }
     }
-    public static void FixPipe(Pipe p){
+    public  void FixPipe(Pipe p){
         String userChoice,userChoice2;
         Scanner sc = new Scanner(System.in);
         Scanner sc2 = new Scanner(System.in);
@@ -145,7 +100,7 @@ public class Plumber extends Player {
         }
 
     }
-    public static void getPump(Pump p) {
+    public  void getPump(Pump p) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Are you on the pump you want to pick up?");
         String userChoice = scanner.nextLine();

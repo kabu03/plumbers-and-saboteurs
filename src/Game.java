@@ -151,12 +151,76 @@ private Timer timer;
             // Check if it's the plumber's turn and there are plumbers left to play
             if (isPlumberTurn && plumberIndex < numPlumbers) {
                 System.out.println("Plumber's turn:");
-                plumbers[plumberIndex++].takeTurn();
+                int choice = plumbers[plumberIndex++].takeTurn();
+                switch (choice) {
+                    case 1:
+                        System.out.println("You chose: Move to an element");
+                        plumbers[plumberIndex].move();
+                        break;
+                    case 2:
+                        System.out.println("You chose: GetPump");
+                        plumbers[plumberIndex].getPump(pumpArray[0]);
+                        break;
+                    case 3:
+                        System.out.println("You chose: InsertPump");
+                        plumbers[plumberIndex].insertPump(pumpArray[1],pipeArray[0]);
+                        break;
+                    case 4:
+                        System.out.println("You chose: FixPump");
+                        // no method yet
+                        break;
+                    case 5:
+                        System.out.println("You chose: FixPipe");
+                        plumbers[plumberIndex].FixPipe(pipeArray[2]);
+                        break;
+                    case 6:
+                        System.out.println("You chose: GetEnd");
+                        plumbers[plumberIndex].getEnd(endOfPipesArray[0]);
+                        break;
+                    case 7:
+                        System.out.println("You chose: InsertPipeEnd");
+                        plumbers[plumberIndex].insertPipeEnd(pipeArray[0]);
+                        break;
+                    case 8:
+                        System.out.println("You chose: ChangeInputPipe");
+                        plumbers[plumberIndex].changeInputPipe(pumpArray[3],pipeArray[2]);
+                        break;
+                    case 9:
+                        System.out.println("You chose: ChangeOutputPipe");
+                        plumbers[plumberIndex].changeOutputPipe(pumpArray[2],pipeArray[1]);
+                        break;
+                    case 10:
+                        System.out.println("You chose: End the Game");
+                        determineWinner();
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
+                }
             }
             // If it's not the plumber's turn, and there are saboteurs left to play
             else if (!isPlumberTurn && saboteurIndex < numSaboteurs) {
                 System.out.println("Saboteur's turn:");
-                saboteurs[saboteurIndex++].takeTurn();
+                int choice = saboteurs[saboteurIndex++].takeTurn();
+                switch (choice) {
+                    case 1:
+                        System.out.println("You chose: Move");
+                        saboteurs[saboteurIndex].move();
+                        break;
+                    case 2:
+                        System.out.println("You chose: ChangeInputPipe");
+                        saboteurs[saboteurIndex].changeInputPipe(pumpArray[3],pipeArray[2]);
+                        break;
+                    case 3:
+                        System.out.println("You chose: ChangeOutputPipe");
+                        saboteurs[saboteurIndex].changeOutputPipe(pumpArray[2],pipeArray[1]);
+                        break;
+                    case 4:
+                        System.out.println("You chose: Puncture");
+                        saboteurs[saboteurIndex].puncture(pipeArray[2]);
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
+                }
             }
         }
     }

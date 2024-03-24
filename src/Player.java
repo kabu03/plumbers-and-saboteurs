@@ -11,7 +11,7 @@ public abstract class Player {
     public String playerName;
     public int index;
 
-    protected abstract void takeTurn();
+    protected abstract int takeTurn();
 
     /**
      * Changes the input pipe of a specified pump to a new pipe based on user input.

@@ -12,7 +12,7 @@ public class Saboteur extends Player {
     }
 
     @Override
-    protected void takeTurn() {
+    protected int takeTurn() {
         System.out.println("takeTurn()");
         System.out.println("The Saboteur is now playing their turn.");
         System.out.println("Player " + playerName + ", it's your turn.");
@@ -29,28 +29,7 @@ public class Saboteur extends Player {
         System.out.print("Enter the number corresponding to your choice: ");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-
-        // Switch case
-        switch (choice) {
-            case 1:
-                System.out.println("You chose: Move");
-
-                break;
-            case 2:
-                System.out.println("You chose: ChangeInputPipe");
-
-                break;
-            case 3:
-                System.out.println("You chose: ChangeOutputPipe");
-
-                break;
-            case 4:
-                System.out.println("You chose: Puncture");
-
-                break;
-            default:
-                System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
-        }
+        return choice;
     }
     /**
      * Attempts to puncture the specified pipe based on user input and certain conditions.
