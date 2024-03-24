@@ -60,7 +60,7 @@ public class Plumber extends Player {
     public void getEnd(EndOfPipe EoP){
         String userChoice;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Are you it the end of the pipe?");
+        System.out.println("Are you on the end of the pipe?");
         userChoice = sc.nextLine();
         if(userChoice.equalsIgnoreCase("yes")) {
             System.out.println("getEnd(EndOfPipe)");

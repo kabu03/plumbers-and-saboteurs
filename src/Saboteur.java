@@ -58,27 +58,35 @@ public class Saboteur extends Player {
      *           {@code incrementLeakage()} on it depending on the water level.
      * @author Karam Abu Judom
      */
-    public void puncture(Pipe p1){
-        Scanner sc = new Scanner(System.in);
+
+    public void puncture(Pipe p1) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("puncture(Pipe)");
         System.out.println("Is the Pipe working? Enter 1 if yes, enter anything else if not.");
-        if (sc.nextInt() == 1){
+
+        String sc1 = scanner.nextLine();
+
+        if (sc1.equals("1")) {
             System.out.println("Are you standing on the pipe? Enter 1 if yes, enter anything else if not.");
-            if (sc.nextInt() == 1){
+
+            String sc2 = scanner.nextLine();
+
+            if (sc2.equals("1")) {
                 p1.works = false;
                 System.out.println("Pipe.works = False");
                 System.out.println("The pipe has been punctured.");
                 System.out.println("IF WaterLevel > 0 (meaning there is water currently flowing through the pipe)");
-                p1.decrementWater();
-                p1.incrementLeakage();
-            }
-            else {
+
+                if (p1.getWaterLevel() > 0) {
+                    p1.decrementWater();
+                    p1.incrementLeakage();
+                }
+            } else {
                 System.out.println("You cannot puncture a pipe that you're not currently standing on.");
             }
-        }
-        else {
+        } else {
             System.out.println("You cannot puncture a pipe that is not working!");
         }
-
     }
+
 }
