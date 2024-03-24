@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 /**
  * Serves as the central class for managing the game. It orchestrates gameplay, managing plumbers
  * and saboteurs, tracking the current player index, and overseeing elements crucial for water
@@ -18,8 +20,14 @@ private Pipe[] pipeArray;
 private Pump[] pumpArray;
 private Cistern[] cisternArray;
 private EndOfPipe[] endOfPipesArray;
+private Spring[] springArray;
 private int[] turnOrder;
-private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index 1 represents Saboteur score.
+    private Pump playerPump;
+    private Pipe TempPipe;
+
+
+
+    private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index 1 represents Saboteur score.
     // Don't we need a method to set that the gameScore depends on game calculateLeakedWater and calculateCollectedWater?
     public Game(Player[] players, Element[] gameElements ){}
 private Timer timer;
@@ -37,6 +45,7 @@ private Timer timer;
      * @author Basel Al-Raoush
      */
     public void initGame() {
+
         System.out.println("initGame()");
         Scanner scanner = new Scanner(System.in);
 
@@ -94,29 +103,46 @@ private Timer timer;
 
         // Game initialization
         System.out.println("Initializing the game...");
-        Pipe[] pipeArray = new Pipe[5]; // Creating an array of size 5 to store 5 pipes
-
-        // Adding 5 pipes to the pipeArray
-        for (int i = 0; i < 5; i++) {
-            pipeArray[i] = new Pipe(); // Creating a new Pipe object and adding it to the pipeArray
+        int k=0;
+        elementArray= new Element[500];
+        pipeArray = new Pipe[5];
+        for (int j = 0; j < pipeArray.length; j++) {
+            pipeArray[j] = new Pipe();
+            addPipe(pipeArray[j]);
+            elementArray[k]=pipeArray[j];
+            k++;
         }
-
-        Pipe pipe = new Pipe(); //pipe object
-        addPipe(pipe);
-        Pump pump = new Pump(); //pump object
-        addPump(pump);
-        Cistern cistern = new Cistern(); //cistern object
-        addCistern(cistern);
-        Spring spring = new Spring(); //spring object
-        addSpring(spring);
-
+        pumpArray = new Pump[5];
+        for (int j = 0; j < pumpArray.length; j++) {
+            pumpArray[j] = new Pump();
+            addPump(pumpArray[j]);
+            elementArray[k]=pumpArray[j];
+            k++;
+        }
+        cisternArray=new Cistern[1];
+        for(int j=0;j<cisternArray.length;j++){
+            cisternArray[j]= new Cistern();
+            addCistern(cisternArray[j]);
+            elementArray[k]=cisternArray[j];
+            k++;
+        }
+        springArray= new Spring[1];
+        for (int j=0;j<springArray.length;j++){
+            springArray[j]=new Spring();
+            addSpring(springArray[j]);
+            elementArray[k]=springArray[j];
+            k++;
+        }
+        endOfPipesArray= new EndOfPipe[10];
+        for (int j=0;j<endOfPipesArray.length;j++){
+            endOfPipesArray[j]=new EndOfPipe();
+        }
         System.out.println("Game initialization completed.");
 
         // Start game
-        System.out.println("Starting the game...");
         startGame();
 
-        System.out.println("The game's state has been initialized.");
+
     }
 
     /**
@@ -184,7 +210,7 @@ private Timer timer;
                         break;
                     case 3:
                         System.out.println("You chose: InsertPump");
-                        plumbers[plumberIndex].insertPump(pumpArray[1],pipeArray[0]);
+                        plumbers[plumberIndex].insertPump(pumpArray[0],pipeArray[0]);
                         break;
                     case 4:
                         System.out.println("You chose: FixPump");
@@ -192,7 +218,8 @@ private Timer timer;
                         break;
                     case 5:
                         System.out.println("You chose: FixPipe");
-                        plumbers[plumberIndex].FixPipe(pipeArray[2]);
+
+                        plumbers[plumberIndex].fixPipe(pipeArray[0]);
                         break;
                     case 6:
                         System.out.println("You chose: GetEnd");
@@ -204,15 +231,16 @@ private Timer timer;
                         break;
                     case 8:
                         System.out.println("You chose: ChangeInputPipe");
-                        plumbers[plumberIndex].changeInputPipe(pumpArray[3],pipeArray[2]);
+                        plumbers[plumberIndex].changeInputPipe(pumpArray[0],pipeArray[0]);
                         break;
                     case 9:
                         System.out.println("You chose: ChangeOutputPipe");
-                        plumbers[plumberIndex].changeOutputPipe(pumpArray[2],pipeArray[1]);
+                        plumbers[plumberIndex].changeOutputPipe(pumpArray[0],pipeArray[0]);
                         break;
                     case 10:
                         System.out.println("You chose: End the Game");
                         determineWinner();
+                        exit(0);
                         break;
                     default:
                         System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
@@ -229,16 +257,20 @@ private Timer timer;
                         break;
                     case 2:
                         System.out.println("You chose: ChangeInputPipe");
-                        saboteurs[saboteurIndex].changeInputPipe(pumpArray[3],pipeArray[2]);
+                        saboteurs[saboteurIndex].changeInputPipe(pumpArray[0],pipeArray[0]);
                         break;
                     case 3:
                         System.out.println("You chose: ChangeOutputPipe");
-                        saboteurs[saboteurIndex].changeOutputPipe(pumpArray[2],pipeArray[1]);
+                        saboteurs[saboteurIndex].changeOutputPipe(pumpArray[0],pipeArray[0]);
                         break;
                     case 4:
                         System.out.println("You chose: Puncture");
-                        saboteurs[saboteurIndex].puncture(pipeArray[2]);
+                        saboteurs[saboteurIndex].puncture(pipeArray[0]);
                         break;
+                    case 5:
+                        System.out.println("You chose: End the Game");
+                        determineWinner();
+                        exit(0);
                     default:
                         System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
                 }

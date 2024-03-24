@@ -90,7 +90,7 @@ public class Plumber extends Player {
             System.out.println("Please Move to the end of the pipe to insert");
         }
     }
-    public  void FixPipe(Pipe p){
+    public  void fixPipe(Pipe p){
         String userChoice,userChoice2;
         Scanner sc = new Scanner(System.in);
         Scanner sc2 = new Scanner(System.in);

@@ -33,6 +33,7 @@ public class Saboteur extends Player {
         System.out.println("2. ChangeInputPipe");
         System.out.println("3. ChangeOutputPipe");
         System.out.println("4. Puncture");
+        System.out.println("5. End Game");
 
         // Prompt the user to enter a number
         System.out.print("Enter the number corresponding to your choice: ");
