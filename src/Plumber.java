@@ -44,6 +44,7 @@ public class Plumber extends Player {
         switch (choice) {
             case 1:
                 System.out.println("You chose: Move to an element");
+                move();
                 break;
             case 2:
                 System.out.println("You chose: GetPump");
@@ -63,28 +64,33 @@ public class Plumber extends Player {
                 break;
             case 6:
                 System.out.println("You chose: GetEnd");
+                getEnd(playerEndOfPipe);
                 break;
             case 7:
                 System.out.println("You chose: InsertPipeEnd");
+                insertPipeEnd(playerPump);
 
                 break;
             case 8:
                 System.out.println("You chose: ChangeInputPipe");
-
+                    changeInputPipe(playerPump,TempPipe);
                 break;
             case 9:
                 System.out.println("You chose: ChangeOutputPipe");
-
+                changeOutputPipe(playerPump,TempPipe);
                 break;
             case 10:
                 System.out.println("You chose: End the Game");
-
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
         }
     }
 
+    /**
+     * this method will allow a plumber to pick up an end of pipe object from the end of a pipe.
+     * @param EoP this will be the end of pipe object that we will pick up
+     */
     public void getEnd(EndOfPipe EoP){
         String userChoice;
         Scanner sc = new Scanner(System.in);
@@ -135,8 +141,7 @@ public class Plumber extends Player {
         }else {
             System.out.println("Please first move to the Pipe you want to fix.");
         }
-        sc.close();
-        sc2.close();
+
     }
     public static void getPump(Pump p) {
         Scanner scanner = new Scanner(System.in);
@@ -149,7 +154,7 @@ public class Plumber extends Player {
             System.out.println("First go to a cistern that has a pump available for pick up.");
         }
 
-        scanner.close();
+
     }
     public void insertPump(Pump pump, Pipe pipe){
 
@@ -163,7 +168,7 @@ public class Plumber extends Player {
         } else {
             System.out.println("Please move to the pipe you want to insert the pump on.");
         }
-        scanner.close();
+
 
         // Why is pump a parameter? We know they can only insert the one they have in the inventory.
         // you are right
