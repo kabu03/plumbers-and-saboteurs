@@ -298,34 +298,70 @@ private Timer timer;
         }
     }
 
+    /**
+     * Ends the game and evaluates the results to determine the winner.
+     * This method stops the game timer and evaluates the results to determine
+     * which team (Saboteurs or Plumbers) wins the game based on the comparison between leaked and collected water.
+     */
     public void endGame(){
     System.out.println("endGame()");
     System.out.println("The timer has stopped, and the game has ended. The results are being evaluated...");
     determineWinner();
 }
-public void nextTurn(){
+
+    /**
+     *Advances the game to the next player's turn.
+     */
+    public void nextTurn(){
     System.out.println("nextTurn()");
     System.out.println("It's now the turn of the next player.");
 
 }
 
-
+    /**
+     * Adds a new pipe to the game.
+     * This method adds a new pipe element to the system.
+     * @param pipe The pipe to be added.
+     */
 public void addPipe(Pipe pipe){
     System.out.println("addPipe(Pipe)");
     System.out.println("A new pipe has been added.");
 }
+
+    /**
+     * Adds a new pump to the game.
+     * This method adds a new pump element to the system.
+     * @param pump The pump to be added.
+     */
 public void addPump(Pump pump){
     System.out.println("addPump(Pump)");
     System.out.println("A new pump has been added.");
 }
+
+    /**
+     * Adds a new cistern to the game.
+     * This method adds a new cistern element to the system.
+     * @param c The cistern to be added.
+     */
 public void addCistern(Cistern c){
     System.out.println("addCistern(Cistern)");
     System.out.println("A new Cistern has been added.");
 }
+
+    /**
+     * Adds a new spring to the game.
+     * This method adds a new spring element to the  system.
+     * @param s The spring to be added.
+     */
 public void addSpring(Spring s){
     System.out.println("addSpring(Spring)");
     System.out.println("A new Spring has been added.");
 }
+
+    /**
+     *Determines the winner of the game based on the comparison between leaked and collected water.
+     *If the leaked water was greater, the Saboteurs win the game. Otherwise, the Plumbers win.
+     */
     public void determineWinner() {
         System.out.println("determineWinner()");
         calculateLeakedWater();
@@ -342,10 +378,17 @@ public void addSpring(Spring s){
         }
     }
 
-public void calculateLeakedWater(){
+    /**
+     *method to calculate the amount of water leaked from the pipes during the entire game.
+     */
+    public void calculateLeakedWater(){
     System.out.println("calculateLeakedWater()");
 }
-public void calculateCollectedWater(){
+
+    /**
+     *method to calculate the amount of water collected by the cistern during the entire game.
+     */
+    public void calculateCollectedWater(){
     System.out.println("calculateCollectedWater()");
 }
 }
