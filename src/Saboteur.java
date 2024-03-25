@@ -29,7 +29,7 @@ public class Saboteur extends Player {
         System.out.println("Available actions for Saboteurs:");
 
         // Print the list of actions
-        System.out.println("1. Move");
+        System.out.println("1. Move to an element");
         System.out.println("2. ChangeInputPipe");
         System.out.println("3. ChangeOutputPipe");
         System.out.println("4. Puncture");

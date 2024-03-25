@@ -51,7 +51,7 @@ public abstract class Player {
             pipeNumber = sc.nextInt();
         }
         System.out.println("Pipe " + pipeNumber + " selected.");
-        System.out.println("Are you on the pump? Enter 1 if yes, enter anything else if not.");
+        System.out.println("Are you on the pump? Enter 1 if yes, enter 0 if not.");
         if (sc.nextInt() == 1) {
             System.out.println("Performing checks...");
             System.out.println("Pump.isOccupied() returns true.");
@@ -95,7 +95,7 @@ public abstract class Player {
             pipeNumber = sc.nextInt();
         }
         System.out.println("Pipe " + pipeNumber + " selected.");
-        System.out.println("Are you on the pump? Enter 1 if yes, enter anything else if not.");
+        System.out.println("Are you on the pump? Enter 1 if yes, enter 0 if not.");
         if (sc.nextInt() == 1) {
             System.out.println("Performing checks...");
             System.out.println("Pump.isOccupied() returns true.");
@@ -156,16 +156,16 @@ public abstract class Player {
         if (userChoice1 == 2) {
             while (true) {
                 System.out.println("There are currently 5 pumps");
-                System.out.println("Which pipe do you want to move to?");
+                System.out.println("Which pump do you want to move to?");
                 userChoice2 = sc.nextLine();
-                int pipeNumber = Integer.parseInt(userChoice2);
-                if (pipeNumber < 1 || pipeNumber > 5) {
+                int pumpNumber = Integer.parseInt(userChoice2);
+                if (pumpNumber < 1 || pumpNumber > 5) {
                     System.out.println("Invalid choice. Please enter a number from 1 to 5.");
                     continue;
                 }
 
                 System.out.println("Player.move()");
-                System.out.println("You have moved to pump " + pipeNumber);
+                System.out.println("You have moved to pump " + pumpNumber);
                 break;
 
             }
