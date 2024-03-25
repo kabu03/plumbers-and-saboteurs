@@ -43,7 +43,7 @@ public class Plumber extends Player {
         System.out.println("7. InsertPipeEnd");
         System.out.println("8. ChangeInputPipe");
         System.out.println("9. ChangeOutputPipe");
-        System.out.println("10. End the Game");
+        System.out.println("10. End Game");
 
         // Prompt the user to enter a number
         System.out.print("Enter the number corresponding to your choice: ");

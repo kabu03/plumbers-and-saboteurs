@@ -228,7 +228,7 @@ private Timer timer;
                         plumbers[plumberIndex].changeOutputPipe(pumpArray[0],pipeArray[0]);
                         break;
                     case 10:
-                        System.out.println("You chose: End the Game");
+                        System.out.println("You chose: End Game");
                         determineWinner();
                         exit(0);
                         break;
@@ -273,7 +273,7 @@ private Timer timer;
                         saboteurs[saboteurIndex].puncture(pipeArray[0]);
                         break;
                     case 5:
-                        System.out.println("You chose: End the Game");
+                        System.out.println("You chose: End Game");
                         determineWinner();
                         exit(0);
                     default:
