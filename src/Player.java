@@ -175,6 +175,10 @@ public abstract class Player {
             // assuming there is only one cistern
             System.out.println("You have moved to the cistern");
         }
-
+        if(userChoice1 != 1 && userChoice1 != 2 && userChoice1 != 3)
+        {
+            System.out.println("Invaild choice");
+            move();
+        }
     }
 }
