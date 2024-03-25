@@ -141,7 +141,7 @@ public abstract class Player {
                     System.out.println("Invalid choice. Please enter a number from 1 to 5.");
                     continue;
                 }
-
+                System.out.println("Pipe" + userChoice2 + ".Standable() == True");
                 System.out.println("is pipe " + pipeNumber + " occupied?");
                 userChoice3 = sc.nextLine();
                 if (userChoice3.equalsIgnoreCase("no")) {
