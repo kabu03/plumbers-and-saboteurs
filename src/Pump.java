@@ -6,9 +6,26 @@
  * of working turns.
  */
 public class Pump extends Element {
+    /**
+     * the input pipe connected to the pump.
+     */
     private Pipe inPipe;
+
+    /**
+     * The output pipe connected to the pump
+     */
     private Pipe outPipe;
+
+    /**
+     * the number of turns that the pump will work for.
+     */
     private int workingTurns;
+
+    /**
+     * A method used to set the working turns of a pump.
+     * It allows for the specification of the number of turns the pump will operate for.
+     * @param x the number of turns that the pump will work for.
+     */
     public void setWorkingTurns(int x){
         workingTurns = x;
     }
