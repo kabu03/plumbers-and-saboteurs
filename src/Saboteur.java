@@ -30,10 +30,11 @@ public class Saboteur extends Player {
 
         // Print the list of actions
         System.out.println("1. Move to an element");
-        System.out.println("2. ChangeInputPipe");
-        System.out.println("3. ChangeOutputPipe");
-        System.out.println("4. Puncture");
-        System.out.println("5. End Game");
+        System.out.println("2. Change the input pipe of a pump");
+        System.out.println("3. Change the output pipe of a pump");
+        System.out.println("4. Puncture a pipe");
+        System.out.println("5. Pass Turn");
+        System.out.println("6. End the game");
 
         // Prompt the user to enter a number
         System.out.print("Enter the number corresponding to your choice: ");

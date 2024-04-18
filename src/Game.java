@@ -195,40 +195,44 @@ private Timer timer;
                         plumbers[plumberIndex].move();
                         break;
                     case 2:
-                        System.out.println("You chose: GetPump");
+                        System.out.println("You chose: Pick up a pump");
                         plumbers[plumberIndex].getPump(pumpArray[0]);
                         break;
                     case 3:
-                        System.out.println("You chose: InsertPump");
+                        System.out.println("You chose: Insert pump into a pipe");
                         plumbers[plumberIndex].insertPump(pumpArray[0],pipeArray[0]);
                         break;
                     case 4:
-                        System.out.println("You chose: FixPump");
+                        System.out.println("You chose: Fix a broken pump");
                         plumbers[plumberIndex].fixPump(pumpArray[0]);
                         break;
                     case 5:
-                        System.out.println("You chose: FixPipe");
+                        System.out.println("You chose: Fix a broken pipe");
 
                         plumbers[plumberIndex].fixPipe(pipeArray[0]);
                         break;
                     case 6:
-                        System.out.println("You chose: GetEnd");
+                        System.out.println("You chose: Pick up the end of a pipe");
                         plumbers[plumberIndex].getEnd(endOfPipesArray[0]);
                         break;
                     case 7:
-                        System.out.println("You chose: InsertPipeEnd");
+                        System.out.println("You chose: Insert the end of a pipe");
                         plumbers[plumberIndex].insertPipeEnd(pipeArray[0]);
                         break;
                     case 8:
-                        System.out.println("You chose: ChangeInputPipe");
+                        System.out.println("You chose: Change the input pipe of a pump");
                         plumbers[plumberIndex].changeInputPipe(pumpArray[0],pipeArray[0]);
                         break;
                     case 9:
-                        System.out.println("You chose: ChangeOutputPipe");
+                        System.out.println("You chose: Change the output pipe of a pump");
                         plumbers[plumberIndex].changeOutputPipe(pumpArray[0],pipeArray[0]);
                         break;
                     case 10:
-                        System.out.println("You chose: End Game");
+                        System.out.println("You chose: Pass Turn");
+                        plumbers[plumberIndex].passTurn();
+                        break;
+                    case 11:
+                        System.out.println("You chose: End the game");
                         determineWinner();
                         exit(0);
                         break;
@@ -257,23 +261,27 @@ private Timer timer;
                 int choice = saboteurs[saboteurIndex].takeTurn();
                 switch (choice) {
                     case 1:
-                        System.out.println("You chose: Move");
+                        System.out.println("You chose: Move to an element");
                         saboteurs[saboteurIndex].move();
                         break;
                     case 2:
-                        System.out.println("You chose: ChangeInputPipe");
+                        System.out.println("You chose: Change the input pipe of a pump");
                         saboteurs[saboteurIndex].changeInputPipe(pumpArray[0],pipeArray[0]);
                         break;
                     case 3:
-                        System.out.println("You chose: ChangeOutputPipe");
+                        System.out.println("You chose: Change the output pipe of a pump");
                         saboteurs[saboteurIndex].changeOutputPipe(pumpArray[0],pipeArray[0]);
                         break;
                     case 4:
-                        System.out.println("You chose: Puncture");
+                        System.out.println("You chose: Puncture a pipe");
                         saboteurs[saboteurIndex].puncture(pipeArray[0]);
                         break;
                     case 5:
-                        System.out.println("You chose: End Game");
+                        System.out.println("You chose: Pass Turn");
+                        saboteurs[saboteurIndex].passTurn();
+                        break;
+                    case 6:
+                        System.out.println("You chose: End the game");
                         determineWinner();
                         exit(0);
                     default:

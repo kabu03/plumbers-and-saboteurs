@@ -7,6 +7,7 @@ public class EndOfPipe {
      * An attribute that stores the element that is currently connected to the end of pipe object.
      */
     private Element connectedElement;
+    // I feel like we need a Pipe attribute to answer "which Pipe is this end of pipe currently belonging to?"
 
     /**
      * A method that connects the end of pipe object to an element in the system.
@@ -14,6 +15,7 @@ public class EndOfPipe {
      */
     public void connectToElement(Element e){
         System.out.println("connectToElement(Element)");
+        connectedElement = e;
 
     }
 

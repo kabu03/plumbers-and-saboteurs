@@ -20,6 +20,10 @@ public abstract class Player {
      */
     protected abstract int takeTurn();
 
+    protected void passTurn(){
+        // Implementation?
+    }
+
     /**
      * Changes the input pipe of a specified pump to a new pipe based on user input.
      * The method prompts the user to select a pump and then choose which of the

@@ -7,9 +7,9 @@ import java.util.Scanner;
  * being vital for water transfer efficiency and system operation.
  */
 public class Plumber extends Player {
-    private Pump playerPump;
-    private Pipe TempPipe;
-    private EndOfPipe playerEndOfPipe;
+    public Pump pickedUpPump;
+    private Pipe TempPipe; // ?
+    public EndOfPipe pickedUpEoP;
 
     public Plumber(String playerName) {
         this.playerName = playerName;
@@ -35,15 +35,16 @@ public class Plumber extends Player {
 
         // Print the list of actions
         System.out.println("1. Move to an element");
-        System.out.println("2. GetPump");
-        System.out.println("3. InsertPump");
-        System.out.println("4. FixPump");
-        System.out.println("5. FixPipe");
-        System.out.println("6. GetEnd");
-        System.out.println("7. InsertPipeEnd");
-        System.out.println("8. ChangeInputPipe");
-        System.out.println("9. ChangeOutputPipe");
-        System.out.println("10. End Game");
+        System.out.println("2. Pick up a pump");
+        System.out.println("3. Insert pump into a pipe");
+        System.out.println("4. Fix a broken pump");
+        System.out.println("5. Fix a broken pipe");
+        System.out.println("6. Pick up the end of a pipe");
+        System.out.println("7. Insert the end of a pipe");
+        System.out.println("8. Change the input pipe of a pump");
+        System.out.println("9. Change the output pipe of a pump");
+        System.out.println("10. Pass Turn");
+        System.out.println("11. End the game");
 
         // Prompt the user to enter a number
         System.out.print("Enter the number corresponding to your choice: ");
@@ -64,7 +65,7 @@ public class Plumber extends Player {
         userChoice = sc.nextLine();
         if(userChoice.equalsIgnoreCase("yes")) {
             System.out.println("getEnd(EndOfPipe)");
-            playerEndOfPipe = EoP;
+            pickedUpEoP = EoP;
             System.out.println("The plumber has picked up an end of pipe. They can now insert it.");
         }
         else {
