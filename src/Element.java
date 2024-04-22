@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Acts as a superclass for elements in the game, including pipes, pumps, cisterns, and springs.
  * These elements are responsible for managing water flow and system functionality, tracking
@@ -5,6 +7,8 @@
  * connections among each other.
  */
 public abstract class Element {
+    // in the doc I wrote that the attributes are private, but them should be protected.
+    private Random rand = new Random(); // random object to generate random values.
     /**
      * A boolean that indicates whether the element is currently occupied by a player or not.
      */
@@ -17,16 +21,12 @@ public abstract class Element {
     /**
      * An integer that represents the current water level in the element.
      */
-    protected int waterLevel;
+    protected int waterLevel = 0;
     /**
      * An integer that represents the maximum amount of water that
      * the element can theoretically hold.
      */
-    protected int maxCapacity;
-    /**
-     * A boolean that indicates whether the element is currently clicked.
-     */
-    protected boolean isClicked = false;
+    protected int maxCapacity = rand.nextInt(10,25); // also an assumption
     /**
      * Represents an array of pipes that are connected to a certain element.
      */
@@ -34,7 +34,7 @@ public abstract class Element {
     /**
      * An integer that represents the maximum number of pipes that can be theoretically connected to an element.
      */
-    protected int maxConnectablePipes;
+    protected int maxConnectablePipes = rand.nextInt(1,5); // I assumed that the max number of connectable pipes will be 4
     /**
      * A boolean that indicates whether the element can be stood upon.
      */
@@ -44,7 +44,6 @@ public abstract class Element {
      * Checks if the element is in working condition and returns a boolean.
      */
     public boolean isWorking(){
-        System.out.println("isWorking()");
         return works;
     }
 
@@ -52,7 +51,6 @@ public abstract class Element {
      * Checks if the element is currently occupied and returns a boolean.
      */
     public boolean isOccupied(){
-        System.out.println("isOccupied()");
         return occupied;
     }
 
@@ -60,36 +58,38 @@ public abstract class Element {
      * Increases the water level within the element.
      */
     public void incrementWater(){
-        System.out.println("incrementWater()");
         waterLevel+=2;
+        if(waterLevel > maxCapacity)
+        {
+            waterLevel = maxCapacity;
+        }
     }
 
     /**
      * Decreases the water level within the element.
      */
     public void decrementWater(){
-        System.out.println("decrementWater()");
         waterLevel-=2;
+        if(waterLevel < 0)
+        {
+            waterLevel = 0;
+        }
     }
 
     /**
      * Sets the occupied status of an element.
      */
     public void setOccupied(boolean bool){
-        System.out.println("setOccupied(boolean)");
         occupied = bool;
     }
     public int getMaxCapacity(){
-        System.out.println("getMaxCapacity()");
         return maxCapacity;
     }
     public int getWaterLevel(){
-        System.out.println("getWaterLevel()");
         return waterLevel;
     }
     public abstract void update(); // it is an abstract method.
     public void setStandable(boolean bool){
-        System.out.println("setStandable()");
         standable = bool;
     }
 }
