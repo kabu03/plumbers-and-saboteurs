@@ -26,7 +26,7 @@ public abstract class Element {
      * An integer that represents the maximum amount of water that
      * the element can theoretically hold.
      */
-    protected int maxCapacity = rand.nextInt(10,25); // also an assumption
+    protected int maxCapacity = rand.nextInt(10,26); // I assumed that the max capacity will be from 10 to 25
     /**
      * Represents an array of pipes that are connected to a certain element.
      */
@@ -34,7 +34,7 @@ public abstract class Element {
     /**
      * An integer that represents the maximum number of pipes that can be theoretically connected to an element.
      */
-    protected int maxConnectablePipes = rand.nextInt(1,5); // I assumed that the max number of connectable pipes will be 4
+    protected int maxConnectablePipes; // this will be different depending on the element.
     /**
      * A boolean that indicates whether the element can be stood upon.
      */
@@ -91,5 +91,15 @@ public abstract class Element {
     public abstract void update(); // it is an abstract method.
     public void setStandable(boolean bool){
         standable = bool;
+    }
+    // Added  a getter and a setter for Works
+    public boolean getWorks()
+    {
+        return works;
+    }
+    // i think this will be used in puncture.
+    public void setWorks(boolean bool)
+    {
+        works = bool;
     }
 }

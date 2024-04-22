@@ -4,19 +4,35 @@
  * active elements and track water leakage.
  */
 public class Pipe extends Element {
-    public int leakedAmount;
-    public EndOfPipe[] endsOfPipe;
+    public Pipe()
+    {
+        maxConnectablePipes = 2; // I did this in the constructor because this is the only we to set it in the child class.
+    }
+
+    public int leakedAmount = 0;
+    public EndOfPipe[] endsOfPipe = new EndOfPipe[2]; // I think a pipe will have max 2 endofpipes.
     public void incrementLeakage(){
-        System.out.println("incrementLeakage()");
-        leakedAmount++;
+        leakedAmount = leakedAmount + getWaterLevel(); // I assumed The leaked amount will depend on the waterLevel.
     }
     public int getLeakedWater(){
-        System.out.println("getLeakedWater()");
         return leakedAmount;
     }
 
     @Override
     public void update() {
-        System.out.println("Update");
+        // to check if we have a free end.
+        boolean haveFreeEnd = false;
+        for(int i = 0; i < 2; i++)
+        {
+            if(endsOfPipe[i] == null)
+            {
+                haveFreeEnd = true;
+            }
+        }
+        if(getWorks() == false || haveFreeEnd)
+        {
+            // we do not need to worry about the waterlevel being less than zero because the min amount it can take is zero.
+            incrementLeakage();
+        }
     }
 }
