@@ -6,9 +6,8 @@
 public class Pipe extends Element {
     public Pipe()
     {
-        maxConnectablePipes = 2; // I did this in the constructor because this is the only we to set it in the child class.
+         // I did this in the constructor because this is the only we to set it in the child class.
     }
-
     public int leakedAmount = 0;
     public EndOfPipe[] endsOfPipe = new EndOfPipe[2]; // I think a pipe will have max 2 endofpipes.
     public void incrementLeakage(){

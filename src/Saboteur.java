@@ -73,7 +73,7 @@ public class Saboteur extends Player {
             String sc2 = scanner.nextLine();
 
             if (sc2.equals("1")) {
-                p1.works = false;
+                p1.setWorks(false);
                 System.out.println("Pipe.works = False");
                 System.out.println("The pipe has been punctured.");
                 System.out.println("IF WaterLevel > 0 (meaning there is water currently flowing through the pipe)");

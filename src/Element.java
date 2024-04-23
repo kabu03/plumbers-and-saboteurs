@@ -1,4 +1,10 @@
-import java.util.Random;
+/*Changes made to element compared to documentation :
+Getter and Setter method for Works attribute
+Setter For maxCapacity attribute
+Getter for standable attribute
+Made connectedPipes Array public.
+Setter For maxConnectablePipes
+ */
 
 /**
  * Acts as a superclass for elements in the game, including pipes, pumps, cisterns, and springs.
@@ -7,38 +13,36 @@ import java.util.Random;
  * connections among each other.
  */
 public abstract class Element {
-    // in the doc I wrote that the attributes are private, but them should be protected.
-    private Random rand = new Random(); // random object to generate random values.
     /**
      * A boolean that indicates whether the element is currently occupied by a player or not.
      */
-    protected boolean occupied = false;
+    private boolean occupied = false;
     /**
      * A boolean indicating whether the element is currently in working condition or not.
      * For example, a broken pump would have this value as False.
      */
-    protected boolean works = true;
+    private boolean works = true;
     /**
      * An integer that represents the current water level in the element.
      */
-    protected int waterLevel = 0;
+    private int waterLevel = 0;
     /**
      * An integer that represents the maximum amount of water that
      * the element can theoretically hold.
      */
-    protected int maxCapacity = rand.nextInt(10,26); // I assumed that the max capacity will be from 10 to 25
+    private int maxCapacity;
     /**
      * Represents an array of pipes that are connected to a certain element.
      */
-    protected Pipe[] connectedPipes;
+    public Pipe[] connectedPipes;
     /**
      * An integer that represents the maximum number of pipes that can be theoretically connected to an element.
      */
-    protected int maxConnectablePipes; // this will be different depending on the element.
+    private int maxConnectablePipes; // this will be different depending on the element.
     /**
      * A boolean that indicates whether the element can be stood upon.
      */
-    protected boolean standable = false;
+    private boolean standable = false;
 
     /**
      * Checks if the element is in working condition and returns a boolean.
@@ -102,4 +106,18 @@ public abstract class Element {
     {
         works = bool;
     }
+    public void setMaxCapacity(int value)
+    {
+        maxCapacity = value;
+    }
+    public boolean getStandable()
+    {
+        return standable;
+    }
+    public void setMaxConnectablePipes(int value)
+    {
+        maxConnectablePipes = value;
+    }
 }
+
+

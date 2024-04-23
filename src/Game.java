@@ -22,17 +22,11 @@ private Cistern[] cisternArray;
 private EndOfPipe[] endOfPipesArray;
 private Spring[] springArray;
 private int[] turnOrder;
-    private Pump playerPump;
-    private Pipe TempPipe;
 
-
-
-    private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index 1 represents Saboteur score.
-    public Game(Player[] players, Element[] gameElements ){}
-private Timer timer;
-
-    public Game() {
-    }
+private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index 1 represents Saboteur score.
+    public Game(Player[] players, Element[] gameElements ){} // this seems useless
+    private Timer timer;
+    public Game() {}
 
 
     /**
@@ -44,8 +38,6 @@ private Timer timer;
      * @author Basel Al-Raoush
      */
     public void initGame() {
-
-        System.out.println("initGame()");
         Scanner scanner = new Scanner(System.in);
 
         // Asking for the number of players
@@ -60,44 +52,45 @@ private Timer timer;
 
         System.out.println("You've selected " + numPlayers + " players.");
 
-        plumbers = new Plumber[numPlayers / 2]; // Array to store plumber objects
-        saboteurs = new Saboteur[numPlayers / 2]; // Array to store saboteur objects
-
-        // Counter variables to keep track of plumbers and saboteurs
-        int plumberIndex = 0;
-        int saboteurIndex = 0;
-
-        // Ask for player names and team choice
-        for (int i = 0; i < numPlayers; i++) {
-            System.out.println("Enter the name of player " + (i + 1) + ":");
-            String playerName = scanner.next();
-
-            // Check if any team is already full
-            if (plumberIndex == numPlayers / 2) {
-                System.out.println(playerName + ", you must join the Saboteurs team.");
-                saboteurs[saboteurIndex++] = new Saboteur(playerName);
-                continue;
-            } else if (saboteurIndex == numPlayers / 2) {
-                System.out.println(playerName + ", you must join the Plumbers team.");
-                plumbers[plumberIndex++] = new Plumber(playerName);
-                continue;
-            }
-
-            // Ask for team choice
-            System.out.println("Select the team for " + playerName + ":");
-            System.out.println("Enter '1' for Plumbers and '2' for Saboteurs.");
-            int teamChoice = scanner.nextInt();
-
-            // Create player object based on team choice and add to respective array
-            if (teamChoice == 1) {
-                plumbers[plumberIndex++] = new Plumber(playerName);
-            } else if (teamChoice == 2) {
-                saboteurs[saboteurIndex++] = new Saboteur(playerName);
-            } else {
-                System.out.println("Invalid team choice.");
-                return;
-            }
-        }
+// The majority of this code is not good.
+//        plumbers = new Plumber[numPlayers / 2]; // Array to store plumber objects
+//        saboteurs = new Saboteur[numPlayers / 2]; // Array to store saboteur objects
+//
+//        // Counter variables to keep track of plumbers and saboteurs
+//        int plumberIndex = 0;
+//        int saboteurIndex = 0;
+//
+//        // Ask for player names and team choice
+//        for (int i = 0; i < numPlayers; i++) {
+//            System.out.println("Enter the name of player " + (i + 1) + ":");
+//            String playerName = scanner.next();
+//
+//            // Check if any team is already full
+//            if (plumberIndex == numPlayers / 2) {
+//                System.out.println(playerName + ", you must join the Saboteurs team.");
+//                saboteurs[saboteurIndex++] = new Saboteur(playerName);
+//                continue;
+//            } else if (saboteurIndex == numPlayers / 2) {
+//                System.out.println(playerName + ", you must join the Plumbers team.");
+//                plumbers[plumberIndex++] = new Plumber(playerName);
+//                continue;
+//            }
+//
+//            // Ask for team choice
+//            System.out.println("Select the team for " + playerName + ":");
+//            System.out.println("Enter '1' for Plumbers and '2' for Saboteurs.");
+//            int teamChoice = scanner.nextInt();
+//
+//            // Create player object based on team choice and add to respective array
+//            if (teamChoice == 1) {
+//                plumbers[plumberIndex++] = new Plumber(playerName);
+//            } else if (teamChoice == 2) {
+//                saboteurs[saboteurIndex++] = new Saboteur(playerName);
+//            } else {
+//                System.out.println("Invalid team choice.");
+//                return;
+//            }
+//        }
 
 
         // Game initialization
