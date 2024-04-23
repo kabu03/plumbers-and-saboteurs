@@ -6,6 +6,8 @@ Made connectedPipes Array public.
 Setter For maxConnectablePipes
  */
 
+import java.util.List;
+
 /**
  * Acts as a superclass for elements in the game, including pipes, pumps, cisterns, and springs.
  * These elements are responsible for managing water flow and system functionality, tracking
@@ -32,9 +34,9 @@ public abstract class Element {
      */
     private int maxCapacity;
     /**
-     * Represents an array of pipes that are connected to a certain element.
+     * Represents a List of pipes that are connected to a certain element.
      */
-    public Pipe[] connectedPipes;
+    public List<Pipe> connectedPipes;
     /**
      * An integer that represents the maximum number of pipes that can be theoretically connected to an element.
      */

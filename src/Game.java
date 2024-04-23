@@ -1,6 +1,12 @@
+import java.util.List;
 import java.util.Scanner;
 
-import static java.lang.System.exit;
+/*
+Changes made on Game:
+changed the element array into a List
+Changed the pipe Array into a list
+Changed the pump Array into a list
+ */
 
 /**
  * Serves as the central class for managing the game. It orchestrates gameplay, managing plumbers
@@ -15,11 +21,11 @@ private Saboteur[] saboteurs;
 private Plumber[] plumbers;
 
 private int currentPlayerIndex;
-private Element[] elementArray;
-private Pipe[] pipeArray;
-private Pump[] pumpArray;
+public List<Element> elementList;
+public List<Pipe> pipeList;
+public List<Pump> pumpList;
 private Cistern[] cisternArray;
-private EndOfPipe[] endOfPipesArray;
+private EndOfPipe[] endOfPipesArray; // i do not think this is needed.
 private Spring[] springArray;
 private int[] turnOrder;
 
@@ -94,6 +100,7 @@ private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index
 
 
         // Game initialization
+        /*
         System.out.println("Initializing the game...");
         int k=0;
         elementArray= new Element[500];
@@ -133,7 +140,7 @@ private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index
 
         // Start game
         startGame();
-
+*/
 
     }
 

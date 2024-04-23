@@ -10,7 +10,7 @@ import java.util.Scanner;
 public abstract class Player {
     public String playerName;
     public int index;
-
+    public Element currentElement;
     /**
      * Abstract method representing a player's turn in the game.
      * Subclasses (Plumber & Saboteur ) implement this method to define specific player actions.

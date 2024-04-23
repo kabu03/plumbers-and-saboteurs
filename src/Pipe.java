@@ -1,12 +1,18 @@
+/*
+Changes made to Pipe compard to docs:
+Added a new Add End of Pipe method.
+*/
+
 /**
  * The backbone of the pipe system, serving as conduits for water transfer. Flexible in nature,
  * allowing extension, repair, or manipulation by players. Pipes are crucial for water flow between
  * active elements and track water leakage.
  */
 public class Pipe extends Element {
+
     public Pipe()
     {
-         // I did this in the constructor because this is the only we to set it in the child class.
+        setMaxConnectablePipes(2);
     }
     public int leakedAmount = 0;
     public EndOfPipe[] endsOfPipe = new EndOfPipe[2]; // I think a pipe will have max 2 endofpipes.
