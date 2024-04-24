@@ -8,8 +8,13 @@ import java.util.Random;
  * representing the ultimate goal for the plumber team to ensure a steady water supply.
  */
 public class Cistern extends Element {
+    public Cistern(Game g)
+    {
+        gameInstance = g;
+    }
+
     Random rand = new Random();
-    Game gameInstance;
+    private Game gameInstance;
     /**
      * The number of turns remaining until a new pipe can be manufactured.
      */
@@ -32,6 +37,7 @@ public class Cistern extends Element {
         p.endsOfPipe[0] = temp;
         g.pipeList.add(p);
         temp.connectToElement(this);
+        // we will decide how to inform the user.
     }
 
     /**
@@ -44,6 +50,7 @@ public class Cistern extends Element {
             Pump temp = new Pump();
             manufacturedPump = temp;
             g.pumpList.add(temp);
+            System.out.println("A new Pump Has been Manufactured at the cistern");
         }
     }
 

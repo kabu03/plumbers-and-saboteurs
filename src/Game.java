@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -6,6 +7,7 @@ Changes made on Game:
 changed the element array into a List
 Changed the pipe Array into a list
 Changed the pump Array into a list
+Removed end of pipe array
  */
 
 /**
@@ -25,7 +27,6 @@ public List<Element> elementList;
 public List<Pipe> pipeList;
 public List<Pump> pumpList;
 private Cistern[] cisternArray;
-private EndOfPipe[] endOfPipesArray; // i do not think this is needed.
 private Spring[] springArray;
 private int[] turnOrder;
 
@@ -100,47 +101,55 @@ private int[] gameScore = {0, 0}; // Say index 0 represents Plumber score, index
 
 
         // Game initialization
-        /*
-        System.out.println("Initializing the game...");
-        int k=0;
-        elementArray= new Element[500];
-        pipeArray = new Pipe[5];
-        for (int j = 0; j < pipeArray.length; j++) {
-            pipeArray[j] = new Pipe();
-            addPipe(pipeArray[j]);
-            elementArray[k]=pipeArray[j];
-            k++;
-        }
-        pumpArray = new Pump[5];
-        for (int j = 0; j < pumpArray.length; j++) {
-            pumpArray[j] = new Pump();
-            addPump(pumpArray[j]);
-            elementArray[k]=pumpArray[j];
-            k++;
-        }
-        cisternArray=new Cistern[1];
-        for(int j=0;j<cisternArray.length;j++){
-            cisternArray[j]= new Cistern();
-            addCistern(cisternArray[j]);
-            elementArray[k]=cisternArray[j];
-            k++;
-        }
-        springArray= new Spring[1];
-        for (int j=0;j<springArray.length;j++){
-            springArray[j]=new Spring();
-            addSpring(springArray[j]);
-            elementArray[k]=springArray[j];
-            k++;
-        }
-        endOfPipesArray= new EndOfPipe[10];
-        for (int j=0;j<endOfPipesArray.length;j++){
-            endOfPipesArray[j]=new EndOfPipe();
-        }
-        System.out.println("Game initialization completed.");
 
+        System.out.println("Initializing the game...");
+        elementList = new ArrayList<>();
+        pipeList = new ArrayList<>();
+        pumpList = new ArrayList<>();
+        springArray = new Spring[1];
+        cisternArray = new Cistern[1];
+        // creation of spring
+        Spring s1 = new Spring();
+        elementList.add(s1);
+        springArray[0] = s1;
+        // creation of the upper pipe and connecting it to the spring
+        Pipe upperPipe = new Pipe();
+        EndOfPipe p1upper = new EndOfPipe(upperPipe);
+        EndOfPipe p2upper = new EndOfPipe(upperPipe);
+        p1upper.connectToElement(s1);
+        elementList.add(upperPipe);
+        pipeList.add(upperPipe);
+        // creation on the upper pump and connecting it to the upper pipe
+        Pump upperPump = new Pump();
+        p2upper.connectToElement(upperPump);
+        elementList.add(upperPipe);
+        pumpList.add(upperPump);
+        // creation of the middle pipe and connecting it to the upper pump
+        Pipe middlePipe = new Pipe();
+        EndOfPipe p1middle = new EndOfPipe(middlePipe);
+        EndOfPipe p2middle = new EndOfPipe(middlePipe);
+        elementList.add(middlePipe);
+        pipeList.add(middlePipe);
+        p1middle.connectToElement(upperPump);
+        // creation of the lower pump and connecting it to the middle Pipe
+        Pump lowerPump = new Pump();
+        p2middle.connectToElement(lowerPump);
+        elementList.add(lowerPump);
+        pumpList.add(lowerPump);
+        // creation of lower pipe and connecting it to the lower pump
+        Pipe lowerPipe = new Pipe();
+        EndOfPipe p1lower = new EndOfPipe(lowerPipe);
+        EndOfPipe p2lower = new EndOfPipe(lowerPipe);
+        elementList.add(lowerPipe);
+        pipeList.add(lowerPipe);
+        p1lower.connectToElement(lowerPump);
+        // creation of cistern connecting it to the lower pipe
+        Cistern cistern = new Cistern(this);
+        cisternArray[0] = cistern;
+        p2lower.connectToElement(cistern);
+        elementList.add(cistern);
         // Start game
         startGame();
-*/
 
     }
 
