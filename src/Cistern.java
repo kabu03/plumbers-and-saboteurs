@@ -1,5 +1,6 @@
 /* added a game instance attribute for cistern class */
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -11,6 +12,8 @@ public class Cistern extends Element {
     public Cistern(Game g)
     {
         gameInstance = g;
+        setMaxCapacity(Integer.MAX_VALUE);
+        connectedPipes= new ArrayList<>(connectedPipes);
     }
 
     Random rand = new Random();
@@ -56,15 +59,29 @@ public class Cistern extends Element {
 
     @Override
     public void update() {
+        boolean decrementPumpTurns = true;
+        boolean decrementPipeTurns = true;
         if(turnsUntilPipeReady == 0)
         {
             manufacturePipe(gameInstance);
             turnsUntilPipeReady = rand.nextInt(8,22);
+            decrementPipeTurns = false;
         }
         if(turnsUntilPumpReady == 0)
         {
             manufacturePump(gameInstance);
             turnsUntilPumpReady = rand.nextInt(8,22);
+            decrementPumpTurns = false;
         }
+        if(decrementPipeTurns)
+        {
+            turnsUntilPipeReady--;
+        }
+        if(decrementPumpTurns)
+        {
+            turnsUntilPumpReady--;
+        }
+        decrementPumpTurns = true;
+        decrementPipeTurns = true;
     }
 }

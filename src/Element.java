@@ -120,6 +120,10 @@ public abstract class Element {
     {
         maxConnectablePipes = value;
     }
+    public int getMaxConnectablePipes()
+    {
+        return maxConnectablePipes;
+    }
 }
 
 

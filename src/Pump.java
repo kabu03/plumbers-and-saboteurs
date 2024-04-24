@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
 /**
  * Essential elements responsible for propelling water through the system, featuring
  * a specific number of connections but only one input and one output pipe at a time. Pumps
@@ -6,6 +10,12 @@
  * of working turns.
  */
 public class Pump extends Element {
+    public Pump()
+    {
+        setMaxConnectablePipes(rand.nextInt(3,6)); setMaxCapacity(50);
+        connectedPipes = new ArrayList<Pipe>();
+    }
+    Random rand = new Random();
     /**
      * the input pipe connected to the pump.
      */
@@ -19,7 +29,7 @@ public class Pump extends Element {
     /**
      * the number of turns that the pump will work for.
      */
-    private int workingTurns;
+    private int workingTurns = rand.nextInt(8,24);
 
     /**
      * A method used to set the working turns of a pump.
@@ -32,6 +42,13 @@ public class Pump extends Element {
 
     @Override
     public void update() {
-        System.out.println("Update");
+        if(workingTurns == 0)
+        {
+            setWorks(false);
+        }
+        else
+        {
+            workingTurns--;
+        }
     }
 }
