@@ -1,3 +1,5 @@
+/* added a game instance attribute for cistern class */
+
 import java.util.Random;
 
 /**
@@ -37,7 +39,7 @@ public class Cistern extends Element {
      * @author: Basel Al-Raoush
      */
     public void manufacturePump(Game g) {
-        if(manufacturedPump != null)
+        if(manufacturedPump == null)
         {
             Pump temp = new Pump();
             manufacturedPump = temp;
