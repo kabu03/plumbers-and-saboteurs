@@ -41,7 +41,7 @@ public class Pump extends Element {
     }
 
     @Override
-    public void update() {
+    public void update() { // shouldn't it actually send water from the inPipe to the outPipe?
         if(workingTurns == 0)
         {
             setWorks(false);

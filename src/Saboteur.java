@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 /**
  * Represents players dedicated to disrupting the pipe system and causing water wastage.
  * Saboteurs employ tactics to change pump directions and puncture pipes, aiming to hinder
@@ -11,6 +13,7 @@ public class Saboteur extends Player {
         this.playerName = playerName;
     }
 
+
     /**
      * Allows the Saboteur player to take their turn.
      * Displays available actions and prompts the player to choose one.
@@ -21,8 +24,7 @@ public class Saboteur extends Player {
      * @author Basel Al-Raoush
      */
     @Override
-    protected int takeTurn() {
-        System.out.println("takeTurn()");
+    protected void takeTurn(Game g) {
         System.out.println("The Saboteur is now playing their turn.");
         System.out.println("Player " + playerName + ", it's your turn.");
         System.out.println("What action would you like to perform?");
@@ -40,7 +42,34 @@ public class Saboteur extends Player {
         System.out.print("Enter the number corresponding to your choice: ");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-        return choice;
+            switch (choice) {
+                case 1:
+                    System.out.println("You chose: Move to an element");
+                    move();
+                    break;
+                case 2:
+                    System.out.println("You chose: Change the input pipe of a pump");
+                    changeInputPipe(g.pumpList.getFirst(), g.pipeList.get(0)); // element selection
+                    break;
+                case 3:
+                    System.out.println("You chose: Change the output pipe of a pump");
+                    changeOutputPipe(g.pumpList.getFirst(), g.pipeList.get(0)); // element selection
+                    break;
+                case 4:
+                    System.out.println("You chose: Puncture a pipe");
+                    puncture(g.pipeList.get(0)); // Pipe selection menu
+                    break;
+                case 5:
+                    System.out.println("You chose: Pass Turn");
+                    passTurn();
+                    break;
+                case 6:
+                    System.out.println("You chose: End the game");
+                    g.endGame();
+                    exit(0);
+                default:
+                    System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
+            }
     }
     /**
      * Attempts to puncture the specified pipe based on user input and certain conditions.

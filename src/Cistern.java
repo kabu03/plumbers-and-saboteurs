@@ -13,7 +13,7 @@ public class Cistern extends Element {
     {
         gameInstance = g;
         setMaxCapacity(Integer.MAX_VALUE);
-        connectedPipes= new ArrayList<>(connectedPipes);
+        connectedPipes= new ArrayList<Pipe>();
     }
 
     Random rand = new Random();
@@ -36,9 +36,9 @@ public class Cistern extends Element {
     public void manufacturePipe(Game g) {
         // init logic
         Pipe p = new Pipe();
-        EndOfPipe temp = new EndOfPipe(p);
+        EndOfPipe temp = new EndOfPipe(p); // why is it a temp EoP, it should be in the game
         p.endsOfPipe[0] = temp;
-        g.pipeList.add(p);
+        g.pipeList.add(p); // we should add it to both pipeList and elementList, so use addPipe method
         temp.connectToElement(this);
         // we will decide how to inform the user.
     }
@@ -52,13 +52,13 @@ public class Cistern extends Element {
         {
             Pump temp = new Pump();
             manufacturedPump = temp;
-            g.pumpList.add(temp);
+            g.pumpList.add(temp);// we should add it to both pumpList and elementList, so use addPump method
             System.out.println("A new Pump Has been Manufactured at the cistern");
         }
     }
 
     @Override
-    public void update() {
+    public void update() { // its update() should include the collection of water
         boolean decrementPumpTurns = true;
         boolean decrementPipeTurns = true;
         if(turnsUntilPipeReady == 0)
@@ -81,7 +81,7 @@ public class Cistern extends Element {
         {
             turnsUntilPumpReady--;
         }
-        decrementPumpTurns = true;
+        decrementPumpTurns = true; // you already set them to true as soon as update is called, no need for this
         decrementPipeTurns = true;
     }
 }

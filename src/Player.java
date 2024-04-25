@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public abstract class Player {
     public String playerName;
-    public int index;
+
     public Element currentElement;
     /**
      * Abstract method representing a player's turn in the game.
@@ -18,10 +18,9 @@ public abstract class Player {
      * @return The integer representing the chosen action.
      * @author Basel Al-Raoush
      */
-    protected abstract int takeTurn();
+    protected abstract void takeTurn(Game g);
 
     protected void passTurn(){
-        // Implementation?
     }
 
     /**
@@ -38,7 +37,6 @@ public abstract class Player {
     protected void changeInputPipe(Pump p1, Pipe p2) {
         int pumpNumber;
         int pipeNumber;
-        System.out.println("changeInputPipe(Pump, Pipe)");
         System.out.println("Enter the number of the pump. (1-5)");
         Scanner sc = new Scanner(System.in);
         pumpNumber = sc.nextInt();

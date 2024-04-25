@@ -15,6 +15,6 @@ public class Spring extends Element {
     @Override
     public void update() {
     }
-    // The class implements no additional functionality, it is simply the source of water in the game.
+    // Its update() should include the decrementation of water based on how many pipes are connected to it. We can use this for further checks later on.
 
 }

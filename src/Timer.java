@@ -1,12 +1,10 @@
 public class Timer {
-    public static double gameLength;
+    public static double gameLength = 300; // Just an idea, 5 min long game
     public double turnLength = 5;
     public double getTime(){
-        System.out.println("getTime()");
         return gameLength;
     }
     public static void setTime(double x){
-        System.out.println("setTime(double)");
         gameLength = x;
     }
 }
