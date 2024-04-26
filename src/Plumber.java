@@ -80,12 +80,12 @@ public class Plumber extends Player {
             case 6:
                 if (!Game.testMode)
                     System.out.println("You chose: Pick up the end of a pipe"); // selection based on connected pipes of the element you are standing on
-                getEnd(pickedUpEoP);
+//                getEnd(pickedUpEoP);
                 break;
             case 7:
                 if (!Game.testMode)
                     System.out.println("You chose: Insert the end of a pipe"); // up to implementer
-                insertPipeEnd(g.pipeList.get(0));
+//                insertPipeEnd(g.pipeList.get(0));
                 break;
             case 8:
                 if (!Game.testMode)

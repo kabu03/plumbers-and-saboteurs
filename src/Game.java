@@ -198,12 +198,12 @@ public class Game {
         }
 
         else { // Make the test map
-            Spring s1 = new Spring(); // Creating the spring
+            Spring s1 = new Spring("Spring"); // Creating the spring
             addSpring(s1);
-            Cistern cistern = new Cistern(this); // Creating the cistern
+            Cistern cistern = new Cistern("Cistern", this); // Creating the cistern
             addCistern(cistern);
             for(int i = 0; i<8; i++){
-                Pipe pipe = new Pipe();
+                Pipe pipe = new Pipe("Pipe" + i);
                 addPipe(pipe);
             }
 //            for (int i = 0; i<15; i++){
@@ -212,7 +212,7 @@ public class Game {
             // Pipe list. Pipe 6 is element 6, index 5.
             // Pipe 8 is element 8, index 7
             for(int i = 0; i<4; i++){
-                Pump pump = new Pump();
+                Pump pump = new Pump("Pump" + i);
                 addPump(pump);
             }
 
