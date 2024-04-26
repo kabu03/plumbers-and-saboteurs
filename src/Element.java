@@ -80,7 +80,6 @@ public abstract class Element {
             waterLevel = maxCapacity;
         }
     }
-
     /**
      * Decreases the water level within the element.
      */

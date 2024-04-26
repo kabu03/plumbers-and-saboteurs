@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 /**
  * Natural water source marking the starting point of the pipe system. A spring provides a
@@ -6,6 +5,8 @@ import java.util.ArrayList;
  * role in the system's functionality.
  */
 public class Spring extends Element {
+    // for debugging
+    public int givenWater = 0;
     public Spring(String n)
     {
         super(n);
@@ -14,6 +15,10 @@ public class Spring extends Element {
 
     @Override
     public void update() {
+        for(Pipe pipe : connectedPipes)
+        {
+            pipe.incrementWater();
+            givenWater +=2;
+        }
     }
-    // Its update() should include the decrementation of water based on how many pipes are connected to it. We can use this for further checks later on.
 }

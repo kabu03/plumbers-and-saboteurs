@@ -19,12 +19,12 @@ public class Pump extends Element {
     /**
      * the input pipe connected to the pump.
      */
-    private Pipe inPipe;
+    public Pipe inPipe;
 
     /**
      * The output pipe connected to the pump
      */
-    private Pipe outPipe;
+    public Pipe outPipe;
 
     /**
      * the number of turns that the pump will work for.
@@ -49,6 +49,14 @@ public class Pump extends Element {
         else
         {
             workingTurns--;
+        }
+        if(inPipe.getWorks() == false)
+        {
+            decrementWater();
+        }
+        if(isWorking() == true && getWaterLevel() >= 2)
+        {
+            outPipe.incrementWater();
         }
     }
 }
