@@ -147,6 +147,8 @@ public class Plumber extends Player {
                         }
                         EoP.disconnectFromElement(e);
                         EoP.setCurrentPipe(null);
+
+                        pickedUpEoP = EoP;
                     }
                 }
             }
