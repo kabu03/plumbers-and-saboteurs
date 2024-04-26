@@ -74,6 +74,7 @@ public class Game {
      */
     public void initGame() {
         int numPlayers;
+        System.out.println("Proceeding to the number of participating players menu.");
         while (true) {
             if(!testMode)
                 System.out.println("How many players will participate? Please enter a number (4 or 6):");
@@ -81,7 +82,7 @@ public class Game {
                 numPlayers = Integer.parseInt(scanner.nextLine());
 
                 if (numPlayers == 4 || numPlayers == 6) {
-                    // Valid number of players entered, break the loop
+                    System.out.println(numPlayers + " players will participate in the game.");
                     break;
                 } else {
                     System.out.println("Invalid input, please choose one of the valid options (4 or 6).");
