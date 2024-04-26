@@ -31,19 +31,18 @@ public class Main {
         int choice = scanner.nextInt();
         switch (choice) {
             case 1:
-                Game game = new Game();
-                game.initGame(1);
+                Game game = new Game(false);
+                game.initGame();
                 break;
             case 2:
-                Game testGame = new Game();
-                testGame.initGame(2);
+                Game testGame = new Game(true);
+                testGame.initGame();
 
                 System.out.println("There are 8 pre-defined tests you can choose from.");
                 System.out.println("For each, an output file will be generated in the tests folder that you can compare with the expected output.");
                 System.out.println("Which one would you like to run?");
                 int testNumber = scanner.nextInt();
                 testProcessing(testNumber);
-                // File IO should be implemented here.
                 break;
             case 3:
                 System.out.println("Exiting the game. Goodbye!");

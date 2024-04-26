@@ -52,7 +52,7 @@ public class Cistern extends Element {
         {
             Pump temp = new Pump();
             manufacturedPump = temp;
-            g.pumpList.add(temp);// we should add it to both pumpList and elementList, so use addPump method
+            g.addPump(temp);
             System.out.println("A new Pump Has been Manufactured at the cistern");
         }
     }
@@ -81,7 +81,5 @@ public class Cistern extends Element {
         {
             turnsUntilPumpReady--;
         }
-        decrementPumpTurns = true; // you already set them to true as soon as update is called, no need for this
-        decrementPipeTurns = true;
     }
 }

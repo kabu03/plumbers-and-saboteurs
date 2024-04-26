@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +34,10 @@ public class Game {
     private List<Spring> springList;
     private int[] gameScore = {0, 0}; // Index 0 represents Plumber score, index 1 represents Saboteur score.
     private Timer timer;
-    public static boolean verbose = true;
+    public static boolean testMode;
 
-    public Game() {
+    public Game(boolean isTesting) {
+        testMode = isTesting;
     }
 
 
@@ -47,17 +50,30 @@ public class Game {
      *
      * @author Basel Al-Raoush
      */
-    public void initGame(int a) { // if 1, normal map, if 2, test map
-        Scanner scanner = new Scanner(System.in);
+    public void initGame() {
+        Scanner scanner;
+        if (testMode) {
+            try {
+                scanner = new Scanner(new File("input.txt"));
+            } catch (FileNotFoundException e) {
+                System.out.println("Input file not found.");
+                return;
+            }
+        } else {
+            scanner = new Scanner(System.in);
+        }
 
-        // Asking for the number of players
-        System.out.println("How many players will participate? Please enter a number (4 or 6):");
-        int numPlayers = scanner.nextInt();
+        int numPlayers;
+        while (true) {
+            System.out.println("How many players will participate? Please enter a number (4 or 6):");
+            numPlayers = scanner.nextInt();
 
-        // Check if the number of players is valid (4 or 6)
-        if (numPlayers != 4 && numPlayers != 6) {
-            System.out.println("Invalid number of players. Only 4 or 6 players are allowed.");
-            return;
+            if (numPlayers == 4 || numPlayers == 6) {
+                // Valid number of players entered, break the loop
+                break;
+            } else {
+                System.out.println("Invalid number of players. Only 4 or 6 players are allowed.");
+            }
         }
 
         System.out.println("You've selected " + numPlayers + " players.");
@@ -71,8 +87,18 @@ public class Game {
 
         // Ask for player names and team choice
         for (int i = 0; i < numPlayers; i++) {
-            System.out.println("Enter the name of player " + (i + 1) + ":");
-            String playerName = scanner.next();
+            String playerName;
+            while (true) {
+                System.out.println("Enter the name of player " + (i + 1) + ":");
+                playerName = scanner.nextLine().trim(); // Use trim() to remove leading and trailing spaces
+
+                if (!playerName.isEmpty()) {
+                    // Valid player name entered, break the loop
+                    break;
+                } else {
+                    System.out.println("Invalid input. Player name cannot be empty.");
+                }
+            }
 
             // Feature to enforce team balancing
             if (plumberIndex == numPlayers / 2) {
@@ -88,16 +114,21 @@ public class Game {
             // Ask for team choice
             System.out.println("Select the team for " + playerName + ":");
             System.out.println("Enter '1' for Plumbers and '2' for Saboteurs.");
-            int teamChoice = scanner.nextInt();
+            int teamChoice;
+            while (true) {
+                System.out.println("Select the team for " + playerName + ":");
+                System.out.println("Enter '1' for Plumbers and '2' for Saboteurs.");
+                teamChoice = scanner.nextInt();
 
-            // Create player object based on team choice and add to respective array
-            if (teamChoice == 1) {
-                plumbers[plumberIndex++] = new Plumber(playerName);
-            } else if (teamChoice == 2) {
-                saboteurs[saboteurIndex++] = new Saboteur(playerName);
-            } else {
-                System.out.println("Invalid team choice.");
-                return;
+                if (teamChoice == 1) {
+                    plumbers[plumberIndex++] = new Plumber(playerName);
+                    break;
+                } else if (teamChoice == 2) {
+                    saboteurs[saboteurIndex++] = new Saboteur(playerName);
+                    break;
+                } else {
+                    System.out.println("Invalid team choice. Please enter '1' for Plumbers or '2' for Saboteurs.");
+                }
             }
         }
         players = new Player[numPlayers];
@@ -115,7 +146,7 @@ public class Game {
         pumpList = new ArrayList<>();
         springList = new ArrayList<>();
         cisternList = new ArrayList<>();
-        if(a == 1) {
+        if(!testMode) {
             Spring s1 = new Spring(); // Creating the spring
             addSpring(s1);
             Pipe upperPipe = new Pipe(); // creation of the upper pipe and connecting it to the spring
@@ -143,7 +174,7 @@ public class Game {
             addCistern(cistern);
             p2lower.connectToElement(cistern);
         }
-        else if (a == 2){ // Make the test map
+        else if (testMode){ // Make the test map
             Spring s1 = new Spring(); // Creating the spring
             addSpring(s1);
             Cistern cistern = new Cistern(this); // Creating the cistern
@@ -155,6 +186,8 @@ public class Game {
 //            for (int i = 0; i<15; i++){
 //                EndOfPipe EoP = new EndOfPipe();
 //            }
+            // Pipe list. Pipe 6 is element 6, index 5.
+            // Pipe 8 is element 8, index 7
             for(int i = 0; i<4; i++){
                 Pump pump = new Pump();
                 addPump(pump);
@@ -188,7 +221,7 @@ public class Game {
         System.out.println("The game has started!");
 
         while (true) {
-            Player currentPlayer = players[currentPlayerIndex];
+            Player currentPlayer = players[currentPlayerIndex]; // TIMER IMPLEMENTATION
             currentPlayer.takeTurn(this);
             for (Element e: elementList){
                 e.update();
@@ -277,7 +310,7 @@ public class Game {
         for (Pipe pipe : pipeList) {
             sum += pipe.leakedAmount;
         }
-        gameScore[0] = sum;
+        gameScore[1] = sum;
         return sum;
     }
 
@@ -289,7 +322,7 @@ public class Game {
         for (Cistern cistern : cisternList) {
             sum += cistern.getWaterLevel();
         }
-        gameScore[1] = sum;
+        gameScore[0] = sum;
         return sum;
     }
 }
