@@ -9,11 +9,11 @@ import java.util.Random;
  * representing the ultimate goal for the plumber team to ensure a steady water supply.
  */
 public class Cistern extends Element {
-    public Cistern(Game g)
+    public Cistern(String n, Game g)
     {
+        super(n);
         gameInstance = g;
         setMaxCapacity(Integer.MAX_VALUE);
-        connectedPipes= new ArrayList<Pipe>();
     }
 
     Random rand = new Random();
@@ -36,10 +36,10 @@ public class Cistern extends Element {
     public void manufacturePipe(Game g) {
         // init logic
         Pipe p = new Pipe();
-        EndOfPipe temp = new EndOfPipe(p); // why is it a temp EoP, it should be in the game
-        p.endsOfPipe[0] = temp;
+        EndOfPipe newEnd = new EndOfPipe(p);
+        p.endsOfPipe[0] = newEnd;
         g.pipeList.add(p); // we should add it to both pipeList and elementList, so use addPipe method
-        temp.connectToElement(this);
+        newEnd.connectToElement(this);
         // we will decide how to inform the user.
     }
 
@@ -52,7 +52,7 @@ public class Cistern extends Element {
         {
             Pump temp = new Pump();
             manufacturedPump = temp;
-            g.pumpList.add(temp);// we should add it to both pumpList and elementList, so use addPump method
+            g.addPump(temp);
             System.out.println("A new Pump Has been Manufactured at the cistern");
         }
     }
@@ -81,7 +81,5 @@ public class Cistern extends Element {
         {
             turnsUntilPumpReady--;
         }
-        decrementPumpTurns = true; // you already set them to true as soon as update is called, no need for this
-        decrementPipeTurns = true;
     }
 }

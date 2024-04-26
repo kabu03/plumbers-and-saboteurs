@@ -10,10 +10,10 @@ import java.util.Random;
  * of working turns.
  */
 public class Pump extends Element {
-    public Pump()
+    public Pump(String n)
     {
+        super(n);
         setMaxConnectablePipes(rand.nextInt(3,6)); setMaxCapacity(50);
-        connectedPipes = new ArrayList<Pipe>();
     }
     Random rand = new Random();
     /**

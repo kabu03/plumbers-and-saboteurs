@@ -24,7 +24,7 @@ public class Saboteur extends Player {
      * @author Basel Al-Raoush
      */
     @Override
-    protected void takeTurn(Game g) {
+    protected void takeTurn(Game g) { // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
         System.out.println("The Saboteur is now playing their turn.");
         System.out.println("Player " + playerName + ", it's your turn.");
         System.out.println("What action would you like to perform?");
@@ -57,7 +57,7 @@ public class Saboteur extends Player {
                     break;
                 case 4:
                     System.out.println("You chose: Puncture a pipe");
-                    puncture(g.pipeList.get(0)); // Pipe selection menu
+                    puncture(g.pipeList.get(0));
                     break;
                 case 5:
                     System.out.println("You chose: Pass Turn");
@@ -68,7 +68,7 @@ public class Saboteur extends Player {
                     g.endGame();
                     exit(0);
                 default:
-                    System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
+                    System.out.println("Invalid input, please choose one of the valid options (1-6).");
             }
     }
     /**

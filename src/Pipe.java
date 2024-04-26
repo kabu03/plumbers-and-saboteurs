@@ -12,10 +12,10 @@ import java.util.ArrayList;
  */
 public class Pipe extends Element {
 
-    public Pipe()
+    public Pipe(String n)
     {
+        super(n);
         setMaxConnectablePipes(2); setMaxCapacity(10);
-        connectedPipes = new ArrayList<Pipe>();
     }
     public int leakedAmount = 0;
     public EndOfPipe[] endsOfPipe = new EndOfPipe[2]; // I think a pipe will have max 2 endofpipes.

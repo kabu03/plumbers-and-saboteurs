@@ -27,7 +27,7 @@ public class Plumber extends Player {
      * @author Basel Al-Raoush
      */
     @Override
-    protected void takeTurn(Game g) {
+    protected void takeTurn(Game g) { // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
         System.out.println("Player " + playerName + ", it's your turn.");
         System.out.println("What action would you like to perform?");
         System.out.println("Available actions for Plumbers:");
@@ -50,7 +50,7 @@ public class Plumber extends Player {
         int choice = scanner.nextInt();
         switch (choice) {
             case 1:
-                System.out.println("You chose: Move to an element");
+                System.out.println("You chose: Move to an element"); // element selection menu
                 move();
                 break;
             case 2:
@@ -70,19 +70,19 @@ public class Plumber extends Player {
                 fixPipe(g.pipeList.get(0));
                 break;
             case 6:
-                System.out.println("You chose: Pick up the end of a pipe");
+                System.out.println("You chose: Pick up the end of a pipe"); // selection based on connected pipes of the element you are standing on
                 getEnd(pickedUpEoP);
                 break;
             case 7:
-                System.out.println("You chose: Insert the end of a pipe");
+                System.out.println("You chose: Insert the end of a pipe"); // up to implementer
                 insertPipeEnd(g.pipeList.get(0));
                 break;
             case 8:
-                System.out.println("You chose: Change the input pipe of a pump");
+                System.out.println("You chose: Change the input pipe of a pump"); // based on connectedpipes array
                 changeInputPipe(g.pumpList.getFirst(), g.pipeList.get(0));
                 break;
             case 9:
-                System.out.println("You chose: Change the output pipe of a pump");
+                System.out.println("You chose: Change the output pipe of a pump"); // based on connectedpipes array
                 changeOutputPipe(g.pumpList.getFirst(), g.pipeList.get(0));
                 break;
             case 10:
@@ -95,7 +95,7 @@ public class Plumber extends Player {
                 exit(0);
                 break;
             default:
-                System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
+                System.out.println("Invalid input, please choose one of the valid options (1-11).");
         }
 
     }
