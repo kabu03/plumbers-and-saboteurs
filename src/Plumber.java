@@ -105,20 +105,38 @@ public class Plumber extends Player {
      * @param EoP this will be the end of pipe object that we will pick up.
      * @author : Majed
      */
-    public void getEnd(EndOfPipe EoP){
-        String userChoice;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Are you on the end of the pipe?");
-        userChoice = sc.nextLine();
-        if(userChoice.equalsIgnoreCase("yes")) {
-            System.out.println("getEnd(EndOfPipe)");
-            pickedUpEoP = EoP;
-            System.out.println("The plumber has picked up an end of pipe. They can now insert it.");
+
+
+    // getEnd method will allow the plumber to pick up the end of a pipe.
+    // in order to pick up the end of pipe, the plumber has to be standing on the Element. we can check using currentElement attribute in the player class.
+    // then we have to know which end of the pipe we are picking up, as there are 2 for each pipe.
+    // we have to pick up the end of pipe from the selected element, which will be a parameter in the method.
+    // so we iterate through the endsOfPipe array in the pipe class, and remove the end of pipe of that is connected to the passed element.
+    // we have to check if the pipe p is in the connected elements list of the element e, if it is we will be able to pick it up.
+
+
+    public void getEnd(EndOfPipe EoP, Pipe p, Element e){
+
+        if (currentElement == e){
+            if (e.connectedPipes.contains(p)){
+                for (int i = 0; i < 2; i++){
+                    if (p.endsOfPipe[i] == EoP){
+                        p.endsOfPipe[i] = null;
+                        EoP.disconnectFromElement(e);
+                        EoP.setCurrentPipe(null);
+                    }
+                }
+            }
+            else { System.out.println("You can't pick up the end of the pipe from this element.");}
         }
-        else {
-            System.out.println("You can not pick up the end of the pipe");
+        else { System.out.println("You have to be standing on the element to pick up the end of the pipe.");}
+
         }
-    }
+
+
+
+
+
 
 
     /**
@@ -126,18 +144,48 @@ public class Plumber extends Player {
      * @param e this will be the element that we will insert the pipe end to.\
      * @author :Majed
      */
-    public void insertPipeEnd(Element e){
-        String userChoice;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Are you at the end of the pipe?");
-        userChoice = sc.nextLine();
-        if(userChoice.equalsIgnoreCase("yes")) {
-            System.out.println("insertPipeEnd(Element)");
+
+    // insertPipeEnd method will allow the plumber to insert the end of a pipe to an element.
+    // in order to insert the end of pipe, the plumber has to be standing on the element.
+    // then we have to know which pipe we are inserting the end of pipe to.
+    //there will be a list in Element class called connectedPipes, which will store the pipes that are connected to the element.
+    // and there will be a list in Element class called connectablePipes, which will store the pipes that can be connected to the element.
+    // so we iterate through the connectablePipes list, and add the end of pipe to the chosen pipe from the selection menu. (so it will be a parameter in the method)
+    // then we add the pipe to the connectedPipes list in the element class.
+    // we have to check if the pipe is in connectable pipes list and NOT in connected pipes list, if it is not in the connected pipes list we will be able to connect it.
+    // we have to make sure that after connecting the pipe the maximum number of connected pipes is not exceeded.
+    // we have to update the connectedPipes list in the element class after connecting the pipe.
+    // we have to insert the picked up end of pipe to the selected pipe.
+
+    public void insertPipeEnd(Element e, Pipe p){
+
+        // check if the player is standing on the element
+        if (currentElement == e){
+
+            // check if the pipe is connectable to the element and not connected to it and the element can connect to more pipes.
+            if (e.connectablePipes.contains(p) && !e.connectedPipes.contains(p) && e.connectedPipes.size() < e.getMaxConnectablePipes()){
+                e.connectedPipes.add(p); // add the pipe to the connected pipes list in the element class.
+
+                // before assigning the end of pipe to the pipe, we have to check which end of the pipe we are inserting.
+
+                for (int i = 0; i < 2; i++){
+                    if (p.endsOfPipe[i] == null){
+                        p.endsOfPipe[i] = pickedUpEoP; // assign the end of pipe to the pipe.
+                        pickedUpEoP.connectToElement(e); // connect the end of pipe to the element.
+                        pickedUpEoP.setCurrentPipe(p); // set the current pipe of the end of pipe to the selected pipe.
+                        pickedUpEoP = null;
+                    }
+                    else {
+                        System.out.println("You can't insert the end of the pipe to this element.");
+                    }
+                }
+            }
+            else { System.out.println("You can't insert the end of the pipe to this element.");}
         }
-        else{
-            System.out.println("Please Move to the end of the pipe to insert");
-        }
+
+        else { System.out.println("You have to be standing on the element to insert the end of the pipe.");}
     }
+
 
     /**
      * This method serves the purpose of fixing a punctured pipe.
@@ -164,8 +212,8 @@ public class Plumber extends Player {
         }else {
             System.out.println("Please first move to the Pipe you want to fix.");
         }
-
     }
+
 
     /**
      * Method for picking up a pump that was manufactured at a cistern
@@ -182,8 +230,6 @@ public class Plumber extends Player {
         } else {
             System.out.println("First go to a cistern that has a pump available for pick up.");
         }
-
-
     }
 
     /**
@@ -232,7 +278,6 @@ public class Plumber extends Player {
         }else {
             System.out.println("Please first move to the pump you want to fix.");
         }
-
 
     }
 }
