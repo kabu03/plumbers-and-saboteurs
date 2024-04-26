@@ -6,11 +6,10 @@ import java.util.ArrayList;
  * role in the system's functionality.
  */
 public class Spring extends Element {
-    public Spring()
+    public Spring(String n)
     {
+        super(n);
         setMaxCapacity(Integer.MAX_VALUE);
-        connectedPipes = new ArrayList<Pipe>();
-        connectablePipes = new ArrayList<>();
     }
 
     @Override

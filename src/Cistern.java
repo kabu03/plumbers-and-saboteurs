@@ -9,12 +9,11 @@ import java.util.Random;
  * representing the ultimate goal for the plumber team to ensure a steady water supply.
  */
 public class Cistern extends Element {
-    public Cistern(Game g)
+    public Cistern(String n, Game g)
     {
+        super(n);
         gameInstance = g;
         setMaxCapacity(Integer.MAX_VALUE);
-        connectedPipes= new ArrayList<Pipe>();
-        connectablePipes = new ArrayList<>();
     }
 
     Random rand = new Random();
