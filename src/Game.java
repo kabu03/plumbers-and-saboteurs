@@ -39,24 +39,11 @@ public class Game {
     public static boolean testMode;
     public static String inputFilePath;
     public static String outputFilePath;
+    public static Scanner scanner;
+    public static PrintStream output;
 
     public Game(boolean isTesting) {
         testMode = isTesting;
-    }
-
-
-    /**
-     * Initializes the game by setting up players and game elements.
-     * Asks for the number of players and assigns them to teams (Plumbers or Saboteurs).
-     * Ensures balanced team assignments for 2v2 or 3v3 setups.
-     * Initializes game elements such as pipes, pumps, cisterns, and springs.
-     * Starts the game.
-     *
-     * @author Basel Al-Raoush
-     */
-    public void initGame() {
-        Scanner scanner;
-        PrintStream output;
         if (testMode) {
             try {
                 System.out.println(inputFilePath);
@@ -72,23 +59,39 @@ public class Game {
         }
         System.setOut(output);
         // System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out))); Important, keep it.
+    }
 
+
+    /**
+     * Initializes the game by setting up players and game elements.
+     * Asks for the number of players and assigns them to teams (Plumbers or Saboteurs).
+     * Ensures balanced team assignments for 2v2 or 3v3 setups.
+     * Initializes game elements such as pipes, pumps, cisterns, and springs.
+     * Starts the game.
+     *
+     * @author Basel Al-Raoush
+     */
+    public void initGame() {
         int numPlayers;
         while (true) {
             if(!testMode)
                 System.out.println("How many players will participate? Please enter a number (4 or 6):");
-            numPlayers = Integer.parseInt(scanner.nextLine());
+            try {
+                numPlayers = Integer.parseInt(scanner.nextLine());
 
-            if (numPlayers == 4 || numPlayers == 6) {
-                // Valid number of players entered, break the loop
-                break;
-            } else {
+                if (numPlayers == 4 || numPlayers == 6) {
+                    // Valid number of players entered, break the loop
+                    break;
+                } else {
+                    System.out.println("Invalid input, please choose one of the valid options (4 or 6).");
+                }
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid input, please choose one of the valid options (4 or 6).");
             }
         }
         if(!testMode)
             System.out.println("You've selected " + numPlayers + " players.");
-
+        System.out.println("Proceeding to the username and team selection menu.");
         plumbers = new Plumber[numPlayers / 2]; // Array to store plumbers
         saboteurs = new Saboteur[numPlayers / 2]; // Array to store saboteurs
 
@@ -100,11 +103,12 @@ public class Game {
         for (int i = 0; i < numPlayers; i++) {
             String playerName;
             while (true) {
-                System.out.println("Enter the name of player " + (i + 1) + ":");
+                if(!testMode)
+                    System.out.println("Enter the name of player " + (i + 1) + ":");
                 playerName = scanner.nextLine().trim(); // Use trim() to remove leading and trailing spaces
 
                 if (!playerName.isEmpty()) {
-                    System.out.println("The name " + playerName + " is validated.");
+                    System.out.println("The name \"" + playerName + "\" is validated.");
                     break;
                 } else {
                     System.out.println("Invalid input, please enter a valid name.");
@@ -113,29 +117,30 @@ public class Game {
 
             // Feature to enforce team balancing
             if (plumberIndex == numPlayers / 2) {
-                System.out.println(playerName + "was automatically placed in the Saboteurs team.");
+                System.out.println(playerName + " was automatically placed in the Saboteurs team.");
                 saboteurs[saboteurIndex++] = new Saboteur(playerName);
                 continue;
             } else if (saboteurIndex == numPlayers / 2) {
-                System.out.println(playerName + "was automatically placed in the Plumbers team.");
+                System.out.println(playerName + " was automatically placed in the Plumbers team.");
                 plumbers[plumberIndex++] = new Plumber(playerName);
                 continue;
             }
 
-            // Ask for team choice
-            System.out.println("Select the team for " + playerName + ":");
-            System.out.println("Enter '1' for Plumbers and '2' for Saboteurs.");
             int teamChoice;
             while (true) {
-                System.out.println("Select the team for " + playerName + ":");
-                System.out.println("Enter '1' for Plumbers and '2' for Saboteurs.");
+                if (!testMode) {
+                    System.out.println("Select the team for " + playerName + ":");
+                    System.out.println("Enter '1' for Plumbers and '2' for Saboteurs.");
+                }
                 teamChoice = Integer.parseInt(scanner.nextLine());
 
                 if (teamChoice == 1) {
                     plumbers[plumberIndex++] = new Plumber(playerName);
+                    System.out.println(playerName + " chose the Plumbers team.");
                     break;
                 } else if (teamChoice == 2) {
                     saboteurs[saboteurIndex++] = new Saboteur(playerName);
+                    System.out.println(playerName + " chose the Saboteurs team.");
                     break;
                 } else {
                     System.out.println("Invalid input, please choose one of the valid options (1 or 2).");

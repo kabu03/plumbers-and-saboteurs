@@ -1,3 +1,7 @@
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -28,75 +32,89 @@ public class Plumber extends Player {
      */
     @Override
     protected void takeTurn(Game g) { // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
-        System.out.println("Player " + playerName + ", it's your turn.");
-        System.out.println("What action would you like to perform?");
-        System.out.println("Available actions for Plumbers:");
-        // Print the list of actions
-        System.out.println("1. Move to an element");
-        System.out.println("2. Pick up a pump");
-        System.out.println("3. Insert pump into a pipe");
-        System.out.println("4. Fix a broken pump");
-        System.out.println("5. Fix a broken pipe");
-        System.out.println("6. Pick up the end of a pipe");
-        System.out.println("7. Insert the end of a pipe");
-        System.out.println("8. Change the input pipe of a pump");
-        System.out.println("9. Change the output pipe of a pump");
-        System.out.println("10. Pass Turn");
-        System.out.println("11. End the game");
-
-        // Prompt the user to enter a number
-        System.out.print("Enter the number corresponding to your choice: ");
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+//        try {
+        if(!Game.testMode) {
+            System.out.println("Player " + playerName + ", it's your turn.");
+            System.out.println("What action would you like to perform?");
+            System.out.println("Available actions for Plumbers:");
+            System.out.println("1. Move to an element");
+            System.out.println("2. Pick up a pump");
+            System.out.println("3. Insert pump into a pipe");
+            System.out.println("4. Fix a broken pump");
+            System.out.println("5. Fix a broken pipe");
+            System.out.println("6. Pick up the end of a pipe");
+            System.out.println("7. Insert the end of a pipe");
+            System.out.println("8. Change the input pipe of a pump");
+            System.out.println("9. Change the output pipe of a pump");
+            System.out.println("10. Pass Turn");
+            System.out.println("11. End the game");
+            System.out.print("Enter the number corresponding to your choice: ");
+        }
+        int choice = Integer.parseInt(Game.scanner.nextLine());
         switch (choice) {
             case 1:
-                System.out.println("You chose: Move to an element"); // element selection menu
+                if (!Game.testMode)
+                    System.out.println("You chose: Move to an element"); // element selection menu
                 move();
                 break;
             case 2:
-                System.out.println("You chose: Pick up a pump");
+                if (!Game.testMode)
+                    System.out.println("You chose: Pick up a pump");
                 getPump(g.pumpList.getFirst());
                 break;
             case 3:
-                System.out.println("You chose: Insert pump into a pipe");
+                if (!Game.testMode)
+                    System.out.println("You chose: Insert pump into a pipe");
                 insertPump(g.pumpList.getFirst(), g.pipeList.get(0));
                 break;
             case 4:
-                System.out.println("You chose: Fix a broken pump");
+                if (!Game.testMode)
+                    System.out.println("You chose: Fix a broken pump");
                 fixPump(g.pumpList.getFirst());
                 break;
             case 5:
-                System.out.println("You chose: Fix a broken pipe");
+                if (!Game.testMode)
+                    System.out.println("You chose: Fix a broken pipe");
                 fixPipe(g.pipeList.get(0));
                 break;
             case 6:
-                System.out.println("You chose: Pick up the end of a pipe"); // selection based on connected pipes of the element you are standing on
+                if (!Game.testMode)
+                    System.out.println("You chose: Pick up the end of a pipe"); // selection based on connected pipes of the element you are standing on
                 getEnd(pickedUpEoP);
                 break;
             case 7:
-                System.out.println("You chose: Insert the end of a pipe"); // up to implementer
+                if (!Game.testMode)
+                    System.out.println("You chose: Insert the end of a pipe"); // up to implementer
                 insertPipeEnd(g.pipeList.get(0));
                 break;
             case 8:
-                System.out.println("You chose: Change the input pipe of a pump"); // based on connectedpipes array
+                if (!Game.testMode)
+                    System.out.println("You chose: Change the input pipe of a pump"); // based on connectedpipes array
                 changeInputPipe(g.pumpList.getFirst(), g.pipeList.get(0));
                 break;
             case 9:
-                System.out.println("You chose: Change the output pipe of a pump"); // based on connectedpipes array
+                if (!Game.testMode)
+                    System.out.println("You chose: Change the output pipe of a pump"); // based on connectedpipes array
                 changeOutputPipe(g.pumpList.getFirst(), g.pipeList.get(0));
                 break;
             case 10:
-                System.out.println("You chose: Pass Turn");
+                if (!Game.testMode)
+                    System.out.println("You chose: Pass Turn");
                 passTurn();
                 break;
             case 11:
-                System.out.println("You chose: End the game");
+                if (!Game.testMode)
+                    System.out.println("You chose: End the game");
                 g.endGame();
                 exit(0);
                 break;
             default:
                 System.out.println("Invalid input, please choose one of the valid options (1-11).");
         }
+//        } catch (NoSuchElementException e) {
+//            PrintStream console = new PrintStream(new FileOutputStream(FileDescriptor.out));
+//            console.println("No more lines to read from the file.");
+//        }
 
     }
 
@@ -135,7 +153,7 @@ public class Plumber extends Player {
             System.out.println("insertPipeEnd(Element)");
         }
         else{
-            System.out.println("Please Move to the end of the pipe to insert");
+            System.out.println("Please move to the end of the pipe to insert");
         }
     }
 
