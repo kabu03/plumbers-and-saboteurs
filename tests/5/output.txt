@@ -1,0 +1,24 @@
+Invalid input, please choose one of the valid options (4 or 6).
+Invalid input, please choose one of the valid options (4 or 6).
+Invalid input, please choose one of the valid options (4 or 6).
+Proceeding to the username and team selection menu.
+The name "Joker" is validated.
+Invalid input, please choose one of the valid options (1 or 2).
+Joker chose the Plumbers team.
+The name "LeeroyJenkins" is validated.
+Invalid input, please choose one of the valid options (1 or 2).
+LeeroyJenkins chose the Saboteurs team.
+The name "Mike" is validated.
+Mike chose the Plumbers team.
+Invalid input, please enter a valid name.
+The name "Oxlong" is validated.
+Oxlong was automatically placed in the Saboteurs team.
+Initializing the game...
+The game’s elements have been initialized successfully.
+The game and timer have started!
+Invalid input, please choose one of the valid options (1-11).
+Invalid input, please choose one of the valid options (1-6).
+Player Mike passed their turn.
+Invalid input, please choose one of the valid options (1-6).
+Invalid input, please choose one of the valid options (1-11).
+Player LeeroyJenkins passed their turn.

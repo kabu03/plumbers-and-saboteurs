@@ -35,12 +35,12 @@ public class Main {
                 game.initGame();
                 break;
             case 2:
-                Game testGame = new Game(true);
                 System.out.println("There are 8 pre-defined tests you can choose from.");
                 System.out.println("For each, an output file will be generated in the tests folder that you can compare with the expected output.");
                 System.out.println("Which one would you like to run?");
                 int testNumber = scanner.nextInt();
                 testProcessing(testNumber);
+                Game testGame = new Game(true);
                 testGame.initGame();
                 break;
             case 3:
