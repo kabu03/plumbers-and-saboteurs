@@ -16,6 +16,7 @@ public class Pipe extends Element {
     {
         setMaxConnectablePipes(2); setMaxCapacity(10);
         connectedPipes = new ArrayList<Pipe>();
+        connectablePipes = new ArrayList<>();
     }
     public int leakedAmount = 0;
     public EndOfPipe[] endsOfPipe = new EndOfPipe[2]; // I think a pipe will have max 2 endofpipes.

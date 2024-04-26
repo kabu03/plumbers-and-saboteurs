@@ -10,11 +10,11 @@ public class Spring extends Element {
     {
         setMaxCapacity(Integer.MAX_VALUE);
         connectedPipes = new ArrayList<Pipe>();
+        connectablePipes = new ArrayList<>();
     }
 
     @Override
     public void update() {
     }
     // Its update() should include the decrementation of water based on how many pipes are connected to it. We can use this for further checks later on.
-
 }
