@@ -131,6 +131,7 @@ public class Plumber extends Player {
     // we have to pick up the end of pipe from the selected element, which will be a parameter in the method.
     // so we iterate through the endsOfPipe array in the pipe class, and remove the end of pipe of that is connected to the passed element.
     // we have to check if the pipe p is in the connected elements list of the element e, if it is we will be able to pick it up.
+    // we have to remove the pipe from connected pipes list in the element class, and add it to the connectable pipes list in the element class.
 
 
     public void getEnd(EndOfPipe EoP, Pipe p, Element e){
@@ -140,6 +141,10 @@ public class Plumber extends Player {
                 for (int i = 0; i < 2; i++){
                     if (p.endsOfPipe[i] == EoP){
                         p.endsOfPipe[i] = null;
+                        e.connectedPipes.remove(p);
+                        if (!e.connectablePipes.contains(p)) {
+                            e.connectablePipes.add(p);
+                        }
                         EoP.disconnectFromElement(e);
                         EoP.setCurrentPipe(null);
                     }
@@ -191,6 +196,7 @@ public class Plumber extends Player {
                         p.endsOfPipe[i] = pickedUpEoP; // assign the end of pipe to the pipe.
                         pickedUpEoP.connectToElement(e); // connect the end of pipe to the element.
                         pickedUpEoP.setCurrentPipe(p); // set the current pipe of the end of pipe to the selected pipe.
+                        e.connectedPipes.add(p);
                         pickedUpEoP = null;
                     }
                     else {
