@@ -1,4 +1,5 @@
-/* added a game instance attribute for cistern class */
+/* added a game instance attribute for cistern class
+*/
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,7 +39,7 @@ public class Cistern extends Element {
         // init logic
         Pipe p = new Pipe("New Pipe " + numOfcreatedPipes + 1);
         EndOfPipe newEnd = new EndOfPipe(p);
-        p.endsOfPipe[0] = newEnd;
+        p.endsOfPipe[1] = newEnd; // the cistern will be on the right.
         g.pipeList.add(p); // we should add it to both pipeList and elementList, so use addPipe method
         newEnd.connectToElement(this);
         Pump toBeconnected = g.pumpList.get(0);
@@ -61,7 +62,7 @@ public class Cistern extends Element {
     }
 
     @Override
-    public void update() { // its update() should include the collection of water
+    public void update() {
         boolean decrementPumpTurns = true;
         boolean decrementPipeTurns = true;
         if(turnsUntilPipeReady == 0)

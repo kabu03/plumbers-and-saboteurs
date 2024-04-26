@@ -1,6 +1,7 @@
 /*
 Changes made to Pipe compard to docs:
 Added a new Add End of Pipe method.
+changed inpipe and outpipe to public.
 */
 
 import java.util.ArrayList;
@@ -20,12 +21,21 @@ public class Pipe extends Element {
     public int leakedAmount = 0;
     public EndOfPipe[] endsOfPipe = new EndOfPipe[2]; // I think a pipe will have max 2 endofpipes.
     public void incrementLeakage(){
-        leakedAmount = leakedAmount + getWaterLevel(); // I assumed The leaked amount will depend on the waterLevel.
+        if(getWaterLevel() >= 2) {
+            leakedAmount = leakedAmount + 2;
+        }
+        decrementWater();
     }
     public int getLeakedWater(){
         return leakedAmount;
     }
-
+    public void incrementWaterToPump(Pump p)
+    {
+        if(p.inPipe == this)
+        {
+            p.incrementWater();
+        }
+    }
     @Override
     public void update() {
         // to check if we have a free end.
@@ -39,8 +49,26 @@ public class Pipe extends Element {
         }
         if(getWorks() == false || haveFreeEnd)
         {
-            // we do not need to worry about the waterlevel being less than zero because the min amount it can take is zero.
             incrementLeakage();
+        }
+        else
+        {
+            if(getWaterLevel() >= 2 && endsOfPipe[1].getConnectedElement() != null)
+            {
+                if(endsOfPipe[1].getConnectedElement() instanceof Pump)
+                {
+                    Pump p = (Pump) endsOfPipe[1].getConnectedElement();
+                    if(p.inPipe == this)
+                    {
+                        endsOfPipe[1].getConnectedElement().incrementWater();
+                    }
+                }
+                else
+                {
+                    endsOfPipe[1].getConnectedElement().incrementWater();
+                }
+            }
+
         }
     }
 }
