@@ -15,6 +15,8 @@ import java.util.List;
  * connections among each other.
  */
 public abstract class Element {
+
+    public List<Pipe> connectablePipes;
     /**
      * A boolean that indicates whether the element is currently occupied by a player or not.
      */

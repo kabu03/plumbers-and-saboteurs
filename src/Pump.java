@@ -14,6 +14,7 @@ public class Pump extends Element {
     {
         setMaxConnectablePipes(rand.nextInt(3,6)); setMaxCapacity(50);
         connectedPipes = new ArrayList<Pipe>();
+        connectablePipes = new ArrayList<>();
     }
     Random rand = new Random();
     /**
