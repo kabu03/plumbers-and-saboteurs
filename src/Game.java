@@ -191,6 +191,7 @@ public class Game {
             cistern.connectablePipes.add(lowerPipe);
             p2lower.connectToElement(cistern);
         }
+
         else { // Make the test map
             Spring s1 = new Spring(); // Creating the spring
             addSpring(s1);

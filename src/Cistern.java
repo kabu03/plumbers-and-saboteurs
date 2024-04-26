@@ -17,11 +17,12 @@ public class Cistern extends Element {
     }
 
     Random rand = new Random();
+    private int numOfcreatedPipes = 0;
     private Game gameInstance;
     /**
      * The number of turns remaining until a new pipe can be manufactured.
      */
-    private int turnsUntilPipeReady = rand.nextInt(8,22); // we can decide on this later
+    private int turnsUntilPipeReady = rand.nextInt(25,50); // we can decide on this later
 
     /**
      *The number of turns remaining until a new pump can be manufactured.
@@ -35,12 +36,14 @@ public class Cistern extends Element {
      */
     public void manufacturePipe(Game g) {
         // init logic
-        Pipe p = new Pipe();
+        Pipe p = new Pipe("New Pipe " + numOfcreatedPipes + 1);
         EndOfPipe newEnd = new EndOfPipe(p);
         p.endsOfPipe[0] = newEnd;
         g.pipeList.add(p); // we should add it to both pipeList and elementList, so use addPipe method
         newEnd.connectToElement(this);
-        // we will decide how to inform the user.
+        Pump toBeconnected = g.pumpList.get(0);
+        toBeconnected.connectablePipes.add(p);
+        System.out.println("A new Pipe Has been added");
     }
 
     /**
@@ -50,7 +53,7 @@ public class Cistern extends Element {
     public void manufacturePump(Game g) {
         if(manufacturedPump == null)
         {
-            Pump temp = new Pump();
+            Pump temp = new Pump("New Pump");
             manufacturedPump = temp;
             g.addPump(temp);
             System.out.println("A new Pump Has been Manufactured at the cistern");
@@ -66,6 +69,7 @@ public class Cistern extends Element {
             manufacturePipe(gameInstance);
             turnsUntilPipeReady = rand.nextInt(8,22);
             decrementPipeTurns = false;
+            numOfcreatedPipes++;
         }
         if(turnsUntilPumpReady == 0)
         {
