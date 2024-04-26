@@ -342,7 +342,7 @@ public class Game {
             EoP2pipe3.connectToElement(cistern);
             EoP1pipe8.connectToElement(Pump4);
             EoP2pipe8.connectToElement(cistern);
-            
+
         }
         // Start game
         System.out.println("The game’s elements have been initialized successfully.");
