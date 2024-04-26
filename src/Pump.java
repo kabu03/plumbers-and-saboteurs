@@ -50,7 +50,7 @@ public class Pump extends Element {
         {
             workingTurns--;
         }
-        if(inPipe.getWorks() == false)
+        if(inPipe.getWorks() == false & isWorking())
         {
             decrementWater();
         }
