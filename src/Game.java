@@ -35,12 +35,13 @@ public class Game {
     private List<Cistern> cisternList;
     private List<Spring> springList;
     private int[] gameScore = {0, 0}; // Index 0 represents Plumber score, index 1 represents Saboteur score.
-    private Timer timer;
+    public Timer timer;
     public static boolean testMode;
     public static String inputFilePath;
     public static String outputFilePath;
     public static Scanner scanner;
     public static PrintStream output;
+    public static int testNumber;
 
     public Game(boolean isTesting) {
         testMode = isTesting;
@@ -237,25 +238,26 @@ public class Game {
      * @author Basel Al-Raoush
      */
     public void startGame() {
-        Timer.setTime(5.0);
+        timer = new Timer();
+        timer.startGameTimer();
         System.out.println("The game and timer have started!");
 
-        while (true) {
-            Player currentPlayer = players[currentPlayerIndex]; // TIMER IMPLEMENTATION
+        while (!timer.isGameOver()) {
+            Player currentPlayer = players[currentPlayerIndex];
             currentPlayer.takeTurn(this);
-            for (Element e: elementList){
-                e.update();
-            }
-                currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-            }
+//                for (Element e : elementList) {
+//                    e.update();
+//                }
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
         }
+        endGame();
+    }
     /**
      * Ends the game and evaluates the results to determine the winner.
      * This method stops the game timer and evaluates the results to determine
      * which team (Saboteurs or Plumbers) wins the game based on the comparison between leaked and collected water.
      */
     public void endGame() {
-        Timer.setTime(0);
         System.out.println("The timer has stopped, and the game has ended. The results are being evaluated...");
         determineWinner();
     }
