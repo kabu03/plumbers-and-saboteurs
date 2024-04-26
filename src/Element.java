@@ -6,6 +6,7 @@ Made connectedPipes Array public.
 Setter For maxConnectablePipes
  */
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,14 @@ import java.util.List;
  * connections among each other.
  */
 public abstract class Element {
+    public Element(String n)
+    {
+        name = n;
+        connectedPipes = new ArrayList<>();
+        connectablePipes = new ArrayList<>();
+    }
 
+    public String name;
     public List<Pipe> connectablePipes;
     /**
      * A boolean that indicates whether the element is currently occupied by a player or not.
