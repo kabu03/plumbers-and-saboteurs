@@ -1,0 +1,30 @@
+4
+Plumber1
+1
+Plumber2
+1
+Saboteur1
+Saboteur2
+1
+pipe 1
+1
+pump 1
+1
+pipe 3
+1
+pump 2
+10
+5
+1
+pipe 2
+1
+pump 2
+2
+pipe 6
+5
+randomly breaks down--> now
+10
+5
+4
+2
+pipe 2

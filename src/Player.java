@@ -18,7 +18,7 @@ public abstract class Player {
      * @return The integer representing the chosen action.
      * @author Basel Al-Raoush
      */
-    protected abstract void takeTurn(Game g);
+    protected abstract boolean takeTurn(Game g);
 
     protected void passTurn(){
         System.out.println("Player " + playerName + " passed their turn.");

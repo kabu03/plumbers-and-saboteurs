@@ -21,6 +21,7 @@ public class Main {
      *
      * @param args The command-line arguments. Not used in this application.
      */
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Pipes in the Desert Game (Prototype Version) by Team Mansaf!");
@@ -38,9 +39,10 @@ public class Main {
                 System.out.println("There are 8 pre-defined tests you can choose from.");
                 System.out.println("For each, an output file will be generated in the tests folder that you can compare with the expected output.");
                 System.out.println("Which one would you like to run?");
-                int testNumber = scanner.nextInt();
-                testProcessing(testNumber);
+                int num = scanner.nextInt();
+                testProcessing(num);
                 Game testGame = new Game(true);
+                Game.testNumber = num;
                 testGame.initGame();
                 break;
             case 3:

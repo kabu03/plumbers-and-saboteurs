@@ -1,0 +1,42 @@
+4
+Plumber1
+1
+Plumber2
+1
+Saboteur1
+Saboteur2
+1
+pipe 4
+1
+pump 3
+5
+10
+5
+1
+pipe 7
+1
+pump 4
+5
+10
+5
+1
+pipe 8
+1
+cistern
+5
+10
+5
+2
+1
+pipe 8
+5
+10
+5
+1
+pump 4
+1
+pipe 6
+5
+10
+5
+3
