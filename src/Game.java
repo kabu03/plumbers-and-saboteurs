@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,8 @@ public class Game {
     private int[] gameScore = {0, 0}; // Index 0 represents Plumber score, index 1 represents Saboteur score.
     private Timer timer;
     public static boolean testMode;
+    public static String inputFilePath;
+    public static String outputFilePath;
 
     public Game(boolean isTesting) {
         testMode = isTesting;
@@ -52,31 +56,38 @@ public class Game {
      */
     public void initGame() {
         Scanner scanner;
+        PrintStream output;
         if (testMode) {
             try {
-                scanner = new Scanner(new File("input.txt"));
+                System.out.println(inputFilePath);
+                scanner = new Scanner(new File(inputFilePath));
+                output = new PrintStream(new FileOutputStream(outputFilePath));
             } catch (FileNotFoundException e) {
                 System.out.println("Input file not found.");
                 return;
             }
         } else {
             scanner = new Scanner(System.in);
+            output = System.out;
         }
+        System.setOut(output);
+        // System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out))); Important, keep it.
 
         int numPlayers;
         while (true) {
-            System.out.println("How many players will participate? Please enter a number (4 or 6):");
-            numPlayers = scanner.nextInt();
+            if(!testMode)
+                System.out.println("How many players will participate? Please enter a number (4 or 6):");
+            numPlayers = Integer.parseInt(scanner.nextLine());
 
             if (numPlayers == 4 || numPlayers == 6) {
                 // Valid number of players entered, break the loop
                 break;
             } else {
-                System.out.println("Invalid number of players. Only 4 or 6 players are allowed.");
+                System.out.println("Invalid input, please choose one of the valid options (4 or 6).");
             }
         }
-
-        System.out.println("You've selected " + numPlayers + " players.");
+        if(!testMode)
+            System.out.println("You've selected " + numPlayers + " players.");
 
         plumbers = new Plumber[numPlayers / 2]; // Array to store plumbers
         saboteurs = new Saboteur[numPlayers / 2]; // Array to store saboteurs
@@ -93,20 +104,20 @@ public class Game {
                 playerName = scanner.nextLine().trim(); // Use trim() to remove leading and trailing spaces
 
                 if (!playerName.isEmpty()) {
-                    // Valid player name entered, break the loop
+                    System.out.println("The name " + playerName + " is validated.");
                     break;
                 } else {
-                    System.out.println("Invalid input. Player name cannot be empty.");
+                    System.out.println("Invalid input, please enter a valid name.");
                 }
             }
 
             // Feature to enforce team balancing
             if (plumberIndex == numPlayers / 2) {
-                System.out.println(playerName + ", you must join the Saboteurs team.");
+                System.out.println(playerName + "was automatically placed in the Saboteurs team.");
                 saboteurs[saboteurIndex++] = new Saboteur(playerName);
                 continue;
             } else if (saboteurIndex == numPlayers / 2) {
-                System.out.println(playerName + ", you must join the Plumbers team.");
+                System.out.println(playerName + "was automatically placed in the Plumbers team.");
                 plumbers[plumberIndex++] = new Plumber(playerName);
                 continue;
             }
@@ -118,7 +129,7 @@ public class Game {
             while (true) {
                 System.out.println("Select the team for " + playerName + ":");
                 System.out.println("Enter '1' for Plumbers and '2' for Saboteurs.");
-                teamChoice = scanner.nextInt();
+                teamChoice = Integer.parseInt(scanner.nextLine());
 
                 if (teamChoice == 1) {
                     plumbers[plumberIndex++] = new Plumber(playerName);
@@ -127,7 +138,7 @@ public class Game {
                     saboteurs[saboteurIndex++] = new Saboteur(playerName);
                     break;
                 } else {
-                    System.out.println("Invalid team choice. Please enter '1' for Plumbers or '2' for Saboteurs.");
+                    System.out.println("Invalid input, please choose one of the valid options (1 or 2).");
                 }
             }
         }
@@ -174,7 +185,7 @@ public class Game {
             addCistern(cistern);
             p2lower.connectToElement(cistern);
         }
-        else if (testMode){ // Make the test map
+        else { // Make the test map
             Spring s1 = new Spring(); // Creating the spring
             addSpring(s1);
             Cistern cistern = new Cistern(this); // Creating the cistern
@@ -195,6 +206,7 @@ public class Game {
 
         }
         // Start game
+        System.out.println("The game’s elements have been initialized successfully.");
         startGame();
     }
 
@@ -213,12 +225,8 @@ public class Game {
      * @author Basel Al-Raoush
      */
     public void startGame() {
-        System.out.println("Starting the game...");
         Timer.setTime(5.0);
-        System.out.println("Game timer started.");
-        System.out.println("Players are placed on the map.");
-        System.out.println("Water flow has started.");
-        System.out.println("The game has started!");
+        System.out.println("The game and timer have started!");
 
         while (true) {
             Player currentPlayer = players[currentPlayerIndex]; // TIMER IMPLEMENTATION

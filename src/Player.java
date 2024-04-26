@@ -21,6 +21,7 @@ public abstract class Player {
     protected abstract void takeTurn(Game g);
 
     protected void passTurn(){
+        System.out.println("Player " + playerName + " passed their turn.");
     }
 
     /**

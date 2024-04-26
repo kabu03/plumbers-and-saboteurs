@@ -95,7 +95,7 @@ public class Plumber extends Player {
                 exit(0);
                 break;
             default:
-                System.out.println("Invalid choice. Please enter a number corresponding to the action you want to perform.");
+                System.out.println("Invalid input, please choose one of the valid options (1-11).");
         }
 
     }

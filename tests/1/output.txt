@@ -1,0 +1,3 @@
+How many players will participate? Please enter a number (4 or 6):
+Invalid number of players. Only 4 or 6 players are allowed.
+How many players will participate? Please enter a number (4 or 6):

@@ -36,13 +36,12 @@ public class Main {
                 break;
             case 2:
                 Game testGame = new Game(true);
-                testGame.initGame();
-
                 System.out.println("There are 8 pre-defined tests you can choose from.");
                 System.out.println("For each, an output file will be generated in the tests folder that you can compare with the expected output.");
                 System.out.println("Which one would you like to run?");
                 int testNumber = scanner.nextInt();
                 testProcessing(testNumber);
+                testGame.initGame();
                 break;
             case 3:
                 System.out.println("Exiting the game. Goodbye!");
@@ -55,21 +54,8 @@ public class Main {
     }
 
 public static void testProcessing(int testNum){
-        String path = "/tests/";
-        String inputFilePath = path + testNum + "/input.txt";
-        String outputFilePath = path + testNum + "/output.txt";
-    try {
-        FileInputStream fis = new FileInputStream(inputFilePath);
-        System.setIn(fis);
-        Scanner scanner = new Scanner(System.in);
-        // executeCommand(scanner);
-        scanner.close();
-        fis.close();
-    } catch (FileNotFoundException e) {
-        System.out.println("Test input file not found at: " + inputFilePath);
-    } catch (IOException e) {
-        throw new RuntimeException(e);
-    }
+        Game.inputFilePath = "tests/" + testNum + "/input.txt";
+        Game.outputFilePath = "tests/" + testNum + "/output.txt";
 }
 }
 
