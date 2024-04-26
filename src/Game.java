@@ -164,38 +164,56 @@ public class Game {
         springList = new ArrayList<>();
         cisternList = new ArrayList<>();
         if(!testMode) {
-            Spring s1 = new Spring("Spring"); // Creating the spring
+// Creating the spring
+            Spring s1 = new Spring("Spring");
             addSpring(s1);
-            Pipe upperPipe = new Pipe("Upper Pipe"); // creation of the upper pipe and connecting it to the spring.
+
+// Creating the upper pipe and connecting it to the spring.
+            Pipe upperPipe = new Pipe("Upper Pipe");
             EndOfPipe p1upper = new EndOfPipe(upperPipe);
             EndOfPipe p2upper = new EndOfPipe(upperPipe);
             s1.connectablePipes.add(upperPipe);
             p1upper.connectToElement(s1);
-            addPipe(upperPipe); // Creating the upper pump, connecting it to the upper pipe
+            addPipe(upperPipe);
+
+// Creating the upper pump, connecting it to the upper pipe
             Pump upperPump = new Pump("Upper Pump");
             upperPump.connectablePipes.add(upperPipe);
+            upperPump.inPipe = upperPipe; // Set inPipe as the first connected pipe
             p2upper.connectToElement(upperPump);
             addPump(upperPump);
-            Pipe middlePipe = new Pipe("Middle Pipe"); // Creating the middle pipe, connecting it to the upper pump
+
+// Creating the middle pipe, connecting it to the upper pump
+            Pipe middlePipe = new Pipe("Middle Pipe");
             EndOfPipe p1middle = new EndOfPipe(middlePipe);
             EndOfPipe p2middle = new EndOfPipe(middlePipe);
             addPipe(middlePipe);
             upperPump.connectablePipes.add(middlePipe);
+            upperPump.outPipe = middlePipe; // Set outPipe as the second connected pipe
             p1middle.connectToElement(upperPump);
-            Pump lowerPump = new Pump("Lower Pump"); // Creating the lower pump, connecting it to the middle pipe
+
+// Creating the lower pump, connecting it to the middle pipe
+            Pump lowerPump = new Pump("Lower Pump");
             lowerPump.connectablePipes.add(middlePipe);
+            lowerPump.inPipe = middlePipe; // Set inPipe as the first connected pipe
             p2middle.connectToElement(lowerPump);
             addPump(lowerPump);
-            Pipe lowerPipe = new Pipe("Lower Pipe"); // Creating the lower pipe, connecting it to the lower pump
+
+// Creating the lower pipe, connecting it to the lower pump
+            Pipe lowerPipe = new Pipe("Lower Pipe");
             EndOfPipe p1lower = new EndOfPipe(lowerPipe);
             EndOfPipe p2lower = new EndOfPipe(lowerPipe);
             addPipe(lowerPipe);
-            lowerPump.connectablePipes.add(middlePipe);
+            lowerPump.connectablePipes.add(lowerPipe);
+            lowerPump.outPipe = lowerPipe; // Set outPipe as the second connected pipe
             p1lower.connectToElement(lowerPump);
-            Cistern cistern = new Cistern("Cistern", this); // Creating the cistern, connecting it to the lower pipe
+
+// Creating the cistern, connecting it to the lower pipe
+            Cistern cistern = new Cistern("Cistern", this);
             addCistern(cistern);
             cistern.connectablePipes.add(lowerPipe);
             p2lower.connectToElement(cistern);
+
         }
 
         else { // Make the test map
