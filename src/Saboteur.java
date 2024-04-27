@@ -1,11 +1,5 @@
-import java.io.FileDescriptor;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.util.NoSuchElementException;
 import java.util.Objects;
-import java.util.Scanner;
-import java.util.concurrent.*;
 
 import static java.lang.System.exit;
 
@@ -27,12 +21,11 @@ public class Saboteur extends Player {
      * Returns the chosen action as an integer.
      * Overrides the abstract takeTurn method of the Player class.
      *
-     * @return The integer representing the chosen action.
      * @author Basel Al-Raoush
      */
 
     @Override
-    protected boolean takeTurn(Game g) {
+    protected void takeTurn(Game g) {
         boolean passflag = false;
         int actionsTaken = 0; // Track the number of actions taken in the turn
         long turnStartTime = System.currentTimeMillis();
@@ -107,7 +100,7 @@ public class Saboteur extends Player {
             }
         }
 
-        return true;
+        return;
     }
 
 
