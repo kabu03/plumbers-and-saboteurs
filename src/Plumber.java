@@ -24,6 +24,9 @@ public class Plumber extends Player {
         this.playerName = playerName;
     }
 
+    public int newPipecount=1;
+    public int newPumpCount=1;
+
     /**
      * Allows the Plumber player to take their turn.
      * Displays available actions and prompts the player to choose one.
@@ -247,10 +250,6 @@ public class Plumber extends Player {
         if (Objects.equals(currentElement, p)) {
             if (!p.getWorks()) {
                 p.setWorks(true);
-               //  if (p.getWaterLevel() > 0) {
-               //     p.incrementWater();
-               // }
-                p.update();
                 System.out.println(playerName + "fixed" + p.getName());
             }
         }
@@ -294,27 +293,65 @@ public class Plumber extends Player {
     public void insertPump(Pump pickedUpPump, Pipe pipe,Game g1){
         if (pickedUpPump != null)
             if (currentElement == pipe) {
-                Pipe newPipe1 = new Pipe("newPipe1");
-                Pipe newPipe2 = new Pipe("newPipe2");
+                Pump newPump= new Pump("newPump"+newPumpCount);
+                newPump=pickedUpPump;
+                newPumpCount++;
+                Pipe newPipe1 = new Pipe("newPipe"+newPipecount);
+                newPipecount++;
+                Pipe newPipe2 = new Pipe("newPipe"+newPipecount);
+                newPipecount++;
+
                 EndOfPipe newEnd1A = new EndOfPipe(newPipe1);
                 EndOfPipe newEnd1B = new EndOfPipe(newPipe1);
                 EndOfPipe newEnd2A  = new EndOfPipe(newPipe2);
                 EndOfPipe newEnd2B  = new EndOfPipe(newPipe2);
 
-                newPipe1.endsOfPipe[0]=pipe.endsOfPipe[0];
 
-                newPipe2.endsOfPipe[0]=pipe.endsOfPipe[1];
+                newPipe1.endsOfPipe[0]=pipe.endsOfPipe[0];
+                newPipe1.endsOfPipe[0].setCurrentPipe(newPipe1);
+                newPipe1.endsOfPipe[1].setCurrentPipe(newPipe1);
+
+                newPipe2.endsOfPipe[1]=pipe.endsOfPipe[1];
+                newPipe2.endsOfPipe[1].setCurrentPipe(newPipe2);
+                newPipe2.endsOfPipe[0].setCurrentPipe(newPipe2);
+
 
                 pipe.setWorks(false);
-                g1.pipeList.remove(pipe);
+                int index = g1.pipeList.indexOf(pipe);
+                int index2 = g1.elementList.indexOf(pipe);
+                int index3 = pipe.endsOfPipe[0].getConnectedElement().connectablePipes.indexOf(pipe);
+                int index4= pipe.endsOfPipe[1].getConnectedElement().connectablePipes.indexOf(pipe);
                 g1.elementList.remove(pipe);
-                g1.elementList.remove(pipe.endsOfPipe[0]);
-                g1.elementList.remove(pipe.endsOfPipe[1]);
-                newPipe1.endsOfPipe[1].connectToElement(pickedUpPump);
-                newPipe2.endsOfPipe[1].connectToElement(pickedUpPump);
+                g1.pipeList.remove(pipe);
 
+                g1.pipeList.add(index, newPipe1);
+                g1.pipeList.add(index + 1, newPipe2);
+
+                g1.elementList.add(index2,newPipe1);
+                g1.elementList.add(index2+1,newPump);
+                g1.elementList.add(index2+2,newPipe2);
+
+                pipe.endsOfPipe[0].getConnectedElement().connectablePipes.remove(pipe);
+                pipe.endsOfPipe[1].getConnectedElement().connectablePipes.remove(pipe);
+
+                pipe.endsOfPipe[0].getConnectedElement().connectablePipes.add(index3,newPipe1);
+                pipe.endsOfPipe[1].getConnectedElement().connectablePipes.add(index4,newPipe2);
+
+                newPipe1.endsOfPipe[1].connectToElement(newPump);
+                newPipe2.endsOfPipe[0].connectToElement(newPump);
+
+                newPump.connectedPipes.add(newPipe1);
+                newPump.connectedPipes.add(newPipe2);
+
+                pickedUpPump=null;
+                System.out.println(playerName + "inserted a pump into "+ pipe.getName());
 
             }
+        if(currentElement==pipe && pickedUpPump==null){
+            System.out.println("You dont have pump picked up to insert here.");
+        } else {
+            System.out.println("You have to have picked up a pump and be standing on a pipe.");
+        }
 
 
     }
@@ -328,10 +365,6 @@ public class Plumber extends Player {
         if (Objects.equals(currentElement, pump)) {
             if (!pump.getWorks()) {
                 pump.setWorks(true);
-               //   if (pump.getWaterLevel() > 0) { handled by update()
-               //     pump.incrementWater();
-               // }
-                pump.update();
                 System.out.println(playerName + "fixed" + pump.getName());
             }
         }

@@ -49,7 +49,9 @@ public class EndOfPipe {
     }
     public void setCurrentPipe(Pipe p)
     {
+        connectedElement.connectedPipes.remove(currentPipe);
         currentPipe = p;
+        connectedElement.connectedPipes.add(currentPipe);;
     }
 
 }

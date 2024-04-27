@@ -129,7 +129,6 @@ public class Saboteur extends Player {
     public void puncture(Pipe p1) {
         if (Objects.equals(currentElement, p1) && p1.getWorks()) {
             p1.setWorks(false);
-            p1.update();
             System.out.println(playerName + "punctured" + p1.getName());
             return;
         }
