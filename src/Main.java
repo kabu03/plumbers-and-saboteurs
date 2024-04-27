@@ -36,10 +36,17 @@ public class Main {
                 game.initGame();
                 break;
             case 2:
-                System.out.println("There are 8 pre-defined tests you can choose from.");
-                System.out.println("For each, an output file will be generated in the tests folder that you can compare with the expected output.");
-                System.out.println("Which one would you like to run?");
-                int num = scanner.nextInt();
+                int num = 0;
+                do {
+                    System.out.println("There are 8 pre-defined tests you can choose from.");
+                    System.out.println("For each, an output file will be generated in the tests folder that you can compare with the expected output.");
+                    System.out.println("Which one would you like to run?");
+                    num = scanner.nextInt();
+                    if(num < 1 || num > 8) {
+                        System.out.println("Invalid test case number. Please enter a number between 1 and 8.");
+                    }
+                } while(num < 1 || num > 8);
+
                 testProcessing(num);
                 Game testGame = new Game(true);
                 Game.testNumber = num;
