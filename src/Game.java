@@ -222,8 +222,8 @@ public class Game {
             Spring s1 = new Spring("Spring");
             addSpring(s1);
 
+            //creating the Cistern
             Cistern cistern = new Cistern("Cistern", this);
-            addCistern(cistern);
 
             // Creating pipes
             Pipe Pipe1 = new Pipe("Pipe1");
@@ -234,16 +234,6 @@ public class Game {
             Pipe Pipe6 = new Pipe("Pipe6");
             Pipe Pipe7 = new Pipe("Pipe7");
             Pipe Pipe8 = new Pipe("Pipe8");
-
-            //adding pipes to the list
-            addPipe(Pipe1);
-            addPipe(Pipe2);
-            addPipe(Pipe3);
-            addPipe(Pipe4);
-            addPipe(Pipe5);
-            addPipe(Pipe6);
-            addPipe(Pipe7);
-            addPipe(Pipe8);
 
             // Creating ends of pipes
             EndOfPipe EoP1pipe1 = new EndOfPipe(Pipe1);
@@ -277,74 +267,97 @@ public class Game {
             Pump Pump3 = new Pump("Pump3");
             Pump Pump4 = new Pump("Pump4");
 
-            // Adding pumps to the list
-            addPump(Pump1);
-            addPump(Pump2);
-            addPump(Pump3);
-            addPump(Pump4);
 
 
-
-            // setting the map connections between the elements and pipes
-
-
-            // ( connection with spring )
-            s1.connectablePipes.add(Pipe1); // pipe1 as connectable pipe to spring
-            s1.connectablePipes.add(Pipe4); // pipe4 as connectable pipe to spring
-            EoP1pipe1.connectToElement(s1); // connecting End of pipe 1 to spring
-            EoP1pipe4.connectToElement(s1); // connecting End of pipe 4 to spring
+            //connecting pipe1 to the spring
+            s1.connectablePipes.add(Pipe1);
+            EoP1pipe1.connectToElement(s1);
+            addPipe(Pipe1);
 
 
-            // connecting pipes 1,4 to pump 1,3
+            //connecting pipe4 to the spring
+            s1.connectablePipes.add(Pipe4);
+            EoP1pipe4.connectToElement(s1);
+            addPipe(Pipe4);
+
+
+            //connecting pipe1 to pump1
             Pump1.connectablePipes.add(Pipe1);
-            Pump3.connectablePipes.add(Pipe4);
             Pump1.inPipe = Pipe1;
-            Pump3.inPipe = Pipe4;
             EoP2pipe1.connectToElement(Pump1);
+            addPump(Pump1);
+
+
+            //connecting pipe4 to pump3
+            Pump3.connectablePipes.add(Pipe4);
+            Pump3.inPipe = Pipe4;
             EoP2pipe4.connectToElement(Pump3);
+            addPump(Pump3);
 
 
-            // connecting pipe 5 to pump 1,3
+            //connecting pipe5 to pump1 and pump3
             Pump1.connectablePipes.add(Pipe5);
             Pump3.connectablePipes.add(Pipe5);
             EoP1pipe5.connectToElement(Pump1);
             EoP2pipe5.connectToElement(Pump3);
+            addPipe(Pipe5);
 
-            // connecting pipe 2,7 to pump 1,3 and pump 2,4
+
+
+            //connecting pipe2 to pump1
             Pump1.connectablePipes.add(Pipe2);
-            Pump2.connectablePipes.add(Pipe2);
-            Pump3.connectablePipes.add(Pipe7);
-            Pump4.connectablePipes.add(Pipe7);
-
-            //setting the input and output pipes for pumps 1,2,3,4
             Pump1.outPipe = Pipe2;
-            Pump2.inPipe = Pipe2;
-            Pump3.outPipe = Pipe7;
-            Pump4.inPipe = Pipe7;
-
             EoP1pipe2.connectToElement(Pump1);
-            EoP2pipe2.connectToElement(Pump2);
+            addPipe(Pipe2);
+
+
+            //connecting pipe7 to pump3
+            Pump3.connectablePipes.add(Pipe7);
+            Pump3.outPipe = Pipe7;
             EoP1pipe7.connectToElement(Pump3);
+            addPipe(Pipe7);
+
+
+            //connecting pipe2 to pump2
+            Pump2.connectablePipes.add(Pipe2);
+            Pump2.inPipe = Pipe2;
+            EoP2pipe2.connectToElement(Pump2);
+            addPump(Pump2);
+
+
+            //connecting pipe7 to pump4
+            Pump4.connectablePipes.add(Pipe7);
+            Pump4.inPipe = Pipe7;
             EoP2pipe7.connectToElement(Pump4);
-
-            //setting the output pipes for pump 2,4
-            Pump2.outPipe = Pipe3;
-            Pump4.outPipe = Pipe8;
+            addPump(Pump4);
 
 
-            // connecting pipe 6 to pump 2,4
+            //connecting pipe6 to pump2 and pump4
             Pump2.connectablePipes.add(Pipe6);
             Pump4.connectablePipes.add(Pipe6);
             EoP1pipe6.connectToElement(Pump2);
+            addPipe(Pipe6);
 
-            // connecting pipe 3,8 to cistern and to pump 2,4
+
+
+            //connecting pipe3 to pump2
+            Pump2.connectablePipes.add(Pipe3);
+            EoP1pipe3.connectToElement(Pump2);
+            Pump2.outPipe = Pipe3;
+            addPipe(Pipe3);
+
+            //connecting pipe8 to pump4
+            Pump4.connectablePipes.add(Pipe8);
+            EoP1pipe8.connectToElement(Pump4);
+            Pump4.outPipe = Pipe8;
+            addPipe(Pipe8);
+
+            //connecting pipe3 and pipe8 to the cistern
             cistern.connectablePipes.add(Pipe3);
             cistern.connectablePipes.add(Pipe8);
-            EoP1pipe3.connectToElement(Pump2);
             EoP2pipe3.connectToElement(cistern);
-            EoP1pipe8.connectToElement(Pump4);
             EoP2pipe8.connectToElement(cistern);
-
+            addCistern(cistern);
         }
         // Start game
         System.out.println("The game’s elements have been initialized successfully.");
