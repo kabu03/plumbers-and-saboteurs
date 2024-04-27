@@ -110,6 +110,7 @@ public class Plumber extends Player {
                             case 10:
                                 if (!Game.testMode)
                                     System.out.println("You chose: Pass Turn");
+                                passflag=true;
                                 passTurn();
                                 return true;
                             case 11:
