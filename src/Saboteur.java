@@ -60,12 +60,12 @@ public class Saboteur extends Player {
                         case 2:
                             if (!Game.testMode)
                                 System.out.println("You chose: Change the input pipe of a pump");
-                            changeInputPipe(g.pumpList.getFirst(), g.pipeList.get(0)); // element selection
+                            changeInputPipe(g); // element selection
                             return true;
                         case 3:
                             if (!Game.testMode)
                                 System.out.println("You chose: Change the output pipe of a pump");
-                            changeOutputPipe(g.pumpList.getFirst(), g.pipeList.get(0)); // element selection
+                            changeOutputPipe(g); // element selection
                             return true;
                         case 4:
                             if (!Game.testMode)

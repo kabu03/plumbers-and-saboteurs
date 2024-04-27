@@ -98,12 +98,12 @@ public class Plumber extends Player {
                         case 8:
                             if (!Game.testMode)
                                 System.out.println("You chose: Change the input pipe of a pump"); // based on connectedpipes array
-                            changeInputPipe(g.pumpList.getFirst(), g.pipeList.get(0));
+                            changeInputPipe(g);
                             return true;
                         case 9:
                             if (!Game.testMode)
                                 System.out.println("You chose: Change the output pipe of a pump"); // based on connectedpipes array
-                            changeOutputPipe(g.pumpList.getFirst(), g.pipeList.get(0));
+                            changeOutputPipe(g);
                             return true;
                         case 10:
                             if (!Game.testMode)
