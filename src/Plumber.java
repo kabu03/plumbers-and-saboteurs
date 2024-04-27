@@ -170,6 +170,9 @@ public class Plumber extends Player {
                         EoP.setCurrentPipe(null);
 
                         pickedUpEoP = EoP;
+
+                        if (Game.testMode) {
+                            System.out.println( playerName + " picked up the end of" + p.getName() +"connected to" + e.getName()); }
                     }
                 }
             }
@@ -221,6 +224,9 @@ public class Plumber extends Player {
                         pickedUpEoP.setCurrentPipe(p); // set the current pipe of the end of pipe to the selected pipe.
                         e.connectedPipes.add(p);
                         pickedUpEoP = null;
+
+                        if (Game.testMode) {
+                            System.out.println( playerName + " inserted the end of pipe to" + e.getName()); }
                     }
                     else {
                         System.out.println("You can't insert the end of the pipe to this element.");
