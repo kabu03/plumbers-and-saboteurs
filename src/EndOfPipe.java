@@ -12,6 +12,13 @@ public class EndOfPipe {
     public EndOfPipe(Pipe p)
     {
         currentPipe = p;
+        for(int i = 0; i < 2; i++)
+        {
+            if(p.endsOfPipe[i] == null)
+            {
+                p.endsOfPipe[i] = this;
+            }
+        }
     }
     /**
      * An attribute that stores the element that is currently connected to the end of pipe object.
