@@ -19,7 +19,7 @@ public class Cistern extends Element {
 
     Random rand = new Random();
     private int numOfcreatedPipes = 0;
-    private Game gameInstance;
+    private final Game gameInstance;
     /**
      * The number of turns remaining until a new pipe can be manufactured.
      */

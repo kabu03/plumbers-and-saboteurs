@@ -34,7 +34,7 @@ public class Game {
     public List<Pump> pumpList;
     private List<Cistern> cisternList;
     private List<Spring> springList;
-    private int[] gameScore = {0, 0}; // Index 0 represents Plumber score, index 1 represents Saboteur score.
+    private final int[] gameScore = {0, 0}; // Index 0 represents Plumber score, index 1 represents Saboteur score.
     public Timer timer;
     public static boolean testMode;
     public static String inputFilePath;

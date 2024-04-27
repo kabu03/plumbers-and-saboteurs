@@ -3,6 +3,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.*;
 
@@ -15,7 +16,7 @@ import static java.lang.System.exit;
  * being vital for water transfer efficiency and system operation.
  */
 public class Plumber extends Player {
-    public Pump pickedUpPump;
+    public Pump pickedUpPump=null;
     private Pipe TempPipe; // ?
     public EndOfPipe pickedUpEoP;
 
@@ -73,7 +74,7 @@ public class Plumber extends Player {
                         case 3:
                             if (!Game.testMode)
                                 System.out.println("You chose: Insert pump into a pipe");
-                            insertPump(g.pumpList.getFirst(), g.pipeList.get(0));
+                           // insertPump(g.pumpList.getFirst(), g.pipeList.get(0));
                             return true;
                         case 4:
                             if (!Game.testMode)
@@ -234,23 +235,22 @@ public class Plumber extends Player {
      * @author Ibrahim
      */
     public  void fixPipe(Pipe p){
-        String userChoice,userChoice2;
-        Scanner sc = new Scanner(System.in);
-        Scanner sc2 = new Scanner(System.in);
-        System.out.println("Are you on the pipe?");
-        userChoice = sc.nextLine();
-        if(userChoice.equalsIgnoreCase("yes")){
-            System.out.println("is the pipe punctured?");
-            userChoice2 = sc2.nextLine();
-            if(userChoice2.equalsIgnoreCase("yes")){
-                System.out.println("FixPipe(Pipe)\n Pipe.Works=True;\n Pipe is now repaired and working");
-            }else{
-                System.out.print("You can't fix a pipe that is not punctured.");
+        if (Objects.equals(currentElement, p)) {
+            if (!p.getWorks()) {
+                p.setWorks(true);
+               //  if (p.getWaterLevel() > 0) {
+               //     p.incrementWater();
+               // }
+                p.update();
+                System.out.println(playerName + "fixed" + p.getName());
             }
-
-        }else {
-            System.out.println("Please first move to the Pipe you want to fix.");
         }
+        if(currentElement == p && p.getWorks()){
+            System.out.println(playerName + "attempted to fix" + p.getName() + ", but it's already working.");
+        }else
+            System.out.println("You need to be standing on a punctured pipe to fix it.");
+
+
     }
 
 
@@ -260,15 +260,16 @@ public class Plumber extends Player {
      * @author Ibrahim
      */
     public  void getPump(Pump p) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Are you on the pump you want to pick up?");
-        String userChoice = scanner.nextLine();
-
-        if (userChoice.equalsIgnoreCase("yes")) {
-            System.out.println("GetPump(p: Pump)\n You have picked up the pump.");
-        } else {
-            System.out.println("First go to a cistern that has a pump available for pick up.");
+        if(!(currentElement instanceof Cistern)){
+            System.out.println("You are not on a Cistern, move to a cistern with a manufactured pump to pick it up");
+            return;
         }
+        if(((Cistern) currentElement).manufacturedPump==null){
+            System.out.println("This cistern does not have a pump available for pickup.");
+            return;
+        }
+        pickedUpPump=((Cistern) currentElement).manufacturedPump;
+        System.out.print(playerName + "picked up" + ((Cistern) currentElement).manufacturedPump);
 
 
     }
@@ -276,23 +277,40 @@ public class Plumber extends Player {
     /**
      * Methods that inserts a pump that was obtained from a cistern, into the pipe grid.
      * Pipe in which the pump is to be connected to, has to be specified.
-     * @param pump will be the inserted pump
+     * @param pickedUpPump will be the inserted pump
      * @param pipe will be where the pump is inserted on
      * @author Ibrahim
      *
      */
-    public void insertPump(Pump pump, Pipe pipe){
+    public void insertPump(Pump pickedUpPump, Pipe pipe,Game g1){
+        if (pickedUpPump != null)
+            if (currentElement == pipe) {
+                Pipe newPipe1 = new Pipe("newPipe1");
+                Pipe newPipe2 = new Pipe("newPipe2");
+                EndOfPipe newEnd1A = new EndOfPipe(newPipe1);
+                EndOfPipe newEnd1B = new EndOfPipe(newPipe1);
+                EndOfPipe newEnd2A  = new EndOfPipe(newPipe2);
+                EndOfPipe newEnd2B  = new EndOfPipe(newPipe2);
 
-        String userChoice;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Are you on the pipe you want to insert a pump on?");
-        userChoice = scanner.nextLine();
+                newPipe1.endsOfPipe[0]=pipe.endsOfPipe[0];
 
-        if (userChoice.equalsIgnoreCase("yes")) {
-            System.out.println("InsertPump(p1:Pump, p2:Pipe)\nPipe.ConnectToElement(Pump)\n Pump is successfully inserted into the pipe system.");
-        } else {
-            System.out.println("Please move to the pipe you want to insert the pump on.");
-        }
+                newPipe2.endsOfPipe[0]=pipe.endsOfPipe[1];
+
+                pipe.setWorks(false);
+                g1.pipeList.remove(pipe);
+                g1.elementList.remove(pipe);
+                g1.elementList.remove(pipe.endsOfPipe[0]);
+                g1.elementList.remove(pipe.endsOfPipe[1]);
+                newPipe1.endsOfPipe[1].connectToElement(pickedUpPump);
+                newPipe2.endsOfPipe[1].connectToElement(pickedUpPump);
+
+
+
+
+
+
+            }
+
 
     }
 
@@ -302,23 +320,22 @@ public class Plumber extends Player {
      * @author Nafez
      */
     public void fixPump(Pump pump){
-        String userChoice,userChoice2;
-        Scanner sc = new Scanner(System.in);
-        Scanner sc2 = new Scanner(System.in);
-        System.out.println("Are you on the pump?");
-        userChoice = sc.nextLine();
-        if(userChoice.equalsIgnoreCase("yes")){
-            System.out.println("is the pump working?");
-            userChoice2 = sc2.nextLine();
-            if(userChoice2.equalsIgnoreCase("no")){
-                System.out.println("FixPump(Pump)\n Pump.Works=True;\n Pump is now repaired and working");
-            }else{
-                System.out.print("You can't fix a pump that is not broken.");
+        if (Objects.equals(currentElement, pump)) {
+            if (!pump.getWorks()) {
+                pump.setWorks(true);
+               //   if (pump.getWaterLevel() > 0) { handled by update()
+               //     pump.incrementWater();
+               // }
+                pump.update();
+                System.out.println(playerName + "fixed" + pump.getName());
             }
-
-        }else {
-            System.out.println("Please first move to the pump you want to fix.");
         }
+       if(currentElement == pump && pump.getWorks()){
+           System.out.println(playerName + "attempted to fix" + pump.getName() + ", but it's already working.");
+
+       }else
+           System.out.println("You need to be standing on a broken pump to fix it.");
+
 
     }
 }

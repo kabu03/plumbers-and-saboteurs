@@ -42,12 +42,12 @@ public class Pipe extends Element {
         boolean haveFreeEnd = false;
         for(int i = 0; i < 2; i++)
         {
-            if(endsOfPipe[i] == null)
-            {
+            if (endsOfPipe[i] == null) {
                 haveFreeEnd = true;
+                break;
             }
         }
-        if(getWorks() == false || haveFreeEnd)
+        if(!getWorks() || haveFreeEnd)
         {
             incrementLeakage();
         }
@@ -55,9 +55,8 @@ public class Pipe extends Element {
         {
             if(getWaterLevel() >= 2 && endsOfPipe[1].getConnectedElement() != null)
             {
-                if(endsOfPipe[1].getConnectedElement() instanceof Pump)
+                if(endsOfPipe[1].getConnectedElement() instanceof Pump p)
                 {
-                    Pump p = (Pump) endsOfPipe[1].getConnectedElement();
                     if(p.inPipe == this)
                     {
                         endsOfPipe[1].getConnectedElement().incrementWater();

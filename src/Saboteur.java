@@ -3,6 +3,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.*;
 
@@ -30,70 +31,78 @@ public class Saboteur extends Player {
      * @author Basel Al-Raoush
      */
     @Override
-    protected boolean takeTurn(Game g) { // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
-//        try {
-        long turnStartTime = System.currentTimeMillis();
-        long turnEndTime = turnStartTime + 10000; // 10 seconds
-        if (!Game.testMode) {
-            System.out.println("Player " + playerName + ", it's your turn.");
-            System.out.println("What action would you like to perform?");
-            System.out.println("Available actions for Saboteurs:");
-            System.out.println("1. Move to an element");
-            System.out.println("2. Change the input pipe of a pump");
-            System.out.println("3. Change the output pipe of a pump");
-            System.out.println("4. Puncture a pipe");
-            System.out.println("5. Pass Turn");
-            System.out.println("6. End the game");
-            System.out.print("Enter the number corresponding to your choice: ");
-        }
-        while (System.currentTimeMillis() < turnEndTime) {
-            // Check if input is available
-            try {
-                if (System.in.available() > 0) {
-                    int choice = Integer.parseInt(Game.scanner.nextLine());
-                    switch (choice) {
-                        case 1:
-                            if (!Game.testMode)
-                                System.out.println("You chose: Move to an element");
-                            move(g);
-                            return true;
-                        case 2:
-                            if (!Game.testMode)
-                                System.out.println("You chose: Change the input pipe of a pump");
-                            changeInputPipe(g); // element selection
-                            return true;
-                        case 3:
-                            if (!Game.testMode)
-                                System.out.println("You chose: Change the output pipe of a pump");
-                            changeOutputPipe(g); // element selection
-                            return true;
-                        case 4:
-                            if (!Game.testMode)
-                                System.out.println("You chose: Puncture a pipe");
-                            puncture(g.pipeList.get(0));
-                            return true;
-                        case 5:
-                            if (!Game.testMode)
-                                System.out.println("You chose: Pass Turn");
-                            passTurn();
-                            return true;
-                        case 6:
-                            if (!Game.testMode)
-                                System.out.println("You chose: End the game");
-                            g.endGame();
-                            exit(0);
-                            return true;
-                        default:
-                            System.out.println("Invalid input, please choose one of the valid options (1-6).");
-                    }
+    protected boolean takeTurn(Game g) {
+        // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
+        boolean passflag=false;
+        for (int i = 0; i < 2; i++) {
+
+            long turnStartTime = System.currentTimeMillis();
+            long turnEndTime = turnStartTime + 10000; // 10 seconds
+            if (!Game.testMode) {
+                System.out.println("Player " + playerName + ", it's your turn.");
+                System.out.println("What action would you like to perform?");
+                System.out.println("Available actions for Saboteurs:");
+                System.out.println("1. Move to an element");
+                System.out.println("2. Change the input pipe of a pump");
+                System.out.println("3. Change the output pipe of a pump");
+                System.out.println("4. Puncture a pipe");
+                System.out.println("5. Pass Turn");
+                System.out.println("6. End the game");
+                System.out.print("Enter the number corresponding to your choice: ");
+            }
+            while (System.currentTimeMillis() < turnEndTime) {
+                // Check if input is available
+                try {
+                    if (System.in.available() > 0) {
+                        int choice = Integer.parseInt(Game.scanner.nextLine());
+                        switch (choice) {
+                            case 1:
+                                if (!Game.testMode)
+                                    System.out.println("You chose: Move to an element");
+                                move(g);
+                                return true;
+                            case 2:
+                                if (!Game.testMode)
+                                    System.out.println("You chose: Change the input pipe of a pump");
+                                changeInputPipe(g); // element selection
+                                return true;
+                            case 3:
+                                if (!Game.testMode)
+                                    System.out.println("You chose: Change the output pipe of a pump");
+                                changeOutputPipe(g); // element selection
+                                return true;
+                            case 4:
+                                if (!Game.testMode)
+                                    System.out.println("You chose: Puncture a pipe");
+                                puncture(g.pipeList.get(0));
+                                return true;
+                            case 5:
+                                if (!Game.testMode)
+                                    System.out.println("You chose: Pass Turn");
+                                passflag=true;
+                                passTurn();
+                                return true;
+                            case 6:
+                                if (!Game.testMode)
+                                    System.out.println("You chose: End the game");
+                                g.endGame();
+                                exit(0);
+                                return true;
+                            default:
+                                System.out.println("Invalid input, please choose one of the valid options (1-6).");
+                        }
 //        } catch (NoSuchElementException e) {
 //            PrintStream console = new PrintStream(new FileOutputStream(FileDescriptor.out));
 //            console.println("No more lines to read from the file");
 //        }
 
+                    }
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+            }
+            if((i == 0 && passflag) == true){
+                break;
             }
         }
         return true;
@@ -118,30 +127,15 @@ public class Saboteur extends Player {
      */
 
     public void puncture(Pipe p1) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("puncture(Pipe)");
-        System.out.println("Is the Pipe working? Enter 1 if yes, enter anything else if not.");
-
-        String sc1 = scanner.nextLine();
-
-        if (sc1.equals("1")) {
-            System.out.println("Are you standing on the pipe? Enter 1 if yes, enter anything else if not.");
-
-            String sc2 = scanner.nextLine();
-
-            if (sc2.equals("1")) {
-                p1.setWorks(false);
-                System.out.println("Pipe.works = False");
-                System.out.println("The pipe has been punctured.");
-                System.out.println("IF WaterLevel > 0 (meaning there is water currently flowing through the pipe)");
-                p1.decrementWater();
-                p1.incrementLeakage();
-
-            } else {
-                System.out.println("You cannot puncture a pipe that you're not currently standing on.");
-            }
-        } else {
-            System.out.println("You cannot puncture a pipe that is not working!");
+        if (Objects.equals(currentElement, p1) && p1.getWorks()) {
+            p1.setWorks(false);
+            p1.update();
+            System.out.println(playerName + "punctured" + p1.getName());
+            return;
         }
+        if (currentElement == p1 && !p1.getWorks()) {
+            System.out.println(playerName + " attempted to puncture" + p1.getName() + ",but it is already punctured.");
+        } else System.out.println("You have to be standing on a working pipe to puncture it.");
+
     }
 }

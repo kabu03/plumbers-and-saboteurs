@@ -40,12 +40,11 @@ public abstract class Player {
      * @author Karam Abu Judom
      */
     protected void changeInputPipe(Game game) {
-        if (!(currentElement instanceof Pump)) {
+        if (!(currentElement instanceof Pump currentPump)) {
             System.out.println("You are not currently on a pump. Move to a pump first.");
             return;
         }
 
-        Pump currentPump = (Pump) currentElement;
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
@@ -83,12 +82,11 @@ public abstract class Player {
      * @author Karam Abu Judom
      */
     protected void changeOutputPipe(Game game) {
-        if (!(currentElement instanceof Pump)) {
+        if (!(currentElement instanceof Pump currentPump)) {
             System.out.println("You are not currently on a pump. Move to a pump first.");
             return;
         }
 
-        Pump currentPump = (Pump) currentElement;
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");

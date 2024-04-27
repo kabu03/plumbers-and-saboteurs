@@ -23,7 +23,7 @@ public abstract class Element {
         connectablePipes = new ArrayList<>();
     }
 
-    private String name;
+    private final String name;
     public String getName(){return name;}
     public List<Pipe> connectablePipes;
     /**

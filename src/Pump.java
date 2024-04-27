@@ -50,11 +50,11 @@ public class Pump extends Element {
         {
             workingTurns--;
         }
-        if(inPipe.getWorks() == false & isWorking())
+        if(!inPipe.getWorks() & isWorking())
         {
             decrementWater();
         }
-        if(isWorking() == true && getWaterLevel() >= 2)
+        if(isWorking() && getWaterLevel() >= 2)
         {
             outPipe.incrementWater();
         }
