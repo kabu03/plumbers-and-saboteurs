@@ -23,3 +23,5 @@ A
 src/Spring.java,4/e/4eb8d11e42c21f8e0afa748f7fcac6007c718267
 >
 src/Timer.java,7/a/7a7068dc4a53f13042620bbfff0f6f173f9642aa
+\
+,.idea/inspectionProfiles/Project_Default.xml,4/9/496a238a6afa168dbaf6efd37bb459331589579c

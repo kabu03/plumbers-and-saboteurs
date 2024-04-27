@@ -37,11 +37,13 @@ public class Plumber extends Player {
      * @author Basel Al-Raoush
      */
     @Override
-    protected boolean takeTurn(Game g) { // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
-        boolean passflag=false;
-        for (int i = 0; i < 2; i++) {
-            long turnStartTime = System.currentTimeMillis();
-            long turnEndTime = turnStartTime + 10000; // 5 seconds for turn
+    protected boolean takeTurn(Game g) {
+        boolean passflag = false;
+        int actionsTaken = 0; // Track the number of actions taken in the turn
+        long turnStartTime = System.currentTimeMillis();
+        long turnEndTime = turnStartTime + 5000; // 5 seconds for turn
+
+        while (actionsTaken < 2 && System.currentTimeMillis() < turnEndTime) {
             if (!Game.testMode) {
                 System.out.println("Player " + playerName + ", it's your turn.");
                 System.out.println("What action would you like to perform?");
@@ -59,90 +61,95 @@ public class Plumber extends Player {
                 System.out.println("11. End the game");
                 System.out.print("Enter the number corresponding to your choice: ");
             }
-            while (System.currentTimeMillis() < turnEndTime) {
-                // Check if input is available
-                try {
-                    if (System.in.available() > 0) {
-                        int choice = Integer.parseInt(Game.scanner.nextLine());
-                        switch (choice) {
-                            case 1:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Move to an element"); // element selection menu
-                                move(g);
-                                return true;
-                            case 2:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Pick up a pump");
-                                getPump(g.pumpList.getFirst());
-                                return true;
-                            case 3:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Insert pump into a pipe");
-                                // insertPump(g.pumpList.getFirst(), g.pipeList.get(0));
-                                return true;
-                            case 4:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Fix a broken pump");
-                                fixPump(g.pumpList.getFirst());
-                                return true;
-                            case 5:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Fix a broken pipe");
-                                fixPipe(g.pipeList.get(0));
-                                return true;
-                            case 6:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Pick up the end of a pipe"); // selection based on connected pipes of the element you are standing on
-//                getEnd(pickedUpEoP);
-                                return true;
-                            case 7:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Insert the end of a pipe"); // up to implementer
-//                insertPipeEnd(g.pipeList.get(0));
-                                return true;
-                            case 8:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Change the input pipe of a pump"); // based on connectedpipes array
-                                changeInputPipe(g);
-                                return true;
-                            case 9:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Change the output pipe of a pump"); // based on connectedpipes array
-                                changeOutputPipe(g);
-                                return true;
-                            case 10:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Pass Turn");
 
-                                passflag=true;
-                                passTurn();
-                                return true;
-                            case 11:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: End the game");
-                                g.endGame();
-                                exit(0);
-                                return true;
-                            default:
-                                System.out.println("Invalid input, please choose one of the valid options (1-11).");
-                        }
-//        } catch (NoSuchElementException e) {
-//            PrintStream console = new PrintStream(new FileOutputStream(FileDescriptor.out));
-//            console.println("No more lines to read from the file.");
-//        }
+
+            try {
+                if (System.in.available() > 0) {
+                    int choice = Integer.parseInt(Game.scanner.nextLine());
+                    switch (choice) {
+                        case 1:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Move to an element"); // element selection menu
+                            move(g);
+                            actionsTaken++;
+                            break;
+                        case 2:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Pick up a pump");
+                           // getPump(g.pumpList.getFirst());
+                            actionsTaken++;
+                            break;
+                        case 3:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Insert pump into a pipe");
+                            insertPump(pickedUpPump, TempPipe, g);
+                            actionsTaken++;
+                            break;
+                        case 4:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Fix a broken pump");
+                            //fixPump(g.pumpList.getFirst());
+                            actionsTaken++;
+                            break;
+                        case 5:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Fix a broken pipe");
+                            fixPipe(g.pipeList.get(0));
+                            actionsTaken++;
+                            break;
+                        case 6:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Pick up the end of a pipe");
+                            getEnd(pickedUpEoP, TempPipe, currentElement);
+                            actionsTaken++;
+                            break;
+                        case 7:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Insert the end of a pipe");
+                            insertPipeEnd(currentElement, TempPipe);
+                            actionsTaken++;
+                            break;
+                        case 8:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Change the input pipe of a pump");
+                            changeInputPipe(g);
+                            actionsTaken++;
+                            break;
+                        case 9:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Change the output pipe of a pump");
+                            changeOutputPipe(g);
+                            actionsTaken++;
+                            break;
+                        case 10:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Pass Turn");
+                            passflag = true;
+                            passTurn();
+                            break;
+                        case 11:
+                            if (!Game.testMode)
+                                System.out.println("You chose: End the game");
+                            g.endGame();
+                            exit(0);
+                            break;
+                        default:
+                            System.out.println("Invalid input, please choose one of the valid options (1-11).");
                     }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
                 }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-            if((i == 0 && passflag) == true){
+
+            // Check if two actions were taken or if the turn timer ran out
+            if (actionsTaken == 2 || System.currentTimeMillis() >= turnEndTime || (actionsTaken == 1 && passflag)) {
                 break;
             }
         }
 
-            return true;
-
+        return true;
     }
+
 
     /**
      * this method will allow a plumber to pick up an end of pipe object from the end of a pipe.
@@ -314,6 +321,10 @@ public class Plumber extends Player {
                 newPipe2.endsOfPipe[1]=pipe.endsOfPipe[1];
                 newPipe2.endsOfPipe[1].setCurrentPipe(newPipe2);
                 newPipe2.endsOfPipe[0].setCurrentPipe(newPipe2);
+
+                newPipe1.leakedAmount=pipe.leakedAmount/2;
+                newPipe2.leakedAmount=pipe.leakedAmount/2;
+
 
 
                 pipe.setWorks(false);

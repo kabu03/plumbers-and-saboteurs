@@ -30,14 +30,15 @@ public class Saboteur extends Player {
      * @return The integer representing the chosen action.
      * @author Basel Al-Raoush
      */
+
     @Override
     protected boolean takeTurn(Game g) {
-        // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
-        boolean passflag=false;
-        for (int i = 0; i < 2; i++) {
+        boolean passflag = false;
+        int actionsTaken = 0; // Track the number of actions taken in the turn
+        long turnStartTime = System.currentTimeMillis();
+        long turnEndTime = turnStartTime + 5000; // 5 seconds for turn
 
-            long turnStartTime = System.currentTimeMillis();
-            long turnEndTime = turnStartTime + 10000; // 10 seconds
+        while (actionsTaken < 2 && System.currentTimeMillis() < turnEndTime) {
             if (!Game.testMode) {
                 System.out.println("Player " + playerName + ", it's your turn.");
                 System.out.println("What action would you like to perform?");
@@ -50,63 +51,66 @@ public class Saboteur extends Player {
                 System.out.println("6. End the game");
                 System.out.print("Enter the number corresponding to your choice: ");
             }
-            while (System.currentTimeMillis() < turnEndTime) {
-                // Check if input is available
-                try {
-                    if (System.in.available() > 0) {
-                        int choice = Integer.parseInt(Game.scanner.nextLine());
-                        switch (choice) {
-                            case 1:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Move to an element");
-                                move(g);
-                                return true;
-                            case 2:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Change the input pipe of a pump");
-                                changeInputPipe(g); // element selection
-                                return true;
-                            case 3:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Change the output pipe of a pump");
-                                changeOutputPipe(g); // element selection
-                                return true;
-                            case 4:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Puncture a pipe");
-                                puncture(g.pipeList.get(0));
-                                return true;
-                            case 5:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: Pass Turn");
-                                passflag=true;
-                                passTurn();
-                                return true;
-                            case 6:
-                                if (!Game.testMode)
-                                    System.out.println("You chose: End the game");
-                                g.endGame();
-                                exit(0);
-                                return true;
-                            default:
-                                System.out.println("Invalid input, please choose one of the valid options (1-6).");
-                        }
-//        } catch (NoSuchElementException e) {
-//            PrintStream console = new PrintStream(new FileOutputStream(FileDescriptor.out));
-//            console.println("No more lines to read from the file");
-//        }
 
+
+            try {
+                if (System.in.available() > 0) {
+                    int choice = Integer.parseInt(Game.scanner.nextLine());
+                    switch (choice) {
+                        case 1:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Move to an element");
+                            move(g);
+                            actionsTaken++;
+                            break;
+                        case 2:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Change the input pipe of a pump");
+                            changeInputPipe(g); // element selection
+                            actionsTaken++;
+                            break;
+                        case 3:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Change the output pipe of a pump");
+                            changeOutputPipe(g); // element selection
+                            actionsTaken++;
+                            break;
+                        case 4:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Puncture a pipe");
+                            puncture(g.pipeList.get(0));
+                            actionsTaken++;
+                            break;
+                        case 5:
+                            if (!Game.testMode)
+                                System.out.println("You chose: Pass Turn");
+                            passflag = true;
+                            passTurn();
+                            break;
+                        case 6:
+                            if (!Game.testMode)
+                                System.out.println("You chose: End the game");
+                            g.endGame();
+                            exit(0);
+                            break;
+                        default:
+                            System.out.println("Invalid input, please choose one of the valid options (1-6).");
                     }
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
                 }
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
-            if((i == 0 && passflag) == true){
+
+            // Check if two actions were taken or if the turn timer ran out
+            if (actionsTaken == 2 || System.currentTimeMillis() >= turnEndTime || (actionsTaken == 1 && passflag)) {
                 break;
             }
         }
+
         return true;
     }
+
+
 
     /**
      * Attempts to puncture the specified pipe based on user input and certain conditions.
