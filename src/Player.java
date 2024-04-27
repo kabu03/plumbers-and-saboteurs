@@ -1,5 +1,8 @@
 import java.lang.*;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 /**
  * Represents individual players in the game, each being part of a team as plumbers or saboteurs.
@@ -123,65 +126,42 @@ public abstract class Player {
      * 4. Updates the player's location in the game world if the move is valid.
      * @author : Majed
      */
-    protected void move() {
-        int userChoice1;
-        String userChoice2;
-        String userChoice3;
+    protected void move(Game game) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Where do you want to move? ");
-        System.out.println("Enter 1 for pipe");
-        System.out.println("Enter 2 for pump");
-        System.out.println("Enter 3 for cistern");
-        userChoice1 = sc.nextInt();
-        sc.nextLine();
-        if (userChoice1 == 1) {
-            while (true) {
-                System.out.println("There are currently 5 pipes");
-                System.out.println("Which pipe do you want to move to? (Enter a number from 1 to 5)");
-                userChoice2 = sc.nextLine();
-                int pipeNumber = Integer.parseInt(userChoice2);
-                if (pipeNumber < 1 || pipeNumber > 5) {
-                    System.out.println("Invalid choice. Please enter a number from 1 to 5.");
-                    continue;
-                }
-                System.out.println("Pipe" + userChoice2 + ".Standable() == True");
-                System.out.println("is pipe " + pipeNumber + " occupied?");
-                userChoice3 = sc.nextLine();
-                if (userChoice3.equalsIgnoreCase("no")) {
-                    System.out.println("Player.move()");
-                    System.out.println("You have moved to pipe " + pipeNumber);
+        int userChoice;
+
+        // Displaying all current elements in the game
+
+        System.out.println("Please select the number of the element you want to move to:");
+
+
+        List<Element> elements = game.elementList;
+
+        for (int i = 0; i < elements.size(); i++) {
+            System.out.println((i + 1) + ". " + elements.get(i).getName());
+        }
+
+        // Get user input
+        while (true) {
+            try {
+                userChoice = sc.nextInt() - 1;  // Adjust for 0-based index
+                if (userChoice >= 0 && userChoice < elements.size()) {
+                    Element chosenElement = elements.get(userChoice);
+                    if (currentElement != chosenElement) {  // Example check: if already there, skip moving
+                        currentElement = chosenElement;
+                        System.out.println("You have moved to: " + chosenElement);
+
+                    } else {
+                        System.out.println("You are already at this location.");
+                    }
+                    break;
                 } else {
-                    System.out.println("You cannot move since the pipe is occupied.");
+                    System.out.println("Invalid choice. Please enter a number between 1 and " + elements.size());
                 }
-                break; // Exit the loop after processing valid input
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                sc.next();  // Clear the invalid input
             }
-        }
-        if (userChoice1 == 2) {
-            while (true) {
-                System.out.println("There are currently 5 pumps");
-                System.out.println("Which pump do you want to move to?");
-                userChoice2 = sc.nextLine();
-                int pumpNumber = Integer.parseInt(userChoice2);
-                if (pumpNumber < 1 || pumpNumber > 5) {
-                    System.out.println("Invalid choice. Please enter a number from 1 to 5.");
-                    continue;
-                }
-
-                System.out.println("Player.move()");
-                System.out.println("You have moved to pump " + pumpNumber);
-                break;
-
-            }
-        }
-        if (userChoice1 == 3) {
-            System.out.println("Player.move()");
-            // assuming there is only one cistern
-            System.out.println("You have moved to the cistern");
-        }
-        if(userChoice1 != 1 && userChoice1 != 2 && userChoice1 != 3)
-        {
-            System.out.println("Invaild choice");
-            move();
         }
     }
 }

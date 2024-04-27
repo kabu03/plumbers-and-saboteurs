@@ -23,7 +23,8 @@ public abstract class Element {
         connectablePipes = new ArrayList<>();
     }
 
-    public String name;
+    private String name;
+    public String getName(){return name;}
     public List<Pipe> connectablePipes;
     /**
      * A boolean that indicates whether the element is currently occupied by a player or not.

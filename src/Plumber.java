@@ -63,7 +63,7 @@ public class Plumber extends Player {
                         case 1:
                             if (!Game.testMode)
                                 System.out.println("You chose: Move to an element"); // element selection menu
-                            move();
+                            move(g);
                             return true;
                         case 2:
                             if (!Game.testMode)
