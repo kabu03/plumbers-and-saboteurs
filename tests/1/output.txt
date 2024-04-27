@@ -1,0 +1,37 @@
+Proceeding to the number of participating players menu.
+4 players will participate in the game.
+Proceeding to the username and team selection menu.
+The name "Plumber 1" is validated.
+Plumber 1 chose the Plumbers team.
+The name "Plumber 2" is validated.
+Plumber 2 chose the Plumbers team.
+The name "Saboteur 1" is validated.
+Saboteur 1 was automatically placed in the Saboteurs team.
+The name "Saboteur 2" is validated.
+Saboteur 2 was automatically placed in the Saboteurs team.
+Initializing the game...
+The game’s elements have been initialized successfully.
+The game and timer have started!
+Plumber 1 moved to Pipe1
+Plumber 1 moved to Pump1
+Saboteur 1 moved to Pipe3
+Plumber 2 moved to Pump2
+Player Plumber 2 passed their turn.
+Player Saboteur 2 passed their turn.
+Player Plumber 1 passed their turn.
+Saboteur 1 moved to Pipe2
+You need to be standing on a broken pump to fix it.
+Invalid input, please choose one of the valid options (1-6).
+Player Saboteur 2 passed their turn.
+Currently connected pipes to the pump 'Pump1':
+1. Pipe1
+2. Pipe5
+3. Pipe2
+Select the number of the pipe to set as the new output pipe:
+Invalid input. Select a number listed above.
+Invalid input, please choose one of the valid options (1-6).
+Saboteur 1 moved to Pump2
+Plumber 2 moved to Pipe6
+Player Plumber 2 passed their turn.
+Player Saboteur 2 passed their turn.
+A new Pump Has been Manufactured at the cistern

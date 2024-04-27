@@ -1,7 +1,6 @@
 import java.lang.*;
 import java.util.Scanner;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 /**
@@ -19,10 +18,9 @@ public abstract class Player {
      * Abstract method representing a player's turn in the game.
      * Subclasses (Plumber & Saboteur ) implement this method to define specific player actions.
      *
-     * @return The integer representing the chosen action.
      * @author Basel Al-Raoush
      */
-    protected abstract boolean takeTurn(Game g);
+    protected abstract void takeTurn(Game g);
 
     protected void passTurn(){
         System.out.println("Player " + playerName + " passed their turn.");
@@ -35,8 +33,6 @@ public abstract class Player {
      * is permissible and outputs the result of the change. The method assumes that there are 5 pumps in the game, and 3 connected
      * pipes connected to every pump. In the GUI implementation, this will be different.
      *
-     * @param p1 The pump object whose input pipe is to be changed.
-     * @param p2 The new pipe object to be set as the input pipe. Note: This parameter is not directly used in the current implementation.
      * @author Karam Abu Judom
      */
     protected void changeInputPipe(Game game) {
@@ -44,8 +40,6 @@ public abstract class Player {
             System.out.println("You are not currently on a pump. Move to a pump first.");
             return;
         }
-
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
         List<Pipe> connectablePipes = currentPump.connectablePipes;
@@ -56,7 +50,7 @@ public abstract class Player {
         System.out.println("Select the number of the pipe to set as the new input pipe:");
         int pipeNumber;
         try {
-            pipeNumber = sc.nextInt();
+            pipeNumber = Integer.parseInt(Game.scanner.nextLine());
             if (pipeNumber < 1 || pipeNumber > connectablePipes.size()) {
                 System.out.println("Invalid input. Select a number listed above.");
             } else {
@@ -72,13 +66,9 @@ public abstract class Player {
 
     /**
      * Changes the output pipe of a specified pump to a new pipe based on user input.
-     * Similar to {@link #changeInputPipe(Pump, Pipe)}, this method prompts the user
+     * Similar to {@link #changeInputPipe(Game game)}, this method prompts the user
      * to select a pump and then choose one of the connected pipes to set as the
      * new output pipe. It checks if the action can be performed and displays the result.
-     * The method assumes that there are 5 pumps in the game, and 3 connected
-     * pipes connected to every pump. In the GUI implementation, this will be different.
-     * @param p1 The pump object whose output pipe is to be changed.
-     * @param p2 The new pipe object to be set as the output pipe. Note: This parameter is not directly used in the current implementation.
      * @author Karam Abu Judom
      */
     protected void changeOutputPipe(Game game) {
@@ -86,8 +76,6 @@ public abstract class Player {
             System.out.println("You are not currently on a pump. Move to a pump first.");
             return;
         }
-
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
         List<Pipe> connectablePipes = currentPump.connectablePipes;
@@ -98,7 +86,7 @@ public abstract class Player {
         System.out.println("Select the number of the pipe to set as the new output pipe:");
         int pipeNumber;
         try {
-            pipeNumber = sc.nextInt();
+            pipeNumber = Integer.parseInt(Game.scanner.nextLine());
             if (pipeNumber < 1 || pipeNumber > connectablePipes.size()) {
                 System.out.println("Invalid input. Select a number listed above.");
             } else {
@@ -125,24 +113,22 @@ public abstract class Player {
      * @author : Majed
      */
     protected void move(Game game) {
-        Scanner sc = new Scanner(System.in);
         int userChoice;
 
         // Displaying all current elements in the game
-        System.out.println("Please select the number of the element you want to move to:");
+        if(!Game.testMode) System.out.println("Please select the number of the element you want to move to:");
         List<Element> elements = game.elementList;
-
-        for (int i = 0; i < elements.size(); i++) {
-            Element element = elements.get(i);
-            // Displaying occupancy status only for Pipe elements
-            String occupancyStatus = (element instanceof Pipe && element.isOccupied()) ? " (Occupied)" : "";
-            System.out.println((i + 1) + ". " + element.getName() + occupancyStatus);
-        }
+    for (int i = 0; i < elements.size(); i++) {
+        Element element = elements.get(i);
+        // Displaying occupancy status only for Pipe elements
+        String occupancyStatus = (element instanceof Pipe && element.isOccupied()) ? " (Occupied)" : "";
+        if(!Game.testMode) System.out.println((i + 1) + ". " + element.getName() + occupancyStatus);
+    }
 
         // Get user input
         while (true) {
             try {
-                userChoice = sc.nextInt() - 1; // Adjust for 0-based index
+                userChoice = Integer.parseInt(Game.scanner.nextLine()) - 1; // Adjust for 0-based index
                 if (userChoice >= 0 && userChoice < elements.size()) {
                     Element chosenElement = elements.get(userChoice);
                     if (currentElement != chosenElement) {
@@ -154,7 +140,7 @@ public abstract class Player {
                             if (chosenElement instanceof Pipe) {
                                 chosenElement.setOccupied(true); // Mark new element as occupied if it is a pipe
                             }
-                            System.out.println("You have moved to: " + chosenElement.getName());
+                            System.out.println(playerName + " moved to " + chosenElement.getName());
                         } else {
                             System.out.println("This location is currently occupied. Choose another location.");
                         }
@@ -167,7 +153,7 @@ public abstract class Player {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                sc.next(); // Clear the invalid input
+                Game.scanner.next(); // Clear the invalid input
             }
         }
     }

@@ -1,37 +1,35 @@
 4
-Plumber1
+Plumber 1
 1
-Plumber2
+Plumber 2
 1
-Saboteur1
-Saboteur2
+Saboteur 1
+Saboteur 2
 1
-select pipe 1
+2
 1
-select pump 1
+4
 1
-pipe 3
+12
 1
-pump 2
+9
 10
 5
 10
 1
-pipe 2
+7
 4
-pipe 2
 10
 5
 9
-pipe 5
+6
 10
 1
-pump 2
+9
 1
-pipe 6
+11
 10
 5
 1
-pipe 2
+7
 5
-pipe 2

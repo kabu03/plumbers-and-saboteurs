@@ -477,9 +477,9 @@ public class Game {
         while (!timer.isGameOver()) {
             Player currentPlayer = players[currentPlayerIndex];
             currentPlayer.takeTurn(this);
-//                for (Element e : elementList) {
-//                    e.update();
-//                }
+                for (Element e : elementList) {
+                    e.update();
+                }
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
         }
         endGame();

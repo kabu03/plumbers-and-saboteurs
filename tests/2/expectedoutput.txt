@@ -1,0 +1,40 @@
+Proceeding to the number of participating players menu.
+4 players will participate in the game.
+Proceeding to the username and team selection menu.
+The name "Plumber 1" is validated.
+Plumber1 chose the Plumbers team.
+The name "Plumber 2" is validated.
+Plumber2 chose the Plumbers team.
+The name "Saboteur 1" is validated.
+Saboteur1 was automatically placed in the Saboteurs team.
+The name "Saboteur 2" is validated.
+Saboteur2 was automatically placed in the Saboteurs team.
+Initializing the game...
+The game’s elements have been initialized successfully.
+The game and timer have started!
+Plumber 1 moved to Pipe 4.
+Plumber 1 moved to Pump 3.
+Saboteur 1 passed their turn.
+Plumber 2 passed their turn.
+Saboteur 2 passed their turn.
+Plumber 1 moved to Pipe 7.
+Plumber 1 moved to Pump 4.
+Saboteur 1 passed their turn.
+Plumber 2 passed their turn.
+Saboteur 2 passed their turn.
+Plumber 1 moved to Pipe 8.
+Plumber 1 moved to the Cistern.
+Saboteur 1 passed their turn.
+Plumber 2 passed their turn.
+Saboteur 2 passed their turn.
+Plumber 1 picked up a pump from the Cistern.
+Plumber 1 moved to Pipe 8.
+Saboteur 1 passed their turn.
+Plumber 2 passed their turn.
+Saboteur 2 passed their turn.
+Plumber 1 moved to Pump 4.
+Plumber 1 moved to Pipe 6.
+Saboteur 1 passed their turn.
+Plumber 2 passed their turn.
+Saboteur 2 passed their turn.
+Plumber 1 inserted a pump into Pipe 6.
