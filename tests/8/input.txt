@@ -9,22 +9,13 @@ Saboteur 2
 Pipe1
 1
 Pump1
-5
-10
-5
 1
-Pipe2
+Pipe3
 1
 Pump2
+1
+Pipe1
+1
+Pump1
 5
-10
-5
-6
-Pipe6
-7
-New Pipe 1
-5
-10
-5
-9
-New Pipe 1
+11
