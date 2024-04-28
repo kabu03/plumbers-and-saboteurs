@@ -20,7 +20,7 @@ Pipe2
 1
 Pump2
 2
-Pump6
+pipe6
 5
 10
 5

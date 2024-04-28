@@ -25,6 +25,6 @@ Saboteur 1 passed their turn.
 Pump2 randomly broke down.
 Plumber 2 passed their turn.
 Saboteur 2 passed their turn.
-Plumber 1fixedPump2
-Plumber 1attempted to fixPump2, but it's already working.
+Plumber 1 fixed Pump2
+Plumber 1 attempted to fix Pump2, but it's already working.
 You are not on a Cistern, move to a cistern with a manufactured pump to pick it up
