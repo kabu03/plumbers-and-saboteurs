@@ -26,17 +26,19 @@ public abstract class Player {
         System.out.println(playerName + " passed their turn.");
     }
 
-       /**
-     * Changes the input pipe of a specified pump to a new pipe based on user input.
-     * The method checks if the user is on a pump or not
-     * The method prints all the current connected elements to the pump
-     * connected pipes to set as the new input pipe. It performs checks to ensure the action
-     * is permissible and outputs the result of the change.
-     * some pipes are connected, and some are connectable. Method will only show connected pipes
+    /**
+     * Changes the input pipe for the currently stood-on pump by allowing the player to select a new input pipe
+     * from a list of currently connected pipes. This method first checks if the player is standing on a pump
+     * and then displays a list of all connected pipes to that pump. The player can select which pipe to set
+     * as the new input pipe either by entering the number associated with the pipe or, in test mode, the name
+     * of the pipe directly.
      *
-     *
+     * @param game The instance of the game containing all the current game data, used here to access the scanner
+     *             for input and possibly other game state manipulations.
+     * @throws NumberFormatException if the input provided is not a valid integer when selecting a pipe by number
+     *         (outside of test mode). This exception is caught internally and an error message is displayed.
      * @author Nafez Mousa Sayyad
-     **/
+     */
        protected void changeInputPipe(Game game) {
            if (!(currentElement instanceof Pump)) {
                if (!Game.testMode) System.out.println("You are not currently on a pump. Move to a pump first.");
@@ -78,11 +80,17 @@ public abstract class Player {
 
 
     /**
-     * Similar to the changeInputPipe, once the user is on a pump, he will be able
-     * to change the input of that specific pump by calling this method
-     * the method, check if the user is on a pump or not
-     * then prints the connected elements to that current pump the user is standing on
-     * the user can choose which pipe to become the input for the pump
+     * Changes the output pipe for the currently stood-on pump by enabling the player to select
+     * a new output pipe from a list of currently connected pipes. This method verifies if the player
+     * is standing on a pump and displays a list of all connected pipes to that pump. The player can
+     * then select which pipe to set as the new output pipe by entering the number associated with the
+     * pipe. In test mode, the player can directly input the name of the pipe.
+     *
+     * @param game The instance of the game that holds all current game data, utilized here to access
+     *             global settings like test mode and for input reading through the game's scanner.
+     * @throws NumberFormatException if the input provided is not a valid integer when selecting a pipe
+     *         by number (outside of test mode). This exception is caught internally, and a user-friendly
+     *         error message is provided.
      * @author Nafez Mousa Sayyad
      */
     protected void changeOutputPipe(Game game) {
@@ -127,14 +135,17 @@ public abstract class Player {
 
 
     /**
-     * The move method, is called once a player wants to move his location
-     * ( move to a new element)
-     * once the user chooses to move, he will be able to select any of the current standable element in the
-     * elementList, (every element in the game)
-     * if a user moves to a pipe, the method sets this pipe as occupied.
-     * the other players are able to see that the pipe is occupied.
-     * if in test mode, the method is able to accept strings as input to move to a location
+     * Moves the player to a selected element from a list of all elements in the game.
+     * The method displays all available elements, including information about their occupation status
+     * if they are pipes. The player can then select an element to move to by entering its corresponding number
+     * in the displayed list. If in test mode, the player can directly enter the name of the element.
+     * This method ensures that the player cannot move to an occupied pipe and updates the occupation
+     * status of the elements accordingly.
      *
+     * @param game The game instance containing all elements and global settings necessary for operation,
+     *             including the list of elements and input handling mechanisms.
+     * @throws InputMismatchException if the input provided is not an integer, which indicates an invalid selection.
+     *         This exception is caught internally, prompting the user to re-enter a valid choice.
      * @author Nafez Mousa Sayyad
      */
     protected void move(Game game) {
