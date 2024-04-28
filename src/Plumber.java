@@ -154,7 +154,7 @@ public class Plumber extends Player {
 
     /**
      * this method will allow a plumber to pick up an end of pipe object from the end of a pipe.
-     * @param EoP this will be the end of pipe object that we will pick up.
+     * @param e this will be the end of pipe object that we will pick up.
      * @author : Majed
      */
 
@@ -176,15 +176,18 @@ public class Plumber extends Player {
         }
 
         // List connected pipes
-        System.out.println("Connected pipes to " + e.getName() + ":");
-        if (e.connectedPipes.isEmpty()) {
-            System.out.println("There are no connected pipes.");
-            return;
-        }
-        e.connectedPipes.forEach(pipe -> System.out.println(pipe.getName()));
 
-        // Get user input on which pipe to manipulate
-        System.out.print("Enter the name of the pipe to pick up an end from: ");
+        if (!Game.testMode) {
+            System.out.println("Connected pipes to " + e.getName() + ":");
+            if (e.connectedPipes.isEmpty()) {
+                System.out.println("There are no connected pipes.");
+                return;
+            }
+            e.connectedPipes.forEach(pipe -> System.out.println(pipe.getName()));
+
+            // Get user input on which pipe to manipulate
+            System.out.print("Enter the name of the pipe to pick up an end from: ");
+        }
         String pipeName = Game.scanner.nextLine();
         Pipe selectedPipe = e.connectedPipes.stream()
                 .filter(pipe -> pipe.getName().equals(pipeName))
@@ -201,7 +204,9 @@ public class Plumber extends Player {
             if (end != null) {
                 end.disconnectFromElement(e); // This should handle both the element and pipe updates
                 pickedUpEoP = end;
-                System.out.println(playerName + " picked up the end of " + selectedPipe.getName());
+                if(Game.testMode) {
+                    System.out.println(playerName + " picked up the end of " + selectedPipe.getName() + " connected to " + e.getName() + ".");
+                }
                 return;
             }
         }
@@ -251,11 +256,15 @@ public class Plumber extends Player {
             System.out.println("There are no connectable pipes available at this element.");
             return;
         }
-        System.out.println("Connectable pipes:");
-        e.connectablePipes.forEach(pipe -> System.out.println(pipe.getName()));
 
         // Get user input on which pipe to connect the end to
-        System.out.print("Enter the name of the pipe to insert the end into: ");
+        if (!Game.testMode)
+        {
+            System.out.println("Connectable pipes:");
+            e.connectablePipes.forEach(pipe -> System.out.println(pipe.getName()));
+            System.out.print("Enter the name of the pipe to insert the end into: ");
+        }
+
         String pipeName = Game.scanner.nextLine();
         Pipe selectedPipe = e.connectablePipes.stream()
                 .filter(pipe -> pipe.getName().equals(pipeName))
