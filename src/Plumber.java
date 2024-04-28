@@ -153,21 +153,16 @@ public class Plumber extends Player {
 
 
     /**
-     * this method will allow a plumber to pick up an end of pipe object from the end of a pipe.
-     * @param EoP this will be the end of pipe object that we will pick up.
-     * @author : Majed
+     * This method allows a plumber to pick up an end of a pipe from a selected pipe.
+     * The plumber must be standing on the element where the pipe is connected.
+     * The method lists all connected pipes to the element and prompts the user to select a pipe.
+     * If the selected pipe is valid and connected to the element, the method attempts to pick up an end of the pipe.
+     * The end of the pipe is disconnected from the element and the pipe, and is then assigned to the plumber.
+     * If no free end is available to pick up from the selected pipe, an appropriate message is displayed.
+     *
+     * @param e The element from which an end of a pipe is to be picked up.
+     * @author : Basel Al-Raoush , Nafez sayyad
      */
-
-
-    // getEnd method will allow the plumber to pick up the end of a pipe.
-    // in order to pick up the end of pipe, the plumber has to be standing on the Element. we can check using currentElement attribute in the player class.
-    // then we have to know which end of the pipe we are picking up, as there are 2 for each pipe.
-    // we have to pick up the end of pipe from the selected element, which will be a parameter in the method.
-    // so we iterate through the endsOfPipe array in the pipe class, and remove the end of pipe of that is connected to the passed element.
-    // we have to check if the pipe p is in the connected elements list of the element e, if it is we will be able to pick it up.
-    // we have to remove the pipe from connected pipes list in the element class, and add it to the connectable pipes list in the element class.
-
-
     public void getEnd(Element e) {
         // First, check if the plumber is standing on the element
         if (currentElement != e) {
@@ -211,30 +206,17 @@ public class Plumber extends Player {
     }
 
 
-
-
-
-
-
-
     /**
-     * this method connects an end of pipe object to an element in the game.
-     * @param e this will be the element that we will insert the pipe end to.\
-     * @author :Majed
+     * This method allows a plumber to insert an end of a pipe to a selected element.
+     * The plumber must be standing on the element where the pipe is to be connected.
+     * The method checks if the plumber has picked up an end of a pipe and if the element is connectable.
+     * If the selected element is valid and connectable, the method attempts to insert the end of the pipe.
+     * The end of the pipe is connected to the element and the pipe, and is then removed from the plumber.
+     * If the end of the pipe cannot be inserted to the element, an appropriate message is displayed.
+     *
+     * @param e The element to which an end of a pipe is to be inserted.
+     * @author :Basel Al-Raoush , Nafez sayyad
      */
-
-    // insertPipeEnd method will allow the plumber to insert the end of a pipe to an element.
-    // in order to insert the end of pipe, the plumber has to be standing on the element.
-    // then we have to know which pipe we are inserting the end of pipe to.
-    //there will be a list in Element class called connectedPipes, which will store the pipes that are connected to the element.
-    // and there will be a list in Element class called connectablePipes, which will store the pipes that can be connected to the element.
-    // so we iterate through the connectablePipes list, and add the end of pipe to the chosen pipe from the selection menu. (so it will be a parameter in the method)
-    // then we add the pipe to the connectedPipes list in the element class.
-    // we have to check if the pipe is in connectable pipes list and NOT in connected pipes list, if it is not in the connected pipes list we will be able to connect it.
-    // we have to make sure that after connecting the pipe the maximum number of connected pipes is not exceeded.
-    // we have to update the connectedPipes list in the element class after connecting the pipe.
-    // we have to insert the picked up end of pipe to the selected pipe.
-
     public void insertPipeEnd(Element e) {
         // Check if the player is standing on the element
         if (currentElement != e) {
