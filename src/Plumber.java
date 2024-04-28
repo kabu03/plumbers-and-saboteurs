@@ -104,13 +104,13 @@ public class Plumber extends Player {
                         case 6:
                             if (!Game.testMode)
                                 System.out.println("You chose: Pick up the end of a pipe");
-                            // getEnd(pickedUpEoP);
+                            getEnd(currentElement);
                             actionstaken++;
                             break;
                         case 7:
                             if (!Game.testMode)
                                 System.out.println("You chose: Insert the end of a pipe");
-                            // insertPipeEnd(g.pipeList.get(0));
+                            insertPipeEnd(currentElement);
                             actionstaken++;
                             break;
                         case 8:
@@ -168,33 +168,46 @@ public class Plumber extends Player {
     // we have to remove the pipe from connected pipes list in the element class, and add it to the connectable pipes list in the element class.
 
 
-    public void getEnd(EndOfPipe EoP, Pipe p, Element e){
-
-        if (currentElement == e){
-            if (e.connectedPipes.contains(p)){
-                for (int i = 0; i < 2; i++){
-                    if (p.endsOfPipe[i] == EoP){
-                        p.endsOfPipe[i] = null;
-                        e.connectedPipes.remove(p);
-                        if (!e.connectablePipes.contains(p)) {
-                            e.connectablePipes.add(p);
-                        }
-                        EoP.disconnectFromElement(e);
-                        EoP.setCurrentPipe(null);
-
-                        pickedUpEoP = EoP;
-
-                        if (Game.testMode) {
-                            System.out.println( playerName + " picked up the end of " + p.getName() +" connected to " + e.getName()); }
-
-                    }
-                }
-            }
-            else { System.out.println("You can't pick up the end of the pipe from this element.");}
+    public void getEnd(Element e) {
+        // First, check if the plumber is standing on the element
+        if (currentElement != e) {
+            System.out.println("You have to be standing on the element to pick up the end of the pipe.");
+            return;
         }
-        else { System.out.println("You have to be standing on the element to pick up the end of the pipe.");}
 
+        // List connected pipes
+        System.out.println("Connected pipes to " + e.getName() + ":");
+        if (e.connectedPipes.isEmpty()) {
+            System.out.println("There are no connected pipes.");
+            return;
+        }
+        e.connectedPipes.forEach(pipe -> System.out.println(pipe.getName()));
+
+        // Get user input on which pipe to manipulate
+        System.out.print("Enter the name of the pipe to pick up an end from: ");
+        String pipeName = Game.scanner.nextLine();
+        Pipe selectedPipe = e.connectedPipes.stream()
+                .filter(pipe -> pipe.getName().equals(pipeName))
+                .findFirst()
+                .orElse(null);
+
+        if (selectedPipe == null) {
+            System.out.println("Invalid pipe selection or pipe is not connected.");
+            return;
+        }
+
+        // Attempt to pick up the end of the selected pipe
+        for (EndOfPipe end : selectedPipe.endsOfPipe) {
+            if (end != null) {
+                end.disconnectFromElement(e); // This should handle both the element and pipe updates
+                pickedUpEoP = end;
+                System.out.println(playerName + " picked up the end of " + selectedPipe.getName());
+                return;
+            }
+        }
+        System.out.println("No free end available to pick up from selected pipe.");
     }
+
 
 
 
@@ -220,38 +233,63 @@ public class Plumber extends Player {
     // we have to update the connectedPipes list in the element class after connecting the pipe.
     // we have to insert the picked up end of pipe to the selected pipe.
 
-    public void insertPipeEnd(Element e, Pipe p){
-
-        // check if the player is standing on the element
-        if (currentElement == e){
-
-            // check if the pipe is connectable to the element and not connected to it and the element can connect to more pipes.
-            if (e.connectablePipes.contains(p) && !e.connectedPipes.contains(p) && e.connectedPipes.size() < e.getMaxConnectablePipes()){
-                e.connectedPipes.add(p); // add the pipe to the connected pipes list in the element class.
-
-                // before assigning the end of pipe to the pipe, we have to check which end of the pipe we are inserting.
-
-                for (int i = 0; i < 2; i++){
-                    if (p.endsOfPipe[i] == null){
-                        p.endsOfPipe[i] = pickedUpEoP; // assign the end of pipe to the pipe.
-                        pickedUpEoP.connectToElement(e); // connect the end of pipe to the element.
-                        pickedUpEoP.setCurrentPipe(p); // set the current pipe of the end of pipe to the selected pipe.
-                        e.connectedPipes.add(p);
-                        pickedUpEoP = null;
-
-                        if (Game.testMode) {
-                            System.out.println( playerName + " inserted the end of pipe to " + e.getName()); }
-
-                    }
-                    else {
-                        System.out.println("You can't insert the end of the pipe to this element.");
-                    }
-                }
-            }
-            else { System.out.println("You can't insert the end of the pipe to this element.");}
+    public void insertPipeEnd(Element e) {
+        // Check if the player is standing on the element
+        if (currentElement != e) {
+            System.out.println("You have to be standing on the element to insert the end of the pipe.");
+            return;
         }
 
-        else { System.out.println("You have to be standing on the element to insert the end of the pipe.");}
+        // Check if the player has picked up an end of pipe
+        if (pickedUpEoP == null) {
+            System.out.println("No end of pipe picked up to insert.");
+            return;
+        }
+
+        // List the connectable pipes that are not yet fully connected
+        if (e.connectablePipes.isEmpty()) {
+            System.out.println("There are no connectable pipes available at this element.");
+            return;
+        }
+        System.out.println("Connectable pipes:");
+        e.connectablePipes.forEach(pipe -> System.out.println(pipe.getName()));
+
+        // Get user input on which pipe to connect the end to
+        System.out.print("Enter the name of the pipe to insert the end into: ");
+        String pipeName = Game.scanner.nextLine();
+        Pipe selectedPipe = e.connectablePipes.stream()
+                .filter(pipe -> pipe.getName().equals(pipeName))
+                .findFirst()
+                .orElse(null);
+
+        if (selectedPipe == null) {
+            System.out.println("Invalid pipe selection or not connectable.");
+            return;
+        }
+
+        // Check if the selected pipe can accept more connections
+        if (selectedPipe.endsOfPipe[0] != null && selectedPipe.endsOfPipe[1] != null) {
+            System.out.println("Selected pipe already has both ends connected.");
+            return;
+        }
+
+        // Insert the end of pipe to the selected pipe and connect it to the element
+        for (int i = 0; i < 2; i++) {
+            if (selectedPipe.endsOfPipe[i] == null) {
+                selectedPipe.endsOfPipe[i] = pickedUpEoP; // Assign the end of pipe to the pipe
+                pickedUpEoP.connectToElement(e); // Connect the end of pipe to the element
+                pickedUpEoP.setCurrentPipe(selectedPipe); // Set the current pipe of the end of pipe to the selected pipe
+                if (!e.connectedPipes.contains(selectedPipe)) {
+                    e.connectedPipes.add(selectedPipe); // Add the pipe to the connected pipes list if not already added
+                }
+                pickedUpEoP = null; // Clear the picked up end of pipe after insertion
+
+                if (Game.testMode) {
+                    System.out.println(playerName + " inserted the end of pipe to " + selectedPipe.getName());
+                }
+                return;
+            }
+        }
     }
 
 
