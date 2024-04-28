@@ -23,6 +23,7 @@ public class Cistern extends Element {
 
     Random rand = new Random();
     private int numOfcreatedPipes = 0;
+    private int numOfCreatedPumps = 0;
     private final Game gameInstance;
     /**
      * The number of turns remaining until a new pipe can be manufactured.
@@ -39,7 +40,8 @@ public class Cistern extends Element {
      * @author: Basel Al-Raoush
      */
     public void manufacturePipe(Game g) {
-        Pipe p = new Pipe("New Pipe " + numOfcreatedPipes + 1);
+        numOfcreatedPipes++;
+        Pipe p = new Pipe("New Pipe " + numOfcreatedPipes);
         EndOfPipe newEnd = new EndOfPipe(p);
         p.endsOfPipe[1] = newEnd; // the cistern will be on the right.
         g.addPipe(p);
@@ -56,7 +58,8 @@ public class Cistern extends Element {
     public void manufacturePump(Game g) {
         if(manufacturedPump == null)
         {
-            Pump temp = new Pump("New Pump");
+            numOfCreatedPumps++;
+            Pump temp = new Pump("New Pump " + numOfCreatedPumps);
             manufacturedPump = temp;
             g.addPump(temp);
             if(gameInstance.testMode && gameInstance.testNumber == 2)

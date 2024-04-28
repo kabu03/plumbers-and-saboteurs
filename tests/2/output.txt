@@ -13,3 +13,28 @@ Initializing the game...
 The game’s elements have been initialized successfully.
 The game and timer have started!
 Plumber 1 moved to Pipe4
+Plumber 1 moved to Pump3
+Saboteur 1 passed their turn.
+Plumber 2 passed their turn.
+Saboteur 2 passed their turn.
+Plumber 1 moved to Pipe7
+Plumber 1 moved to Pump4
+Saboteur 1 passed their turn.
+Plumber 2 passed their turn.
+Saboteur 2 passed their turn.
+Plumber 1 moved to Pipe8
+Plumber 1 moved to Cistern
+Saboteur 1 passed their turn.
+Plumber 2 passed their turn.
+Saboteur 2 passed their turn.
+Plumber 1 picked up New Pump 1 from the Cistern.
+Plumber 1 moved to Pipe8
+Saboteur 1 passed their turn.
+Plumber 2 passed their turn.
+Saboteur 2 passed their turn.
+Plumber 1 moved to Pump4
+Plumber 1 moved to Pipe6
+Saboteur 1 passed their turn.
+Plumber 2 passed their turn.
+Saboteur 2 passed their turn.
+Plumber 1 inserted a pump into Pipe6.

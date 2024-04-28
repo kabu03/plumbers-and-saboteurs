@@ -280,7 +280,7 @@ public class Plumber extends Player {
         }
         pickedUpPump=((Cistern) currentElement).manufacturedPump;
         g1.pumpList.add(pickedUpPump);
-        System.out.print(playerName + "picked up" + ((Cistern) currentElement).manufacturedPump);
+        System.out.println(playerName + " picked up " + ((Cistern) currentElement).manufacturedPump.getName() + " from the Cistern.");
 
 
     }
@@ -298,9 +298,8 @@ public class Plumber extends Player {
             if (currentElement instanceof Pipe) {
                 Pipe pipe = (Pipe) currentElement;
 
-                Pump newPump= new Pump("newPump"+newPumpCount);
+                Pump newPump;
                 newPump=pickedUpPump;
-                newPumpCount++;
                 Pipe newPipe1 = new Pipe("newPipe"+newPipecount);
                 newPipecount++;
                 Pipe newPipe2 = new Pipe("newPipe"+newPipecount);
@@ -311,12 +310,15 @@ public class Plumber extends Player {
                 EndOfPipe newEnd2A  = new EndOfPipe(newPipe2);
                 EndOfPipe newEnd2B  = new EndOfPipe(newPipe2);
 
-
-                newPipe1.endsOfPipe[0]=pipe.endsOfPipe[0];
+                if(pipe.endsOfPipe[0] != null) {
+                    newPipe1.endsOfPipe[0] = pipe.endsOfPipe[0];
+                }
                 newPipe1.endsOfPipe[0].setCurrentPipe(newPipe1);
                 newPipe1.endsOfPipe[1].setCurrentPipe(newPipe1);
-
-                newPipe2.endsOfPipe[1]=pipe.endsOfPipe[1];
+                if(pipe.endsOfPipe[1] != null) // in the test case pipe 6 has only one and we need to take that into consideration.
+                {
+                    newPipe2.endsOfPipe[1]=pipe.endsOfPipe[1];
+                }
                 newPipe2.endsOfPipe[1].setCurrentPipe(newPipe2);
                 newPipe2.endsOfPipe[0].setCurrentPipe(newPipe2);
 
@@ -326,8 +328,10 @@ public class Plumber extends Player {
                 pipe.setWorks(false);
                 int index = g1.pipeList.indexOf(pipe);
                 int index2 = g1.elementList.indexOf(pipe);
+                /* these are not needed since connectable list order does not effect anything
                 int index3 = pipe.endsOfPipe[0].getConnectedElement().connectablePipes.indexOf(pipe);
                 int index4= pipe.endsOfPipe[1].getConnectedElement().connectablePipes.indexOf(pipe);
+                 */
                 g1.elementList.remove(pipe);
                 g1.pipeList.remove(pipe);
 
@@ -337,12 +341,17 @@ public class Plumber extends Player {
                 g1.elementList.add(index2,newPipe1);
                 g1.elementList.add(index2+1,newPump);
                 g1.elementList.add(index2+2,newPipe2);
-
-                pipe.endsOfPipe[0].getConnectedElement().connectablePipes.remove(pipe);
-                pipe.endsOfPipe[1].getConnectedElement().connectablePipes.remove(pipe);
-
-                pipe.endsOfPipe[0].getConnectedElement().connectablePipes.add(index3,newPipe1);
-                pipe.endsOfPipe[1].getConnectedElement().connectablePipes.add(index4,newPipe2);
+                if(pipe.endsOfPipe[0] != null) {
+                    pipe.endsOfPipe[0].getConnectedElement().connectablePipes.remove(pipe);
+                }
+                if(pipe.endsOfPipe[1] != null) {
+                    pipe.endsOfPipe[1].getConnectedElement().connectablePipes.remove(pipe);
+                }
+                if(pipe.endsOfPipe[0] != null) {
+                    pipe.endsOfPipe[0].getConnectedElement().connectablePipes.add(newPipe1);
+                }
+                if(pipe.endsOfPipe[1] != null){
+                pipe.endsOfPipe[1].getConnectedElement().connectablePipes.add(newPipe2);}
 
                 newPipe1.endsOfPipe[1].connectToElement(newPump);
                 newPipe2.endsOfPipe[0].connectToElement(newPump);
@@ -353,7 +362,7 @@ public class Plumber extends Player {
                 g1.pumpList.add(newPump);
 
                 pickedUpPump=null;
-                System.out.println(playerName + "inserted a pump into "+ pipe.getName());
+                System.out.println(playerName + " inserted a pump into "+ pipe.getName() + ".");
 
             }
         else if(currentElement instanceof Pipe && pickedUpPump==null){

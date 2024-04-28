@@ -50,9 +50,15 @@ public class EndOfPipe {
     }
     public void setCurrentPipe(Pipe p)
     {
-        connectedElement.connectedPipes.remove(currentPipe);
-        currentPipe = p;
-        connectedElement.connectedPipes.add(currentPipe);;
+        if(connectedElement != null) {
+            connectedElement.connectedPipes.remove(currentPipe);
+            currentPipe = p;
+            connectedElement.connectedPipes.add(currentPipe);
+        }
+        else
+        {
+            currentPipe = p;
+        }
     }
 
 }
