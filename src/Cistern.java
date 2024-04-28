@@ -20,14 +20,14 @@ public class Cistern extends Element {
         {
             turnsUntilPumpReady = 0;
         }
+        else if(gameInstance.testMode && gameInstance.testNumber == 7)
+        {
+            turnsUntilPipeReady = 0;
+        }
         else if(gameInstance.testMode)
         {
             turnsUntilPipeReady = 100000;
             turnsUntilPumpReady = 100000;
-        }
-        else if(gameInstance.testMode && gameInstance.testNumber == 7)
-        {
-            turnsUntilPipeReady = 0;
         }
     }
 
@@ -60,6 +60,7 @@ public class Cistern extends Element {
         Pipe p = new Pipe("New Pipe " + numOfcreatedPipes);
         EndOfPipe newEnd = new EndOfPipe(p);
         p.endsOfPipe[1] = newEnd; // the cistern will be on the right.
+        p.endsOfPipe[0] = null;
         g.addPipe(p);
         newEnd.connectToElement(this);
         if(g.testMode && g.testNumber == 7)
