@@ -1,5 +1,11 @@
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Scanner;
+import java.util.concurrent.*;
 
 import static java.lang.System.exit;
 
@@ -21,17 +27,17 @@ public class Saboteur extends Player {
      * Returns the chosen action as an integer.
      * Overrides the abstract takeTurn method of the Player class.
      *
+     * @return The integer representing the chosen action.
      * @author Basel Al-Raoush
      */
-
     @Override
     protected void takeTurn(Game g) {
         boolean passflag = false;
-        int actionsTaken = 0; // Track the number of actions taken in the turn
+        int actionstaken=0;
         long turnStartTime = System.currentTimeMillis();
-        long turnEndTime = turnStartTime + 5000; // 5 seconds for turn
+        long turnDuration = 5000;
 
-        while (actionsTaken < 2 && System.currentTimeMillis() < turnEndTime) {
+
             if (!Game.testMode) {
                 System.out.println("Player " + playerName + ", it's your turn.");
                 System.out.println("What action would you like to perform?");
@@ -45,34 +51,35 @@ public class Saboteur extends Player {
                 System.out.print("Enter the number corresponding to your choice: ");
             }
 
+            while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
 
-            try {
-                if (System.in.available() > 0) {
-                    int choice = Integer.parseInt(Game.scanner.nextLine());
+                try {
+                    if (System.in.available() > 0) {
+                        int choice = Integer.parseInt(Game.scanner.nextLine());
                     switch (choice) {
                         case 1:
                             if (!Game.testMode)
                                 System.out.println("You chose: Move to an element");
                             move(g);
-                            actionsTaken++;
+                            actionstaken++;
                             break;
                         case 2:
                             if (!Game.testMode)
                                 System.out.println("You chose: Change the input pipe of a pump");
-                            changeInputPipe(g); // element selection
-                            actionsTaken++;
+                            changeInputPipe(g);
+                            actionstaken++;
                             break;
                         case 3:
                             if (!Game.testMode)
                                 System.out.println("You chose: Change the output pipe of a pump");
-                            changeOutputPipe(g); // element selection
-                            actionsTaken++;
+                            changeOutputPipe(g);
+                            actionstaken++;
                             break;
                         case 4:
                             if (!Game.testMode)
                                 System.out.println("You chose: Puncture a pipe");
                             puncture(g.pipeList.get(0));
-                            actionsTaken++;
+                            actionstaken++;
                             break;
                         case 5:
                             if (!Game.testMode)
@@ -90,19 +97,17 @@ public class Saboteur extends Player {
                             System.out.println("Invalid input, please choose one of the valid options (1-6).");
                     }
                 }
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
 
             // Check if two actions were taken or if the turn timer ran out
-            if (actionsTaken == 2 || System.currentTimeMillis() >= turnEndTime || (actionsTaken == 1 && passflag)) {
+            if (actionstaken == 1 && passflag) {
                 break;
             }
         }
-
-        return;
     }
-
 
 
     /**

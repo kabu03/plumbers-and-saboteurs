@@ -1,5 +1,11 @@
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Scanner;
+import java.util.concurrent.*;
 
 import static java.lang.System.exit;
 
@@ -27,92 +33,94 @@ public class Plumber extends Player {
      * Returns the chosen action as an integer.
      * Overrides the abstract takeTurn method of the Player class.
      *
+     * @return The integer representing the chosen action.
      * @author Basel Al-Raoush
      */
     @Override
-    protected void takeTurn(Game g) {
+    protected void takeTurn(Game g) { // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
         boolean passflag = false;
-        int actionsTaken = 0; // Track the number of actions taken in the turn
+        int actionstaken=0;
         long turnStartTime = System.currentTimeMillis();
-        long turnEndTime = turnStartTime + 5000; // 5 seconds for turn
+        long turnDuration = 5000; //
 
-        while (actionsTaken < 2 && System.currentTimeMillis() < turnEndTime) {
-            if (!Game.testMode) {
-                System.out.println("Player " + playerName + ", it's your turn.");
-                System.out.println("What action would you like to perform?");
-                System.out.println("Available actions for Plumbers:");
-                System.out.println("1. Move to an element");
-                System.out.println("2. Pick up a pump");
-                System.out.println("3. Insert pump into a pipe");
-                System.out.println("4. Fix a broken pump");
-                System.out.println("5. Fix a broken pipe");
-                System.out.println("6. Pick up the end of a pipe");
-                System.out.println("7. Insert the end of a pipe");
-                System.out.println("8. Change the input pipe of a pump");
-                System.out.println("9. Change the output pipe of a pump");
-                System.out.println("10. Pass Turn");
-                System.out.println("11. End the game");
-                System.out.print("Enter the number corresponding to your choice: ");
-            }
+        if (!Game.testMode) {
+            System.out.println("Player " + playerName + ", it's your turn.");
+            System.out.println("What action would you like to perform?");
+            System.out.println("Available actions for Plumbers:");
+            System.out.println("1. Move to an element");
+            System.out.println("2. Pick up a pump");
+            System.out.println("3. Insert pump into a pipe");
+            System.out.println("4. Fix a broken pump");
+            System.out.println("5. Fix a broken pipe");
+            System.out.println("6. Pick up the end of a pipe");
+            System.out.println("7. Insert the end of a pipe");
+            System.out.println("8. Change the input pipe of a pump");
+            System.out.println("9. Change the output pipe of a pump");
+            System.out.println("10. Pass Turn");
+            System.out.println("11. End the game");
+            System.out.print("Enter the number corresponding to your choice: ");
+        }
 
-
+        while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
+            // Check if input is available
             try {
                 if (System.in.available() > 0) {
                     int choice = Integer.parseInt(Game.scanner.nextLine());
                     switch (choice) {
                         case 1:
                             if (!Game.testMode)
-                                System.out.println("You chose: Move to an element"); // element selection menu
+                                System.out.println("You chose: Move to an element");
                             move(g);
-                            actionsTaken++;
+                            actionstaken++;
                             break;
                         case 2:
                             if (!Game.testMode)
                                 System.out.println("You chose: Pick up a pump");
-                           // getPump(g.pumpList.getFirst());
-                            actionsTaken++;
+                            // getPump(g.pumpList.getFirst());
+                            actionstaken++;
                             break;
                         case 3:
                             if (!Game.testMode)
                                 System.out.println("You chose: Insert pump into a pipe");
-                            insertPump(pickedUpPump, TempPipe, g);
-                            actionsTaken++;
+                            // insertPump(g.pumpList.getFirst(), g.pipeList.get(0));
+                            actionstaken++;
+
                             break;
                         case 4:
                             if (!Game.testMode)
                                 System.out.println("You chose: Fix a broken pump");
-                            //fixPump(g.pumpList.getFirst());
-                            actionsTaken++;
+                            // fixPump(g.pumpList.getFirst());
+                            actionstaken++;
                             break;
                         case 5:
                             if (!Game.testMode)
                                 System.out.println("You chose: Fix a broken pipe");
                             fixPipe(g.pipeList.get(0));
-                            actionsTaken++;
+                            actionstaken++;
                             break;
                         case 6:
                             if (!Game.testMode)
                                 System.out.println("You chose: Pick up the end of a pipe");
-                            getEnd(pickedUpEoP, TempPipe, currentElement);
-                            actionsTaken++;
+                            // getEnd(pickedUpEoP);
+                            actionstaken++;
                             break;
                         case 7:
                             if (!Game.testMode)
                                 System.out.println("You chose: Insert the end of a pipe");
-                            insertPipeEnd(currentElement, TempPipe);
-                            actionsTaken++;
+                            // insertPipeEnd(g.pipeList.get(0));
+                            actionstaken++;
                             break;
                         case 8:
                             if (!Game.testMode)
                                 System.out.println("You chose: Change the input pipe of a pump");
                             changeInputPipe(g);
-                            actionsTaken++;
+                            actionstaken++;
                             break;
                         case 9:
                             if (!Game.testMode)
                                 System.out.println("You chose: Change the output pipe of a pump");
                             changeOutputPipe(g);
-                            actionsTaken++;
+                            actionstaken++;
                             break;
                         case 10:
                             if (!Game.testMode)
@@ -133,14 +141,11 @@ public class Plumber extends Player {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-            // Check if two actions were taken or if the turn timer ran out
-            if (actionsTaken == 2 || System.currentTimeMillis() >= turnEndTime || (actionsTaken == 1 && passflag)) {
-                break;
-            }
         }
 
-        return;
+        if (passflag && actionstaken==1){
+            return;
+        }
     }
 
 
@@ -182,7 +187,7 @@ public class Plumber extends Player {
         }
         else { System.out.println("You have to be standing on the element to pick up the end of the pipe.");}
 
-        }
+    }
 
 
 
@@ -318,8 +323,6 @@ public class Plumber extends Player {
                 newPipe1.leakedAmount=pipe.leakedAmount/2;
                 newPipe2.leakedAmount=pipe.leakedAmount/2;
 
-
-
                 pipe.setWorks(false);
                 int index = g1.pipeList.indexOf(pipe);
                 int index2 = g1.elementList.indexOf(pipe);
@@ -372,11 +375,11 @@ public class Plumber extends Player {
                 System.out.println(playerName + "fixed" + pump.getName());
             }
         }
-       if(currentElement == pump && pump.getWorks()){
-           System.out.println(playerName + "attempted to fix" + pump.getName() + ", but it's already working.");
+        if(currentElement == pump && pump.getWorks()){
+            System.out.println(playerName + "attempted to fix" + pump.getName() + ", but it's already working.");
 
-       }else
-           System.out.println("You need to be standing on a broken pump to fix it.");
+        }else
+            System.out.println("You need to be standing on a broken pump to fix it.");
 
 
     }
