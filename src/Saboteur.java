@@ -78,7 +78,7 @@ public class Saboteur extends Player {
                         case 4:
                             if (!Game.testMode)
                                 System.out.println("You chose: Puncture a pipe");
-                            puncture(g.pipeList.get(0));
+                            puncture();
                             actionstaken++;
                             break;
                         case 5:
@@ -128,14 +128,14 @@ public class Saboteur extends Player {
      * @author Karam Abu Judom
      */
 
-    public void puncture(Pipe p1) {
-        if (Objects.equals(currentElement, p1) && p1.getWorks()) {
-            p1.setWorks(false);
-            System.out.println(playerName + "punctured" + p1.getName());
+    public void puncture() {
+        if (currentElement instanceof Pipe && currentElement.getWorks()) {
+            currentElement.setWorks(false);
+            System.out.println(playerName + "punctured" + currentElement.getName());
             return;
         }
-        if (currentElement == p1 && !p1.getWorks()) {
-            System.out.println(playerName + " attempted to puncture" + p1.getName() + ",but it is already punctured.");
+        if (currentElement instanceof Pipe && !currentElement.getWorks()) {
+            System.out.println(playerName + " attempted to puncture" + currentElement.getName() + ",but it is already punctured.");
         } else System.out.println("You have to be standing on a working pipe to puncture it.");
 
     }
