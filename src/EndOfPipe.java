@@ -25,6 +25,10 @@ public class EndOfPipe {
      * An attribute that stores the element that is currently connected to the end of pipe object.
      */
     private Element connectedElement;
+
+    /**
+     * The pipe that this end of the pipe is associated with.
+     */
     private Pipe currentPipe;
 
     /**
@@ -45,9 +49,19 @@ public class EndOfPipe {
         e.connectedPipes.remove(currentPipe);
     }
 
+    /**
+     * Retrieves the element currently connected to this end of the pipe.
+     *
+     */
     public Element getConnectedElement(){
         return connectedElement;
     }
+    /**
+     * Sets a new pipe to this end of the pipe, updating the connected element's list of connected pipes
+     * if there is one.
+     *
+     * @param p The new pipe to be associated with this end of the pipe.
+     */
     public void setCurrentPipe(Pipe p)
     {
         if(connectedElement != null) {

@@ -2,9 +2,10 @@
 Changes made to Pipe compard to docs:
 Added a new Add End of Pipe method.
 changed inpipe and outpipe to public.
+made leaked amount public
 */
 
-import java.util.ArrayList;
+
 
 /**
  * The backbone of the pipe system, serving as conduits for water transfer. Flexible in nature,
@@ -13,29 +14,39 @@ import java.util.ArrayList;
  */
 public class Pipe extends Element {
 
-    public Pipe(String n)
-    {
-        super(n);
-        setMaxConnectablePipes(2); setMaxCapacity(10);
-    }
+    /**
+     * Publicly accessible amount of water that has leaked from the pipe.
+     */
     public int leakedAmount = 0;
-    public EndOfPipe[] endsOfPipe = new EndOfPipe[2]; // I think a pipe will have max 2 endofpipes.
-    public void incrementLeakage(){
-        if(getWaterLevel() >= 2) {
-            leakedAmount = leakedAmount + 2;
+
+    /**
+     * Array of two endpoints, each capable of connecting to different game elements.
+     */
+    public EndOfPipe[] endsOfPipe = new EndOfPipe[2];
+
+    /**
+     * Initializes a new Pipe with a specified name, setting default capacity and connectable pipes.
+     *
+     * @param n The name of the pipe.
+     */
+    public Pipe(String n) {
+        super(n);
+        setMaxConnectablePipes(2);
+        setMaxCapacity(10);
+    }
+
+    /**
+     * Increments the leaked amount if the water level is sufficient and decrements the water level.
+     */
+    public void incrementLeakage() {
+        if (getWaterLevel() >= 2) {
+            leakedAmount += 2;
         }
         decrementWater();
     }
-    public int getLeakedWater(){
-        return leakedAmount;
-    }
-    public void incrementWaterToPump(Pump p)
-    {
-        if(p.inPipe == this)
-        {
-            p.incrementWater();
-        }
-    }
+    /**
+     * Periodically updates the pipe's state, checking for free ends and managing water flow.
+     */
     @Override
     public void update() {
         // to check if we have a free end.
@@ -67,7 +78,6 @@ public class Pipe extends Element {
                     endsOfPipe[1].getConnectedElement().incrementWater();
                 }
             }
-
         }
     }
 }

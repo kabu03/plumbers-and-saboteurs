@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -15,6 +13,7 @@ public class Pump extends Element {
         super(n);
         setMaxConnectablePipes(rand.nextInt(3,6)); setMaxCapacity(50);
     }
+
     Random rand = new Random();
     /**
      * the input pipe connected to the pump.
@@ -39,7 +38,11 @@ public class Pump extends Element {
     public void setWorkingTurns(int x){
         workingTurns = x;
     }
-
+    /**
+     * Updates the pump's operational status and handles water transfer based on current conditions.
+     * This method processes the pump's functionality each cycle, checking for operational status,
+     * managing breakdowns, and transferring water if conditions are met.
+     */
     @Override
     public void update() {
         if(inPipe == null && outPipe == null)
