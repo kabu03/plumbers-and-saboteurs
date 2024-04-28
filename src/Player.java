@@ -37,35 +37,44 @@ public abstract class Player {
      *
      * @author Nafez Mousa Sayyad
      **/
-    protected void changeInputPipe(Game game) {
-        if (!(currentElement instanceof Pump)) {
-            if (!Game.testMode)  System.out.println("You are not currently on a pump. Move to a pump first.");
-            return;
-        }
+       protected void changeInputPipe(Game game) {
+           if (!(currentElement instanceof Pump)) {
+               if (!Game.testMode) System.out.println("You are not currently on a pump. Move to a pump first.");
+               return;
+           }
 
-        Pump currentPump = (Pump) currentElement;
+           Pump currentPump = (Pump) currentElement;
+           if (!Game.testMode) System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
+           List<Pipe> connectedPipes = currentPump.connectedPipes;
+           for (int i = 0; i < connectedPipes.size(); i++) {
+               if (!Game.testMode) System.out.println((i + 1) + ". " + connectedPipes.get(i).getName());
+           }
 
-        if (!Game.testMode) System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
-        List<Pipe> connectablePipes = currentPump.connectablePipes;
-        for (int i = 0; i < connectablePipes.size(); i++) {
-            if (!Game.testMode)  System.out.println((i + 1) + ". " + connectablePipes.get(i).getName());
-        }
-
-        if (!Game.testMode) System.out.println("Select the number of the pipe to set as the new input pipe:");
-        int pipeNumber;
-        try {
-            pipeNumber = Integer.parseInt(Game.scanner.nextLine());
-            if (pipeNumber < 1 || pipeNumber > connectablePipes.size()) {
-                System.out.println("Invalid input. Select a number listed above.");
-            } else {
-                Pipe selectedPipe = connectablePipes.get(pipeNumber - 1);
-                currentPump.inPipe = selectedPipe; // Setting the selected pipe as new input pipe
-                System.out.println(playerName+" changed the input pipe of "+currentPump.getName()+" to " + selectedPipe.getName());
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a number.");
-        }
-    }
+           if (!Game.testMode) System.out.println("Select the number of the pipe to set as the new input pipe:");
+           String input;
+           try {
+               input = Game.scanner.nextLine().trim();
+               int pipeNumber = Game.testMode ? -1 : Integer.parseInt(input);
+               if (Game.testMode) {
+                   for (Pipe pipe : connectedPipes) {
+                       if (pipe.getName().equalsIgnoreCase(input)) {
+                           currentPump.inPipe = pipe;
+                           System.out.println(playerName + " changed the input pipe of " + currentPump.getName() + " to " + pipe.getName());
+                           return;
+                       }
+                   }
+                   System.out.println("Invalid input. Select a pipe listed above.");
+               } else if (pipeNumber < 1 || pipeNumber > connectedPipes.size()) {
+                   System.out.println("Invalid input. Select a number listed above.");
+               } else {
+                   Pipe selectedPipe = connectedPipes.get(pipeNumber - 1);
+                   currentPump.inPipe = selectedPipe;
+                   System.out.println(playerName + " changed the input pipe of " + currentPump.getName() + " to " + selectedPipe.getName());
+               }
+           } catch (NumberFormatException e) {
+               System.out.println("Invalid input. Please enter a number or a valid pipe name.");
+           }
+       }
 
 
     /**
@@ -78,33 +87,43 @@ public abstract class Player {
      */
     protected void changeOutputPipe(Game game) {
         if (!(currentElement instanceof Pump)) {
-            if (!Game.testMode)    System.out.println("You are not currently on a pump. Move to a pump first.");
+            if (!Game.testMode) System.out.println("You are not currently on a pump. Move to a pump first.");
             return;
         }
 
         Pump currentPump = (Pump) currentElement;
-
         if (!Game.testMode) System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
-        List<Pipe> connectablePipes = currentPump.connectablePipes;
-        for (int i = 0; i < connectablePipes.size(); i++) {
-            if (!Game.testMode)    System.out.println((i + 1) + ". " + connectablePipes.get(i).getName());
+        List<Pipe> connectedPipes = currentPump.connectedPipes;
+        for (int i = 0; i < connectedPipes.size(); i++) {
+            if (!Game.testMode) System.out.println((i + 1) + ". " + connectedPipes.get(i).getName());
         }
 
         if (!Game.testMode) System.out.println("Select the number of the pipe to set as the new output pipe:");
-        int pipeNumber;
+        String input;
         try {
-            pipeNumber = Integer.parseInt(Game.scanner.nextLine());
-            if (pipeNumber < 1 || pipeNumber > connectablePipes.size()) {
-                if (!Game.testMode)      System.out.println("Invalid input. Select a number listed above.");
+            input = Game.scanner.nextLine().trim();
+            int pipeNumber = Game.testMode ? -1 : Integer.parseInt(input);
+            if (Game.testMode) {
+                for (Pipe pipe : connectedPipes) {
+                    if (pipe.getName().equalsIgnoreCase(input)) {
+                        currentPump.outPipe = pipe;
+                        System.out.println(playerName + " changed the output pipe of " + currentPump.getName() + " to " + pipe.getName());
+                        return;
+                    }
+                }
+                System.out.println("Invalid input. Select a pipe listed above.");
+            } else if (pipeNumber < 1 || pipeNumber > connectedPipes.size()) {
+                System.out.println("Invalid input. Select a number listed above.");
             } else {
-                Pipe selectedPipe = connectablePipes.get(pipeNumber - 1);
-                currentPump.outPipe = selectedPipe; // Setting the selected pipe as new output pipe
-                System.out.println(playerName + " changed the output pipe of " + currentPump.getName()+" to " + selectedPipe.getName());
+                Pipe selectedPipe = connectedPipes.get(pipeNumber - 1);
+                currentPump.outPipe = selectedPipe;
+                System.out.println(playerName + " changed the output pipe of " + currentPump.getName() + " to " + selectedPipe.getName());
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a number.");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number or a valid pipe name.");
         }
     }
+
 
 
     /**

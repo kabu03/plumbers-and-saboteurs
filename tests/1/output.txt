@@ -31,4 +31,3 @@ Plumber 2 passed their turn.
 Saboteur 2 passed their turn.
 Plumber 1 moved to Pipe2
 Plumber 1 fixed Pipe2
-A new Pump Has been Manufactured at the cistern
