@@ -20,10 +20,10 @@ Pipe2
 1
 Pump2
 2
-pipe6
+Pipe6
 5
 10
 5
 4
-2
+8
 Pipe2

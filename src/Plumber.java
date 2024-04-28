@@ -433,18 +433,14 @@ public class Plumber extends Player {
      * @author Ibrahim
      */
     public void fixPump(){
+        if(currentElement instanceof Pump && currentElement.getWorks()){
+            System.out.println(playerName + " attempted to fix " + currentElement.getName() + ", but it's already working.");}
         if (currentElement instanceof Pump) {
             if (!currentElement.getWorks()) {
                 currentElement.setWorks(true);
                 System.out.println(playerName + " fixed " + currentElement.getName());
             }
-        }
-        if(currentElement instanceof Pump && currentElement.getWorks()){
-            System.out.println(playerName + " attempted to fix " + currentElement.getName() + ", but it's already working.");
-
-        }else
-            System.out.println("You need to be standing on a broken pump to fix it.");
-
-
+        } else {
+            System.out.println("You need to be standing on a broken pump to fix it.");}
     }
-}
+    }

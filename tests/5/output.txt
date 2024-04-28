@@ -20,7 +20,7 @@ The game’s elements have been initialized successfully.
 The game and timer have started!
 Invalid input, please choose one of the valid options (1-11).
 Invalid input, please choose one of the valid options (1-11).
-Player Joker passed their turn.
+Joker passed their turn.
 Invalid input, please choose one of the valid options (1-6).
 Invalid input, please choose one of the valid options (1-6).
-Player LeeroyJenkins passed their turn.
+LeeroyJenkins passed their turn.
