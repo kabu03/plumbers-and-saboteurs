@@ -360,6 +360,15 @@ public class Game {
             EoP2pipe3.connectToElement(cistern);
             EoP2pipe8.connectToElement(cistern);
             addCistern(cistern);
+            if(testMode) {
+                for (Pump p : pumpList) {
+                    p.setWorkingTurns(100000);
+                }
+                if(testNumber == 3)
+                {
+                    Pump2.setWorkingTurns(5);
+                }
+            }
         }
         // Start game
         System.out.println("The game’s elements have been initialized successfully.");

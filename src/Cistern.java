@@ -19,6 +19,15 @@ public class Cistern extends Element {
         {
             turnsUntilPumpReady = 0;
         }
+        else if(gameInstance.testMode)
+        {
+            turnsUntilPipeReady = 100000;
+            turnsUntilPumpReady = 100000;
+        }
+        else if(gameInstance.testMode && gameInstance.testNumber == 7)
+        {
+            turnsUntilPipeReady = 0;
+        }
     }
 
     Random rand = new Random();
@@ -46,6 +55,11 @@ public class Cistern extends Element {
         p.endsOfPipe[1] = newEnd; // the cistern will be on the right.
         g.addPipe(p);
         newEnd.connectToElement(this);
+        if(g.testMode && g.testNumber == 7)
+        {
+            Pump toBeconnected = g.pumpList.get(2);
+            toBeconnected.connectablePipes.add(p);
+        }
         Pump toBeconnected = g.pumpList.get(0);
         toBeconnected.connectablePipes.add(p);
         System.out.println("A new Pipe Has been added");

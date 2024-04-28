@@ -47,8 +47,9 @@ public class Pump extends Element {
             ;
         }
         else {
-            if (workingTurns == 0) {
+            if (workingTurns == 0 && isWorking()) {
                 setWorks(false);
+                System.out.println( this.getName() + " randomly broke down.");
             } else {
                 workingTurns--;
             }
