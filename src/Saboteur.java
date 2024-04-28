@@ -131,7 +131,7 @@ public class Saboteur extends Player {
     public void puncture() {
         if (currentElement instanceof Pipe && currentElement.getWorks()) {
             currentElement.setWorks(false);
-            System.out.println(playerName + "punctured" + currentElement.getName());
+            System.out.println(playerName + " punctured " + currentElement.getName());
             return;
         }
         if (currentElement instanceof Pipe && !currentElement.getWorks()) {

@@ -251,22 +251,17 @@ public class Plumber extends Player {
    //  * @param p will be the broken pipe to be fixed
      * @author Ibrahim
      */
-    public  void fixPipe(){
+    public  void fixPipe() {
+        if (currentElement instanceof Pipe && currentElement.getWorks())
+            System.out.println(playerName + " attempted to fix " + currentElement.getName() + ", but it's already working.");
         if (currentElement instanceof Pipe) {
-            if (!currentElement.getWorks()) {
-                currentElement.setWorks(true);
-                System.out.println(playerName + "fixed" + currentElement.getName());
-            }
-        }
-        if(currentElement instanceof Pipe && currentElement.getWorks()){
-            System.out.println(playerName + "attempted to fix" + currentElement.getName() + ", but it's already working.");
-        }else
-            System.out.println("You need to be standing on a punctured pipe to fix it.");
-
-
+                if (!currentElement.getWorks()) {
+                    currentElement.setWorks(true);
+                    System.out.println(playerName + " fixed " + currentElement.getName());
+                }
+            } else
+                System.out.println("You need to be standing on a punctured pipe to fix it.");
     }
-
-
     /**
      * Method for picking up a pump that was manufactured at a cistern
      //* @param p is the pump that will be picked up
