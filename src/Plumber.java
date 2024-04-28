@@ -251,19 +251,16 @@ public class Plumber extends Player {
    //  * @param p will be the broken pipe to be fixed
      * @author Ibrahim
      */
-    public  void fixPipe(){
+    public  void fixPipe() {
+        if (currentElement instanceof Pipe && currentElement.getWorks())
+            System.out.println(playerName + " attempted to fix " + currentElement.getName() + ", but it's already working.");
         if (currentElement instanceof Pipe) {
             if (!currentElement.getWorks()) {
                 currentElement.setWorks(true);
-                System.out.println(playerName + "fixed" + currentElement.getName());
+                System.out.println(playerName + " fixed " + currentElement.getName());
             }
-        }
-        else if(currentElement instanceof Pipe && currentElement.getWorks()){
-            System.out.println(playerName + "attempted to fix" + currentElement.getName() + ", but it's already working.");
-        }else
+        } else
             System.out.println("You need to be standing on a punctured pipe to fix it.");
-
-
     }
 
 
@@ -378,7 +375,7 @@ public class Plumber extends Player {
                 System.out.println(playerName + "fixed" + currentElement.getName());
             }
         }
-       else if(currentElement instanceof Pump && currentElement.getWorks()){
+        if(currentElement instanceof Pump && currentElement.getWorks()){
             System.out.println(playerName + "attempted to fix" + currentElement.getName() + ", but it's already working.");
 
         }else
