@@ -1,0 +1,23 @@
+Proceeding to the number of participating players menu.
+4 players will participate in the game.
+Proceeding to the username and team selection menu.
+The name "Plumber 1" is validated.
+Plumber 1 chose the Plumbers team.
+The name "Plumber 2" is validated.
+Plumber 2 chose the Plumbers team.
+The name "Saboteur 1" is validated.
+Saboteur 1 was automatically placed in the Saboteurs team.
+The name "Saboteur 2" is validated.
+Saboteur 2 was automatically placed in the Saboteurs team.
+Initializing the game...
+The game’s elements have been initialized successfully.
+The game and timer have started!
+Plumber 1 moved to Pipe1
+Plumber 1 moved to Pump1
+Saboteur 1 moved to Pipe3
+Saboteur 1 moved to Pump2
+Plumber 2 moved to Pipe1
+Plumber 2 moved to Pump1
+Saboteur 2 passed their turn.
+The timer has stopped, and the game has ended. The results are being evaluated...
+Total water leaked was 0, and total water collected was 16. The Plumbers won the game.

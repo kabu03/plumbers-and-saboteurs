@@ -180,6 +180,10 @@ public class Plumber extends Player {
                         EoP.setCurrentPipe(null);
 
                         pickedUpEoP = EoP;
+
+                        if (Game.testMode) {
+                            System.out.println( playerName + " picked up the end of " + p.getName() +" connected to " + e.getName()); }
+
                     }
                 }
             }
@@ -231,6 +235,10 @@ public class Plumber extends Player {
                         pickedUpEoP.setCurrentPipe(p); // set the current pipe of the end of pipe to the selected pipe.
                         e.connectedPipes.add(p);
                         pickedUpEoP = null;
+
+                        if (Game.testMode) {
+                            System.out.println( playerName + " inserted the end of pipe to " + e.getName()); }
+
                     }
                     else {
                         System.out.println("You can't insert the end of the pipe to this element.");
@@ -372,11 +380,11 @@ public class Plumber extends Player {
         if (currentElement instanceof Pump) {
             if (!currentElement.getWorks()) {
                 currentElement.setWorks(true);
-                System.out.println(playerName + "fixed" + currentElement.getName());
+                System.out.println(playerName + " fixed " + currentElement.getName());
             }
         }
         if(currentElement instanceof Pump && currentElement.getWorks()){
-            System.out.println(playerName + "attempted to fix" + currentElement.getName() + ", but it's already working.");
+            System.out.println(playerName + " attempted to fix " + currentElement.getName() + ", but it's already working.");
 
         }else
             System.out.println("You need to be standing on a broken pump to fix it.");

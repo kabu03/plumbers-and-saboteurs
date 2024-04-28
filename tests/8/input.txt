@@ -1,0 +1,21 @@
+4
+Plumber 1
+1
+Plumber 2
+1
+Saboteur 1
+Saboteur 2
+1
+Pipe1
+1
+Pump1
+1
+Pipe3
+1
+Pump2
+1
+Pipe1
+1
+Pump1
+5
+11
