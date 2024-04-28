@@ -19,10 +19,20 @@ public class Cistern extends Element {
         {
             turnsUntilPumpReady = 0;
         }
+        else if(gameInstance.testMode)
+        {
+            turnsUntilPipeReady = 100000;
+            turnsUntilPumpReady = 100000;
+        }
+        else if(gameInstance.testMode && gameInstance.testNumber == 7)
+        {
+            turnsUntilPipeReady = 0;
+        }
     }
 
     Random rand = new Random();
     private int numOfcreatedPipes = 0;
+    private int numOfCreatedPumps = 0;
     private final Game gameInstance;
     /**
      * The number of turns remaining until a new pipe can be manufactured.
@@ -39,11 +49,17 @@ public class Cistern extends Element {
      * @author: Basel Al-Raoush
      */
     public void manufacturePipe(Game g) {
-        Pipe p = new Pipe("New Pipe " + numOfcreatedPipes + 1);
+        numOfcreatedPipes++;
+        Pipe p = new Pipe("New Pipe " + numOfcreatedPipes);
         EndOfPipe newEnd = new EndOfPipe(p);
         p.endsOfPipe[1] = newEnd; // the cistern will be on the right.
         g.addPipe(p);
         newEnd.connectToElement(this);
+        if(g.testMode && g.testNumber == 7)
+        {
+            Pump toBeconnected = g.pumpList.get(2);
+            toBeconnected.connectablePipes.add(p);
+        }
         Pump toBeconnected = g.pumpList.get(0);
         toBeconnected.connectablePipes.add(p);
         System.out.println("A new Pipe Has been added");
@@ -56,7 +72,8 @@ public class Cistern extends Element {
     public void manufacturePump(Game g) {
         if(manufacturedPump == null)
         {
-            Pump temp = new Pump("New Pump");
+            numOfCreatedPumps++;
+            Pump temp = new Pump("New Pump " + numOfCreatedPumps);
             manufacturedPump = temp;
             g.addPump(temp);
             if(gameInstance.testMode && gameInstance.testNumber == 2)

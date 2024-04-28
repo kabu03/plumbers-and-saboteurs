@@ -16,13 +16,12 @@ Pump2
 10
 5
 1
-Pipe22
+Pipe2
 1
 Pump2
 2
-Pipe6
+Pump6
 5
-randomly breaks down--> now
 10
 5
 4

@@ -24,11 +24,14 @@ public class Saboteur extends Player {
     /**
      * Allows the Saboteur player to take their turn.
      * Displays available actions and prompts the player to choose one.
-     * Returns the chosen action as an integer.
+     *
      * Overrides the abstract takeTurn method of the Player class.
      *
-     * @return The integer representing the chosen action.
      * @author Basel Al-Raoush
+     *
+     * The method allows each player 2 actions to pick from in a 5-second interval for each turn.
+     *                    In essence in each turn the player has either 2 actions to perform within 5 seconds.
+     *@author Ibrahim Muheisen
      */
     @Override
     protected void takeTurn(Game g) {
@@ -114,18 +117,8 @@ public class Saboteur extends Player {
      * Attempts to puncture the specified pipe based on user input and certain conditions.
      * The method first checks if the pipe is in a working state. If it is, it then verifies
      * if the user is standing on the pipe. If both conditions are satisfied, the method
-     * sets the pipe's working status to false (punctured), potentially affects water flow,
-     * and increments leakage.
-     * <p>
-     * The method prompts the user for input to confirm the pipe's working status and the
-     * user's position relative to the pipe. If the pipe is not working or the user is not
-     * standing on it, the action is aborted with an explanatory message.
-     * </p>
-     *
-     * @param p1 The {@link Pipe} object to be punctured. This method directly modifies its
-     *           {@code works} property, and may call {@code decrementWater()} and
-     *           {@code incrementLeakage()} on it depending on the water level.
-     * @author Karam Abu Judom
+     * sets the pipe's working status to false (punctured).
+     * @author Ibrahim
      */
 
     public void puncture() {

@@ -30,11 +30,14 @@ public class Plumber extends Player {
     /**
      * Allows the Plumber player to take their turn.
      * Displays available actions and prompts the player to choose one.
-     * Returns the chosen action as an integer.
+     *
      * Overrides the abstract takeTurn method of the Player class.
      *
-     * @return The integer representing the chosen action.
+     *
      * @author Basel Al-Raoush
+     * The method allows each player 2 actions to pick from in a 5-second interval for each turn.
+     *                      In essence in each turn the player has either 2 actions to perform within 5 seconds.
+     * @author Ibrahim Muheisen
      */
     @Override
     protected void takeTurn(Game g) { // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
@@ -254,9 +257,8 @@ public class Plumber extends Player {
 
     /**
      * This method serves the purpose of fixing a punctured pipe.
-     * The user is asked about the condition of the pipe before the game proceeds with any action,
      * if the pipe is punctured the plumber is allowed to fix if he is standing on it, otherwise the action will be aborted.
-   //  * @param p will be the broken pipe to be fixed
+     * Conditions Checked: Plumber is occupying a pipe that has been punctured.
      * @author Ibrahim
      */
     public  void fixPipe() {
@@ -274,7 +276,9 @@ public class Plumber extends Player {
 
     /**
      * Method for picking up a pump that was manufactured at a cistern
-     //* @param p is the pump that will be picked up
+     * @param g1 is the Game instance
+     *  Conditions Checked: Currently occupying a Cistern.
+     *                      Whether the Cistern has a manufactured pump ready.
      * @author Ibrahim
      */
     public  void getPump(Game g1) {
@@ -288,16 +292,21 @@ public class Plumber extends Player {
         }
         pickedUpPump=((Cistern) currentElement).manufacturedPump;
         g1.pumpList.add(pickedUpPump);
-        System.out.print(playerName + "picked up" + ((Cistern) currentElement).manufacturedPump);
+        System.out.println(playerName + " picked up " + ((Cistern) currentElement).manufacturedPump.getName() + " from the Cistern.");
 
 
     }
 
     /**
      * Methods that inserts a pump that was obtained from a cistern, into the pipe grid.
-     * Pipe in which the pump is to be connected to, has to be specified.
-    / * @param pickedUpPump will be the inserted pump
-    / * @param pipe will be where the pump is inserted on
+     *
+     * @param g1 is the game instance.
+     * When called, the method will simulate the breaking of a pipe (currently occupied) into 2 new pipes.
+     *          initialized with the respective connectivity based on direction through EndOfPipe instances.
+     * In essence, the pump inserted (pickedUpPump) is inserted in the middle of the old pipe, where two new pipes simulate the 2 broken halves.
+     *           Connectivity with the new pump is also handled.
+     * Each element is also inserted into their respective element-lists, index accounted for when needed.
+     * Condition checks implemented to handle when the circumstance is not applicable.(!Currently occupying a pipe & !Having a pump picked up form a  cistern.)
      * @author Ibrahim
      *
      */
@@ -306,9 +315,8 @@ public class Plumber extends Player {
             if (currentElement instanceof Pipe) {
                 Pipe pipe = (Pipe) currentElement;
 
-                Pump newPump= new Pump("newPump"+newPumpCount);
+                Pump newPump;
                 newPump=pickedUpPump;
-                newPumpCount++;
                 Pipe newPipe1 = new Pipe("newPipe"+newPipecount);
                 newPipecount++;
                 Pipe newPipe2 = new Pipe("newPipe"+newPipecount);
@@ -319,12 +327,15 @@ public class Plumber extends Player {
                 EndOfPipe newEnd2A  = new EndOfPipe(newPipe2);
                 EndOfPipe newEnd2B  = new EndOfPipe(newPipe2);
 
-
-                newPipe1.endsOfPipe[0]=pipe.endsOfPipe[0];
+                if(pipe.endsOfPipe[0] != null) {
+                    newPipe1.endsOfPipe[0] = pipe.endsOfPipe[0];
+                }
                 newPipe1.endsOfPipe[0].setCurrentPipe(newPipe1);
                 newPipe1.endsOfPipe[1].setCurrentPipe(newPipe1);
-
-                newPipe2.endsOfPipe[1]=pipe.endsOfPipe[1];
+                if(pipe.endsOfPipe[1] != null) // in the test case pipe 6 has only one and we need to take that into consideration.
+                {
+                    newPipe2.endsOfPipe[1]=pipe.endsOfPipe[1];
+                }
                 newPipe2.endsOfPipe[1].setCurrentPipe(newPipe2);
                 newPipe2.endsOfPipe[0].setCurrentPipe(newPipe2);
 
@@ -334,8 +345,10 @@ public class Plumber extends Player {
                 pipe.setWorks(false);
                 int index = g1.pipeList.indexOf(pipe);
                 int index2 = g1.elementList.indexOf(pipe);
+                /* these are not needed since connectable list order does not effect anything
                 int index3 = pipe.endsOfPipe[0].getConnectedElement().connectablePipes.indexOf(pipe);
                 int index4= pipe.endsOfPipe[1].getConnectedElement().connectablePipes.indexOf(pipe);
+                 */
                 g1.elementList.remove(pipe);
                 g1.pipeList.remove(pipe);
 
@@ -345,12 +358,17 @@ public class Plumber extends Player {
                 g1.elementList.add(index2,newPipe1);
                 g1.elementList.add(index2+1,newPump);
                 g1.elementList.add(index2+2,newPipe2);
-
-                pipe.endsOfPipe[0].getConnectedElement().connectablePipes.remove(pipe);
-                pipe.endsOfPipe[1].getConnectedElement().connectablePipes.remove(pipe);
-
-                pipe.endsOfPipe[0].getConnectedElement().connectablePipes.add(index3,newPipe1);
-                pipe.endsOfPipe[1].getConnectedElement().connectablePipes.add(index4,newPipe2);
+                if(pipe.endsOfPipe[0] != null) {
+                    pipe.endsOfPipe[0].getConnectedElement().connectablePipes.remove(pipe);
+                }
+                if(pipe.endsOfPipe[1] != null) {
+                    pipe.endsOfPipe[1].getConnectedElement().connectablePipes.remove(pipe);
+                }
+                if(pipe.endsOfPipe[0] != null) {
+                    pipe.endsOfPipe[0].getConnectedElement().connectablePipes.add(newPipe1);
+                }
+                if(pipe.endsOfPipe[1] != null){
+                pipe.endsOfPipe[1].getConnectedElement().connectablePipes.add(newPipe2);}
 
                 newPipe1.endsOfPipe[1].connectToElement(newPump);
                 newPipe2.endsOfPipe[0].connectToElement(newPump);
@@ -361,7 +379,7 @@ public class Plumber extends Player {
                 g1.pumpList.add(newPump);
 
                 pickedUpPump=null;
-                System.out.println(playerName + "inserted a pump into "+ pipe.getName());
+                System.out.println(playerName + " inserted a pump into "+ pipe.getName() + ".");
 
             }
         else if(currentElement instanceof Pipe && pickedUpPump==null){
@@ -372,9 +390,9 @@ public class Plumber extends Player {
     }
 
     /**
-     * this method fixes a broken pump
-     //* @param pump this will be the element that we will fix.\
-     * @author Nafez
+     * this method fixes a broken pump.
+     * Conditions checked: Currently occupying a broken pump.
+     * @author Ibrahim
      */
     public void fixPump(){
         if (currentElement instanceof Pump) {
