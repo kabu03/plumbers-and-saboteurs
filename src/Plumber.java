@@ -82,7 +82,7 @@ public class Plumber extends Player {
                         case 3:
                             if (!Game.testMode)
                                 System.out.println("You chose: Insert pump into a pipe");
-                            // insertPump(g.pumpList.getFirst(), g.pipeList.get(0));
+                             insertPump(g);
                             actionstaken++;
 
                             break;
@@ -258,7 +258,7 @@ public class Plumber extends Player {
                 System.out.println(playerName + "fixed" + currentElement.getName());
             }
         }
-        if(currentElement instanceof Pipe && currentElement.getWorks()){
+        else if(currentElement instanceof Pipe && currentElement.getWorks()){
             System.out.println(playerName + "attempted to fix" + currentElement.getName() + ", but it's already working.");
         }else
             System.out.println("You need to be standing on a punctured pipe to fix it.");
@@ -291,14 +291,16 @@ public class Plumber extends Player {
     /**
      * Methods that inserts a pump that was obtained from a cistern, into the pipe grid.
      * Pipe in which the pump is to be connected to, has to be specified.
-     * @param pickedUpPump will be the inserted pump
-     * @param pipe will be where the pump is inserted on
+    / * @param pickedUpPump will be the inserted pump
+    / * @param pipe will be where the pump is inserted on
      * @author Ibrahim
      *
      */
-    public void insertPump(Pump pickedUpPump, Pipe pipe,Game g1){
+    public void insertPump(Game g1){
         if (pickedUpPump != null)
-            if (currentElement == pipe) {
+            if (currentElement instanceof Pipe) {
+                Pipe pipe = (Pipe) currentElement;
+
                 Pump newPump= new Pump("newPump"+newPumpCount);
                 newPump=pickedUpPump;
                 newPumpCount++;
@@ -357,13 +359,11 @@ public class Plumber extends Player {
                 System.out.println(playerName + "inserted a pump into "+ pipe.getName());
 
             }
-        if(currentElement==pipe && pickedUpPump==null){
+        else if(currentElement instanceof Pipe && pickedUpPump==null){
             System.out.println("You dont have pump picked up to insert here.");
         } else {
             System.out.println("You have to have picked up a pump and be standing on a pipe.");
         }
-
-
     }
 
     /**
@@ -378,7 +378,7 @@ public class Plumber extends Player {
                 System.out.println(playerName + "fixed" + currentElement.getName());
             }
         }
-        if(currentElement instanceof Pump && currentElement.getWorks()){
+       else if(currentElement instanceof Pump && currentElement.getWorks()){
             System.out.println(playerName + "attempted to fix" + currentElement.getName() + ", but it's already working.");
 
         }else
