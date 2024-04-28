@@ -41,22 +41,23 @@ public class Pump extends Element {
     }
 
     @Override
-    public void update() { // shouldn't it actually send water from the inPipe to the outPipe?
-        if(workingTurns == 0)
+    public void update() {
+        if(inPipe == null && outPipe == null)
         {
-            setWorks(false);
+            ;
         }
-        else
-        {
-            workingTurns--;
-        }
-        if(!inPipe.getWorks() & isWorking())
-        {
-            decrementWater();
-        }
-        if(isWorking() && getWaterLevel() >= 2)
-        {
-            outPipe.incrementWater();
+        else {
+            if (workingTurns == 0) {
+                setWorks(false);
+            } else {
+                workingTurns--;
+            }
+            if (!inPipe.getWorks() & isWorking()) {
+                decrementWater();
+            }
+            if (isWorking() && getWaterLevel() >= 2) {
+                outPipe.incrementWater();
+            }
         }
     }
 }

@@ -475,10 +475,17 @@ public class Game {
         System.out.println("The game and timer have started!");
 
         while (!timer.isGameOver()) {
+            int elementListSize = elementList.size();
+            int i = 0;
             Player currentPlayer = players[currentPlayerIndex];
             currentPlayer.takeTurn(this);
                 for (Element e : elementList) {
+                    i++;
                     e.update();
+                    if(i == elementListSize)
+                    {
+                        break;
+                    }
                 }
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
         }

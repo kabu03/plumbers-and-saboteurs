@@ -15,6 +15,10 @@ public class Cistern extends Element {
         super(n);
         gameInstance = g;
         setMaxCapacity(Integer.MAX_VALUE);
+        if(gameInstance.testMode && gameInstance.testNumber == 2)
+        {
+            turnsUntilPumpReady = 0;
+        }
     }
 
     Random rand = new Random();
@@ -30,17 +34,15 @@ public class Cistern extends Element {
      */
     private int turnsUntilPumpReady = rand.nextInt(10,23); // we can decide on this later.
     public Pump manufacturedPump = null;
-
     /**
      * Initiates the manufacturing process for a new pipe.
      * @author: Basel Al-Raoush
      */
     public void manufacturePipe(Game g) {
-        // init logic
         Pipe p = new Pipe("New Pipe " + numOfcreatedPipes + 1);
         EndOfPipe newEnd = new EndOfPipe(p);
         p.endsOfPipe[1] = newEnd; // the cistern will be on the right.
-        g.pipeList.add(p); // we should add it to both pipeList and elementList, so use addPipe method
+        g.addPipe(p);
         newEnd.connectToElement(this);
         Pump toBeconnected = g.pumpList.get(0);
         toBeconnected.connectablePipes.add(p);
@@ -57,7 +59,13 @@ public class Cistern extends Element {
             Pump temp = new Pump("New Pump");
             manufacturedPump = temp;
             g.addPump(temp);
-            System.out.println("A new Pump Has been Manufactured at the cistern");
+            if(gameInstance.testMode && gameInstance.testNumber == 2)
+            {
+                ;
+            }
+            else {
+                System.out.println("A new Pump Has been Manufactured at the cistern");
+            }
         }
     }
 
@@ -68,14 +76,14 @@ public class Cistern extends Element {
         if(turnsUntilPipeReady == 0)
         {
             manufacturePipe(gameInstance);
-            turnsUntilPipeReady = rand.nextInt(8,22);
+            turnsUntilPipeReady = rand.nextInt(25,50);
             decrementPipeTurns = false;
             numOfcreatedPipes++;
         }
         if(turnsUntilPumpReady == 0)
         {
             manufacturePump(gameInstance);
-            turnsUntilPumpReady = rand.nextInt(8,22);
+            turnsUntilPumpReady = rand.nextInt(10,23);
             decrementPumpTurns = false;
         }
         if(decrementPipeTurns)

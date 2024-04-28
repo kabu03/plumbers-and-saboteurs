@@ -17,6 +17,7 @@ public class EndOfPipe {
             if(p.endsOfPipe[i] == null)
             {
                 p.endsOfPipe[i] = this;
+                break;
             }
         }
     }
