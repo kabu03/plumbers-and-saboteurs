@@ -76,7 +76,7 @@ public class Plumber extends Player {
                         case 2:
                             if (!Game.testMode)
                                 System.out.println("You chose: Pick up a pump");
-                            // getPump(g.pumpList.getFirst());
+                             getPump(g);
                             actionstaken++;
                             break;
                         case 3:
@@ -89,13 +89,13 @@ public class Plumber extends Player {
                         case 4:
                             if (!Game.testMode)
                                 System.out.println("You chose: Fix a broken pump");
-                            // fixPump(g.pumpList.getFirst());
+                             fixPump();
                             actionstaken++;
                             break;
                         case 5:
                             if (!Game.testMode)
                                 System.out.println("You chose: Fix a broken pipe");
-                            fixPipe(g.pipeList.get(0));
+                            fixPipe();
                             actionstaken++;
                             break;
                         case 6:
@@ -248,18 +248,18 @@ public class Plumber extends Player {
      * This method serves the purpose of fixing a punctured pipe.
      * The user is asked about the condition of the pipe before the game proceeds with any action,
      * if the pipe is punctured the plumber is allowed to fix if he is standing on it, otherwise the action will be aborted.
-     * @param p will be the broken pipe to be fixed
+   //  * @param p will be the broken pipe to be fixed
      * @author Ibrahim
      */
-    public  void fixPipe(Pipe p){
-        if (Objects.equals(currentElement, p)) {
-            if (!p.getWorks()) {
-                p.setWorks(true);
-                System.out.println(playerName + "fixed" + p.getName());
+    public  void fixPipe(){
+        if (currentElement instanceof Pipe) {
+            if (!currentElement.getWorks()) {
+                currentElement.setWorks(true);
+                System.out.println(playerName + "fixed" + currentElement.getName());
             }
         }
-        if(currentElement == p && p.getWorks()){
-            System.out.println(playerName + "attempted to fix" + p.getName() + ", but it's already working.");
+        if(currentElement instanceof Pipe && currentElement.getWorks()){
+            System.out.println(playerName + "attempted to fix" + currentElement.getName() + ", but it's already working.");
         }else
             System.out.println("You need to be standing on a punctured pipe to fix it.");
 
@@ -269,10 +269,10 @@ public class Plumber extends Player {
 
     /**
      * Method for picking up a pump that was manufactured at a cistern
-     * @param p is the pump that will be picked up
+     //* @param p is the pump that will be picked up
      * @author Ibrahim
      */
-    public  void getPump(Pump p) {
+    public  void getPump(Game g1) {
         if(!(currentElement instanceof Cistern)){
             System.out.println("You are not on a Cistern, move to a cistern with a manufactured pump to pick it up");
             return;
@@ -282,6 +282,7 @@ public class Plumber extends Player {
             return;
         }
         pickedUpPump=((Cistern) currentElement).manufacturedPump;
+        g1.pumpList.add(pickedUpPump);
         System.out.print(playerName + "picked up" + ((Cistern) currentElement).manufacturedPump);
 
 
@@ -350,6 +351,8 @@ public class Plumber extends Player {
                 newPump.connectedPipes.add(newPipe1);
                 newPump.connectedPipes.add(newPipe2);
 
+                g1.pumpList.add(newPump);
+
                 pickedUpPump=null;
                 System.out.println(playerName + "inserted a pump into "+ pipe.getName());
 
@@ -365,18 +368,18 @@ public class Plumber extends Player {
 
     /**
      * this method fixes a broken pump
-     * @param pump this will be the element that we will fix.\
+     //* @param pump this will be the element that we will fix.\
      * @author Nafez
      */
-    public void fixPump(Pump pump){
-        if (Objects.equals(currentElement, pump)) {
-            if (!pump.getWorks()) {
-                pump.setWorks(true);
-                System.out.println(playerName + "fixed" + pump.getName());
+    public void fixPump(){
+        if (currentElement instanceof Pump) {
+            if (!currentElement.getWorks()) {
+                currentElement.setWorks(true);
+                System.out.println(playerName + "fixed" + currentElement.getName());
             }
         }
-        if(currentElement == pump && pump.getWorks()){
-            System.out.println(playerName + "attempted to fix" + pump.getName() + ", but it's already working.");
+        if(currentElement instanceof Pump && currentElement.getWorks()){
+            System.out.println(playerName + "attempted to fix" + currentElement.getName() + ", but it's already working.");
 
         }else
             System.out.println("You need to be standing on a broken pump to fix it.");
