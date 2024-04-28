@@ -30,11 +30,14 @@ public class Plumber extends Player {
     /**
      * Allows the Plumber player to take their turn.
      * Displays available actions and prompts the player to choose one.
-     * Returns the chosen action as an integer.
+     *
      * Overrides the abstract takeTurn method of the Player class.
      *
-     * @return The integer representing the chosen action.
+     *
      * @author Basel Al-Raoush
+     * The method allows each player 2 actions to pick from in a 5-second interval for each turn.
+     *                      In essence in each turn the player has either 2 actions to perform within 5 seconds.
+     * @author Ibrahim Muheisen
      */
     @Override
     protected void takeTurn(Game g) { // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
@@ -246,9 +249,8 @@ public class Plumber extends Player {
 
     /**
      * This method serves the purpose of fixing a punctured pipe.
-     * The user is asked about the condition of the pipe before the game proceeds with any action,
      * if the pipe is punctured the plumber is allowed to fix if he is standing on it, otherwise the action will be aborted.
-   //  * @param p will be the broken pipe to be fixed
+     * Conditions Checked: Plumber is occupying a pipe that has been punctured.
      * @author Ibrahim
      */
     public  void fixPipe() {
@@ -266,7 +268,9 @@ public class Plumber extends Player {
 
     /**
      * Method for picking up a pump that was manufactured at a cistern
-     //* @param p is the pump that will be picked up
+     * @param g1 is the Game instance
+     *  Conditions Checked: Currently occupying a Cistern.
+     *                      Whether the Cistern has a manufactured pump ready.
      * @author Ibrahim
      */
     public  void getPump(Game g1) {
@@ -287,9 +291,14 @@ public class Plumber extends Player {
 
     /**
      * Methods that inserts a pump that was obtained from a cistern, into the pipe grid.
-     * Pipe in which the pump is to be connected to, has to be specified.
-    / * @param pickedUpPump will be the inserted pump
-    / * @param pipe will be where the pump is inserted on
+     *
+     * @param g1 is the game instance.
+     * When called, the method will simulate the breaking of a pipe (currently occupied) into 2 new pipes.
+     *          initialized with the respective connectivity based on direction through EndOfPipe instances.
+     * In essence, the pump inserted (pickedUpPump) is inserted in the middle of the old pipe, where two new pipes simulate the 2 broken halves.
+     *           Connectivity with the new pump is also handled.
+     * Each element is also inserted into their respective element-lists, index accounted for when needed.
+     * Condition checks implemented to handle when the circumstance is not applicable.(!Currently occupying a pipe & !Having a pump picked up form a  cistern.)
      * @author Ibrahim
      *
      */
@@ -373,9 +382,9 @@ public class Plumber extends Player {
     }
 
     /**
-     * this method fixes a broken pump
-     //* @param pump this will be the element that we will fix.\
-     * @author Nafez
+     * this method fixes a broken pump.
+     * Conditions checked: Currently occupying a broken pump.
+     * @author Ibrahim
      */
     public void fixPump(){
         if (currentElement instanceof Pump) {
