@@ -1,4 +1,5 @@
 /* added a game instance attribute for cistern class
+Added two new attributes numOfCreatedPipes and numOfCreatedPumps
 */
 
 import java.util.ArrayList;
@@ -31,7 +32,13 @@ public class Cistern extends Element {
     }
 
     Random rand = new Random();
+    /**
+     * attribute that keeps track of how many pipes were manufactured by the cistern
+     */
     private int numOfcreatedPipes = 0;
+    /**
+     * attribute that keeps track of how many pumps were manufactured by the cistern
+     */
     private int numOfCreatedPumps = 0;
     private final Game gameInstance;
     /**
@@ -86,6 +93,9 @@ public class Cistern extends Element {
         }
     }
 
+    /**
+     *Updates the status of manufacturing timers and triggers manufacturing processes for pipes and pumps
+     */
     @Override
     public void update() {
         boolean decrementPumpTurns = true;

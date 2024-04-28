@@ -3,7 +3,8 @@ Getter and Setter method for Works attribute
 Setter For maxCapacity attribute
 Getter for standable attribute
 Made connectedPipes Array public.
-Setter For maxConnectablePipes
+Setter and getter For maxConnectablePipes
+Added A new name attribute
  */
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public abstract class Element {
     /**
      * An integer that represents the maximum number of pipes that can be theoretically connected to an element.
      */
-    private int maxConnectablePipes; // this will be different depending on the element.
+    private int maxConnectablePipes;
     /**
      * A boolean that indicates whether the element can be stood upon.
      */
@@ -95,45 +96,91 @@ public abstract class Element {
     /**
      * Sets the occupied status of an element.
      */
-    public void setOccupied(boolean bool){
+    /**
+     * Sets the occupied status of the element.
+     * @param bool true if the element is to be occupied, false otherwise.
+     */
+    public void setOccupied(boolean bool) {
         occupied = bool;
     }
-    public int getMaxCapacity(){
+
+    /**
+     * Returns the maximum water capacity of the element.
+     * @return The maximum water capacity.
+     */
+    public int getMaxCapacity() {
         return maxCapacity;
     }
-    public int getWaterLevel(){
+
+    /**
+     * Retrieves the current water level in the element.
+     * @return The current water level.
+     */
+    public int getWaterLevel() {
         return waterLevel;
     }
-    public abstract void update(); // it is an abstract method.
-    public void setStandable(boolean bool){
+
+    /**
+     * An abstract method to be implemented by subclasses for element-specific updates.
+     */
+    public abstract void update();
+
+    /**
+     * Sets the standability of the element.
+     * @param bool true if the element can be stood upon, false otherwise.
+     */
+    public void setStandable(boolean bool) {
         standable = bool;
     }
-    // Added  a getter and a setter for Works
-    public boolean getWorks()
-    {
+
+    /**
+     * Retrieves the working status of the element.
+     * @return true if the element is working, otherwise false.
+     */
+    public boolean getWorks() {
         return works;
     }
-    // i think this will be used in puncture.
-    public void setWorks(boolean bool)
-    {
+
+    /**
+     * Sets the working status of the element.
+     * @param bool true if the element is to be set as working, false if not.
+     */
+    public void setWorks(boolean bool) {
         works = bool;
     }
-    public void setMaxCapacity(int value)
-    {
+
+    /**
+     * Sets the maximum water capacity of the element.
+     * @param value the maximum water capacity to set.
+     */
+    public void setMaxCapacity(int value) {
         maxCapacity = value;
     }
-    public boolean getStandable()
-    {
+
+    /**
+     * Retrieves whether the element can be stood upon.
+     * @return true if the element can be stood upon, otherwise false.
+     */
+    public boolean getStandable() {
         return standable;
     }
-    public void setMaxConnectablePipes(int value)
-    {
+
+    /**
+     * Sets the maximum number of connectable pipes to the element.
+     * @param value the maximum number of pipes that can be connected.
+     */
+    public void setMaxConnectablePipes(int value) {
         maxConnectablePipes = value;
     }
-    public int getMaxConnectablePipes()
-    {
+
+    /**
+     * Gets the maximum number of connectable pipes for the element.
+     * @return The maximum number of connectable pipes.
+     */
+    public int getMaxConnectablePipes() {
         return maxConnectablePipes;
     }
+
 }
 
 
