@@ -201,7 +201,7 @@ public class Plumber extends Player {
             if (end != null) {
                 end.disconnectFromElement(e); // This should handle both the element and pipe updates
                 pickedUpEoP = end;
-                System.out.println(playerName + " picked up the end of " + selectedPipe.getName());
+                System.out.println(playerName + " picked up the end of " + selectedPipe.getName()+" connected to "+ currentElement.getName());
                 return;
             }
         }
@@ -285,7 +285,7 @@ public class Plumber extends Player {
                 pickedUpEoP = null; // Clear the picked up end of pipe after insertion
 
                 if (Game.testMode) {
-                    System.out.println(playerName + " inserted the end of pipe to " + selectedPipe.getName());
+                    System.out.println(playerName + " inserted the end of pipe into " + selectedPipe.getName());
                 }
                 return;
             }
