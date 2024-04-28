@@ -175,16 +175,18 @@ public class Plumber extends Player {
             return;
         }
 
-        // List connected pipes
-        System.out.println("Connected pipes to " + e.getName() + ":");
-        if (e.connectedPipes.isEmpty()) {
-            System.out.println("There are no connected pipes.");
-            return;
-        }
-        e.connectedPipes.forEach(pipe -> System.out.println(pipe.getName()));
+        if (!Game.testMode) {
+            // List connected pipes
+            System.out.println("Connected pipes to " + e.getName() + ":");
+            if (e.connectedPipes.isEmpty()) {
+                System.out.println("There are no connected pipes.");
+                return;
+            }
+            e.connectedPipes.forEach(pipe -> System.out.println(pipe.getName()));
 
-        // Get user input on which pipe to manipulate
-        System.out.print("Enter the name of the pipe to pick up an end from: ");
+            // Get user input on which pipe to manipulate
+            System.out.print("Enter the name of the pipe to pick up an end from: ");
+        }
         String pipeName = Game.scanner.nextLine();
         Pipe selectedPipe = e.connectedPipes.stream()
                 .filter(pipe -> pipe.getName().equals(pipeName))
@@ -246,16 +248,18 @@ public class Plumber extends Player {
             return;
         }
 
-        // List the connectable pipes that are not yet fully connected
-        if (e.connectablePipes.isEmpty()) {
-            System.out.println("There are no connectable pipes available at this element.");
-            return;
-        }
-        System.out.println("Connectable pipes:");
-        e.connectablePipes.forEach(pipe -> System.out.println(pipe.getName()));
+        if (!Game.testMode) {
+            // List the connectable pipes that are not yet fully connected
+            if (e.connectablePipes.isEmpty()) {
+                System.out.println("There are no connectable pipes available at this element.");
+                return;
+            }
+            System.out.println("Connectable pipes:");
+            e.connectablePipes.forEach(pipe -> System.out.println(pipe.getName()));
 
-        // Get user input on which pipe to connect the end to
-        System.out.print("Enter the name of the pipe to insert the end into: ");
+            // Get user input on which pipe to connect the end to
+            System.out.print("Enter the name of the pipe to insert the end into: ");
+        }
         String pipeName = Game.scanner.nextLine();
         Pipe selectedPipe = e.connectablePipes.stream()
                 .filter(pipe -> pipe.getName().equals(pipeName))

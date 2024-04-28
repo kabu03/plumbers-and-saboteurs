@@ -70,7 +70,8 @@ public class Cistern extends Element {
         }
         Pump toBeconnected = g.pumpList.get(0);
         toBeconnected.connectablePipes.add(p);
-        System.out.println("A new Pipe Has been added");
+        if (!Game.testMode) {
+        System.out.println("A new Pipe Has been added"); }
     }
 
     /**
