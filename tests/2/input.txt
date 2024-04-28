@@ -8,34 +8,34 @@ Saboteur 2
 1
 3
 1
-pump 3
+Pump3
 5
 10
 5
 1
-pipe 7
+Pipe7
 1
-pump 4
+Pump4
 5
 10
 5
 1
-pipe 8
+Pipe8
 1
-cistern
+Cistern
 5
 10
 5
 2
 1
-pipe 8
+Pipe8
 5
 10
 5
 1
-pump 4
+Pump4
 1
-pipe 6
+Pipe6
 5
 10
 5

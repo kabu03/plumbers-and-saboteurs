@@ -6,25 +6,25 @@ Plumber 2
 Saboteur 1
 Saboteur 2
 1
-pipe 1
+Pipe1
 1
-pump 1
+Pump1
 1
-pipe 3
+Pipe3
 1
-pump 2
+Pump2
 10
 5
 1
-pipe 2
+Pipe22
 1
-pump 2
+Pump2
 2
-pipe 6
+Pipe6
 5
 randomly breaks down--> now
 10
 5
 4
 2
-pipe 2
+Pipe2

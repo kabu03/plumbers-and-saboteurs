@@ -393,7 +393,7 @@ public class Game {
                 for (Element e : elementList) {
                     i++;
                     e.update();
-                    if(i == elementListSize)
+                    if(i == elementListSize) // DO NOT CHANGE THIS, VERY IMPORTANT - MAJED.
                     {
                         break;
                     }
