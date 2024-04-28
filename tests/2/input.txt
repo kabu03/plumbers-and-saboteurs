@@ -6,7 +6,7 @@ Plumber 2
 Saboteur 1
 Saboteur 2
 1
-pipe 4
+3
 1
 pump 3
 5

@@ -37,29 +37,29 @@ public abstract class Player {
      */
     protected void changeInputPipe(Game game) {
         if (!(currentElement instanceof Pump currentPump)) {
-            System.out.println("You are not currently on a pump. Move to a pump first.");
+            if (!Game.testMode)  System.out.println("You are not currently on a pump. Move to a pump first.");
             return;
         }
 
-        System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
+        if (!Game.testMode) System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
         List<Pipe> connectablePipes = currentPump.connectablePipes;
         for (int i = 0; i < connectablePipes.size(); i++) {
-            System.out.println((i + 1) + ". " + connectablePipes.get(i).getName());
+            if (!Game.testMode)    System.out.println((i + 1) + ". " + connectablePipes.get(i).getName());
         }
 
-        System.out.println("Select the number of the pipe to set as the new input pipe:");
+        if (!Game.testMode) System.out.println("Select the number of the pipe to set as the new input pipe:");
         int pipeNumber;
         try {
             pipeNumber = Integer.parseInt(Game.scanner.nextLine());
             if (pipeNumber < 1 || pipeNumber > connectablePipes.size()) {
-                System.out.println("Invalid input. Select a number listed above.");
+                if (!Game.testMode)    System.out.println("Invalid input. Select a number listed above.");
             } else {
                 Pipe selectedPipe = connectablePipes.get(pipeNumber - 1);
                 currentPump.inPipe = selectedPipe; // Setting the selected pipe as new input pipe
                 System.out.println("New input pipe set to: " + selectedPipe.getName());
             }
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a number.");
+            if (!Game.testMode)   System.out.println("Invalid input. Please enter a number.");
         }
     }
 
@@ -73,29 +73,29 @@ public abstract class Player {
      */
     protected void changeOutputPipe(Game game) {
         if (!(currentElement instanceof Pump currentPump)) {
-            System.out.println("You are not currently on a pump. Move to a pump first.");
+            if (!Game.testMode)  System.out.println("You are not currently on a pump. Move to a pump first.");
             return;
         }
 
-        System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
+        if (!Game.testMode) System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
         List<Pipe> connectablePipes = currentPump.connectablePipes;
         for (int i = 0; i < connectablePipes.size(); i++) {
-            System.out.println((i + 1) + ". " + connectablePipes.get(i).getName());
+            if (!Game.testMode) System.out.println((i + 1) + ". " + connectablePipes.get(i).getName());
         }
 
-        System.out.println("Select the number of the pipe to set as the new output pipe:");
+        if (!Game.testMode) System.out.println("Select the number of the pipe to set as the new output pipe:");
         int pipeNumber;
         try {
             pipeNumber = Integer.parseInt(Game.scanner.nextLine());
             if (pipeNumber < 1 || pipeNumber > connectablePipes.size()) {
-                System.out.println("Invalid input. Select a number listed above.");
+                if (!Game.testMode)    System.out.println("Invalid input. Select a number listed above.");
             } else {
                 Pipe selectedPipe = connectablePipes.get(pipeNumber - 1);
                 currentPump.outPipe = selectedPipe; // Setting the selected pipe as new output pipe
                 System.out.println("New output pipe set to: " + selectedPipe.getName());
             }
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a number.");
+            if (!Game.testMode)  System.out.println("Invalid input. Please enter a number.");
         }
     }
 

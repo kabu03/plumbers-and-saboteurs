@@ -12,3 +12,21 @@ Saboteur 2 was automatically placed in the Saboteurs team.
 Initializing the game...
 The game’s elements have been initialized successfully.
 The game and timer have started!
+Plumber 1 moved to Pipe1
+Plumber 1 moved to Pump1
+Saboteur 1 moved to Pipe3
+Saboteur 1 moved to Pump2
+Player Plumber 2 passed their turn.
+Player Saboteur 2 passed their turn.
+Player Plumber 1 passed their turn.
+Saboteur 1 moved to Pipe2
+You have to be standing on a working pipe to puncture it.
+Player Plumber 2 passed their turn.
+Player Saboteur 2 passed their turn.
+Player Plumber 1 passed their turn.
+Saboteur 1 moved to Pump2
+Saboteur 1 moved to Pipe6
+Player Plumber 2 passed their turn.
+Player Saboteur 2 passed their turn.
+Plumber 1 moved to Pipe2
+You need to be standing on a punctured pipe to fix it.

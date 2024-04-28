@@ -54,7 +54,7 @@ public class Saboteur extends Player {
             while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
 
                 try {
-                    if (System.in.available() > 0) {
+                    if (System.in.available() > 0 || Game.testMode) {
                         int choice = Integer.parseInt(Game.scanner.nextLine());
                     switch (choice) {
                         case 1:
@@ -86,7 +86,7 @@ public class Saboteur extends Player {
                                 System.out.println("You chose: Pass Turn");
                             passflag = true;
                             passTurn();
-                            break;
+                            return;
                         case 6:
                             if (!Game.testMode)
                                 System.out.println("You chose: End the game");
