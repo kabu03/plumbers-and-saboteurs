@@ -23,9 +23,16 @@ public abstract class Element {
         connectedPipes = new ArrayList<>();
         connectablePipes = new ArrayList<>();
     }
-
+    /**
+     * A Property to get the names of the element
+     * @author Nafez Mousa Sayyad
+     */
     private final String name;
     public String getName(){return name;}
+
+    /** a public list that contains all the connectable pipes in the map
+     * @author Nafez Mousa Sayyad
+     */
     public List<Pipe> connectablePipes;
     /**
      * A boolean that indicates whether the element is currently occupied by a player or not.

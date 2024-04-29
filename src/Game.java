@@ -171,51 +171,150 @@ public class Game {
             Spring s1 = new Spring("Spring");
             addSpring(s1);
 
-// Creating the upper pipe and connecting it to the spring.
-            Pipe upperPipe = new Pipe("Upper Pipe");
-            EndOfPipe p1upper = new EndOfPipe(upperPipe);
-            EndOfPipe p2upper = new EndOfPipe(upperPipe);
-            s1.connectablePipes.add(upperPipe);
-            p1upper.connectToElement(s1);
-            addPipe(upperPipe);
-
-// Creating the upper pump, connecting it to the upper pipe
-            Pump upperPump = new Pump("Upper Pump");
-            upperPump.connectablePipes.add(upperPipe);
-            upperPump.inPipe = upperPipe; // Set inPipe as the first connected pipe
-            p2upper.connectToElement(upperPump);
-            addPump(upperPump);
-
-// Creating the middle pipe, connecting it to the upper pump
-            Pipe middlePipe = new Pipe("Middle Pipe");
-            EndOfPipe p1middle = new EndOfPipe(middlePipe);
-            EndOfPipe p2middle = new EndOfPipe(middlePipe);
-            addPipe(middlePipe);
-            upperPump.connectablePipes.add(middlePipe);
-            upperPump.outPipe = middlePipe; // Set outPipe as the second connected pipe
-            p1middle.connectToElement(upperPump);
-
-// Creating the lower pump, connecting it to the middle pipe
-            Pump lowerPump = new Pump("Lower Pump");
-            lowerPump.connectablePipes.add(middlePipe);
-            lowerPump.inPipe = middlePipe; // Set inPipe as the first connected pipe
-            p2middle.connectToElement(lowerPump);
-            addPump(lowerPump);
-
-// Creating the lower pipe, connecting it to the lower pump
-            Pipe lowerPipe = new Pipe("Lower Pipe");
-            EndOfPipe p1lower = new EndOfPipe(lowerPipe);
-            EndOfPipe p2lower = new EndOfPipe(lowerPipe);
-            addPipe(lowerPipe);
-            lowerPump.connectablePipes.add(lowerPipe);
-            lowerPump.outPipe = lowerPipe; // Set outPipe as the second connected pipe
-            p1lower.connectToElement(lowerPump);
-
-// Creating the cistern, connecting it to the lower pipe
+            //creating the Cistern
             Cistern cistern = new Cistern("Cistern", this);
+
+            // Creating pipes
+            Pipe Pipe1 = new Pipe("Pipe1");
+            Pipe Pipe2 = new Pipe("Pipe2");
+            Pipe Pipe3 = new Pipe("Pipe3");
+            Pipe Pipe4 = new Pipe("Pipe4");
+            Pipe Pipe5 = new Pipe("Pipe5");
+            Pipe Pipe6 = new Pipe("Pipe6");
+            Pipe Pipe7 = new Pipe("Pipe7");
+            Pipe Pipe8 = new Pipe("Pipe8");
+            Pipe NewPipe1 = new Pipe("NewPipe1");
+
+            // Creating ends of pipes
+            EndOfPipe EoP1pipe1 = new EndOfPipe(Pipe1);
+            EndOfPipe EoP2pipe1 = new EndOfPipe(Pipe1);
+
+            EndOfPipe EoP1pipe2 = new EndOfPipe(Pipe2);
+            EndOfPipe EoP2pipe2 = new EndOfPipe(Pipe2);
+
+            EndOfPipe EoP1pipe3 = new EndOfPipe(Pipe3);
+            EndOfPipe EoP2pipe3 = new EndOfPipe(Pipe3);
+
+            EndOfPipe EoP1pipe4 = new EndOfPipe(Pipe4);
+            EndOfPipe EoP2pipe4 = new EndOfPipe(Pipe4);
+
+            EndOfPipe EoP1pipe5 = new EndOfPipe(Pipe5);
+            EndOfPipe EoP2pipe5 = new EndOfPipe(Pipe5);
+
+            // only one end of pipe for pipe 6
+            EndOfPipe EoP1pipe6 = new EndOfPipe(Pipe6);
+
+            EndOfPipe EoP1pipe7 = new EndOfPipe(Pipe7);
+            EndOfPipe EoP2pipe7 = new EndOfPipe(Pipe7);
+
+            EndOfPipe EoP1pipe8 = new EndOfPipe(Pipe8);
+            EndOfPipe EoP2pipe8 = new EndOfPipe(Pipe8);
+
+            EndOfPipe EoP1NewPipe1 = new EndOfPipe(NewPipe1);
+
+
+            // Creating pumps
+            Pump Pump1 = new Pump("Pump1");
+            Pump Pump2 = new Pump("Pump2");
+            Pump Pump3 = new Pump("Pump3");
+            Pump Pump4 = new Pump("Pump4");
+
+
+
+            //connecting pipe1 to the spring
+            s1.connectablePipes.add(Pipe1);
+            EoP1pipe1.connectToElement(s1);
+            addPipe(Pipe1);
+
+
+            //connecting pipe4 to the spring
+            s1.connectablePipes.add(Pipe4);
+            EoP1pipe4.connectToElement(s1);
+            addPipe(Pipe4);
+
+
+            //connecting pipe1 to pump1
+            Pump1.connectablePipes.add(Pipe1);
+            Pump1.inPipe = Pipe1;
+            EoP2pipe1.connectToElement(Pump1);
+            addPump(Pump1);
+
+
+            //connecting pipe4 to pump3
+            Pump3.connectablePipes.add(Pipe4);
+            Pump3.inPipe = Pipe4;
+            EoP2pipe4.connectToElement(Pump3);
+            addPump(Pump3);
+
+
+            //connecting pipe5 to pump1 and pump3
+            Pump1.connectablePipes.add(Pipe5);
+            Pump3.connectablePipes.add(Pipe5);
+            EoP1pipe5.connectToElement(Pump1);
+            EoP2pipe5.connectToElement(Pump3);
+            addPipe(Pipe5);
+
+
+
+            //connecting pipe2 to pump1
+            Pump1.connectablePipes.add(Pipe2);
+            Pump1.outPipe = Pipe2;
+            EoP1pipe2.connectToElement(Pump1);
+            addPipe(Pipe2);
+
+
+            //connecting pipe7 to pump3
+            Pump3.connectablePipes.add(Pipe7);
+            Pump3.outPipe = Pipe7;
+            EoP1pipe7.connectToElement(Pump3);
+            addPipe(Pipe7);
+
+
+            //connecting pipe2 to pump2
+            Pump2.connectablePipes.add(Pipe2);
+            Pump2.inPipe = Pipe2;
+            EoP2pipe2.connectToElement(Pump2);
+            Pump2.connectablePipes.add(NewPipe1);
+            addPump(Pump2);
+
+
+
+
+            //connecting pipe7 to pump4
+            Pump4.connectablePipes.add(Pipe7);
+            Pump4.inPipe = Pipe7;
+            EoP2pipe7.connectToElement(Pump4);
+            addPump(Pump4);
+
+
+            //connecting pipe6 to pump2 and pump4
+            Pump2.connectablePipes.add(Pipe6);
+            Pump4.connectablePipes.add(Pipe6);
+            EoP1pipe6.connectToElement(Pump2);
+            addPipe(Pipe6);
+
+
+
+            //connecting pipe3 to pump2
+            Pump2.connectablePipes.add(Pipe3);
+            EoP1pipe3.connectToElement(Pump2);
+            Pump2.outPipe = Pipe3;
+            addPipe(Pipe3);
+
+            //connecting pipe8 to pump4
+            Pump4.connectablePipes.add(Pipe8);
+            EoP1pipe8.connectToElement(Pump4);
+            Pump4.outPipe = Pipe8;
+            addPipe(Pipe8);
+
+            //connecting pipe3 and pipe8 to the cistern
+            cistern.connectablePipes.add(Pipe3);
+            cistern.connectablePipes.add(Pipe8);
+            EoP2pipe3.connectToElement(cistern);
+            EoP2pipe8.connectToElement(cistern);
+            cistern.connectablePipes.add(NewPipe1);
+            EoP1NewPipe1.connectToElement(cistern);
             addCistern(cistern);
-            cistern.connectablePipes.add(lowerPipe);
-            p2lower.connectToElement(cistern);
 
         }
 
