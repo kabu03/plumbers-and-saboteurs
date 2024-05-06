@@ -17,6 +17,7 @@ public class Plumber extends Player {
 
     public Plumber(String playerName) {
         this.playerName = playerName;
+        // set initial position to Springs
     }
 
     public int newPipecount=1;
@@ -41,93 +42,64 @@ public class Plumber extends Player {
         long turnStartTime = System.currentTimeMillis();
         long turnDuration = 5000; //
 
-        if (!Game.testMode) {
-            System.out.println("model.Player " + playerName + ", it's your turn.");
-            System.out.println("What action would you like to perform?");
-            System.out.println("Available actions for Plumbers:");
-            System.out.println("1. Move to an element");
-            System.out.println("2. Pick up a pump");
-            System.out.println("3. Insert pump into a pipe");
-            System.out.println("4. Fix a broken pump");
-            System.out.println("5. Fix a broken pipe");
-            System.out.println("6. Pick up the end of a pipe");
-            System.out.println("7. Insert the end of a pipe");
-            System.out.println("8. Change the input pipe of a pump");
-            System.out.println("9. Change the output pipe of a pump");
-            System.out.println("10. Pass Turn");
-            System.out.println("11. End the game");
-            System.out.print("Enter the number corresponding to your choice: ");
-        }
 
         while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
             // Check if input is available
-            try {
-                if (System.in.available() > 0 || Game.testMode) {
-                    int choice = Integer.parseInt(Game.scanner.nextLine());
+
+                    int choice = 3; // temporarily set to 3 to enter the loop
                     switch (choice) {
                         case 1:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Move to an element");
                             move(g);
                             actionstaken++;
                             break;
                         case 2:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Pick up a pump");
                              getPump(g);
                             actionstaken++;
                             break;
                         case 3:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Insert pump into a pipe");
                              insertPump(g);
                             actionstaken++;
 
                             break;
                         case 4:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Fix a broken pump");
                              fixPump();
                             actionstaken++;
                             break;
                         case 5:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Fix a broken pipe");
                             fixPipe();
                             actionstaken++;
                             break;
                         case 6:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Pick up the end of a pipe");
                             getEnd(currentElement);
                             actionstaken++;
                             break;
                         case 7:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Insert the end of a pipe");
                             insertPipeEnd(currentElement);
                             actionstaken++;
                             break;
                         case 8:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Change the input pipe of a pump");
                             changeInputPipe(g);
                             actionstaken++;
                             break;
                         case 9:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Change the output pipe of a pump");
                             changeOutputPipe(g);
                             actionstaken++;
                             break;
                         case 10:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Pass Turn");
                             passflag = true;
                             passTurn();
                             return;
                         case 11:
-                            if (!Game.testMode)
                                 System.out.println("You chose: End the game");
                             g.endGame();
                             exit(0);
@@ -136,10 +108,6 @@ public class Plumber extends Player {
                             System.out.println("Invalid input, please choose one of the valid options (1-11).");
                     }
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
 
         if (passflag && actionstaken==1){
             return;
@@ -165,7 +133,6 @@ public class Plumber extends Player {
             return;
         }
 
-        if (!Game.testMode) {
             // List connected pipes
             System.out.println("Connected pipes to " + e.getName() + ":");
             if (e.connectedPipes.isEmpty()) {
@@ -176,8 +143,8 @@ public class Plumber extends Player {
 
             // Get user input on which pipe to manipulate
             System.out.print("Enter the name of the pipe to pick up an end from: ");
-        }
-        String pipeName = Game.scanner.nextLine();
+
+        String pipeName = "temp"; // temporarily set to a string
         Pipe selectedPipe = e.connectedPipes.stream()
                 .filter(pipe -> pipe.getName().equals(pipeName))
                 .findFirst()
@@ -225,7 +192,7 @@ public class Plumber extends Player {
             return;
         }
 
-        if (!Game.testMode) {
+
             // List the connectable pipes that are not yet fully connected
             if (e.connectablePipes.isEmpty()) {
                 System.out.println("There are no connectable pipes available at this element.");
@@ -236,8 +203,7 @@ public class Plumber extends Player {
 
             // Get user input on which pipe to connect the end to
             System.out.print("Enter the name of the pipe to insert the end into: ");
-        }
-        String pipeName = Game.scanner.nextLine();
+        String pipeName = "temp"; // temporarily set to a string
         Pipe selectedPipe = e.connectablePipes.stream()
                 .filter(pipe -> pipe.getName().equals(pipeName))
                 .findFirst()
@@ -265,9 +231,6 @@ public class Plumber extends Player {
                 }
                 pickedUpEoP = null; // Clear the picked up end of pipe after insertion
 
-                if (Game.testMode) {
-                    System.out.println(playerName + " inserted the end of pipe into " + selectedPipe.getName());
-                }
                 return;
             }
         }

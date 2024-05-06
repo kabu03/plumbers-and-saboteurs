@@ -10,7 +10,8 @@ public class CisternGUI {
     public ImageIcon cisternImg = new ImageIcon("images/cistern.png");
 
 
-    public void draw(){
-
+    public void draw(Graphics g){
+        Point pos = cistern.getPosition();
+        g.drawImage(cisternImg.getImage(), pos.x, pos.y, null);
     }
 }

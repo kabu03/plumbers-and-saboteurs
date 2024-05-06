@@ -23,10 +23,11 @@ public class Game {
     public List<Element> elementList;
     public List<Pipe> pipeList;
     public List<Pump> pumpList;
-    private List<Cistern> cisternList;
-    private List<Spring> springList;
+    public List<Cistern> cisternList;
+    public List<Spring> springList;
     private final int[] gameScore = {0, 0}; // Index 0 represents model.Plumber score, index 1 represents model.Saboteur score.
     public Timer timer;
+    public Scanner tempScanner = new Scanner(System.in);
 
     public Game() {}
 
@@ -40,91 +41,31 @@ public class Game {
      *
      * @author Basel Al-Raoush
      */
-    public void initGame() {
-        int numPlayers;
-        System.out.println("Proceeding to the number of participating players menu.");
-        while (true) {
-
-                System.out.println("How many players will participate? Please enter a number (4 or 6):");
-            try {
-                numPlayers = Integer.parseInt(scanner.nextLine());
-
-                if (numPlayers == 4 || numPlayers == 6) {
-                    System.out.println(numPlayers + " players will participate in the game.");
-                    break;
-                } else {
-                    System.out.println("Invalid input, please choose one of the valid options (4 or 6).");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input, please choose one of the valid options (4 or 6).");
-            }
-        }
-
-            System.out.println("You've selected " + numPlayers + " players.");
-        System.out.println("Proceeding to the username and team selection menu.");
-        plumbers = new Plumber[numPlayers / 2]; // Array to store plumbers
-        saboteurs = new Saboteur[numPlayers / 2]; // Array to store saboteurs
-
-        // Counter variables to keep track of plumbers and saboteurs
-        int plumberIndex = 0;
-        int saboteurIndex = 0;
-
-        // Ask for player names and team choice
-        for (int i = 0; i < numPlayers; i++) {
-            String playerName;
-            while (true) {
-
-                    System.out.println("Enter the name of player " + (i + 1) + ":");
-                playerName = scanner.nextLine().trim(); // Use trim() to remove leading and trailing spaces
-
-                if (!playerName.isEmpty()) {
-                    System.out.println("The name \"" + playerName + "\" is validated.");
-                    break;
-                } else {
-                    System.out.println("Invalid input, please enter a valid name.");
-                }
-            }
-
-            // Feature to enforce team balancing
-            if (plumberIndex == numPlayers / 2) {
-                System.out.println(playerName + " was automatically placed in the Saboteurs team.");
-                saboteurs[saboteurIndex++] = new Saboteur(playerName);
-                continue;
-            } else if (saboteurIndex == numPlayers / 2) {
-                System.out.println(playerName + " was automatically placed in the Plumbers team.");
-                plumbers[plumberIndex++] = new Plumber(playerName);
-                continue;
-            }
-
-            int teamChoice;
-            while (true) {
-               {
-                    System.out.println("Select the team for " + playerName + ":");
-                    System.out.println("Enter '1' for Plumbers and '2' for Saboteurs.");
-                }
-                teamChoice = Integer.parseInt(new scanner.nextLine());
-
-                if (teamChoice == 1) {
-                    plumbers[plumberIndex++] = new Plumber(playerName);
-                    System.out.println(playerName + " chose the Plumbers team.");
-                    break;
-                } else if (teamChoice == 2) {
-                    saboteurs[saboteurIndex++] = new Saboteur(playerName);
-                    System.out.println(playerName + " chose the Saboteurs team.");
-                    break;
-                } else {
-                    System.out.println("Invalid input, please choose one of the valid options (1 or 2).");
-                }
-            }
-        }
+    public void configureGame(List<String> names, List<Boolean> isPlumberList) {
+        int numPlayers = names.size();
         players = new Player[numPlayers];
-        int tmp = 0;
-        for (int i = 0; i < plumbers.length; i++) {
-            players[tmp++] = plumbers[i];  // Add plumber
-            if (i < saboteurs.length) {
-                players[tmp++] = saboteurs[i];  // Add saboteur
+        plumbers = new Plumber[numPlayers / 2];
+        saboteurs = new Saboteur[numPlayers / 2];
+
+        int plumberIndex = 0, saboteurIndex = 0;
+
+        for (int i = 0; i < numPlayers; i++) {
+            if (isPlumberList.get(i)) {
+                if (plumberIndex < plumbers.length) {
+                    plumbers[plumberIndex] = new Plumber(names.get(i));
+                    players[i] = plumbers[plumberIndex++];
+                }
+            } else {
+                if (saboteurIndex < saboteurs.length) {
+                    saboteurs[saboteurIndex] = new Saboteur(names.get(i));
+                    players[i] = saboteurs[saboteurIndex++];
+                }
             }
         }
+        initMap();
+    }
+    public void initMap() {
+
         // model.Game initialization
         System.out.println("Initializing the game...");
         elementList = new ArrayList<>();

@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -10,9 +11,9 @@ import java.util.Random;
  * of working turns.
  */
 public class Pump extends Element {
-    public Pump(String n)
+    public Pump(String n, Point p)
     {
-        super(n);
+        super(n,p);
         setMaxConnectablePipes(rand.nextInt(3,6)); setMaxCapacity(50);
     }
 

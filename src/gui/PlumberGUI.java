@@ -13,7 +13,8 @@ public class PlumberGUI {
     }
 
 
-    public void draw(){
-
+    public void draw(Graphics g){
+        Point pos = plumber.getPosition();
+        g.drawImage(plumberImg.getImage(), pos.x, pos.y, null);
     }
 }

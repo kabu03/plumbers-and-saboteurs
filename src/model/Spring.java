@@ -2,6 +2,9 @@ package model;/* changes made to spring compared to docs :
 1- made a given water attribute
 2- gave implementation to update for the water logic.
  */
+
+import java.awt.*;
+
 /**
  * Natural water source marking the starting point of the pipe system. A spring provides a
  * continuous water supply, essential for sustaining flow within pipes. They play a foundational
@@ -18,8 +21,8 @@ public class Spring extends Element {
      *
      * @param n The name of the spring.
      */
-    public Spring(String n) {
-        super(n);
+    public Spring(String n, Point p) {
+        super(n,p);
         setMaxCapacity(Integer.MAX_VALUE);
     }
 

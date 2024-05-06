@@ -49,32 +49,23 @@ public abstract class Player {
      */
        protected void changeInputPipe(Game game) {
            if (!(currentElement instanceof Pump)) {
-               if (!Game.testMode) System.out.println("You are not currently on a pump. Move to a pump first.");
+               System.out.println("You are not currently on a pump. Move to a pump first.");
                return;
            }
 
            Pump currentPump = (Pump) currentElement;
-           if (!Game.testMode) System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
+          System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
            List<Pipe> connectedPipes = currentPump.connectedPipes;
            for (int i = 0; i < connectedPipes.size(); i++) {
-               if (!Game.testMode) System.out.println((i + 1) + ". " + connectedPipes.get(i).getName());
+              System.out.println((i + 1) + ". " + connectedPipes.get(i).getName());
            }
 
-           if (!Game.testMode) System.out.println("Select the number of the pipe to set as the new input pipe:");
+          System.out.println("Select the number of the pipe to set as the new input pipe:");
            String input;
            try {
-               input = Game.scanner.nextLine().trim();
-               int pipeNumber = Game.testMode ? -1 : Integer.parseInt(input);
-               if (Game.testMode) {
-                   for (Pipe pipe : connectedPipes) {
-                       if (pipe.getName().equalsIgnoreCase(input)) {
-                           currentPump.inPipe = pipe;
-                           System.out.println(playerName + " changed the input pipe of " + currentPump.getName() + " to " + pipe.getName());
-                           return;
-                       }
-                   }
-                   System.out.println("Invalid input. Select a pipe listed above.");
-               } else if (pipeNumber < 1 || pipeNumber > connectedPipes.size()) {
+               input = "temporarily";
+               int pipeNumber = 2; // temporarily
+               if (pipeNumber < 1 || pipeNumber > connectedPipes.size()) {
                    System.out.println("Invalid input. Select a number listed above.");
                } else {
                    Pipe selectedPipe = connectedPipes.get(pipeNumber - 1);
@@ -103,23 +94,22 @@ public abstract class Player {
      */
     protected void changeOutputPipe(Game game) {
         if (!(currentElement instanceof Pump)) {
-            if (!Game.testMode) System.out.println("You are not currently on a pump. Move to a pump first.");
+           System.out.println("You are not currently on a pump. Move to a pump first.");
             return;
         }
 
         Pump currentPump = (Pump) currentElement;
-        if (!Game.testMode) System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
+      System.out.println("Currently connected pipes to the pump '" + currentPump.getName() + "':");
         List<Pipe> connectedPipes = currentPump.connectedPipes;
         for (int i = 0; i < connectedPipes.size(); i++) {
-            if (!Game.testMode) System.out.println((i + 1) + ". " + connectedPipes.get(i).getName());
+       System.out.println((i + 1) + ". " + connectedPipes.get(i).getName());
         }
 
-        if (!Game.testMode) System.out.println("Select the number of the pipe to set as the new output pipe:");
-        String input;
+        System.out.println("Select the number of the pipe to set as the new output pipe:");
+        String input = "temporarily";
         try {
-            input = Game.scanner.nextLine().trim();
-            int pipeNumber = Game.testMode ? -1 : Integer.parseInt(input);
-            if (Game.testMode) {
+            int pipeNumber = 2; // temporarily
+   {
                 for (Pipe pipe : connectedPipes) {
                     if (pipe.getName().equalsIgnoreCase(input)) {
                         currentPump.outPipe = pipe;
@@ -128,7 +118,7 @@ public abstract class Player {
                     }
                 }
                 System.out.println("Invalid input. Select a pipe listed above.");
-            } else if (pipeNumber < 1 || pipeNumber > connectedPipes.size()) {
+            } if (pipeNumber < 1 || pipeNumber > connectedPipes.size()) {
                 System.out.println("Invalid input. Select a number listed above.");
             } else {
                 Pipe selectedPipe = connectedPipes.get(pipeNumber - 1);
@@ -167,33 +157,19 @@ public abstract class Player {
         for (int i = 0; i < elements.size(); i++) {
             Element element = elements.get(i);
             String occupancyStatus = (element instanceof Pipe && element.isOccupied()) ? " (Occupied)" : "";
-            if (!Game.testMode)     System.out.println((i + 1) + ". " + element.getName() + occupancyStatus);
+   System.out.println((i + 1) + ". " + element.getName() + occupancyStatus);
         }
 
         // Get user input
         while (true) {
             try {
-                if (!Game.testMode) {
-                    int userChoice = Integer.parseInt(Game.scanner.nextLine()) - 1; // Adjust for 0-based index
+                    int userChoice = 2; // temporarily
                     if (userChoice >= 0 && userChoice < elements.size()) {
                         chosenElement = elements.get(userChoice);
                     } else {
                         System.out.println("Invalid choice. Please enter a number between 1 and " + elements.size());
                         continue;
                     }
-                } else {
-                    userInput = Game.scanner.nextLine().trim();
-                    for (Element element : elements) {
-                        if (element.getName().equalsIgnoreCase(userInput)) {
-                            chosenElement = element;
-                            break;
-                        }
-                    }
-                    if (chosenElement == null) {
-                        System.out.println("No element matches the name entered. Please try again.");
-                        continue;
-                    }
-                }
 
                 if (currentElement != chosenElement) {
                     if (!(chosenElement instanceof Pipe) || !chosenElement.isOccupied()) {
@@ -215,7 +191,6 @@ public abstract class Player {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                Game.scanner.next(); // Clear the invalid input
             }
         }
     }

@@ -1,5 +1,5 @@
 package gui;
-
+import model.Spring;
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,7 +11,8 @@ public class SpringGUI {
     }
 
 
-    public void draw(){
-
+    public void draw(Graphics g){
+        Point pos = spring.getPosition();
+        g.drawImage(springImg.getImage(), pos.x, pos.y, null);
     }
 }

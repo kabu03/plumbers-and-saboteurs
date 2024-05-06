@@ -13,7 +13,7 @@ public class Saboteur extends Player {
 
     public Saboteur(String playerName) {
         this.playerName = playerName;
-    }
+    } // set initial position to the cisterns
 
 
     /**
@@ -36,57 +36,36 @@ public class Saboteur extends Player {
         long turnDuration = 5000;
 
 
-            if (!Game.testMode) {
-                System.out.println("model.Player " + playerName + ", it's your turn.");
-                System.out.println("What action would you like to perform?");
-                System.out.println("Available actions for Saboteurs:");
-                System.out.println("1. Move to an element");
-                System.out.println("2. Change the input pipe of a pump");
-                System.out.println("3. Change the output pipe of a pump");
-                System.out.println("4. Puncture a pipe");
-                System.out.println("5. Pass Turn");
-                System.out.println("6. End the game");
-                System.out.print("Enter the number corresponding to your choice: ");
-            }
-
             while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
-
-                try {
-                    if (System.in.available() > 0 || Game.testMode) {
-                        int choice = Integer.parseInt(Game.scanner.nextLine());
+                        int choice = 3; // temporarily set to 3 to enter the loop
                     switch (choice) {
                         case 1:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Move to an element");
                             move(g);
                             actionstaken++;
                             break;
                         case 2:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Change the input pipe of a pump");
                             changeInputPipe(g);
                             actionstaken++;
                             break;
                         case 3:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Change the output pipe of a pump");
                             changeOutputPipe(g);
                             actionstaken++;
                             break;
                         case 4:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Puncture a pipe");
                             puncture();
                             actionstaken++;
                             break;
                         case 5:
-                            if (!Game.testMode)
                                 System.out.println("You chose: Pass Turn");
                             passflag = true;
                             passTurn();
                             return;
                         case 6:
-                            if (!Game.testMode)
+
                                 System.out.println("You chose: End the game");
                             g.endGame();
                             exit(0);
@@ -94,10 +73,6 @@ public class Saboteur extends Player {
                         default:
                             System.out.println("Invalid input, please choose one of the valid options (1-6).");
                     }
-                }
-            } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
 
 
             // Check if two actions were taken or if the turn timer ran out

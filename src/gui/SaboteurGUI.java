@@ -12,7 +12,8 @@ public class SaboteurGUI {
         this.saboteur = saboteur;
     }
 
-    public void draw(){
-
+    public void draw(Graphics g){
+        Point pos = saboteur.getPosition();
+        g.drawImage(saboteurImg.getImage(), pos.x, pos.y, null);
     }
 }

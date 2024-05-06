@@ -25,9 +25,10 @@ public abstract class Element {
     public Point getPosition() {
         return position;
     }
-    public Element(String n)
+    public Element(String n, Point position)
     {
         name = n;
+        this.position = position;
         connectedPipes = new ArrayList<>();
         connectablePipes = new ArrayList<>();
     }

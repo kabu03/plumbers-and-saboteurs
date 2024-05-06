@@ -12,7 +12,8 @@ public class PumpGUI {
     public PumpGUI(Pump pump){
         this.pump = pump;
     }
-    public void draw(){
-
+    public void draw(Graphics g){
+        Point pos = pump.getPosition();
+        g.drawImage(pumpImg.getImage(), pos.x, pos.y, null);
     }
 }

@@ -2,6 +2,7 @@ package model;/* added a game instance attribute for cistern class
 Added two new attributes numOfCreatedPipes and numOfCreatedPumps
 */
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -10,24 +11,11 @@ import java.util.Random;
  * representing the ultimate goal for the plumber team to ensure a steady water supply.
  */
 public class Cistern extends Element {
-    public Cistern(String n, Game g)
+    public Cistern(String n, Point p, Game g)
     {
-        super(n);
+        super(n,p);
         gameInstance = g;
         setMaxCapacity(Integer.MAX_VALUE);
-        if(gameInstance.testMode && gameInstance.testNumber == 2)
-        {
-            turnsUntilPumpReady = 0;
-        }
-        else if(gameInstance.testMode && gameInstance.testNumber == 7)
-        {
-            turnsUntilPipeReady = 0;
-        }
-        else if(gameInstance.testMode)
-        {
-            turnsUntilPipeReady = 100000;
-            turnsUntilPumpReady = 100000;
-        }
     }
 
     Random rand = new Random();
@@ -62,16 +50,10 @@ public class Cistern extends Element {
         p.endsOfPipe[0] = null;
         g.addPipe(p);
         newEnd.connectToElement(this);
-        if(g.testMode && g.testNumber == 7)
-        {
-            Pump toBeconnected = g.pumpList.get(2);
-            toBeconnected.connectablePipes.add(p);
-        }
+
         Pump toBeconnected = g.pumpList.get(0);
         toBeconnected.connectablePipes.add(p);
-        if (!Game.testMode) {
         System.out.println("A new model.Pipe Has been added"); }
-    }
 
     /**
      *Initiates the manufacturing process for a new pump.
@@ -84,13 +66,7 @@ public class Cistern extends Element {
             Pump temp = new Pump("New model.Pump " + numOfCreatedPumps);
             manufacturedPump = temp;
             g.addPump(temp);
-            if(gameInstance.testMode && gameInstance.testNumber == 2)
-            {
-                ;
-            }
-            else {
                 System.out.println("A new model.Pump Has been Manufactured at the cistern");
-            }
         }
     }
 

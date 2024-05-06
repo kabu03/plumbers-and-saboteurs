@@ -1,5 +1,7 @@
 package model;
 
+import gui.MainMenuGUI;
+
 import java.util.*;
 /**
  * The {@code model.Main} class serves as the entry point for the Pipes in the Desert CLI model.Game.
@@ -22,26 +24,7 @@ public class Main {
      */
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to Pipes in the Desert model.Game (Prototype Version) by Team Mansaf!");
-        System.out.println("1. Proceed to username and team selection");
-        System.out.println("2. Run a pre-defined test");
-        System.out.println("3. Exit");
-
-        int choice = scanner.nextInt();
-        switch (choice) {
-            case 1:
-                Game game = new Game();
-                game.initGame();
-                break;
-            case 3:
-                System.out.println("Exiting the game. Goodbye!");
-                System.exit(0);
-                break;
-            default:
-                System.out.println("Invalid choice. Exiting the game.");
-                System.exit(0);
-        }
+        new MainMenuGUI();
     }
 }
 

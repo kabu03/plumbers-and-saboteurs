@@ -6,6 +6,7 @@ made leaked amount public
 */
 
 
+import java.awt.*;
 
 /**
  * The backbone of the pipe system, serving as conduits for water transfer. Flexible in nature,
@@ -29,8 +30,8 @@ public class Pipe extends Element {
      *
      * @param n The name of the pipe.
      */
-    public Pipe(String n) {
-        super(n);
+    public Pipe(String n, Point p) {
+        super(n,p);
         setMaxConnectablePipes(2);
         setMaxCapacity(10);
     }

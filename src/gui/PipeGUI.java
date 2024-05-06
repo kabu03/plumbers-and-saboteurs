@@ -13,7 +13,8 @@ public class PipeGUI {
     }
 
 
-    public void draw(){
-
+    public void draw(Graphics g){
+        Point pos = pipe.getPosition();
+        g.drawImage(pipeImg.getImage(), pos.x, pos.y, null);
     }
 }
