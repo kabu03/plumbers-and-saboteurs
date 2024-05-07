@@ -106,10 +106,10 @@ public class ConfigurationGUI extends JFrame {
         if (plumbers != saboteurs) {
             JOptionPane.showMessageDialog(this, "Teams must be balanced: equal numbers of Plumbers and Saboteurs required.");
         } else {
-            game.configureGame(names, isPlumberList);
             JOptionPane.showMessageDialog(this, "Configuration successful. Click OK to start the game!");
             dispose();  // Close this window
             launchGameMap(); // subject to change
+            game.configureGame(names, isPlumberList);
         }
     }
     private void launchGameMap() {

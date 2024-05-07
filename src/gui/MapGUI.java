@@ -108,7 +108,10 @@ public class MapGUI extends JPanel implements KeyListener {
         keyMappingPanel.setLayout(new GridLayout(2, (numActions / 2) + (numActions % 2), 5, 5)); // Grid layout with 2 rows
         keyMappingPanel.setBackground(Color.LIGHT_GRAY); // Set a light background or as preferred
 
-        String[] actions = {"Move to an Element: Q", "Change the input pipe of a pump: A", "Change the output pipe of a pump: S", "Pass Turn: W", "End the game: E", "[Saboteur Only] Puncture a pipe: P", "[Plumber Only] Pick up a pump: D", "[Plumber Only] Insert pump: I", "[Plumber Only] Fix a broken pump: F", "[Plumber Only] Fix a broken Pipe: O", "[Plumber Only] Pick up end of pipe: R", "[Plumber Only] Insert end of pipe: T"};
+        String[] actions = {"Move to an element: Q", "Change the input pipe of a pump: A", "Change the output pipe of a pump: S", "Pass turn: W",
+                "End the game: E", "[Saboteur Only] Puncture a pipe: P", "[Plumber Only] Pick up a pump: D",
+                "[Plumber Only] Insert pump: I", "[Plumber Only] Fix a broken pump: F", "[Plumber Only] Fix a broken pipe: O",
+                "[Plumber Only] Pick up end of pipe: R", "[Plumber Only] Insert end of pipe: T"};
         Color[] colors = {Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN, Color.RED, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE};
 
         for (int i = 0; i < actions.length; i++) {

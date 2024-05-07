@@ -1,13 +1,14 @@
 package model;
 
+import gui.EndGameGUI;
+
+import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static java.lang.Thread.sleep;
 
 /**
  * Serves as the central class for managing the game. It orchestrates gameplay, managing plumbers
@@ -251,7 +252,7 @@ public class Game {
         timer.startGameTimer();
         System.out.println("The game and timer have started!");
 
-//        while (!timer.isGameOver()) {
+  //      while (!timer.isGameOver()) {
 //            int elementListSize = elementList.size();
 //            int i = 0;
 //            Player currentPlayer = players[currentPlayerIndex];
@@ -265,8 +266,9 @@ public class Game {
 //                    }
 //                }
 //            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-//        }
-//        endGame();
+ //      }
+   // try { sleep(5000); } catch (InterruptedException e) { e.printStackTrace(); } // this line is for testing the endGame menu:
+     //  endGame();
     }
     /**
      * Ends the game and evaluates the results to determine the winner.
@@ -330,14 +332,10 @@ public class Game {
         int waterLeaked = calculateLeakedWater();
         int waterCollected = calculateCollectedWater();
 
-        if (waterLeaked > waterCollected) {
-            System.out.println("Total water leaked was " + waterLeaked + ", and total water collected was " + waterCollected + ". The Saboteurs won the game.");
-        } else if (waterLeaked < waterCollected) {
-            System.out.println("Total water leaked was " + waterLeaked + ", and total water collected was " + waterCollected + ". The Plumbers won the game.");
-        }
-        else {
-            System.out.println("The game ended in a tie, as the amount of water leaked and collected was the same.");
-        }
+        SwingUtilities.invokeLater(() -> {
+            EndGameGUI endGameGUI = new EndGameGUI(waterCollected, waterLeaked);
+            endGameGUI.setVisible(true);
+        });
     }
 
     /**
