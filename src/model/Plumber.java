@@ -1,6 +1,8 @@
 package model;
 
+import java.awt.*;
 import java.io.IOException;
+import java.util.Scanner;
 
 import static java.lang.System.exit;
 
@@ -17,7 +19,6 @@ public class Plumber extends Player {
 
     public Plumber(String playerName) {
         this.playerName = playerName;
-        // set initial position to Springs
     }
 
     public int newPipecount=1;
@@ -44,9 +45,9 @@ public class Plumber extends Player {
 
 
         while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
-            // Check if input is available
 
-                    int choice = 3; // temporarily set to 3 to enter the loop
+            Scanner sc = new Scanner(System.in);
+            int choice = sc.nextInt();
                     switch (choice) {
                         case 1:
                                 System.out.println("You chose: Move to an element");
@@ -244,10 +245,10 @@ public class Plumber extends Player {
      * @author Ibrahim
      */
     public  void fixPipe() {
-        if (currentElement instanceof Pipe && currentElement.getWorks())
+        if (currentElement instanceof Pipe && currentElement.isWorking())
             System.out.println(playerName + " attempted to fix " + currentElement.getName() + ", but it's already working.");
         if (currentElement instanceof Pipe) {
-            if (!currentElement.getWorks()) {
+            if (!currentElement.isWorking()) {
                 currentElement.setWorks(true);
                 System.out.println(playerName + " fixed " + currentElement.getName());
             }
@@ -299,9 +300,9 @@ public class Plumber extends Player {
 
                 Pump newPump;
                 newPump=pickedUpPump;
-                Pipe newPipe1 = new Pipe("newPipe"+newPipecount);
+                Pipe newPipe1 = new Pipe("newPipe"+newPipecount, pipe.getPosition(), pipe.vertical);
                 newPipecount++;
-                Pipe newPipe2 = new Pipe("newPipe"+newPipecount);
+                Pipe newPipe2 = new Pipe("newPipe"+newPipecount, new Point((pipe.getPosition().x+50), pipe.getPosition().y), pipe.vertical);
                 newPipecount++;
 
                 EndOfPipe newEnd1A = new EndOfPipe(newPipe1);
@@ -377,10 +378,10 @@ public class Plumber extends Player {
      * @author Ibrahim
      */
     public void fixPump(){
-        if(currentElement instanceof Pump && currentElement.getWorks()){
+        if(currentElement instanceof Pump && currentElement.isWorking()){
             System.out.println(playerName + " attempted to fix " + currentElement.getName() + ", but it's already working.");}
         if (currentElement instanceof Pump) {
-            if (!currentElement.getWorks()) {
+            if (!currentElement.isWorking()) {
                 currentElement.setWorks(true);
                 System.out.println(playerName + " fixed " + currentElement.getName());
             }

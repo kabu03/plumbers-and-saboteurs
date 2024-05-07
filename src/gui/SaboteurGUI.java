@@ -10,6 +10,9 @@ public class SaboteurGUI {
     public ImageIcon saboteurImg = new ImageIcon("images/model.Saboteur.png");
     public SaboteurGUI(Saboteur saboteur){
         this.saboteur = saboteur;
+        Image originalImage = new ImageIcon("src\\gui\\images\\Saboteur.png").getImage();
+        Image scaledImage = originalImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH); // Change the width and height to your desired size
+        this.saboteurImg = new ImageIcon(scaledImage);
     }
 
     public void draw(Graphics g){

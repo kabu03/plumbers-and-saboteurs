@@ -14,6 +14,8 @@ public class Cistern extends Element {
     public Cistern(String n, Point p, Game g)
     {
         super(n,p);
+        width = 300;
+        height = 300;
         gameInstance = g;
         setMaxCapacity(Integer.MAX_VALUE);
     }
@@ -44,7 +46,7 @@ public class Cistern extends Element {
      */
     public void manufacturePipe(Game g) {
         numOfcreatedPipes++;
-        Pipe p = new Pipe("New model.Pipe " + numOfcreatedPipes);
+        Pipe p = new Pipe("New Pipe " + numOfcreatedPipes, new Point (100,200), false);
         EndOfPipe newEnd = new EndOfPipe(p);
         p.endsOfPipe[1] = newEnd; // the cistern will be on the right.
         p.endsOfPipe[0] = null;
@@ -63,7 +65,7 @@ public class Cistern extends Element {
         if(manufacturedPump == null)
         {
             numOfCreatedPumps++;
-            Pump temp = new Pump("New model.Pump " + numOfCreatedPumps);
+            Pump temp = new Pump("New Pump " + numOfCreatedPumps, new Point(200,300));
             manufacturedPump = temp;
             g.addPump(temp);
                 System.out.println("A new model.Pump Has been Manufactured at the cistern");

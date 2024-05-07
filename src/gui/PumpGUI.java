@@ -11,6 +11,9 @@ public class PumpGUI {
 
     public PumpGUI(Pump pump){
         this.pump = pump;
+        Image originalImage = new ImageIcon("src\\gui\\images\\Pump.png").getImage();
+        Image scaledImage = originalImage.getScaledInstance(pump.width, pump.height, Image.SCALE_SMOOTH); // Change the width and height to your desired size
+        this.pumpImg = new ImageIcon(scaledImage);
     }
     public void draw(Graphics g){
         Point pos = pump.getPosition();

@@ -29,7 +29,11 @@ public class Timer {
     public Timer() {
         this.gameTime = GAME_LENGTH;
     }
-
+    public String getCurrentTimeFormatted() {
+        int minutes = gameTime / 60;
+        int seconds = gameTime % 60;
+       return String.format("%02d:%02d", minutes, seconds);
+    }
     /**
      * Starts the game timer, decrementing the gameTime every second. When gameTime reaches zero,
      * the timer is canceled, effectively ending the game.

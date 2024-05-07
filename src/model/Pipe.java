@@ -20,6 +20,7 @@ public class Pipe extends Element {
      */
     public int leakedAmount = 0;
 
+public boolean vertical;
     /**
      * Array of two endpoints, each capable of connecting to different game elements.
      */
@@ -30,8 +31,24 @@ public class Pipe extends Element {
      *
      * @param n The name of the pipe.
      */
-    public Pipe(String n, Point p) {
+    public Pipe(String n, Point p, boolean vertical) {
         super(n,p);
+        this.vertical = vertical;
+        if (vertical){
+            width = 30;
+            height = 200;}
+        else {
+            width = 200;
+            height = 30;
+        }
+        setMaxConnectablePipes(2);
+        setMaxCapacity(10);
+    }
+    public Pipe(String n, Point p, boolean vertical, int width, int height) {
+        super(n,p);
+        this.vertical = vertical;
+        this.width = width;
+        this.height = height;
         setMaxConnectablePipes(2);
         setMaxCapacity(10);
     }
@@ -45,6 +62,7 @@ public class Pipe extends Element {
         }
         decrementWater();
     }
+
     /**
      * Periodically updates the pipe's state, checking for free ends and managing water flow.
      */
@@ -59,7 +77,7 @@ public class Pipe extends Element {
                 break;
             }
         }
-        if(!getWorks() || haveFreeEnd)
+        if(!isWorking() || haveFreeEnd)
         {
             incrementLeakage();
         }

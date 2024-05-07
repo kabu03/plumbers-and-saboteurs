@@ -23,6 +23,8 @@ public class Spring extends Element {
      */
     public Spring(String n, Point p) {
         super(n,p);
+        width = 350;
+        height = 350;
         setMaxCapacity(Integer.MAX_VALUE);
     }
 

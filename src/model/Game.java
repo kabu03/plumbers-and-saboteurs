@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,8 +18,8 @@ import java.util.Scanner;
  */
 public class Game {
     private Player[] players;
-    private Saboteur[] saboteurs;
-    private Plumber[] plumbers;
+    public Saboteur[] saboteurs;
+    public Plumber[] plumbers;
     private int currentPlayerIndex = 0;
     public List<Element> elementList;
     public List<Pipe> pipeList;
@@ -75,57 +76,57 @@ public class Game {
         cisternList = new ArrayList<>();
 
             // Creating the spring
-            Spring s1 = new Spring("model.Spring");
+            Spring s1 = new Spring("Spring", new Point(50,300));
             addSpring(s1);
 
             //creating the model.Cistern
-            Cistern cistern = new Cistern("model.Cistern", this);
+            Cistern cistern = new Cistern("Cistern", new Point(1200,300), this);
 
             // Creating pipes
-            Pipe Pipe1 = new Pipe("Pipe1");
-            Pipe Pipe2 = new Pipe("Pipe2");
-            Pipe Pipe3 = new Pipe("Pipe3");
-            Pipe Pipe4 = new Pipe("Pipe4");
-            Pipe Pipe5 = new Pipe("Pipe5");
-            Pipe Pipe6 = new Pipe("Pipe6");
-            Pipe Pipe7 = new Pipe("Pipe7");
-            Pipe Pipe8 = new Pipe("Pipe8");
-
-            // Creating ends of pipes
-            EndOfPipe EoP1pipe1 = new EndOfPipe(Pipe1);
-            EndOfPipe EoP2pipe1 = new EndOfPipe(Pipe1);
-
-            EndOfPipe EoP1pipe2 = new EndOfPipe(Pipe2);
-            EndOfPipe EoP2pipe2 = new EndOfPipe(Pipe2);
-
-            EndOfPipe EoP1pipe3 = new EndOfPipe(Pipe3);
-            EndOfPipe EoP2pipe3 = new EndOfPipe(Pipe3);
-
-            EndOfPipe EoP1pipe4 = new EndOfPipe(Pipe4);
-            EndOfPipe EoP2pipe4 = new EndOfPipe(Pipe4);
-
-            EndOfPipe EoP1pipe5 = new EndOfPipe(Pipe5);
-            EndOfPipe EoP2pipe5 = new EndOfPipe(Pipe5);
-
-            // only one end of pipe for pipe 6
-            EndOfPipe EoP1pipe6 = new EndOfPipe(Pipe6);
-
-            EndOfPipe EoP1pipe7 = new EndOfPipe(Pipe7);
-            EndOfPipe EoP2pipe7 = new EndOfPipe(Pipe7);
-
-            EndOfPipe EoP1pipe8 = new EndOfPipe(Pipe8);
-            EndOfPipe EoP2pipe8 = new EndOfPipe(Pipe8);
-
+            Pipe Pipe1 = new Pipe("Pipe1", new Point(400, 300), false);
+            Pipe Pipe2 = new Pipe("Pipe2", new Point (700, 300), false);
+            Pipe Pipe3 = new Pipe("Pipe3", new Point (1000, 300), false);
+            Pipe Pipe4 = new Pipe("Pipe4", new Point (400, 550), false);
+            Pipe Pipe5 = new Pipe("Pipe5", new Point(635, 350), true);
+            Pipe Pipe6 = new Pipe("Pipe6", new Point(935, 350), true);
+            Pipe Pipe7 = new Pipe("Pipe7", new Point(700, 550), false);
+            Pipe Pipe8 = new Pipe("Pipe8", new Point(1000, 550), false);
 
             // Creating pumps
-            Pump Pump1 = new Pump("Pump1");
-            Pump Pump2 = new Pump("Pump2");
-            Pump Pump3 = new Pump("Pump3");
-            Pump Pump4 = new Pump("Pump4");
+            Pump Pump1 = new Pump("Pump1", new Point(600,265));
+            Pump Pump2 = new Pump("Pump2", new Point(900,265));
+            Pump Pump3 = new Pump("Pump3", new Point(600,500));
+            Pump Pump4 = new Pump("Pump4", new Point(900,500));
+
+
+        // Creating ends of pipes
+        EndOfPipe EoP1pipe1 = new EndOfPipe(Pipe1);
+        EndOfPipe EoP2pipe1 = new EndOfPipe(Pipe1);
+
+        EndOfPipe EoP1pipe2 = new EndOfPipe(Pipe2);
+        EndOfPipe EoP2pipe2 = new EndOfPipe(Pipe2);
+
+        EndOfPipe EoP1pipe3 = new EndOfPipe(Pipe3);
+        EndOfPipe EoP2pipe3 = new EndOfPipe(Pipe3);
+
+        EndOfPipe EoP1pipe4 = new EndOfPipe(Pipe4);
+        EndOfPipe EoP2pipe4 = new EndOfPipe(Pipe4);
+
+        EndOfPipe EoP1pipe5 = new EndOfPipe(Pipe5);
+        EndOfPipe EoP2pipe5 = new EndOfPipe(Pipe5);
+
+        // only one end of pipe for pipe 6
+        EndOfPipe EoP1pipe6 = new EndOfPipe(Pipe6);
+
+        EndOfPipe EoP1pipe7 = new EndOfPipe(Pipe7);
+        EndOfPipe EoP2pipe7 = new EndOfPipe(Pipe7);
+
+        EndOfPipe EoP1pipe8 = new EndOfPipe(Pipe8);
+        EndOfPipe EoP2pipe8 = new EndOfPipe(Pipe8);
 
 
 
-            //connecting pipe1 to the spring
+        //connecting pipe1 to the spring
             s1.connectablePipes.add(Pipe1);
             EoP1pipe1.connectToElement(s1);
             addPipe(Pipe1);
@@ -214,9 +215,20 @@ public class Game {
             EoP2pipe3.connectToElement(cistern);
             EoP2pipe8.connectToElement(cistern);
             addCistern(cistern);
-
-        // Start game
         System.out.println("The game’s elements have been initialized successfully.");
+        for (int i = 0; i < saboteurs.length; i++) {
+            Saboteur s = saboteurs[i];
+            int x = 1250 + 50 * i;
+            int y = 350 + 50 * i;
+            s.setPosition(new Point(x, y));
+        }
+
+        for (int i = 0; i < plumbers.length; i++) {
+            Plumber p = plumbers[i];
+            int x = 150 + 50 * i;
+            int y = 400 + 50 * i;
+            p.setPosition(new Point(x, y));
+        }
         startGame();
     }
 
@@ -239,22 +251,22 @@ public class Game {
         timer.startGameTimer();
         System.out.println("The game and timer have started!");
 
-        while (!timer.isGameOver()) {
-            int elementListSize = elementList.size();
-            int i = 0;
-            Player currentPlayer = players[currentPlayerIndex];
-            currentPlayer.takeTurn(this);
-                for (Element e : elementList) {
-                    i++;
-                    e.update();
-                    if(i == elementListSize) // DO NOT CHANGE THIS, VERY IMPORTANT - MAJED.
-                    {
-                        break;
-                    }
-                }
-            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-        }
-        endGame();
+//        while (!timer.isGameOver()) {
+//            int elementListSize = elementList.size();
+//            int i = 0;
+//            Player currentPlayer = players[currentPlayerIndex];
+//            currentPlayer.takeTurn(this);
+//                for (Element e : elementList) {
+//                    i++;
+//                    e.update();
+//                    if(i == elementListSize) // DO NOT CHANGE THIS, VERY IMPORTANT - MAJED.
+//                    {
+//                        break;
+//                    }
+//                }
+//            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+//        }
+//        endGame();
     }
     /**
      * Ends the game and evaluates the results to determine the winner.

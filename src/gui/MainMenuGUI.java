@@ -22,7 +22,7 @@ public class MainMenuGUI extends JFrame {
                 g.drawImage(bgIcon.getImage(), 0, 0, getWidth(), getHeight(), this);
             }
         };
-        background.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 50));
+        background.setLayout(new FlowLayout(FlowLayout.CENTER, 150, 100));
 
         JButton proceedButton = new JButton("Proceed");
         JButton instructionsButton = new JButton("Instructions");
@@ -45,12 +45,12 @@ public class MainMenuGUI extends JFrame {
     }
 
     private void styleButton(JButton button) {
-        button.setFont(new Font("Tahoma", Font.BOLD, 20));
+        button.setFont(new Font("Tahoma", Font.BOLD, 28));
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(139, 69, 19));
         button.setFocusPainted(false);
         button.setBorderPainted(true);
-        button.setPreferredSize(new Dimension(200, 50));
+        button.setPreferredSize(new Dimension(250, 100));
         button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
     }
 

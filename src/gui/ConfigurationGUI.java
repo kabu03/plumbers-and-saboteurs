@@ -107,7 +107,7 @@ public class ConfigurationGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Teams must be balanced: equal numbers of Plumbers and Saboteurs required.");
         } else {
             game.configureGame(names, isPlumberList);
-            JOptionPane.showMessageDialog(this, "Configuration successful. Starting game...");
+            JOptionPane.showMessageDialog(this, "Configuration successful. Click OK to start the game!");
             dispose();  // Close this window
             launchGameMap(); // subject to change
         }
@@ -116,11 +116,11 @@ public class ConfigurationGUI extends JFrame {
         JFrame gameFrame = new JFrame("Game Map");
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setLayout(new BorderLayout());
-
         MapGUI mapGUI = new MapGUI(game);
         gameFrame.add(mapGUI, BorderLayout.CENTER);
         gameFrame.pack();
         gameFrame.setLocationRelativeTo(null);
+        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         gameFrame.setVisible(true);
     }
 }

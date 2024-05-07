@@ -1,6 +1,7 @@
 package model;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 import static java.lang.System.exit;
 
@@ -37,7 +38,8 @@ public class Saboteur extends Player {
 
 
             while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
-                        int choice = 3; // temporarily set to 3 to enter the loop
+                        Scanner sc = new Scanner(System.in);
+                        int choice = sc.nextInt();
                     switch (choice) {
                         case 1:
                                 System.out.println("You chose: Move to an element");
@@ -92,12 +94,12 @@ public class Saboteur extends Player {
      */
 
     public void puncture() {
-        if (currentElement instanceof Pipe && currentElement.getWorks()) {
+        if (currentElement instanceof Pipe && currentElement.isWorking()) {
             currentElement.setWorks(false);
             System.out.println(playerName + " punctured " + currentElement.getName());
             return;
         }
-        if (currentElement instanceof Pipe && !currentElement.getWorks()) {
+        if (currentElement instanceof Pipe && !currentElement.isWorking()) {
             System.out.println(playerName + " attempted to puncture" + currentElement.getName() + ",but it is already punctured.");
         } else System.out.println("You have to be standing on a working pipe to puncture it.");
 

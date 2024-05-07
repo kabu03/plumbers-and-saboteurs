@@ -19,11 +19,17 @@ import java.util.List;
  */
 public abstract class Element {
     private Point position;
+    public int width;
+    public int height;
     public void setPosition(Point position) {
         this.position = position;
     }
     public Point getPosition() {
         return position;
+    }
+    public boolean contains(int x, int y) {
+        return x >= getPosition().x && x <= getPosition().x + width &&
+                y >= getPosition().y && y <= getPosition().y + height;
     }
     public Element(String n, Point position)
     {
@@ -153,9 +159,7 @@ public abstract class Element {
      * Retrieves the working status of the element.
      * @return true if the element is working, otherwise false.
      */
-    public boolean getWorks() {
-        return works;
-    }
+
 
     /**
      * Sets the working status of the element.

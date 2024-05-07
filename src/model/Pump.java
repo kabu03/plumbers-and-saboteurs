@@ -14,6 +14,8 @@ public class Pump extends Element {
     public Pump(String n, Point p)
     {
         super(n,p);
+        width = 100;
+        height = 100;
         setMaxConnectablePipes(rand.nextInt(3,6)); setMaxCapacity(50);
     }
 
@@ -59,7 +61,7 @@ public class Pump extends Element {
             } else {
                 workingTurns--;
             }
-            if (!inPipe.getWorks() & isWorking()) {
+            if (!inPipe.isWorking() & isWorking()) {
                 decrementWater();
             }
             if (isWorking() && getWaterLevel() >= 2) {
