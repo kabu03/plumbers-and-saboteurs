@@ -39,34 +39,34 @@ public class Saboteur extends Player {
 
             while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
                         Scanner sc = new Scanner(System.in);
-                        int choice = sc.nextInt();
+                        String choice = sc.next();
                     switch (choice) {
-                        case 1:
+                        case "Q":
                                 System.out.println("You chose: Move to an element");
                             move(g);
                             actionstaken++;
                             break;
-                        case 2:
+                        case "A":
                                 System.out.println("You chose: Change the input pipe of a pump");
                             changeInputPipe(g);
                             actionstaken++;
                             break;
-                        case 3:
+                        case "S":
                                 System.out.println("You chose: Change the output pipe of a pump");
                             changeOutputPipe(g);
                             actionstaken++;
                             break;
-                        case 4:
+                        case "P":
                                 System.out.println("You chose: Puncture a pipe");
                             puncture();
                             actionstaken++;
                             break;
-                        case 5:
+                        case "W":
                                 System.out.println("You chose: Pass Turn");
                             passflag = true;
                             passTurn();
                             return;
-                        case 6:
+                        case "E":
 
                                 System.out.println("You chose: End the game");
                             g.endGame();

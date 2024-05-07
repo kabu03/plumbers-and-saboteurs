@@ -15,16 +15,19 @@ public class MapGUI extends JPanel implements KeyListener {
     private javax.swing.Timer refreshTimer;
     public Image tileImage = new ImageIcon("src\\gui\\images\\MapTiles2.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
     private Game game;
+    private JPanel keyMappingPanel;
 
     public MapGUI(Game game) {
         this.game = game;
         setupUI();
         setupRefreshTimer();
+        setupKeyMappingPanel();
     }
 
     private void setupUI() {
+        this.setLayout(new BorderLayout());
         setPreferredSize(new Dimension(800, 600));
-        setBackground(Color.WHITE);
+        setBackground(Color.BLACK);
         setFocusable(true);
         addKeyListener(this);
         requestFocusInWindow();
@@ -72,7 +75,7 @@ public class MapGUI extends JPanel implements KeyListener {
     private void drawTimer(Graphics g) {
         if (game.timer != null) {
             String time = game.timer.getCurrentTimeFormatted();
-            g.setColor(Color.BLACK);
+            g.setColor(Color.RED);
             g.setFont(new Font("SansSerif", Font.BOLD, 50));
             int x = getWidth() - 135; // Position from the right edge
             int y = 55; // Margin from the top
@@ -83,7 +86,7 @@ public class MapGUI extends JPanel implements KeyListener {
         int collectedWater = game.calculateCollectedWater();
         int leakedWater = game.calculateLeakedWater();
 
-        g.setColor(Color.BLACK);
+        g.setColor(Color.RED);
         g.setFont(new Font("SansSerif", Font.BOLD, 30));
         int x = 10; // Margin from the left edge
         int y = 30; // Margin from the top
@@ -99,6 +102,25 @@ public class MapGUI extends JPanel implements KeyListener {
             }
         }
     }
+    private void setupKeyMappingPanel() {
+        keyMappingPanel = new JPanel();
+        int numActions = 12; // Total number of actions
+        keyMappingPanel.setLayout(new GridLayout(2, (numActions / 2) + (numActions % 2), 5, 5)); // Grid layout with 2 rows
+        keyMappingPanel.setBackground(Color.LIGHT_GRAY); // Set a light background or as preferred
+
+        String[] actions = {"Move to an Element: Q", "Change the input pipe of a pump: A", "Change the output pipe of a pump: S", "Pass Turn: W", "End the game: E", "[Saboteur Only] Puncture a pipe: P", "[Plumber Only] Pick up a pump: D", "[Plumber Only] Insert pump: I", "[Plumber Only] Fix a broken pump: F", "[Plumber Only] Fix a broken Pipe: O", "[Plumber Only] Pick up end of pipe: R", "[Plumber Only] Insert end of pipe: T"};
+        Color[] colors = {Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN, Color.RED, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE};
+
+        for (int i = 0; i < actions.length; i++) {
+            JLabel actionLabel = new JLabel(actions[i], SwingConstants.CENTER);
+            actionLabel.setOpaque(true);
+            actionLabel.setBackground(colors[i]);
+            keyMappingPanel.add(actionLabel);
+        }
+
+        add(keyMappingPanel, BorderLayout.SOUTH); // Add the keyMappingPanel to the bottom of the MapGUI
+    }
+
     private void drawElements(Graphics g) {
         for (Pipe pipe : game.pipeList) {
             new PipeGUI(pipe).draw(g);

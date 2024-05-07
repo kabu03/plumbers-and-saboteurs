@@ -14,7 +14,6 @@ import static java.lang.System.exit;
  */
 public class Plumber extends Player {
     public Pump pickedUpPump=null;
-    private Pipe TempPipe; // ?
     public EndOfPipe pickedUpEoP;
 
     public Plumber(String playerName) {
@@ -47,60 +46,60 @@ public class Plumber extends Player {
         while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
 
             Scanner sc = new Scanner(System.in);
-            int choice = sc.nextInt();
+            String choice = sc.next();
                     switch (choice) {
-                        case 1:
+                        case "Q":
                                 System.out.println("You chose: Move to an element");
                             move(g);
                             actionstaken++;
                             break;
-                        case 2:
+                        case "D":
                                 System.out.println("You chose: Pick up a pump");
                              getPump(g);
                             actionstaken++;
                             break;
-                        case 3:
+                        case "I":
                                 System.out.println("You chose: Insert pump into a pipe");
                              insertPump(g);
                             actionstaken++;
 
                             break;
-                        case 4:
+                        case "F":
                                 System.out.println("You chose: Fix a broken pump");
                              fixPump();
                             actionstaken++;
                             break;
-                        case 5:
+                        case "O":
                                 System.out.println("You chose: Fix a broken pipe");
                             fixPipe();
                             actionstaken++;
                             break;
-                        case 6:
+                        case "R":
                                 System.out.println("You chose: Pick up the end of a pipe");
                             getEnd(currentElement);
                             actionstaken++;
                             break;
-                        case 7:
+                        case "T":
                                 System.out.println("You chose: Insert the end of a pipe");
                             insertPipeEnd(currentElement);
                             actionstaken++;
                             break;
-                        case 8:
+                        case "A":
                                 System.out.println("You chose: Change the input pipe of a pump");
                             changeInputPipe(g);
                             actionstaken++;
                             break;
-                        case 9:
+                        case "S":
                                 System.out.println("You chose: Change the output pipe of a pump");
                             changeOutputPipe(g);
                             actionstaken++;
                             break;
-                        case 10:
+                        case "W":
                                 System.out.println("You chose: Pass Turn");
                             passflag = true;
                             passTurn();
                             return;
-                        case 11:
+                        case "E":
                                 System.out.println("You chose: End the game");
                             g.endGame();
                             exit(0);
