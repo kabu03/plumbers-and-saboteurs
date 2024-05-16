@@ -20,7 +20,6 @@ public abstract class Player {
     public Point getPosition() {
         return position;
     }
-
     public Element currentElement;
     /**
      * Abstract method representing a player's turn in the game.
@@ -146,37 +145,24 @@ public abstract class Player {
      *         This exception is caught internally, prompting the user to re-enter a valid choice.
      * @author Nafez Mousa Sayyad
      */
-    protected void move(Game game) {
-        String userInput;
-        Element chosenElement = null;
-
-        // Displaying all current elements in the game
+    public void move(Game game, Element chosenElement) {
 
         List<Element> elements = game.elementList;
 
-        for (int i = 0; i < elements.size(); i++) {
-            Element element = elements.get(i);
+        for (Element element : elements) {
             String occupancyStatus = (element instanceof Pipe && element.isOccupied()) ? " (Occupied)" : "";
-   System.out.println((i + 1) + ". " + element.getName() + occupancyStatus);
         }
 
         // Get user input
         while (true) {
             try {
-                    int userChoice = 2; // temporarily
-                    if (userChoice >= 0 && userChoice < elements.size()) {
-                        chosenElement = elements.get(userChoice);
-                    } else {
-                        System.out.println("Invalid choice. Please enter a number between 1 and " + elements.size());
-                        continue;
-                    }
-
                 if (currentElement != chosenElement) {
                     if (!(chosenElement instanceof Pipe) || !chosenElement.isOccupied()) {
                         if (currentElement != null && currentElement instanceof Pipe) {
                             currentElement.setOccupied(false); // Mark current element as not occupied if it is a pipe
                         }
                         currentElement = chosenElement; // Move player to new element
+                        this.position = chosenElement.getPosition();
                         if (chosenElement instanceof Pipe) {
                             chosenElement.setOccupied(true); // Mark new element as occupied if it is a pipe
                         }

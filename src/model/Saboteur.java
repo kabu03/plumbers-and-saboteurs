@@ -1,5 +1,7 @@
 package model;
 
+import gui.MapGUI;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -34,47 +36,48 @@ public class Saboteur extends Player {
         boolean passflag = false;
         int actionstaken=0;
         long turnStartTime = System.currentTimeMillis();
-        long turnDuration = 5000;
+        long turnDuration = 10000;
 
 
             while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
-                        Scanner sc = new Scanner(System.in);
-                        String choice = sc.next();
+                char choice = Character.toUpperCase(g.getCurrentAction());
+                if (choice != '\0') {
                     switch (choice) {
-                        case "Q":
-                                System.out.println("You chose: Move to an element");
-                            move(g);
+                        case 'Q':
+                            System.out.println("You chose: Move to an element");
+                            MapGUI.isMoveActive = true;
                             actionstaken++;
                             break;
-                        case "A":
-                                System.out.println("You chose: Change the input pipe of a pump");
+                        case 'A':
+                            System.out.println("You chose: Change the input pipe of a pump");
                             changeInputPipe(g);
                             actionstaken++;
                             break;
-                        case "S":
-                                System.out.println("You chose: Change the output pipe of a pump");
+                        case 'S':
+                            System.out.println("You chose: Change the output pipe of a pump");
                             changeOutputPipe(g);
                             actionstaken++;
                             break;
-                        case "P":
-                                System.out.println("You chose: Puncture a pipe");
+                        case 'P':
+                            System.out.println("You chose: Puncture a pipe");
                             puncture();
                             actionstaken++;
                             break;
-                        case "W":
-                                System.out.println("You chose: Pass Turn");
+                        case 'W':
+                            System.out.println("You chose: Pass Turn");
                             passflag = true;
                             passTurn();
                             return;
-                        case "E":
+                        case 'E':
 
-                                System.out.println("You chose: End the game");
+                            System.out.println("You chose: End the game");
                             g.endGame();
                             exit(0);
                             break;
                         default:
-                            System.out.println("Invalid input, please choose one of the valid options (1-6).");
+                            System.out.println("Invalid input, please choose one of the valid options.");
                     }
+                }
 
 
             // Check if two actions were taken or if the turn timer ran out

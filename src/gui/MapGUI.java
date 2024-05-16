@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 public class MapGUI extends JPanel implements KeyListener {
     private Element selectedElement;
@@ -16,9 +17,11 @@ public class MapGUI extends JPanel implements KeyListener {
     public Image tileImage = new ImageIcon("src\\gui\\images\\MapTiles2.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
     private Game game;
     private JPanel keyMappingPanel;
+    public static boolean isMoveActive = false;
 
     public MapGUI(Game game) {
         this.game = game;
+        game.mapGUI = this;
         setupUI();
         setupRefreshTimer();
         setupKeyMappingPanel();
@@ -34,7 +37,17 @@ public class MapGUI extends JPanel implements KeyListener {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                selectObjectAt(e.getX(), e.getY());
+                if (isMoveActive) { // Check if move action is active
+                    // Assuming you have a reference to the current player
+                    Player currentPlayer = game.players[game.currentPlayerIndex];
+                    if (currentPlayer != null) {
+                        selectObjectAt(e.getX(), e.getY());
+                        currentPlayer.move(game, selectedElement);
+                    }
+                    isMoveActive = false; // Reset the move action state
+                } else {
+                    selectObjectAt(e.getX(), e.getY());
+                }
                 repaint();
             }
         });
@@ -52,12 +65,13 @@ public class MapGUI extends JPanel implements KeyListener {
         int ih = tileImage.getHeight(this);
         if (iw > 0 && ih > 0) { // Make sure the image has loaded correctly
             for (int x = 0; x < getWidth(); x += iw) {
-                for (int y = 70; y < getHeight(); y += ih) {
+                for (int y = 100; y < getHeight(); y += ih) {
                     g.drawImage(tileImage, x, y, iw, ih, this);
                 }
             }
             drawElements(g);
             drawPlayers(g);
+            drawPlayerInfo(g);
             drawTimer(g);
             drawScores(g);
         }
@@ -146,14 +160,36 @@ public class MapGUI extends JPanel implements KeyListener {
             new PlumberGUI(plumber).draw(g);
         }
     }
+
+    private void drawPlayerInfo(Graphics g) {
+        Player currentPlayer = game.players[game.currentPlayerIndex];
+        String team = Arrays.asList(game.saboteurs).contains(currentPlayer) ? "Saboteurs" : "Plumbers";
+        String pickedUpPump = "F";
+        String pickedUpEndOfPipe = "F";
+
+        if (currentPlayer instanceof Plumber) {
+            Plumber plumber = (Plumber) currentPlayer;
+            pickedUpPump = plumber.pickedUpPump != null ? "T" : "F";
+            pickedUpEndOfPipe = plumber.pickedUpEoP != null ? "T" : "F";
+        }
+
+        String playerInfo = String.format("Player: %s's turn | Team: %s | Picked up pump: %s | Picked up end of pipe: %s",
+                currentPlayer.playerName, team, pickedUpPump, pickedUpEndOfPipe);
+
+        g.setColor(Color.RED);
+        g.setFont(new Font("SansSerif", Font.BOLD, 30));
+        int x = 10; // Margin from the left edge
+        int y = 90; // Margin from the top
+
+        g.drawString(playerInfo, x, y);
+    }
+
     @Override
     public void keyTyped(KeyEvent e) { }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
-            repaint();  // Repaint the component when Q is pressed
-        }
+        game.setCurrentAction(e.getKeyChar());
     }
 
     @Override

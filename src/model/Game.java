@@ -1,6 +1,7 @@
 package model;
 
 import gui.EndGameGUI;
+import gui.MapGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,10 +19,10 @@ import static java.lang.Thread.sleep;
  * game metrics.
  */
 public class Game {
-    private Player[] players;
+    public Player[] players;
     public Saboteur[] saboteurs;
     public Plumber[] plumbers;
-    private int currentPlayerIndex = 0;
+    public int currentPlayerIndex = 0;
     public List<Element> elementList;
     public List<Pipe> pipeList;
     public List<Pump> pumpList;
@@ -29,7 +30,19 @@ public class Game {
     public List<Spring> springList;
     private final int[] gameScore = {0, 0}; // Index 0 represents model.Plumber score, index 1 represents model.Saboteur score.
     public Timer timer;
-    public Scanner tempScanner = new Scanner(System.in);
+    private volatile char currentAction = '\0';
+
+    public synchronized void setCurrentAction(char action) {
+        this.currentAction = action;
+    }
+
+    public synchronized char getCurrentAction() {
+        char action = currentAction;
+        currentAction = '\0';  // Reset after reading
+        return action;
+    }
+
+    public MapGUI mapGUI;
 
     public Game() {}
 
@@ -49,18 +62,20 @@ public class Game {
         plumbers = new Plumber[numPlayers / 2];
         saboteurs = new Saboteur[numPlayers / 2];
 
-        int plumberIndex = 0, saboteurIndex = 0;
+        int plumberIndex = 0, saboteurIndex = 0, plumberPlayerIndex = 0, saboteurPlayerIndex = 1;
 
         for (int i = 0; i < numPlayers; i++) {
             if (isPlumberList.get(i)) {
                 if (plumberIndex < plumbers.length) {
                     plumbers[plumberIndex] = new Plumber(names.get(i));
-                    players[i] = plumbers[plumberIndex++];
+                    players[plumberPlayerIndex] = plumbers[plumberIndex++];
+                    plumberPlayerIndex += 2; // Skip one index for a saboteur
                 }
             } else {
                 if (saboteurIndex < saboteurs.length) {
                     saboteurs[saboteurIndex] = new Saboteur(names.get(i));
-                    players[i] = saboteurs[saboteurIndex++];
+                    players[saboteurPlayerIndex] = saboteurs[saboteurIndex++];
+                    saboteurPlayerIndex += 2; // Skip one index for a plumber
                 }
             }
         }
@@ -219,6 +234,7 @@ public class Game {
         System.out.println("The game’s elements have been initialized successfully.");
         for (int i = 0; i < saboteurs.length; i++) {
             Saboteur s = saboteurs[i];
+            s.currentElement = cistern;
             int x = 1250 + 50 * i;
             int y = 350 + 50 * i;
             s.setPosition(new Point(x, y));
@@ -226,6 +242,7 @@ public class Game {
 
         for (int i = 0; i < plumbers.length; i++) {
             Plumber p = plumbers[i];
+            p.currentElement = s1;
             int x = 150 + 50 * i;
             int y = 400 + 50 * i;
             p.setPosition(new Point(x, y));
@@ -248,28 +265,34 @@ public class Game {
      * @author Basel Al-Raoush
      */
     public void startGame() {
-        timer = new Timer();
-        timer.startGameTimer();
-        System.out.println("The game and timer have started!");
+        Thread gameThread = new Thread(() -> {
+            timer = new Timer();
+            timer.startGameTimer();
+            System.out.println("The game and timer have started!");
 
-  //      while (!timer.isGameOver()) {
-//            int elementListSize = elementList.size();
-//            int i = 0;
-//            Player currentPlayer = players[currentPlayerIndex];
-//            currentPlayer.takeTurn(this);
-//                for (Element e : elementList) {
-//                    i++;
-//                    e.update();
-//                    if(i == elementListSize) // DO NOT CHANGE THIS, VERY IMPORTANT - MAJED.
-//                    {
-//                        break;
-//                    }
-//                }
-//            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
- //      }
-   // try { sleep(5000); } catch (InterruptedException e) { e.printStackTrace(); } // this line is for testing the endGame menu:
-     //  endGame();
+            while (!timer.isGameOver()) {
+                int elementListSize = elementList.size();
+                int i = 0;
+                Player currentPlayer = players[currentPlayerIndex];
+                currentPlayer.takeTurn(this);
+                for (Element e : elementList) {
+                    i++;
+                    e.update();
+                    if (i == elementListSize) { // DO NOT CHANGE THIS, VERY IMPORTANT - MAJED.
+                        break;
+                    }
+                }
+                currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+            }
+
+            SwingUtilities.invokeLater(() -> {
+                endGame();
+            });
+        });
+
+        gameThread.start();  // Start the game logic in a new thread
     }
+
     /**
      * Ends the game and evaluates the results to determine the winner.
      * This method stops the game timer and evaluates the results to determine

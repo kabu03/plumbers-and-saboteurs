@@ -1,5 +1,7 @@
 package model;
 
+import gui.MapGUI;
+
 import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
@@ -40,74 +42,74 @@ public class Plumber extends Player {
         boolean passflag = false;
         int actionstaken=0;
         long turnStartTime = System.currentTimeMillis();
-        long turnDuration = 5000; //
+        long turnDuration = 10000; //
 
 
         while (System.currentTimeMillis() < turnStartTime + turnDuration && actionstaken < 2) {
+            char choice = Character.toUpperCase(g.getCurrentAction());
+            if (choice != '\0') {
+                switch (choice) {
+                    case 'Q':
+                        System.out.println("You chose: Move to an element");
+                        MapGUI.isMoveActive = true;
+                        actionstaken++;
+                        break;
+                    case 'D':
+                        System.out.println("You chose: Pick up a pump");
+                        getPump(g);
+                        actionstaken++;
+                        break;
+                    case 'I':
+                        System.out.println("You chose: Insert pump into a pipe");
+                        insertPump(g);
+                        actionstaken++;
 
-            Scanner sc = new Scanner(System.in);
-            String choice = sc.next();
-                    switch (choice) {
-                        case "Q":
-                                System.out.println("You chose: Move to an element");
-                            move(g);
-                            actionstaken++;
-                            break;
-                        case "D":
-                                System.out.println("You chose: Pick up a pump");
-                             getPump(g);
-                            actionstaken++;
-                            break;
-                        case "I":
-                                System.out.println("You chose: Insert pump into a pipe");
-                             insertPump(g);
-                            actionstaken++;
-
-                            break;
-                        case "F":
-                                System.out.println("You chose: Fix a broken pump");
-                             fixPump();
-                            actionstaken++;
-                            break;
-                        case "O":
-                                System.out.println("You chose: Fix a broken pipe");
-                            fixPipe();
-                            actionstaken++;
-                            break;
-                        case "R":
-                                System.out.println("You chose: Pick up the end of a pipe");
-                            getEnd(currentElement);
-                            actionstaken++;
-                            break;
-                        case "T":
-                                System.out.println("You chose: Insert the end of a pipe");
-                            insertPipeEnd(currentElement);
-                            actionstaken++;
-                            break;
-                        case "A":
-                                System.out.println("You chose: Change the input pipe of a pump");
-                            changeInputPipe(g);
-                            actionstaken++;
-                            break;
-                        case "S":
-                                System.out.println("You chose: Change the output pipe of a pump");
-                            changeOutputPipe(g);
-                            actionstaken++;
-                            break;
-                        case "W":
-                                System.out.println("You chose: Pass Turn");
-                            passflag = true;
-                            passTurn();
-                            return;
-                        case "E":
-                                System.out.println("You chose: End the game");
-                            g.endGame();
-                            exit(0);
-                            break;
-                        default:
-                            System.out.println("Invalid input, please choose one of the valid options (1-11).");
-                    }
+                        break;
+                    case 'F':
+                        System.out.println("You chose: Fix a broken pump");
+                        fixPump();
+                        actionstaken++;
+                        break;
+                    case 'O':
+                        System.out.println("You chose: Fix a broken pipe");
+                        fixPipe();
+                        actionstaken++;
+                        break;
+                    case 'R':
+                        System.out.println("You chose: Pick up the end of a pipe");
+                        getEnd(currentElement);
+                        actionstaken++;
+                        break;
+                    case 'T':
+                        System.out.println("You chose: Insert the end of a pipe");
+                        insertPipeEnd(currentElement);
+                        actionstaken++;
+                        break;
+                    case 'A':
+                        System.out.println("You chose: Change the input pipe of a pump");
+                        changeInputPipe(g);
+                        actionstaken++;
+                        break;
+                    case 'S':
+                        System.out.println("You chose: Change the output pipe of a pump");
+                        changeOutputPipe(g);
+                        actionstaken++;
+                        break;
+                    case 'W':
+                        System.out.println("You chose: Pass Turn");
+                        passflag = true;
+                        passTurn();
+                        return;
+                    case 'E':
+                        System.out.println("You chose: End the game");
+                        g.endGame();
+                        exit(0);
+                        break;
+                    default:
+                        System.out.println("Invalid input, please choose one of the valid options.");
                 }
+            }
+        }
 
         if (passflag && actionstaken==1){
             return;
