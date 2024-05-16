@@ -4,11 +4,13 @@ import model.*;
 import model.Spring;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.PrintStream;
 import java.util.Arrays;
 
 public class MapGUI extends JPanel implements KeyListener {
@@ -18,13 +20,17 @@ public class MapGUI extends JPanel implements KeyListener {
     private Game game;
     private JPanel keyMappingPanel;
     public static boolean isMoveActive = false;
+    private JTextArea console;
+    JPanel southPanel = new JPanel();
+
 
     public MapGUI(Game game) {
         this.game = game;
         game.mapGUI = this;
-        setupUI();
         setupRefreshTimer();
         setupKeyMappingPanel();
+        setupConsole();
+        setupUI();
     }
 
     private void setupUI() {
@@ -34,6 +40,10 @@ public class MapGUI extends JPanel implements KeyListener {
         setFocusable(true);
         addKeyListener(this);
         requestFocusInWindow();
+
+        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
+        southPanel.setMaximumSize(new Dimension(800, 150)); // This constrains the maximum height
+        add(southPanel, BorderLayout.SOUTH);
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -52,6 +62,24 @@ public class MapGUI extends JPanel implements KeyListener {
             }
         });
     }
+    private void setupConsole() {
+        console = new JTextArea(5, 50); // 5 rows, 50 columns
+        console.setEditable(false);
+        console.setFocusable(false);
+
+        JScrollPane scrollPane = new JScrollPane(console);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setPreferredSize(new Dimension(800, 100));
+        scrollPane.setMaximumSize(new Dimension(800, 100)); // Control the maximum size
+
+        PrintStream printStream = new PrintStream(new CustomOutputStream(console));
+        System.setOut(printStream);
+        System.setErr(printStream);
+
+        southPanel.add(scrollPane);
+    }
+
 
     private void setupRefreshTimer() {
         refreshTimer = new javax.swing.Timer(1000, e -> repaint()); // Refresh every second
@@ -118,10 +146,10 @@ public class MapGUI extends JPanel implements KeyListener {
     }
     private void setupKeyMappingPanel() {
         keyMappingPanel = new JPanel();
-        int numActions = 12; // Total number of actions
-        keyMappingPanel.setLayout(new GridLayout(2, (numActions / 2) + (numActions % 2), 5, 5)); // Grid layout with 2 rows
-        keyMappingPanel.setBackground(Color.LIGHT_GRAY); // Set a light background or as preferred
-
+        keyMappingPanel.setLayout(new GridLayout(4,3, 5, 5));
+        keyMappingPanel.setBackground(Color.BLACK);
+        keyMappingPanel.setPreferredSize(new Dimension(800, 100)); // Control the size to fit within southPanel
+        keyMappingPanel.setMaximumSize(new Dimension(800, 100));
         String[] actions = {"Move to an element: Q", "Change the input pipe of a pump: A", "Change the output pipe of a pump: S", "Pass turn: W",
                 "End the game: E", "[Saboteur Only] Puncture a pipe: P", "[Plumber Only] Pick up a pump: D",
                 "[Plumber Only] Insert pump: I", "[Plumber Only] Fix a broken pump: F", "[Plumber Only] Fix a broken pipe: O",
@@ -134,8 +162,7 @@ public class MapGUI extends JPanel implements KeyListener {
             actionLabel.setBackground(colors[i]);
             keyMappingPanel.add(actionLabel);
         }
-
-        add(keyMappingPanel, BorderLayout.SOUTH); // Add the keyMappingPanel to the bottom of the MapGUI
+        southPanel.add(keyMappingPanel);
     }
 
     private void drawElements(Graphics g) {
@@ -164,26 +191,41 @@ public class MapGUI extends JPanel implements KeyListener {
     private void drawPlayerInfo(Graphics g) {
         Player currentPlayer = game.players[game.currentPlayerIndex];
         String team = Arrays.asList(game.saboteurs).contains(currentPlayer) ? "Saboteurs" : "Plumbers";
-        String pickedUpPump = "F";
-        String pickedUpEndOfPipe = "F";
+        String pickedUpPump = "No";
+        String pickedUpEndOfPipe = "No";
 
         if (currentPlayer instanceof Plumber) {
             Plumber plumber = (Plumber) currentPlayer;
-            pickedUpPump = plumber.pickedUpPump != null ? "T" : "F";
-            pickedUpEndOfPipe = plumber.pickedUpEoP != null ? "T" : "F";
+            pickedUpPump = plumber.pickedUpPump != null ? "Yes" : "No";
+            pickedUpEndOfPipe = plumber.pickedUpEoP != null ? "Yes" : "No";
         }
 
-        String playerInfo = String.format("Player: %s's turn | Team: %s | Picked up pump: %s | Picked up end of pipe: %s",
+        String playerInfo = String.format("Player: %s's turn | Team: %s | Has a picked up pump: %s | Has a picked up end of pipe: %s",
                 currentPlayer.playerName, team, pickedUpPump, pickedUpEndOfPipe);
 
         g.setColor(Color.RED);
-        g.setFont(new Font("SansSerif", Font.BOLD, 30));
+        g.setFont(new Font("SansSerif", Font.BOLD, 25));
         int x = 10; // Margin from the left edge
         int y = 90; // Margin from the top
 
         g.drawString(playerInfo, x, y);
     }
+    static class CustomOutputStream extends java.io.OutputStream { // Add this inner class
+        private JTextArea textArea;
 
+        public CustomOutputStream(JTextArea textArea) {
+            this.textArea = textArea;
+        }
+
+        @Override
+        public void write(int b) {
+            SwingUtilities.invokeLater(() -> {
+                textArea.append(String.valueOf((char) b));
+                // Make sure the last part of the text is always shown
+                textArea.setCaretPosition(textArea.getDocument().getLength());
+            });
+        }
+    }
     @Override
     public void keyTyped(KeyEvent e) { }
 
