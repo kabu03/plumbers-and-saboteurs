@@ -14,9 +14,19 @@ public class EndOfPipe {
     public int width;
     public int height;
     public Pipe currentPipe;
+    private boolean visible = true;
     public Point getPosition() {
         return position;
     }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
     public boolean contains(int x, int y) {
         int expandArea = 30;
         return  x >= getPosition().x - expandArea && x <= getPosition().x + width + expandArea &&

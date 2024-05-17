@@ -15,7 +15,13 @@ import java.util.Arrays;
 
 public class MapGUI extends JPanel implements KeyListener {
     private Element selectedElement;
-    private EndOfPipe selectedEndOfPipe;
+    public static EndOfPipe selectedEndOfPipe;
+
+    // getter for selectedEndOfPipe
+    public static EndOfPipe getSelectedEndOfPipe() {
+        return selectedEndOfPipe;
+    }
+
     private javax.swing.Timer refreshTimer;
     public Image tileImage = new ImageIcon("src\\gui\\images\\MapTiles2.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
     private Game game;
@@ -131,8 +137,6 @@ public class MapGUI extends JPanel implements KeyListener {
                 g.drawRect(pos.x - i, pos.y - i, adjustedWidth, adjustedHeight);
             }
         }
-
-
         g.setColor(Color.BLACK); // Reset color for other drawing
     }
 
@@ -209,8 +213,11 @@ public class MapGUI extends JPanel implements KeyListener {
         for (Spring spring : game.springList) {
             new SpringGUI(spring).draw(g);
         }
-        for(EndOfPipe endOfPipe : game.endOfPipeList) {
-            new EndOfPipeGUI(endOfPipe).draw(g);
+        for (EndOfPipe endOfPipe : game.endOfPipeList) {
+            if (endOfPipe.isVisible()) { // Check the visibility flag
+                new EndOfPipeGUI(endOfPipe).draw(g);
+
+            }
         }
     }
     private void drawPlayers(Graphics g){

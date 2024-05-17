@@ -6,6 +6,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static gui.MapGUI.selectedEndOfPipe;
 import static java.lang.System.exit;
 
 /**
@@ -17,6 +18,8 @@ import static java.lang.System.exit;
 public class Plumber extends Player {
     public Pump pickedUpPump=null;
     public EndOfPipe pickedUpEoP;
+
+    EndOfPipe selected = MapGUI.getSelectedEndOfPipe();
 
     public Plumber(String playerName) {
         this.playerName = playerName;
@@ -77,6 +80,7 @@ public class Plumber extends Player {
                         break;
                     case 'R':
                         System.out.println("You chose: Pick up the end of a pipe");
+
                         getEnd(currentElement);
                         actionstaken++;
                         break;
@@ -129,45 +133,45 @@ public class Plumber extends Player {
      * @author : Basel Al-Raoush , Nafez sayyad
      */
     public void getEnd(Element e) {
+        // Retrieve the selectedEndOfPipe from MapGUI
+        EndOfPipe selectedEndOfPipe = MapGUI.getSelectedEndOfPipe();
+
         // First, check if the plumber is standing on the element
         if (currentElement != e) {
             System.out.println("You have to be standing on the element to pick up the end of the pipe.");
             return;
         }
 
-            // List connected pipes
-            System.out.println("Connected pipes to " + e.getName() + ":");
-            if (e.connectedPipes.isEmpty()) {
-                System.out.println("There are no connected pipes.");
-                return;
-            }
-            e.connectedPipes.forEach(pipe -> System.out.println(pipe.getName()));
-
-            // Get user input on which pipe to manipulate
-            System.out.print("Enter the name of the pipe to pick up an end from: ");
-
-        String pipeName = "temp"; // temporarily set to a string
-        Pipe selectedPipe = e.connectedPipes.stream()
-                .filter(pipe -> pipe.getName().equals(pipeName))
-                .findFirst()
-                .orElse(null);
-
-        if (selectedPipe == null) {
-            System.out.println("Invalid pipe selection or pipe is not connected.");
+        // Check if the selectedEndOfPipe is null
+        if (selectedEndOfPipe == null) {
+            System.out.println("No end of pipe is selected.");
             return;
         }
 
-        // Attempt to pick up the end of the selected pipe
-        for (EndOfPipe end : selectedPipe.endsOfPipe) {
-            if (end != null) {
-                end.disconnectFromElement(e); // This should handle both the element and pipe updates
-                pickedUpEoP = end;
-                System.out.println(playerName + " picked up the end of " + selectedPipe.getName()+" connected to "+ currentElement.getName());
+        // Check if the current pipe is null
+        if (selectedEndOfPipe.currentPipe == null) {
+            System.out.println("The selected end of pipe does not have a connected pipe.");
+            return;
+        }
+
+        // Check if the connected elements are null or do not contain the element
+        for (int i = 0; i < selectedEndOfPipe.currentPipe.endsOfPipe.length; i++) {
+            if (selectedEndOfPipe.currentPipe.endsOfPipe[i] == null) {
+                System.out.println("The selected end of the pipe is not connected to the current element.");
                 return;
             }
         }
-        System.out.println("No free end available to pick up from selected pipe.");
+
+
+        // Set the visibility to false and update the picked-up end of the pipe
+        selectedEndOfPipe.disconnectFromElement(e); // This should handle both the element and pipe updates
+        pickedUpEoP = selectedEndOfPipe;
+        selectedEndOfPipe.setVisible(false);
+        System.out.println(playerName + " picked up the end of the pipe connected to " + currentElement.getName());
     }
+
+
+
 
 
     /**
