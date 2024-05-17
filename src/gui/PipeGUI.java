@@ -22,11 +22,15 @@ public class PipeGUI {
     }
 
     public void draw(Graphics g) {
-        if (!pipe.isWorking() && pipe.vertical){
-            pipeImg = new ImageIcon("src\\gui\\images\\PuncturedPipeVERTICAL.png");
-        }
-        else if (!pipe.isWorking()){
-            pipeImg = new ImageIcon("src\\gui\\images\\PuncturedPipe.png");
+        if (!pipe.isWorking()) {
+            Image originalImage;
+            if (pipe.vertical){
+                originalImage = new ImageIcon("src\\gui\\images\\PuncturedPipeVERTICAL.png").getImage();
+            } else {
+                originalImage = new ImageIcon("src\\gui\\images\\PuncturedPipe.png").getImage();
+            }
+            Image scaledImage = originalImage.getScaledInstance(pipe.width, pipe.height, Image.SCALE_SMOOTH);
+            pipeImg = new ImageIcon(scaledImage);
         }
         Point pos = pipe.getPosition();
         g.drawImage(pipeImg.getImage(), pos.x, pos.y, null);
