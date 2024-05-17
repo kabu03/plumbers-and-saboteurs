@@ -18,7 +18,7 @@ public class EndOfPipe {
         return position;
     }
     public boolean contains(int x, int y) {
-        int expandArea = 50;
+        int expandArea = 30;
         return  x >= getPosition().x - expandArea && x <= getPosition().x + width + expandArea &&
                 y >= getPosition().y - expandArea && y <= getPosition().y + height + expandArea;
     }

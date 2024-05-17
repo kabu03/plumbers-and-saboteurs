@@ -111,12 +111,27 @@ public class MapGUI extends JPanel implements KeyListener {
                 g.drawRect(pos.x - i, pos.y - i, selectedElement.width + 2 * i, selectedElement.height + 2 * i);
             }
         }
-        else if (selectedEndOfPipe != null) {
+        if (selectedEndOfPipe != null) {
             g.setColor(Color.RED);
             Point pos = selectedEndOfPipe.getPosition();
-            int padding = 20;
-            g.drawRect(pos.x - padding, pos.y + padding, selectedEndOfPipe.width + 2 * padding, selectedEndOfPipe.height + 2 * padding);
+            int padding = 8;
+
+            for (int i = 0; i < 5; i++) {
+                int adjustedWidth = selectedEndOfPipe.width + 2 * padding + 2 * i;
+                int adjustedHeight = selectedEndOfPipe.height + 2 * padding + 2 * i;
+
+                // Adjust dimensions based on orientation
+                if (selectedEndOfPipe.currentPipe.vertical) {
+                    adjustedWidth += 2 * 3 * padding; // Triple the padding for width if vertical
+                } else {
+                    adjustedHeight += 2 * 3 * padding; // Triple the padding for height if horizontal
+                }
+
+                // Draw the rectangle with the adjusted dimensions
+                g.drawRect(pos.x - i, pos.y - i, adjustedWidth, adjustedHeight);
+            }
         }
+
 
         g.setColor(Color.BLACK); // Reset color for other drawing
     }
