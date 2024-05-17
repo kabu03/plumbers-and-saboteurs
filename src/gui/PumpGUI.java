@@ -9,6 +9,7 @@ public class PumpGUI {
     private Pump pump;
     public ImageIcon pumpImg = new ImageIcon("images/model.Pump.png");
 
+
     public PumpGUI(Pump pump){
         this.pump = pump;
         Image originalImage = new ImageIcon("src\\gui\\images\\Pump.png").getImage();

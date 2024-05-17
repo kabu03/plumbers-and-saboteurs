@@ -11,6 +11,7 @@ import java.util.Random;
  * of working turns.
  */
 public class Pump extends Element {
+    public boolean newPump = false; // this is used to check if the pump is new or not.
     public Pump(String n, Point p)
     {
         super(n,p);
@@ -18,7 +19,6 @@ public class Pump extends Element {
         height = 100;
         setMaxConnectablePipes(rand.nextInt(3,6)); setMaxCapacity(50);
     }
-
     Random rand = new Random();
     /**
      * the input pipe connected to the pump.

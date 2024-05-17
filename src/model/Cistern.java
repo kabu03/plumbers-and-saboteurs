@@ -2,6 +2,8 @@ package model;/* added a game instance attribute for cistern class
 Added two new attributes numOfCreatedPipes and numOfCreatedPumps
 */
 
+import gui.MapGUI;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -38,7 +40,7 @@ public class Cistern extends Element {
     /**
      *The number of turns remaining until a new pump can be manufactured.
      */
-    private int turnsUntilPumpReady = rand.nextInt(10,23); // we can decide on this later.
+    private int turnsUntilPumpReady = 1; // we can decide on this later.
     public Pump manufacturedPump = null;
     /**
      * Initiates the manufacturing process for a new pipe.
@@ -65,10 +67,11 @@ public class Cistern extends Element {
         if(manufacturedPump == null)
         {
             numOfCreatedPumps++;
-            Pump temp = new Pump("New Pump " + numOfCreatedPumps, new Point(200,300));
+            Pump temp = new Pump("New Pump " + numOfCreatedPumps, new Point(this.getPosition().x + 80 , this.getPosition().y - 80) );
             manufacturedPump = temp;
             g.addPump(temp);
-                System.out.println("A new model.Pump Has been Manufactured at the cistern");
+            System.out.println("A new model.Pump Has been Manufactured at the cistern");
+            g.mapGUI.repaint();
         }
     }
 
@@ -89,7 +92,7 @@ public class Cistern extends Element {
         if(turnsUntilPumpReady == 0)
         {
             manufacturePump(gameInstance);
-            turnsUntilPumpReady = rand.nextInt(10,23);
+            turnsUntilPumpReady = rand.nextInt(100,230);
             decrementPumpTurns = false;
         }
         if(decrementPipeTurns)
