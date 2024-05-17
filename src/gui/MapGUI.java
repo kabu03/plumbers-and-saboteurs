@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 public class MapGUI extends JPanel implements KeyListener {
     private Element selectedElement;
+    private EndOfPipe selectedEndOfPipe;
     private javax.swing.Timer refreshTimer;
     public Image tileImage = new ImageIcon("src\\gui\\images\\MapTiles2.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
     private Game game;
@@ -110,6 +111,12 @@ public class MapGUI extends JPanel implements KeyListener {
                 g.drawRect(pos.x - i, pos.y - i, selectedElement.width + 2 * i, selectedElement.height + 2 * i);
             }
         }
+        else if (selectedEndOfPipe != null) {
+            g.setColor(Color.RED);
+            Point pos = selectedEndOfPipe.getPosition();
+            int padding = 20;
+            g.drawRect(pos.x - padding, pos.y + padding, selectedEndOfPipe.width + 2 * padding, selectedEndOfPipe.height + 2 * padding);
+        }
 
         g.setColor(Color.BLACK); // Reset color for other drawing
     }
@@ -137,13 +144,22 @@ public class MapGUI extends JPanel implements KeyListener {
         g.drawString("Team Saboteurs: " + leakedWater, x, y + 30); // Slightly below the first string
     }
     private void selectObjectAt(int x, int y) {
+        for (EndOfPipe eop : game.endOfPipeList) {
+            if (eop.contains(x, y)) {
+                selectedEndOfPipe = eop;
+                selectedElement = null;
+                return;
+            }
+        }
         for (Element e : game.elementList) {
             if (e.contains(x, y)) {
                 selectedElement = e;
+                selectedEndOfPipe = null;
                 break;
             }
         }
     }
+
     private void setupKeyMappingPanel() {
         keyMappingPanel = new JPanel();
         keyMappingPanel.setLayout(new GridLayout(4,3, 5, 5));

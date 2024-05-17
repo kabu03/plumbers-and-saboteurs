@@ -18,15 +18,17 @@ public class EndOfPipe {
         return position;
     }
     public boolean contains(int x, int y) {
-        return x >= getPosition().x && x <= getPosition().x + width &&
-                y >= getPosition().y && y <= getPosition().y + height;
+        int expandArea = 50;
+        return  x >= getPosition().x - expandArea && x <= getPosition().x + width + expandArea &&
+                y >= getPosition().y - expandArea && y <= getPosition().y + height + expandArea;
     }
+
     public EndOfPipe(Pipe p, boolean atStart)
     {
         currentPipe = p;
         this.atStart = atStart;
-        width = 20;
-        height = 20;
+        width = 15;
+        height = 15;
         for(int i = 0; i < 2; i++)
         {
             if(p.endsOfPipe[i] == null)
@@ -91,28 +93,23 @@ public class EndOfPipe {
     }
     private void setPosition() {
         int x, y;
-        // Manual adjustment for horizontal centering of vertical pipe caps
-        int manualOffsetX = -25; // Adjust this value as needed for better alignment
+        int manualOffsetX = -25;
 
         if (currentPipe.vertical) {
-            // Adjust horizontal centering by adding a manual offset
             x = currentPipe.getPosition().x + ((currentPipe.width - width) / 2) + manualOffsetX;
 
             if (atStart) {
-                // Align the start cap to the top of the vertical pipe without any vertical offset
                 y = currentPipe.getPosition().y;
             } else {
-                // Align the end cap to the bottom of the vertical pipe without any vertical offset
                 y = currentPipe.getPosition().y + currentPipe.height - height - 40;
             }
         } else {
-            // Ensure horizontal pipes logic remains exactly as it is since it's working well
             if (atStart) {
                 x = currentPipe.getPosition().x;
-                y = currentPipe.getPosition().y - height;  // No changes here as per your request
+                y = currentPipe.getPosition().y - height;
             } else {
                 x = currentPipe.getPosition().x + currentPipe.width - width;
-                y = currentPipe.getPosition().y - height;  // No changes here as per your request
+                y = currentPipe.getPosition().y - height;
             }
         }
 
