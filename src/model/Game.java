@@ -28,6 +28,7 @@ public class Game {
     public List<Pump> pumpList;
     public List<Cistern> cisternList;
     public List<Spring> springList;
+    public List<EndOfPipe> endOfPipeList = new ArrayList<>();
     private final int[] gameScore = {0, 0}; // Index 0 represents model.Plumber score, index 1 represents model.Saboteur score.
     public Timer timer;
     private volatile char currentAction = '\0';
@@ -116,30 +117,44 @@ public class Game {
 
 
         // Creating ends of pipes
-        EndOfPipe EoP1pipe1 = new EndOfPipe(Pipe1);
-        EndOfPipe EoP2pipe1 = new EndOfPipe(Pipe1);
+        EndOfPipe EoP1pipe1 = new EndOfPipe(Pipe1,true);
+        EndOfPipe EoP2pipe1 = new EndOfPipe(Pipe1,false);
+        endOfPipeList.add(EoP1pipe1);
+        endOfPipeList.add(EoP2pipe1);
 
-        EndOfPipe EoP1pipe2 = new EndOfPipe(Pipe2);
-        EndOfPipe EoP2pipe2 = new EndOfPipe(Pipe2);
+        EndOfPipe EoP1pipe2 = new EndOfPipe(Pipe2,true);
+        EndOfPipe EoP2pipe2 = new EndOfPipe(Pipe2,false);
+        endOfPipeList.add(EoP1pipe2);
+        endOfPipeList.add(EoP2pipe2);
 
-        EndOfPipe EoP1pipe3 = new EndOfPipe(Pipe3);
-        EndOfPipe EoP2pipe3 = new EndOfPipe(Pipe3);
+        EndOfPipe EoP1pipe3 = new EndOfPipe(Pipe3,true);
+        EndOfPipe EoP2pipe3 = new EndOfPipe(Pipe3,false);
+        endOfPipeList.add(EoP1pipe3);
+        endOfPipeList.add(EoP2pipe3);
 
-        EndOfPipe EoP1pipe4 = new EndOfPipe(Pipe4);
-        EndOfPipe EoP2pipe4 = new EndOfPipe(Pipe4);
+        EndOfPipe EoP1pipe4 = new EndOfPipe(Pipe4,true);
+        EndOfPipe EoP2pipe4 = new EndOfPipe(Pipe4,false);
+        endOfPipeList.add(EoP1pipe4);
+        endOfPipeList.add(EoP2pipe4);
 
-        EndOfPipe EoP1pipe5 = new EndOfPipe(Pipe5);
-        EndOfPipe EoP2pipe5 = new EndOfPipe(Pipe5);
+        EndOfPipe EoP1pipe5 = new EndOfPipe(Pipe5,true);
+        EndOfPipe EoP2pipe5 = new EndOfPipe(Pipe5,false);
+        endOfPipeList.add(EoP1pipe5);
+        endOfPipeList.add(EoP2pipe5);
 
         // only one end of pipe for pipe 6
-        EndOfPipe EoP1pipe6 = new EndOfPipe(Pipe6);
+        EndOfPipe EoP1pipe6 = new EndOfPipe(Pipe6,true);
+        endOfPipeList.add(EoP1pipe6);
 
-        EndOfPipe EoP1pipe7 = new EndOfPipe(Pipe7);
-        EndOfPipe EoP2pipe7 = new EndOfPipe(Pipe7);
+        EndOfPipe EoP1pipe7 = new EndOfPipe(Pipe7,true);
+        EndOfPipe EoP2pipe7 = new EndOfPipe(Pipe7,false);
+        endOfPipeList.add(EoP1pipe7);
+        endOfPipeList.add(EoP2pipe7);
 
-        EndOfPipe EoP1pipe8 = new EndOfPipe(Pipe8);
-        EndOfPipe EoP2pipe8 = new EndOfPipe(Pipe8);
-
+        EndOfPipe EoP1pipe8 = new EndOfPipe(Pipe8,true);
+        EndOfPipe EoP2pipe8 = new EndOfPipe(Pipe8,false);
+        endOfPipeList.add(EoP1pipe8);
+        endOfPipeList.add(EoP2pipe8);
 
 
         //connecting pipe1 to the spring

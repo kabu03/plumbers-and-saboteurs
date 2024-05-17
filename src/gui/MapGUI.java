@@ -178,6 +178,9 @@ public class MapGUI extends JPanel implements KeyListener {
         for (Spring spring : game.springList) {
             new SpringGUI(spring).draw(g);
         }
+        for(EndOfPipe endOfPipe : game.endOfPipeList) {
+            new EndOfPipeGUI(endOfPipe).draw(g);
+        }
     }
     private void drawPlayers(Graphics g){
         for (Saboteur saboteur : game.saboteurs) {

@@ -306,10 +306,10 @@ public class Plumber extends Player {
                 Pipe newPipe2 = new Pipe("newPipe"+newPipecount, new Point((pipe.getPosition().x+50), pipe.getPosition().y), pipe.vertical);
                 newPipecount++;
 
-                EndOfPipe newEnd1A = new EndOfPipe(newPipe1);
-                EndOfPipe newEnd1B = new EndOfPipe(newPipe1);
-                EndOfPipe newEnd2A  = new EndOfPipe(newPipe2);
-                EndOfPipe newEnd2B  = new EndOfPipe(newPipe2);
+                EndOfPipe newEnd1A = new EndOfPipe(newPipe1, true);
+                EndOfPipe newEnd1B = new EndOfPipe(newPipe1, false);
+                EndOfPipe newEnd2A  = new EndOfPipe(newPipe2, true);
+                EndOfPipe newEnd2B  = new EndOfPipe(newPipe2, false);
 
                 if(pipe.endsOfPipe[0] != null) {
                     newPipe1.endsOfPipe[0] = pipe.endsOfPipe[0];

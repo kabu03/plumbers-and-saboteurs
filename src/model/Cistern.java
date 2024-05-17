@@ -47,7 +47,7 @@ public class Cistern extends Element {
     public void manufacturePipe(Game g) {
         numOfcreatedPipes++;
         Pipe p = new Pipe("New Pipe " + numOfcreatedPipes, new Point (100,200), false);
-        EndOfPipe newEnd = new EndOfPipe(p);
+        EndOfPipe newEnd = new EndOfPipe(p,false);
         p.endsOfPipe[1] = newEnd; // the cistern will be on the right.
         p.endsOfPipe[0] = null;
         g.addPipe(p);
