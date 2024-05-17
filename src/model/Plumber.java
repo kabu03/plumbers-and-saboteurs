@@ -19,8 +19,6 @@ public class Plumber extends Player {
     public Pump pickedUpPump=null;
     public EndOfPipe pickedUpEoP;
 
-    EndOfPipe selected = MapGUI.getSelectedEndOfPipe();
-
     public Plumber(String playerName) {
         this.playerName = playerName;
     }
@@ -269,21 +267,32 @@ public class Plumber extends Player {
      *                      Whether the model.Cistern has a manufactured pump ready.
      * @author Ibrahim
      */
-    public  void getPump(Game g1) {
-        if(!(currentElement instanceof Cistern)){
-            System.out.println("You are not on a model.Cistern, move to a cistern with a manufactured pump to pick it up");
+    public void getPump(Game g1) {
+        if (!(currentElement instanceof Cistern)) {
+            System.out.println("You are not on a Cistern, move to a cistern with a manufactured pump to pick it up.");
             return;
         }
-        if(((Cistern) currentElement).manufacturedPump==null){
+        if (((Cistern) currentElement).manufacturedPump == null) {
             System.out.println("This cistern does not have a pump available for pickup.");
             return;
         }
-        pickedUpPump=((Cistern) currentElement).manufacturedPump;
+
+        pickedUpPump = ((Cistern) currentElement).manufacturedPump;
         g1.pumpList.add(pickedUpPump);
-        System.out.println(playerName + " picked up " + ((Cistern) currentElement).manufacturedPump.getName() + " from the model.Cistern.");
 
+        // Retrieve the selected element from MapGUI
+        Element selectedElement = MapGUI.getSelectedElement();
 
+        // Check if the selected element is a pump and set its visibility to false
+        if (selectedElement instanceof Pump && selectedElement == pickedUpPump) {
+            pickedUpPump.setVisible(false);
+            //System.out.println("Setting visibility of the pump to false");
+        }
+
+        System.out.println(playerName + " picked up " + ((Cistern) currentElement).manufacturedPump.getName() + " from the cistern.");
     }
+
+
 
     /**
      * Methods that inserts a pump that was obtained from a cistern, into the pipe grid.

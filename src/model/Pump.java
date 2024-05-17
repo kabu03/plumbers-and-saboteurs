@@ -12,6 +12,17 @@ import java.util.Random;
  */
 public class Pump extends Element {
     public boolean newPump = false; // this is used to check if the pump is new or not.
+
+    private boolean visible = true;
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
     public Pump(String n, Point p)
     {
         super(n,p);

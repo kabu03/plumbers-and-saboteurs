@@ -14,7 +14,13 @@ import java.io.PrintStream;
 import java.util.Arrays;
 
 public class MapGUI extends JPanel implements KeyListener {
-    private Element selectedElement;
+    public static Element selectedElement;
+
+    // getter for selectedElement
+    public static Element getSelectedElement() {
+        return selectedElement;
+    }
+
     public static EndOfPipe selectedEndOfPipe;
 
     // getter for selectedEndOfPipe
@@ -174,7 +180,7 @@ public class MapGUI extends JPanel implements KeyListener {
             if (e.contains(x, y)) {
                 selectedElement = e;
                 selectedEndOfPipe = null;
-                break;
+                return;
             }
         }
     }
@@ -205,6 +211,9 @@ public class MapGUI extends JPanel implements KeyListener {
             new PipeGUI(pipe).draw(g);
         }
         for (Pump pump : game.pumpList) {
+            if (pump.isVisible()) { // Check the visibility flag
+                new PumpGUI(pump).draw(g);
+            }
             new PumpGUI(pump).draw(g);
         }
         for (Cistern cistern : game.cisternList) {

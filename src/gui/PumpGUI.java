@@ -17,6 +17,11 @@ public class PumpGUI {
         this.pumpImg = new ImageIcon(scaledImage);
     }
     public void draw(Graphics g){
+
+        if (!pump.isVisible()) {
+            return; // Do not draw if the pump is not visible
+        }
+
         Point pos = pump.getPosition();
         g.drawImage(pumpImg.getImage(), pos.x, pos.y, null);
     }
