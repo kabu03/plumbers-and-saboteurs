@@ -134,8 +134,12 @@ public class Plumber extends Player {
         // Retrieve the selectedEndOfPipe from MapGUI
         EndOfPipe selectedEndOfPipe = MapGUI.getSelectedEndOfPipe();
 
+        // Debugging: Print currentElement and the target element
+       // System.out.println("Current Element: " + currentElement.getName());
+        //System.out.println("Target Element: " + e.getName());
+
         // First, check if the plumber is standing on the element
-        if (currentElement != e) {
+        if (currentElement !=  e) {
             System.out.println("You have to be standing on the element to pick up the end of the pipe.");
             return;
         }
@@ -160,8 +164,13 @@ public class Plumber extends Player {
             }
         }
 
+        // Check if the player has already picked up an end of pipe
+        if (pickedUpEoP != null) {
+            System.out.println("You have already picked up an end of pipe.");
+            return;
+        }
 
-        // Set the visibility to false and update the picked-up end of the pipe
+            // Set the visibility to false and update the picked-up end of the pipe
         selectedEndOfPipe.disconnectFromElement(e); // This should handle both the element and pipe updates
         pickedUpEoP = selectedEndOfPipe;
         selectedEndOfPipe.setVisible(false);
@@ -268,29 +277,37 @@ public class Plumber extends Player {
      * @author Ibrahim
      */
     public void getPump(Game g1) {
+        // Check if the current element is a Cistern
         if (!(currentElement instanceof Cistern)) {
             System.out.println("You are not on a Cistern, move to a cistern with a manufactured pump to pick it up.");
             return;
         }
+
+        // Check if the cistern has a manufactured pump
         if (((Cistern) currentElement).manufacturedPump == null) {
             System.out.println("This cistern does not have a pump available for pickup.");
             return;
         }
 
-        pickedUpPump = ((Cistern) currentElement).manufacturedPump;
-        g1.pumpList.add(pickedUpPump);
+        // Retrieve the manufactured pump from the cistern
+        Pump cisternPump = ((Cistern) currentElement).manufacturedPump;
 
         // Retrieve the selected element from MapGUI
         Element selectedElement = MapGUI.getSelectedElement();
 
-        // Check if the selected element is a pump and set its visibility to false
-        if (selectedElement instanceof Pump && selectedElement == pickedUpPump) {
-            pickedUpPump.setVisible(false);
-            //System.out.println("Setting visibility of the pump to false");
+        // Check if the selected element is the pump to be picked up and set its visibility to false
+        if (selectedElement instanceof Pump && selectedElement == cisternPump) {
+            selectedElement.setVisible(false);
         }
 
-        System.out.println(playerName + " picked up " + ((Cistern) currentElement).manufacturedPump.getName() + " from the cistern.");
+        // Assign the pump to pickedUpPump and add it to the game's pump list
+        pickedUpPump = cisternPump;
+        g1.pumpList.add(pickedUpPump);
+
+        // Print confirmation message
+        System.out.println(playerName + " picked up " + pickedUpPump.getName() + " from the cistern.");
     }
+
 
 
 

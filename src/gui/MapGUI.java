@@ -14,14 +14,15 @@ import java.io.PrintStream;
 import java.util.Arrays;
 
 public class MapGUI extends JPanel implements KeyListener {
+
     public static Element selectedElement;
+    public static EndOfPipe selectedEndOfPipe;
 
     // getter for selectedElement
+
     public static Element getSelectedElement() {
         return selectedElement;
     }
-
-    public static EndOfPipe selectedEndOfPipe;
 
     // getter for selectedEndOfPipe
     public static EndOfPipe getSelectedEndOfPipe() {

@@ -12,17 +12,13 @@ import java.util.Random;
  */
 public class Pump extends Element {
     public boolean newPump = false; // this is used to check if the pump is new or not.
-
-    private boolean visible = true;
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
+    /**
+     * Initializes a new pump with a specified name and position, setting default capacity and
+     * connectable pipes.
+     *
+     * @param n The name of the pump.
+     * @param p The position of the pump.
+     */
     public Pump(String n, Point p)
     {
         super(n,p);
