@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The ConfigurationGUI class represents a graphical user interface for configuring the game settings.
+ * It allows the user to set up player names and roles (Plumber or Saboteur) and ensures balanced teams.
+ */
 public class ConfigurationGUI extends JFrame {
     private final List<JTextField> nameFields = new ArrayList<>();
     private final List<JRadioButton> plumberButtons = new ArrayList<>();
@@ -16,11 +20,19 @@ public class ConfigurationGUI extends JFrame {
     private final JPanel playerPanel = new JPanel(new GridLayout(0, 1));
     private Game game;
 
+    /**
+     * Constructs a ConfigurationGUI with the specified Game object.
+     *
+     * @param game the Game object representing the game model
+     */
     public ConfigurationGUI(Game game) {
         this.game = game;
         initializeForm();
     }
 
+    /**
+     * Initializes the configuration form, setting the title, size, layout, and default close operation.
+     */
     private void initializeForm() {
         setTitle("Game Configuration");
         setSize(500, 700);
@@ -36,6 +48,9 @@ public class ConfigurationGUI extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Sets up the player options panel with radio buttons to select the number of players.
+     */
     private void setupPlayerOptions() {
         JPanel optionsPanel = new JPanel();
         JRadioButton fourPlayers = new JRadioButton("2v2", true);
@@ -57,6 +72,11 @@ public class ConfigurationGUI extends JFrame {
         updatePlayerInputs(4);  // Default to 4 players initially
     }
 
+    /**
+     * Updates the player input fields based on the selected number of players.
+     *
+     * @param numPlayers the number of players to configure
+     */
     private void updatePlayerInputs(int numPlayers) {
         playerPanel.removeAll();
         nameFields.clear();
@@ -88,6 +108,12 @@ public class ConfigurationGUI extends JFrame {
         repaint();
     }
 
+    /**
+     * Collects the data from the input fields and validates the team configuration.
+     * If the teams are balanced, it starts the game and configures the game model.
+     *
+     * @param e the ActionEvent triggered by the submit button
+     */
     private void collectData(ActionEvent e) {
         List<String> names = new ArrayList<>();
         List<Boolean> isPlumberList = new ArrayList<>();
@@ -112,6 +138,10 @@ public class ConfigurationGUI extends JFrame {
             game.configureGame(names, isPlumberList);
         }
     }
+
+    /**
+     * Launches the game map interface.
+     */
     private void launchGameMap() {
         JFrame gameFrame = new JFrame("Game Map");
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
