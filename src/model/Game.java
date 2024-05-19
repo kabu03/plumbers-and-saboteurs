@@ -112,11 +112,6 @@ public class Game {
             Pipe Pipe10 = new Pipe("Pipe10", new Point(935, 200), true,30,70);
             Pipe Pipe11 = new Pipe("Pipe11", new Point(980, 150), false,350,30);
             Pipe pipe12 = new Pipe("Pipe12", new Point(980, 650), false,350,30);
-            Pipe pipe13 = new Pipe("Pipe13", new Point(1330, 605), true,30,35);
-            Pipe Pipe14 = new Pipe("Pipe14", new Point(1340, 200), true,30,100);
-            addPipe(Pipe10);
-            addPipe(Pipe11);
-            addPipe(pipe12);
             // Creating pumps
             Pump Pump1 = new Pump("Pump1", new Point(600,265));
             Pump Pump2 = new Pump("Pump2", new Point(900,265));
@@ -468,6 +463,10 @@ public class Game {
     public void removeCistern(Cistern cistern) {
         cisternList.remove(cistern);
         elementList.remove(cistern);
+    }
+    public void removePump(Pump pump) {
+        pumpList.remove(pump);
+        elementList.remove(pump);
     }
 }
 

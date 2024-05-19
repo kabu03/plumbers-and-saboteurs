@@ -4,6 +4,8 @@ import gui.MapGUI;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static gui.MapGUI.selectedEndOfPipe;
@@ -25,6 +27,7 @@ public class Plumber extends Player {
 
     public int newPipecount=1;
     public int newPumpCount=1;
+    public Game gameInstance;
 
     /**
      * Allows the model.Plumber player to take their turn.
@@ -39,7 +42,8 @@ public class Plumber extends Player {
      * @author Ibrahim Muheisen
      */
     @Override
-    protected void takeTurn(Game g) { // should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
+    protected void takeTurn(Game g) {// should happen twice, user should be prompted twice EXCEPT FOR PASS TURN
+        gameInstance = g;
         boolean passflag = false;
         int actionstaken=0;
         long turnStartTime = System.currentTimeMillis();
@@ -102,11 +106,14 @@ public class Plumber extends Player {
                         passflag = true;
                         passTurn();
                         return;
+                        /*
                     case 'E':
                         System.out.println("You chose: End the game");
                         g.endGame();
                         exit(0);
                         break;
+
+                         */
                     default:
                         System.out.println("Invalid input, please choose one of the valid options.");
                 }
@@ -166,11 +173,11 @@ public class Plumber extends Player {
         }
 
         // Set the visibility to false and update the picked-up end of the pipe
-        selectedEndOfPipe.getConnectedElement().connectablePipes.add(selectedEndOfPipe.currentPipe);
         selectedEndOfPipe.disconnectFromElement(e); // This should handle both the element and pipe updates
         selectedEndOfPipe.setCurrentPipe(null);
         pickedUpEoP = selectedEndOfPipe;
-        selectedEndOfPipe.setVisible(false);
+        gameInstance.endOfPipeList.remove(selectedEndOfPipe);
+        gameInstance.mapGUI.repaint();
         System.out.println(playerName + " picked up the end of the pipe connected to " + currentElement.getName());
     }
 
@@ -210,15 +217,22 @@ public class Plumber extends Player {
             }
             System.out.println("Connectable pipes:");
             e.connectablePipes.forEach(pipe -> System.out.println(pipe.getName()));
+            java.util.List<Pipe> connectableNotConnected = new ArrayList<>(e.connectablePipes);
+            connectableNotConnected.removeAll(e.connectedPipes);
+            if (connectableNotConnected.isEmpty()) {
+                System.out.println("All connectable pipes are already fully connected.");
+                return;
+            }
+            Pipe selectedPipe = connectableNotConnected.get(0);
 
+            /* Prototype code for connecting the end of pipe to a pipe
             // Get user input on which pipe to connect the end to
             System.out.print("Enter the name of the pipe to insert the end into: ");
-        String pipeName = "temp"; // temporarily set to a string
-        Pipe selectedPipe = e.connectablePipes.stream()
+            String pipeName = "temp"; // temporarily set to a string
+            Pipe selectedPipe = e.connectablePipes.stream()
                 .filter(pipe -> pipe.getName().equals(pipeName))
                 .findFirst()
                 .orElse(null);
-
         if (selectedPipe == null) {
             System.out.println("Invalid pipe selection or not connectable.");
             return;
@@ -229,20 +243,91 @@ public class Plumber extends Player {
             System.out.println("Selected pipe already has both ends connected.");
             return;
         }
-
+*/
         // Insert the end of pipe to the selected pipe and connect it to the element
-        for (int i = 0; i < 2; i++) {
-            if (selectedPipe.endsOfPipe[i] == null) {
-                selectedPipe.endsOfPipe[i] = pickedUpEoP; // Assign the end of pipe to the pipe
-                pickedUpEoP.connectToElement(e); // Connect the end of pipe to the element
-                pickedUpEoP.setCurrentPipe(selectedPipe); // Set the current pipe of the end of pipe to the selected pipe
-                if (!e.connectedPipes.contains(selectedPipe)) {
-                    e.connectedPipes.add(selectedPipe); // Add the pipe to the connected pipes list if not already added
-                }
-                pickedUpEoP = null; // Clear the picked up end of pipe after insertion
-
-                return;
+        if(selectedPipe.endsOfPipe[0] == null && selectedPipe.endsOfPipe[1] != null)
+        {
+            boolean atStart = !selectedPipe.endsOfPipe[1].atStart;
+            EndOfPipe temp;
+            if((selectedPipe == gameInstance.pipeList.get(4) || selectedPipe == gameInstance.pipeList.get(5)) && atStart == false)
+            {
+                temp =  new EndOfPipe(selectedPipe, atStart, 0, 35);
             }
+            else {
+                temp = new EndOfPipe(selectedPipe, atStart, 0, 0);
+            }
+            selectedPipe.endsOfPipe[0] = temp;
+            selectedPipe.endsOfPipe[0].connectToElement(e);
+            pickedUpEoP = null;
+            gameInstance.endOfPipeList.add(temp);
+            gameInstance.mapGUI.repaint();
+        }
+        else if(selectedPipe.endsOfPipe[0] != null && selectedPipe.endsOfPipe[1] == null)
+        {
+            boolean atStart = !selectedPipe.endsOfPipe[0].atStart;
+            EndOfPipe temp;
+            if((selectedPipe == gameInstance.pipeList.get(4) || selectedPipe == gameInstance.pipeList.get(5)) && atStart == false)
+            {
+                temp =  new EndOfPipe(selectedPipe, atStart, 0, 35);
+            }
+            else {
+                temp = new EndOfPipe(selectedPipe, atStart, 0, 0);
+            }
+            selectedPipe.endsOfPipe[1] = temp;
+            selectedPipe.endsOfPipe[1].connectToElement(e);
+            pickedUpEoP = null;
+            gameInstance.endOfPipeList.add(temp);
+            gameInstance.mapGUI.repaint();
+        }
+        else if(selectedPipe.endsOfPipe[0] == null && selectedPipe.endsOfPipe[1] == null) {
+            boolean atStart = true;
+            EndOfPipe temp;
+            if((selectedPipe == gameInstance.pipeList.get(4) || selectedPipe == gameInstance.pipeList.get(5)) && atStart == false)
+            {
+                temp =  new EndOfPipe(selectedPipe, atStart, 0, 35);
+            }
+            else {
+                temp = new EndOfPipe(selectedPipe, atStart, 0, 0);
+            }
+            selectedPipe.endsOfPipe[0] = temp;
+            selectedPipe.endsOfPipe[0].connectToElement(e);
+            pickedUpEoP = null;
+            gameInstance.endOfPipeList.add(temp);
+            gameInstance.mapGUI.repaint();
+        }
+        else if(selectedPipe.endsOfPipe[0].currentPipe == null && selectedPipe.endsOfPipe[1].currentPipe != null)
+        {
+            boolean atStart = !selectedPipe.endsOfPipe[1].atStart;
+            EndOfPipe temp;
+            if((selectedPipe == gameInstance.pipeList.get(4) || selectedPipe == gameInstance.pipeList.get(5)) && atStart == false)
+            {
+                temp =  new EndOfPipe(selectedPipe, atStart, 0, 35);
+            }
+            else {
+                temp = new EndOfPipe(selectedPipe, atStart, 0, 0);
+            }
+            selectedPipe.endsOfPipe[0] = temp;
+            selectedPipe.endsOfPipe[0].connectToElement(e);
+            pickedUpEoP = null;
+            gameInstance.endOfPipeList.add(temp);
+            gameInstance.mapGUI.repaint();
+        }
+        else if(selectedPipe.endsOfPipe[0].currentPipe != null && selectedPipe.endsOfPipe[1].currentPipe == null)
+        {
+            boolean atStart = !selectedPipe.endsOfPipe[0].atStart;
+            EndOfPipe temp;
+            if((selectedPipe == gameInstance.pipeList.get(4) || selectedPipe == gameInstance.pipeList.get(5)) && atStart == false)
+            {
+                temp =  new EndOfPipe(selectedPipe, atStart, 0, 35);
+            }
+            else {
+                temp = new EndOfPipe(selectedPipe, atStart, 0, 0);
+            }
+            selectedPipe.endsOfPipe[1] = temp;
+            selectedPipe.endsOfPipe[1].connectToElement(e);
+            pickedUpEoP = null;
+            gameInstance.endOfPipeList.add(temp);
+            gameInstance.mapGUI.repaint();
         }
     }
 
@@ -295,11 +380,11 @@ public class Plumber extends Player {
         // Check if the selected element is the pump to be picked up and set its visibility to false
         if (selectedElement instanceof Pump && selectedElement == cisternPump) {
             selectedElement.setVisible(false);
+            g1.removePump(cisternPump);
         }
 
         // Assign the pump to pickedUpPump and add it to the game's pump list
         pickedUpPump = cisternPump;
-        g1.pumpList.add(pickedUpPump);
 
         // Print confirmation message
         System.out.println(playerName + " picked up " + pickedUpPump.getName() + " from the cistern.");

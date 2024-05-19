@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class EndOfPipe {
     private Point position;
-    private boolean atStart;
+    public boolean atStart;
     public int width;
     public int height;
     int adjustX = 0;
