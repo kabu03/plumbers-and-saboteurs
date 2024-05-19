@@ -26,6 +26,13 @@ public class Pump extends Element {
         height = 100;
         setMaxConnectablePipes(rand.nextInt(3,6)); setMaxCapacity(50);
     }
+    public Pump(String n, Point p, int width, int height)
+    {
+        super(n,p);
+        this.width = width;
+        this.height = height;
+        setMaxConnectablePipes(rand.nextInt(3,6)); setMaxCapacity(50);
+    }
     Random rand = new Random();
     /**
      * the input pipe connected to the pump.

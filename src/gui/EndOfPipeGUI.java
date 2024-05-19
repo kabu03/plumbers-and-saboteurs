@@ -11,11 +11,14 @@ public class EndOfPipeGUI {
 
     public EndOfPipeGUI(EndOfPipe endOfPipe) {
         this.endOfPipe = endOfPipe;
+        Image originalImage;
         if (!endOfPipe.currentPipe.vertical) {
-            endOfPipeImg = new ImageIcon("src\\gui\\images\\endOfPipeImg.png");
+            originalImage = new ImageIcon("src\\gui\\images\\endOfPipeImg.png").getImage();
         } else {
-            endOfPipeImg = new ImageIcon("src\\gui\\images\\endOfPipeImg_vertical.png");
+            originalImage = new ImageIcon("src\\gui\\images\\endOfPipeImg_vertical.png").getImage();
         }
+        Image scaledImage = originalImage.getScaledInstance(endOfPipe.width, endOfPipe.height, Image.SCALE_SMOOTH);
+        this.endOfPipeImg = new ImageIcon(scaledImage);
     }
 
     public void draw(Graphics g) {

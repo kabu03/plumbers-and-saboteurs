@@ -108,13 +108,24 @@ public class Game {
             Pipe Pipe6 = new Pipe("Pipe6", new Point(935, 350), true);
             Pipe Pipe7 = new Pipe("Pipe7", new Point(700, 550), false);
             Pipe Pipe8 = new Pipe("Pipe8", new Point(1000, 550), false);
-
+            Pipe Pipe9 = new Pipe("Pipe9", new Point(935, 585), true,30,50);
+            Pipe Pipe10 = new Pipe("Pipe10", new Point(935, 200), true,30,70);
+            Pipe Pipe11 = new Pipe("Pipe11", new Point(980, 150), false,350,30);
+            Pipe pipe12 = new Pipe("Pipe12", new Point(980, 650), false,350,30);
+            Pipe pipe13 = new Pipe("Pipe13", new Point(1330, 605), true,30,35);
+            Pipe Pipe14 = new Pipe("Pipe14", new Point(1340, 200), true,30,100);
+            addPipe(Pipe10);
+            addPipe(Pipe11);
+            addPipe(pipe12);
             // Creating pumps
             Pump Pump1 = new Pump("Pump1", new Point(600,265));
             Pump Pump2 = new Pump("Pump2", new Point(900,265));
             Pump Pump3 = new Pump("Pump3", new Point(600,500));
             Pump Pump4 = new Pump("Pump4", new Point(900,500));
-
+            Pump Pump5 = new Pump("Pump5", new Point(912,635),75,50);
+            Pump Pump6 = new Pump("Pump6", new Point(914,125),70,80);
+            Pump Pump7 = new Pump("Pump7", new Point(1320,635),50,50);
+            Pump pump8 = new Pump("Pump8", new Point(1320,125),70,70);
 
         // Creating ends of pipes
         EndOfPipe EoP1pipe1 = new EndOfPipe(Pipe1,true);
@@ -138,7 +149,7 @@ public class Game {
         endOfPipeList.add(EoP2pipe4);
 
         EndOfPipe EoP1pipe5 = new EndOfPipe(Pipe5,true);
-        EndOfPipe EoP2pipe5 = new EndOfPipe(Pipe5,false);
+        EndOfPipe EoP2pipe5 = new EndOfPipe(Pipe5,false,0,35);
         endOfPipeList.add(EoP1pipe5);
         endOfPipeList.add(EoP2pipe5);
 
@@ -156,6 +167,22 @@ public class Game {
         endOfPipeList.add(EoP1pipe8);
         endOfPipeList.add(EoP2pipe8);
 
+        EndOfPipe EoP1pipe9 = new EndOfPipe(Pipe9,true);
+        EndOfPipe EoP2pipe9 = new EndOfPipe(Pipe9,false);
+        endOfPipeList.add(EoP1pipe9);
+        endOfPipeList.add(EoP2pipe9);
+        EndOfPipe EoP1pipe10 = new EndOfPipe(Pipe10,true);
+        EndOfPipe EoP2pipe10 = new EndOfPipe(Pipe10,false);
+        endOfPipeList.add(EoP1pipe10);
+        endOfPipeList.add(EoP2pipe10);
+        EndOfPipe EoP1pipe11 = new EndOfPipe(Pipe11,true);
+        EndOfPipe EoP2pipe11 = new EndOfPipe(Pipe11,false);
+        endOfPipeList.add(EoP1pipe11);
+        endOfPipeList.add(EoP2pipe11);
+        EndOfPipe EoP1pipe12 = new EndOfPipe(pipe12,true);
+        EndOfPipe EoP2pipe12 = new EndOfPipe(pipe12,false);
+        endOfPipeList.add(EoP1pipe12);
+        endOfPipeList.add(EoP2pipe12);
 
         //connecting pipe1 to the spring
             s1.connectablePipes.add(Pipe1);
@@ -239,6 +266,45 @@ public class Game {
             EoP1pipe8.connectToElement(Pump4);
             Pump4.outPipe = Pipe8;
             addPipe(Pipe8);
+
+            // connecting pipe9 to pump5 and pump4
+            Pump4.connectablePipes.add(Pipe9);
+            Pump5.connectablePipes.add(Pipe9);
+            EoP1pipe9.connectToElement(Pump4);
+            EoP2pipe9.connectToElement(Pump5);
+            Pump5.inPipe = Pipe9;
+            addPipe(Pipe9);
+            addPump(Pump5);
+
+
+            //connecting pipe10 to pump6 and pump2
+            Pump6.connectablePipes.add(Pipe10);
+            Pump2.connectablePipes.add(Pipe10);
+            EoP1pipe10.connectToElement(Pump6);
+            EoP2pipe10.connectToElement(Pump2);
+            Pump6.inPipe = Pipe10;
+            addPipe(Pipe10);
+            addPump(Pump6);
+
+            //connecting pipe11 to pump 6 and pump 8
+            Pump6.connectablePipes.add(Pipe11);
+            EoP1pipe11.connectToElement(Pump6);
+            Pump6.outPipe = Pipe11;
+            pump8.connectablePipes.add(Pipe11);
+            EoP2pipe11.connectToElement(pump8);
+            pump8.inPipe = Pipe11;
+            addPipe(Pipe11);
+            addPump(pump8);
+
+            //connecting pipe12 to pump 5 and pump 7
+            Pump5.connectablePipes.add(pipe12);
+            EoP1pipe12.connectToElement(Pump5);
+            Pump5.outPipe = pipe12;
+            Pump7.connectablePipes.add(pipe12);
+            EoP2pipe12.connectToElement(Pump7);
+            Pump7.inPipe = pipe12;
+            addPipe(pipe12);
+            addPump(Pump7);
 
             //connecting pipe3 and pipe8 to the cistern
             cistern.connectablePipes.add(Pipe3);
@@ -399,4 +465,9 @@ public class Game {
         gameScore[0] = sum;
         return sum;
     }
+    public void removeCistern(Cistern cistern) {
+        cisternList.remove(cistern);
+        elementList.remove(cistern);
+    }
 }
+

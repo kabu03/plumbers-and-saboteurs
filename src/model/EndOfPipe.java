@@ -13,6 +13,8 @@ public class EndOfPipe {
     private boolean atStart;
     public int width;
     public int height;
+    int adjustX = 0;
+    int adjustY = 0;
     public Pipe currentPipe;
     private boolean visible = true;
     public Point getPosition() {
@@ -28,17 +30,16 @@ public class EndOfPipe {
     }
 
     public boolean contains(int x, int y) {
-        int expandArea = 30;
-        return  x >= getPosition().x - expandArea && x <= getPosition().x + width + expandArea &&
-                y >= getPosition().y - expandArea && y <= getPosition().y + height + expandArea;
+        return x >= getPosition().x && x <= getPosition().x + width &&
+                y >= getPosition().y && y <= getPosition().y + height;
     }
 
     public EndOfPipe(Pipe p, boolean atStart)
     {
         currentPipe = p;
         this.atStart = atStart;
-        width = 15;
-        height = 15;
+        width = 40;
+        height = 40;
         for(int i = 0; i < 2; i++)
         {
             if(p.endsOfPipe[i] == null)
@@ -47,6 +48,24 @@ public class EndOfPipe {
                 break;
             }
         }
+        setPosition();
+    }
+    public EndOfPipe(Pipe p, boolean atStart, int adjustX, int adjustY)
+    {
+        currentPipe = p;
+        this.atStart = atStart;
+        width = 40;
+        height = 40;
+        for(int i = 0; i < 2; i++)
+        {
+            if(p.endsOfPipe[i] == null)
+            {
+                p.endsOfPipe[i] = this;
+                break;
+            }
+        }
+        this.adjustX = adjustX;
+        this.adjustY = adjustY;
         setPosition();
     }
     /**
@@ -103,23 +122,23 @@ public class EndOfPipe {
     }
     private void setPosition() {
         int x, y;
-        int manualOffsetX = -25;
 
+        // Adjust the alignment for vertical and horizontal pipes
         if (currentPipe.vertical) {
-            x = currentPipe.getPosition().x + ((currentPipe.width - width) / 2) + manualOffsetX;
+            x = currentPipe.getPosition().x + (currentPipe.width - width) / 2;  // Center horizontally
 
             if (atStart) {
-                y = currentPipe.getPosition().y;
+                y = currentPipe.getPosition().y - height / 2;  // Adjust to visually connect at the start
             } else {
-                y = currentPipe.getPosition().y + currentPipe.height - height - 40;
+                y = (currentPipe.getPosition().y + currentPipe.height - height / 2) - adjustY;  // Adjust to visually connect at the end
             }
         } else {
             if (atStart) {
-                x = currentPipe.getPosition().x;
-                y = currentPipe.getPosition().y - height;
+                x = currentPipe.getPosition().x - width / 2;  // Adjust to visually start at the pipe's beginning
+                y = currentPipe.getPosition().y + (currentPipe.height - height) / 2;  // Center vertically
             } else {
-                x = currentPipe.getPosition().x + currentPipe.width - width;
-                y = currentPipe.getPosition().y - height;
+                x = currentPipe.getPosition().x + currentPipe.width - width / 2;  // Adjust to visually end at the pipe's edge
+                y = currentPipe.getPosition().y + (currentPipe.height - height) / 2;  // Center vertically
             }
         }
 
