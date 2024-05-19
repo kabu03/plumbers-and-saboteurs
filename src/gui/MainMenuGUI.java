@@ -6,7 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * The MainMenuGUI class represents the main menu of the "Pipes in the Desert" game.
+ * It provides options to proceed to the game setup, view instructions, or exit the game.
+ */
 public class MainMenuGUI extends JFrame {
+
+    /**
+     * Constructs the MainMenuGUI and initializes the user interface.
+     */
     public MainMenuGUI() {
         setTitle("Pipes in the Desert - Team Mansaf");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,6 +52,11 @@ public class MainMenuGUI extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Styles the given button with custom font, color, and size settings.
+     *
+     * @param button the JButton to style
+     */
     private void styleButton(JButton button) {
         button.setFont(new Font("Tahoma", Font.BOLD, 28));
         button.setForeground(Color.WHITE);
@@ -54,12 +67,22 @@ public class MainMenuGUI extends JFrame {
         button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
     }
 
+    /**
+     * Action handler for the "Proceed" button. Starts the game setup process.
+     *
+     * @param e the ActionEvent triggered by the button
+     */
     private void onProceed(ActionEvent e) {
         System.out.println("Proceed to game setup");
         Game game = new Game(); // Assuming Game class has a no-argument constructor
         new ConfigurationGUI(game); // Start with default 4 players, change as necessary
     }
 
+    /**
+     * Action handler for the "Instructions" button. Displays the game instructions.
+     *
+     * @param e the ActionEvent triggered by the button
+     */
     private void onInstructions(ActionEvent e) {
         JDialog instructionsDialog = new JDialog(this, "Game Instructions", true);
         instructionsDialog.setSize(800, 600);
