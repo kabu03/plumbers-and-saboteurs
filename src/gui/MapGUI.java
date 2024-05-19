@@ -13,18 +13,29 @@ import java.awt.event.MouseEvent;
 import java.io.PrintStream;
 import java.util.Arrays;
 
+/**
+ * The MapGUI class represents the graphical user interface for the game map.
+ * It handles the rendering of game elements, players, and provides interaction mechanisms such as key and mouse listeners.
+ */
 public class MapGUI extends JPanel implements KeyListener {
 
     public static Element selectedElement;
     public static EndOfPipe selectedEndOfPipe;
 
-    // getter for selectedElement
-
+    /**
+     * Gets the currently selected element on the map.
+     *
+     * @return the currently selected Element
+     */
     public static Element getSelectedElement() {
         return selectedElement;
     }
 
-    // getter for selectedEndOfPipe
+    /**
+     * Gets the currently selected end of pipe on the map.
+     *
+     * @return the currently selected EndOfPipe
+     */
     public static EndOfPipe getSelectedEndOfPipe() {
         return selectedEndOfPipe;
     }
@@ -37,7 +48,11 @@ public class MapGUI extends JPanel implements KeyListener {
     private JTextArea console;
     JPanel southPanel = new JPanel();
 
-
+    /**
+     * Constructs a MapGUI with the specified Game object.
+     *
+     * @param game the Game object representing the game model
+     */
     public MapGUI(Game game) {
         this.game = game;
         game.mapGUI = this;
@@ -47,6 +62,9 @@ public class MapGUI extends JPanel implements KeyListener {
         setupUI();
     }
 
+    /**
+     * Sets up the user interface components.
+     */
     private void setupUI() {
         this.setLayout(new BorderLayout());
         setPreferredSize(new Dimension(800, 600));
@@ -62,7 +80,6 @@ public class MapGUI extends JPanel implements KeyListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (isMoveActive) { // Check if move action is active
-                    // Assuming you have a reference to the current player
                     Player currentPlayer = game.players[game.currentPlayerIndex];
                     if (currentPlayer != null) {
                         selectObjectAt(e.getX(), e.getY());
@@ -76,6 +93,10 @@ public class MapGUI extends JPanel implements KeyListener {
             }
         });
     }
+
+    /**
+     * Sets up the console for logging game events and output.
+     */
     private void setupConsole() {
         console = new JTextArea(5, 50); // 5 rows, 50 columns
         console.setEditable(false);
@@ -94,7 +115,9 @@ public class MapGUI extends JPanel implements KeyListener {
         southPanel.add(scrollPane);
     }
 
-
+    /**
+     * Sets up the refresh timer to periodically repaint the component.
+     */
     private void setupRefreshTimer() {
         refreshTimer = new javax.swing.Timer(1000, e -> repaint()); // Refresh every second
         refreshTimer.start();
@@ -147,6 +170,11 @@ public class MapGUI extends JPanel implements KeyListener {
         g.setColor(Color.BLACK); // Reset color for other drawing
     }
 
+    /**
+     * Draws the game timer on the panel.
+     *
+     * @param g the Graphics context to draw on
+     */
     private void drawTimer(Graphics g) {
         if (game.timer != null) {
             String time = game.timer.getCurrentTimeFormatted();
@@ -157,6 +185,12 @@ public class MapGUI extends JPanel implements KeyListener {
             g.drawString(time, x, y);
         }
     }
+
+    /**
+     * Draws the scores for the Plumbers and Saboteurs on the panel.
+     *
+     * @param g the Graphics context to draw on
+     */
     private void drawScores(Graphics g) {
         int collectedWater = game.calculateCollectedWater();
         int leakedWater = game.calculateLeakedWater();
@@ -169,6 +203,13 @@ public class MapGUI extends JPanel implements KeyListener {
         g.drawString("Team Plumbers: " + collectedWater, x, y);
         g.drawString("Team Saboteurs: " + leakedWater, x, y + 30); // Slightly below the first string
     }
+
+    /**
+     * Selects the game object (element or end of pipe) at the specified coordinates.
+     *
+     * @param x the x-coordinate of the mouse click
+     * @param y the y-coordinate of the mouse click
+     */
     private void selectObjectAt(int x, int y) {
         for (EndOfPipe eop : game.endOfPipeList) {
             if (eop.contains(x, y)) {
@@ -186,9 +227,12 @@ public class MapGUI extends JPanel implements KeyListener {
         }
     }
 
+    /**
+     * Sets up the key mapping panel that displays key bindings for actions.
+     */
     private void setupKeyMappingPanel() {
         keyMappingPanel = new JPanel();
-        keyMappingPanel.setLayout(new GridLayout(4,3, 5, 5));
+        keyMappingPanel.setLayout(new GridLayout(4, 3, 5, 5));
         keyMappingPanel.setBackground(Color.BLACK);
         keyMappingPanel.setPreferredSize(new Dimension(800, 100)); // Control the size to fit within southPanel
         keyMappingPanel.setMaximumSize(new Dimension(800, 100));
@@ -207,6 +251,11 @@ public class MapGUI extends JPanel implements KeyListener {
         southPanel.add(keyMappingPanel);
     }
 
+    /**
+     * Draws the game elements (pipes, pumps, cisterns, springs, end of pipes) on the panel.
+     *
+     * @param g the Graphics context to draw on
+     */
     private void drawElements(Graphics g) {
         for (Pipe pipe : game.pipeList) {
             new PipeGUI(pipe).draw(g);
@@ -215,7 +264,6 @@ public class MapGUI extends JPanel implements KeyListener {
             if (pump.isVisible()) { // Check the visibility flag
                 new PumpGUI(pump).draw(g);
             }
-            new PumpGUI(pump).draw(g);
         }
         for (Cistern cistern : game.cisternList) {
             new CisternGUI(cistern).draw(g);
@@ -226,11 +274,16 @@ public class MapGUI extends JPanel implements KeyListener {
         for (EndOfPipe endOfPipe : game.endOfPipeList) {
             if (endOfPipe.isVisible()) { // Check the visibility flag
                 new EndOfPipeGUI(endOfPipe).draw(g);
-
             }
         }
     }
-    private void drawPlayers(Graphics g){
+
+    /**
+     * Draws the players (saboteurs and plumbers) on the panel.
+     *
+     * @param g the Graphics context to draw on
+     */
+    private void drawPlayers(Graphics g) {
         for (Saboteur saboteur : game.saboteurs) {
             new SaboteurGUI(saboteur).draw(g);
         }
@@ -239,6 +292,11 @@ public class MapGUI extends JPanel implements KeyListener {
         }
     }
 
+    /**
+     * Draws the information of the current player on the panel.
+     *
+     * @param g the Graphics context to draw on
+     */
     private void drawPlayerInfo(Graphics g) {
         Player currentPlayer = game.players[game.currentPlayerIndex];
         String team = Arrays.asList(game.saboteurs).contains(currentPlayer) ? "Saboteurs" : "Plumbers";
@@ -261,7 +319,11 @@ public class MapGUI extends JPanel implements KeyListener {
 
         g.drawString(playerInfo, x, y);
     }
-    static class CustomOutputStream extends java.io.OutputStream { // Add this inner class
+
+    /**
+     * Custom output stream to redirect system output to the console.
+     */
+    static class CustomOutputStream extends java.io.OutputStream {
         private JTextArea textArea;
 
         public CustomOutputStream(JTextArea textArea) {
@@ -277,6 +339,7 @@ public class MapGUI extends JPanel implements KeyListener {
             });
         }
     }
+
     @Override
     public void keyTyped(KeyEvent e) { }
 
@@ -287,6 +350,4 @@ public class MapGUI extends JPanel implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) { }
-
 }
-
