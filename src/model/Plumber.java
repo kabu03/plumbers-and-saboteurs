@@ -134,34 +134,10 @@ public class Plumber extends Player {
         // Retrieve the selectedEndOfPipe from MapGUI
         EndOfPipe selectedEndOfPipe = MapGUI.getSelectedEndOfPipe();
 
-        // Debugging: Print currentElement and the target element
-       // System.out.println("Current Element: " + currentElement.getName());
-        //System.out.println("Target Element: " + e.getName());
-
         // First, check if the plumber is standing on the element
-        if (currentElement !=  e) {
+        if (currentElement != selectedEndOfPipe.getConnectedElement()) {
             System.out.println("You have to be standing on the element to pick up the end of the pipe.");
             return;
-        }
-
-        // Check if the selectedEndOfPipe is null
-        if (selectedEndOfPipe == null) {
-            System.out.println("No end of pipe is selected.");
-            return;
-        }
-
-        // Check if the current pipe is null
-        if (selectedEndOfPipe.currentPipe == null) {
-            System.out.println("The selected end of pipe does not have a connected pipe.");
-            return;
-        }
-
-        // Check if the connected elements are null or do not contain the element
-        for (int i = 0; i < selectedEndOfPipe.currentPipe.endsOfPipe.length; i++) {
-            if (selectedEndOfPipe.currentPipe.endsOfPipe[i] == null) {
-                System.out.println("The selected end of the pipe is not connected to the current element.");
-                return;
-            }
         }
 
         // Check if the player has already picked up an end of pipe
@@ -170,8 +146,29 @@ public class Plumber extends Player {
             return;
         }
 
-            // Set the visibility to false and update the picked-up end of the pipe
+        // Check if the element is not an instance of Pipe
+        if (e instanceof Pipe) {
+            System.out.println("You can't pick up the end of a pipe from a pipe.");
+            return;
+        }
+
+        // Check if the selected end of the pipe is connected to the current element
+        boolean isConnected = false;
+        for (EndOfPipe end : selectedEndOfPipe.currentPipe.endsOfPipe) {
+            if (end != null) {
+                isConnected = true;
+                break;
+            }
+        }
+        if (!isConnected) {
+            System.out.println("The selected end of the pipe is not connected to the current element.");
+            return;
+        }
+
+        // Set the visibility to false and update the picked-up end of the pipe
+        selectedEndOfPipe.getConnectedElement().connectablePipes.add(selectedEndOfPipe.currentPipe);
         selectedEndOfPipe.disconnectFromElement(e); // This should handle both the element and pipe updates
+        selectedEndOfPipe.setCurrentPipe(null);
         pickedUpEoP = selectedEndOfPipe;
         selectedEndOfPipe.setVisible(false);
         System.out.println(playerName + " picked up the end of the pipe connected to " + currentElement.getName());
