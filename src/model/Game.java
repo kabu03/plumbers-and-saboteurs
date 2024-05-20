@@ -144,7 +144,7 @@ public class Game {
         endOfPipeList.add(EoP2pipe4);
 
         EndOfPipe EoP1pipe5 = new EndOfPipe(Pipe5,true);
-        EndOfPipe EoP2pipe5 = new EndOfPipe(Pipe5,false,0,35);
+        EndOfPipe EoP2pipe5 = new EndOfPipe(Pipe5,false,0,30);
         endOfPipeList.add(EoP1pipe5);
         endOfPipeList.add(EoP2pipe5);
 
@@ -468,5 +468,10 @@ public class Game {
         pumpList.remove(pump);
         elementList.remove(pump);
     }
+    public void removePipe(Pipe pipe) {
+        pipeList.remove(pipe);
+        elementList.remove(pipe);
+    }
+
 }
 

@@ -35,12 +35,12 @@ public class Cistern extends Element {
     /**
      * The number of turns remaining until a new pipe can be manufactured.
      */
-    private int turnsUntilPipeReady = 1; // we can decide on this later
+    private int turnsUntilPipeReady =rand.nextInt(10,20); // we can decide on this later
 
     /**
      *The number of turns remaining until a new pump can be manufactured.
      */
-    private int turnsUntilPumpReady = rand.nextInt(10,20); // we can decide on this later.
+    private int turnsUntilPumpReady = 1; // we can decide on this later.
     public Pump manufacturedPump = null;
     /**
      * Initiates the manufacturing process for a new pipe.

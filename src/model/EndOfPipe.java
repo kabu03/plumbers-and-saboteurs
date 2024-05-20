@@ -38,8 +38,8 @@ public class EndOfPipe {
     {
         currentPipe = p;
         this.atStart = atStart;
-        width = 40;
-        height = 40;
+        width = 30;
+        height = 30;
         for(int i = 0; i < 2; i++)
         {
             if(p.endsOfPipe[i] == null)
@@ -54,8 +54,8 @@ public class EndOfPipe {
     {
         currentPipe = p;
         this.atStart = atStart;
-        width = 40;
-        height = 40;
+        width = 30;
+        height = 30;
         for(int i = 0; i < 2; i++)
         {
             if(p.endsOfPipe[i] == null)
@@ -68,6 +68,7 @@ public class EndOfPipe {
         this.adjustY = adjustY;
         setPosition();
     }
+
     /**
      * An attribute that stores the element that is currently connected to the end of pipe object.
      */

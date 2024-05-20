@@ -407,21 +407,74 @@ public class Plumber extends Player {
      *
      */
     public void insertPump(Game g1){
-        if (pickedUpPump != null)
-            if (currentElement instanceof Pipe) {
-                Pipe pipe = (Pipe) currentElement;
+        if (pickedUpPump != null && currentElement instanceof Pipe) {
+            Pipe pipe = (Pipe) currentElement;
+            Pump newPump;
+            Pipe newPipe1;
+            Pipe newPipe2;
+            EndOfPipe newEnd1A;
+            EndOfPipe newEnd1B;
+            EndOfPipe newEnd2A;
+            EndOfPipe newEnd2B;
+            int x = pipe.getPosition().x;
+            int y = pipe.getPosition().y;
+            if (pipe.vertical) {
+                int pumpHeight = 50;  // Height of the pump, adjust if different
+                int totalHeight = pipe.height;
+                int remainingHeight = totalHeight - pumpHeight;
+                int newPipeHeight = remainingHeight / 2;  // Split remaining height between two new pipes
 
-                Pump newPump;
-                newPump=pickedUpPump;
-                Pipe newPipe1 = new Pipe("newPipe"+newPipecount, pipe.getPosition(), pipe.vertical);
-                newPipecount++;
-                Pipe newPipe2 = new Pipe("newPipe"+newPipecount, new Point((pipe.getPosition().x+50), pipe.getPosition().y), pipe.vertical);
-                newPipecount++;
+                // Reduce newPipeHeight slightly to allow for some space at the connections
+                newPipeHeight -= 5;  // Adjust this value as needed to perfect the fit
 
-                EndOfPipe newEnd1A = new EndOfPipe(newPipe1, true);
-                EndOfPipe newEnd1B = new EndOfPipe(newPipe1, false);
-                EndOfPipe newEnd2A  = new EndOfPipe(newPipe2, true);
-                EndOfPipe newEnd2B  = new EndOfPipe(newPipe2, false);
+                // Position the pump to start where the first new pipe ends
+                int pumpStartY = y + newPipeHeight;
+
+                newPump = new Pump("newPump" + newPumpCount, new Point(x, pumpStartY), pipe.width, pumpHeight);
+                newPumpCount++;
+
+                // Create new pipes above and below the pump
+                newPipe1 = new Pipe("newPipe" + newPipecount, new Point(x, y), pipe.vertical, pipe.width, newPipeHeight);
+                newPipecount++;
+                newPipe2 = new Pipe("newPipe" + newPipecount, new Point(x, pumpStartY + pumpHeight), pipe.vertical, pipe.width, newPipeHeight);
+                newPipecount++;
+                newEnd1A = new EndOfPipe(newPipe1, true);
+                newEnd1B = new EndOfPipe(newPipe1, false);
+                newEnd2A  = new EndOfPipe(newPipe2, true);
+                newEnd2B  = new EndOfPipe(newPipe2, false,0,35);
+            } else {
+                int pipeWidth = pipe.width;
+                int pumpWidth = 50;
+                int pumpHeight = 50;
+                int newPipeWidth = (pipeWidth - pumpWidth) / 2;
+
+                newPump = new Pump("newPump" + newPumpCount, new Point(x + newPipeWidth, y - 10), pumpWidth, pumpHeight);
+                newPumpCount++;
+
+                newPipe1 = new Pipe("newPipe" + newPipecount, new Point(x, y), pipe.vertical, newPipeWidth, pipe.height);
+                newPipecount++;
+                newPipe2 = new Pipe("newPipe" + newPipecount, new Point(x + newPipeWidth + pumpWidth, y), pipe.vertical, newPipeWidth, pipe.height);
+                newPipecount++;
+                newEnd1A = new EndOfPipe(newPipe1, true);
+                newEnd1B = new EndOfPipe(newPipe1, false);
+                newEnd2A  = new EndOfPipe(newPipe2, true);
+                newEnd2B  = new EndOfPipe(newPipe2, false);
+            }
+                for (EndOfPipe end : pipe.endsOfPipe) {
+                    if(end == null)
+                    {
+                        continue;
+                    }
+                    if (end.currentPipe == pipe) {
+                        g1.endOfPipeList.remove(end);
+                    }
+                }
+                g1.endOfPipeList.add(newEnd1A);
+                g1.endOfPipeList.add(newEnd1B);
+                g1.endOfPipeList.add(newEnd2A);
+                g1.endOfPipeList.add(newEnd2B);
+
+
 
                 if(pipe.endsOfPipe[0] != null) {
                     newPipe1.endsOfPipe[0] = pipe.endsOfPipe[0];
@@ -476,6 +529,7 @@ public class Plumber extends Player {
 
                 pickedUpPump=null;
                 System.out.println(playerName + " inserted a pump into "+ pipe.getName() + ".");
+                g1.removePipe(pipe);
 
             }
         else if(currentElement instanceof Pipe && pickedUpPump==null){
