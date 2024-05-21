@@ -5,16 +5,30 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * The EndGameGUI class represents a dialog that is displayed at the end of the game,
+ * showing the final scores and the winner.
+ */
 public class EndGameGUI extends JDialog {
     private int waterCollected;
     private int waterLeaked;
 
+    /**
+     * Constructs an EndGameGUI dialog with the specified scores for water collected and water leaked.
+     *
+     * @param waterCollected the amount of water collected by the Plumbers
+     * @param waterLeaked    the amount of water leaked by the Saboteurs
+     */
     public EndGameGUI(int waterCollected, int waterLeaked) {
         this.waterCollected = waterCollected;
         this.waterLeaked = waterLeaked;
         initializeUI();
     }
 
+    /**
+     * Initializes the user interface for the end game dialog.
+     * Sets up the title, size, layout, and window close operation.
+     */
     private void initializeUI() {
         setTitle("Game Over");
         setSize(600, 300);
@@ -52,6 +66,11 @@ public class EndGameGUI extends JDialog {
         setVisible(true);
     }
 
+    /**
+     * Determines the winner based on the scores of water collected and water leaked.
+     *
+     * @return a String indicating the winning team or if the game ended in a tie
+     */
     private String determineWinner() {
         if (waterLeaked > waterCollected) {
             return "The Saboteurs won the game!";
