@@ -15,6 +15,9 @@ import java.util.Arrays;
 
 public class MapGUI extends JPanel implements KeyListener {
 
+    public boolean isChangingInputPipe = false;
+    public boolean isChangingOutputPipe = false;
+    public Pump selectedPump = null;
     public static Element selectedElement;
     public static EndOfPipe selectedEndOfPipe;
 
@@ -69,7 +72,53 @@ public class MapGUI extends JPanel implements KeyListener {
                         currentPlayer.move(game, selectedElement);
                     }
                     isMoveActive = false; // Reset the move action state
-                } else {
+                }
+                else if(isChangingInputPipe || isChangingOutputPipe)
+                {
+                    boolean correctSelection = false;
+                    selectObjectAt(e.getX(), e.getY());
+                    for(Pipe p : selectedPump.connectedPipes)
+                    {
+                        if(selectedElement == p)
+                        {
+                            correctSelection = true;
+                        }
+                    }
+                    if(correctSelection)
+                    {
+                        if(isChangingInputPipe)
+                        {
+                            Pipe selectedPipe = (Pipe) selectedElement;
+                            if(selectedPipe == selectedPump.outPipe)
+                            {
+                                System.out.println("Input Pipe and Output Pipe cannot be the same.");
+                            }
+                            else {
+                                selectedPump.inPipe = (Pipe) selectedElement;
+                                System.out.println(selectedPump.getName() + " changed the input pipe to " + selectedElement.getName());
+                            }
+                        }
+                        else
+                        {
+                            Pipe selectedPipe = (Pipe) selectedElement;
+                            if(selectedPipe == selectedPump.inPipe)
+                            {
+                                System.out.println("Input Pipe and Output Pipe cannot be the same.");
+                            }
+                            else {
+                                selectedPump.outPipe = (Pipe) selectedElement;
+                                System.out.println(selectedPump.getName() + " changed the input pipe to " + selectedElement.getName());
+                            }
+                        }
+                        isChangingInputPipe = false;
+                        isChangingOutputPipe = false;
+                    }
+                    else
+                    {
+                        System.out.println("Invalid input. Select a pipe that is connected to the Pump");
+                    }
+                }
+                else {
                     selectObjectAt(e.getX(), e.getY());
                 }
                 repaint();

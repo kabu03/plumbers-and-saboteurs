@@ -32,6 +32,7 @@ public class Game {
     private final int[] gameScore = {0, 0}; // Index 0 represents model.Plumber score, index 1 represents model.Saboteur score.
     public Timer timer;
     private volatile char currentAction = '\0';
+    public boolean pumpPickedUp = false;
 
     public synchronized void setCurrentAction(char action) {
         this.currentAction = action;
@@ -460,6 +461,7 @@ public class Game {
         gameScore[0] = sum;
         return sum;
     }
+
     public void removeCistern(Cistern cistern) {
         cisternList.remove(cistern);
         elementList.remove(cistern);

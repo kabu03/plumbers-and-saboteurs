@@ -47,6 +47,10 @@ public class Cistern extends Element {
      * @author: Basel Al-Raoush
      */
     public void manufacturePipe(Game g) {
+        if(g.pumpPickedUp == false)
+        {
+            return;
+        }
         numOfcreatedPipes++;
         if(numOfcreatedPipes == 1)
         {

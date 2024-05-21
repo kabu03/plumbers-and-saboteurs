@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static gui.MapGUI.getSelectedEndOfPipe;
 import static gui.MapGUI.selectedEndOfPipe;
 import static java.lang.System.exit;
 
@@ -93,12 +94,32 @@ public class Plumber extends Player {
                         break;
                     case 'A':
                         System.out.println("You chose: Change the input pipe of a pump");
-                        changeInputPipe(g);
+                        if(currentElement instanceof Pump)
+                        {
+                            gameInstance.mapGUI.isChangingInputPipe = true;
+                            gameInstance.mapGUI.isChangingOutputPipe = false;
+                            gameInstance.mapGUI.selectedPump =(Pump) currentElement;
+                            System.out.println("Please choose a pipe that is connected to the Pump");
+                        }
+                        else
+                        {
+                            System.out.println("You have to be standing on a pump to change the input pipe.");
+                        }
                         actionstaken++;
                         break;
                     case 'S':
                         System.out.println("You chose: Change the output pipe of a pump");
-                        changeOutputPipe(g);
+                        if(currentElement instanceof Pump)
+                        {
+                            gameInstance.mapGUI.isChangingOutputPipe = true;
+                            gameInstance.mapGUI.isChangingInputPipe = false;
+                            gameInstance.mapGUI.selectedPump =(Pump) currentElement;
+                            System.out.println("Please choose a pipe that is connected to the Pump");
+                        }
+                        else
+                        {
+                            System.out.println("You have to be standing on a pump to change the output pipe.");
+                        }
                         actionstaken++;
                         break;
                     case 'W':
@@ -388,6 +409,7 @@ public class Plumber extends Player {
 
         // Print confirmation message
         System.out.println(playerName + " picked up " + pickedUpPump.getName() + " from the cistern.");
+        g1.pumpPickedUp = true;
     }
 
 

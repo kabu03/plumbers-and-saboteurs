@@ -108,7 +108,7 @@ public abstract class Element {
      * Decreases the water level within the element.
      */
     public void decrementWater(){
-        waterLevel-=2;
+        waterLevel = waterLevel - 2;
         if(waterLevel < 0)
         {
             waterLevel = 0;

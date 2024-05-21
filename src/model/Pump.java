@@ -75,11 +75,24 @@ public class Pump extends Element {
             } else {
                 workingTurns--;
             }
-            if (!inPipe.isWorking() & isWorking()) {
+            if (!inPipe.isWorking() && isWorking()) {
                 decrementWater();
             }
             if (isWorking() && getWaterLevel() >= 2) {
-                outPipe.incrementWater();
+                if(outPipe == null)
+                {
+                    ;
+                }
+                else {
+                    outPipe.incrementWater();
+                }
+            }
+            for(Pipe p : connectedPipes) {
+                if (p != inPipe && p != outPipe) {
+                    if (p.getWaterLevel() >= 2) {
+                        p.decrementWater();
+                    }
+                }
             }
         }
     }
