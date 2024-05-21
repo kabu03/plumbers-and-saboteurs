@@ -308,7 +308,7 @@ public class Game {
             EoP2pipe3.connectToElement(cistern);
             EoP2pipe8.connectToElement(cistern);
             addCistern(cistern);
-        System.out.println("The game’s elements have been initialized successfully.");
+        System.out.println("The game's elements have been initialized successfully.");
         for (int i = 0; i < saboteurs.length; i++) {
             Saboteur s = saboteurs[i];
             s.currentElement = cistern;
